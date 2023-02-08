@@ -7,12 +7,11 @@ import java.util.Objects;
 public class Link {
     private final String text;
     private final String reference;
-    private List<Action> actions;
+    private List<Action> actions = new ArrayList<>();
 
     Link(String text, String reference){
         this.text = text;
         this.reference = reference;
-        actions = new ArrayList<>();
     }
 
     public String getText() {
