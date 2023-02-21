@@ -1,5 +1,7 @@
 package edu.ntnu.idatt2001;
 
+import java.util.List;
+
 public class Game {
     private final Player player;
     private final Story story;
