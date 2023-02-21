@@ -53,8 +53,8 @@ public class Game {
     /**
      * Begins the game, by referring to the opening passage.
      */
-    public void begin(){
-        //return Story.getOpeningPassage();
+    public Passage begin(){
+        return story.getOpeningPassage();
     }
 
     /**
@@ -62,8 +62,8 @@ public class Game {
      *
      * @param link the link
      */
-    public void go(Link link){
-        //return Story.getPassage(link);
+    public Passage go(Link link){
+        return story.getPassage(link);
     }
 
 }
