@@ -5,7 +5,7 @@ package edu.ntnu.idatt2001;
  */
 public class HealthAction implements Action{
 
-    private int health;
+    private final int health;
 
     /**
      * Instantiates a new HealthAction.
@@ -18,7 +18,7 @@ public class HealthAction implements Action{
 
     @Override
     public void Execute(Player player){
-        //Player.addScore(points);
+        player.addHealth(health);
     }
 
 }

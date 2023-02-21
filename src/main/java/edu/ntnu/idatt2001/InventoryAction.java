@@ -5,7 +5,7 @@ package edu.ntnu.idatt2001;
  */
 public class InventoryAction implements Action{
 
-    private String item;
+    private final String item;
 
     /**
      * Instantiates a new InventoryAction.
@@ -18,7 +18,7 @@ public class InventoryAction implements Action{
 
     @Override
     public void Execute(Player player){
-        //Player.addToInventory(item);
+        player.addToInventory(item);
     }
 
 }

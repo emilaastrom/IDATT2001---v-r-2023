@@ -5,7 +5,7 @@ package edu.ntnu.idatt2001;
  */
 public class ScoreAction implements Action {
 
-    private int points;
+    private final int points;
 
     /**
      * Instantiates a new ScoreAction.
@@ -18,7 +18,7 @@ public class ScoreAction implements Action {
 
     @Override
     public void Execute(Player player){
-        //Player.addScore(points);
+        player.addScore(points);
     }
 
 }

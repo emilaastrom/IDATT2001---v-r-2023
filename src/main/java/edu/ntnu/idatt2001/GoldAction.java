@@ -5,7 +5,7 @@ package edu.ntnu.idatt2001;
  */
 public class GoldAction implements Action{
 
-    private int gold;
+    private final int gold;
 
     /**
      * Instantiates a new GoldAction.
@@ -18,7 +18,7 @@ public class GoldAction implements Action{
 
     @Override
     public void Execute(Player player){
-        //Player.addGold(gold);
+        player.addGold(gold);
     }
 
 
