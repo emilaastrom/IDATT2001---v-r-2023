@@ -2,7 +2,7 @@ package edu.ntnu.idatt2001;
 
 public class GoldAction implements Action{
 
-    int gold;
+    private int gold;
 
     GoldAction(int gold){
         this.gold = gold;

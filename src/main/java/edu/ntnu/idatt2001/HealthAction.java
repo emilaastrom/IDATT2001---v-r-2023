@@ -2,7 +2,7 @@ package edu.ntnu.idatt2001;
 
 public class HealthAction implements Action{
 
-    int health;
+    private int health;
 
     HealthAction(int health){
         this.health = health;
