@@ -2,7 +2,7 @@ package edu.ntnu.idatt2001;
 
 public class InventoryAction implements Action{
 
-    String item;
+    private String item;
 
     InventoryAction(String item){
         this.item = item;
