@@ -21,7 +21,7 @@ public class Player {
      * @param score  the score
      * @param gold   the gold
      */
-    Player(String name,int health,int score,int gold){
+    public Player(String name,int health,int score,int gold){
         this.name = name;
         this.health = health;
         this.score = score;

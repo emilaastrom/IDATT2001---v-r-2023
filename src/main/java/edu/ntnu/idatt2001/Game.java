@@ -17,7 +17,7 @@ public class Game {
      * @param story  the story
      * @param goals  the goals
      */
-    Game(Player player, Story story, List<Goal> goals){
+    public Game(Player player, Story story, List<Goal> goals){
         this.player = player;
         this.story = story;
         this.goals = goals;

@@ -18,7 +18,7 @@ public class Passage {
      * @param title   the title
      * @param content the content
      */
-    Passage(String title, String content){
+    public Passage(String title, String content){
         this.title = title;
         this.content = content;
         links = new ArrayList<>();

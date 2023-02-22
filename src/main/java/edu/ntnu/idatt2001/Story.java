@@ -17,7 +17,7 @@ public class Story {
      * @param title          the title
      * @param openingPassage the opening passage
      */
-    Story(String title, Passage openingPassage){
+    public Story(String title, Passage openingPassage){
         this.title = title;
         this.openingPassage = openingPassage;
     }
