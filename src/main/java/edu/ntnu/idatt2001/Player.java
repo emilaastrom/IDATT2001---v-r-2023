@@ -22,10 +22,27 @@ public class Player {
      * @param gold   the gold
      */
     public Player(String name,int health,int score,int gold){
+
+        checkPositiveIntInput("Health", health);
+        checkPositiveIntInput("Gold", gold);
+
         this.name = name;
         this.health = health;
         this.score = score;
         this.gold = gold;
+    }
+
+
+    /**
+     * Check a variable to ensure it has a positive value.
+     *
+     * @param s the name of the given value
+     * @param i the integer to be checked
+     */
+    public void checkPositiveIntInput( String s, int i){
+        if (i<0){
+            throw new IllegalArgumentException("Error value regarding: " + s + ". This must be greater than zero!");
+        }
     }
 
     /**
@@ -74,11 +91,12 @@ public class Player {
     }
 
     /**
-     * Add health.
+     * Add health, ensures result is a valid number (>0)
      *
      * @param health the health
      */
     public void addHealth(int health) {
+        checkPositiveIntInput("health after addition", this.health += health);
         this.health += health;
     }
 
