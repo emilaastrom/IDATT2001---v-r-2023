@@ -38,8 +38,9 @@ public class Player {
      *
      * @param s the name of the given value
      * @param i the integer to be checked
+     * @throws IllegalArgumentException if the value of health or gold is negative
      */
-    public void checkPositiveIntInput( String s, int i){
+    public void checkPositiveIntInput( String s, int i) throws IllegalArgumentException{
         if (i<0){
             throw new IllegalArgumentException("Error value regarding: " + s + ". This must be greater than zero!");
         }
