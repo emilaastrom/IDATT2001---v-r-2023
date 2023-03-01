@@ -1,5 +1,7 @@
 package edu.ntnu.idatt2001;
 
+import edu.ntnu.idatt2001.Goals.Goal;
+
 import java.util.List;
 
 /**

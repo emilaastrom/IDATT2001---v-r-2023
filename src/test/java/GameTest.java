@@ -1,5 +1,5 @@
 import edu.ntnu.idatt2001.*;
-import org.junit.jupiter.api.BeforeAll;
+import edu.ntnu.idatt2001.Goals.Goal;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

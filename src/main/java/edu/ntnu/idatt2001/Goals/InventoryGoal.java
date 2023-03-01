@@ -1,11 +1,14 @@
-package edu.ntnu.idatt2001;
+package edu.ntnu.idatt2001.Goals;
+
+import edu.ntnu.idatt2001.Goals.Goal;
+import edu.ntnu.idatt2001.Player;
 
 import java.util.List;
 
 /**
  * The goal of having certain items in the inventory.
  */
-public class InventoryGoal implements Goal{
+public class InventoryGoal implements Goal {
         private final List<String> mandatoryItems;
 
     /**

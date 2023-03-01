@@ -1,9 +1,12 @@
-package edu.ntnu.idatt2001;
+package edu.ntnu.idatt2001.Actions;
+
+import edu.ntnu.idatt2001.Actions.Action;
+import edu.ntnu.idatt2001.Player;
 
 /**
  * An action that affects player gold.
  */
-public class GoldAction implements Action{
+public class GoldAction implements Action {
 
     private final int gold;
 

@@ -1,9 +1,12 @@
-package edu.ntnu.idatt2001;
+package edu.ntnu.idatt2001.Actions;
+
+import edu.ntnu.idatt2001.Actions.Action;
+import edu.ntnu.idatt2001.Player;
 
 /**
  * An action that affects player health.
  */
-public class HealthAction implements Action{
+public class HealthAction implements Action {
 
     private final int health;
 

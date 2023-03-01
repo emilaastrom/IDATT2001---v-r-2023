@@ -1,9 +1,12 @@
-package edu.ntnu.idatt2001;
+package edu.ntnu.idatt2001.Goals;
+
+import edu.ntnu.idatt2001.Goals.Goal;
+import edu.ntnu.idatt2001.Player;
 
 /**
  * The goal of reaching a certain score.
  */
-public class ScoreGoal implements Goal{
+public class ScoreGoal implements Goal {
     private final int minimumPoints;
 
     /**

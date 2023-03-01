@@ -1,4 +1,6 @@
-package edu.ntnu.idatt2001;
+package edu.ntnu.idatt2001.Goals;
+
+import edu.ntnu.idatt2001.Player;
 
 /**
  * The interface Goal.

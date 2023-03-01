@@ -1,9 +1,12 @@
-package edu.ntnu.idatt2001;
+package edu.ntnu.idatt2001.Goals;
+
+import edu.ntnu.idatt2001.Goals.Goal;
+import edu.ntnu.idatt2001.Player;
 
 /**
  * The goal of reaching a certain amount of gold.
  */
-public class GoldGoal implements Goal{
+public class GoldGoal implements Goal {
     private final int minimumGold;
 
     /**
