@@ -98,7 +98,6 @@ public class Player {
      */
     public void addHealth(int health) {
         checkPositiveIntInput("health after addition", this.health += health);
-        this.health += health;
     }
 
     /**
