@@ -20,7 +20,7 @@ public class Link {
      * @param text      the text
      * @param reference the reference
      */
-    Link(String text, String reference){
+    public Link(String text, String reference){
         this.text = text;
         this.reference = reference;
         actions = new ArrayList<>();
