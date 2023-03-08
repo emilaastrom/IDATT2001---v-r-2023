@@ -1,3 +1,5 @@
+package edu.ntnu.idatt2001;
+
 import edu.ntnu.idatt2001.*;
 import edu.ntnu.idatt2001.Goals.Goal;
 import org.junit.jupiter.api.BeforeEach;
