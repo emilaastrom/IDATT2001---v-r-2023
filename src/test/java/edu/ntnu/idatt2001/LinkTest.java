@@ -31,7 +31,7 @@ class LinkTest {
     }
 
     @Test
-    @DisplayName("getActions()")
+    @DisplayName("Testing getActions() method")
     void testingGetActionMethodToCheckIfAddedActionsAreEqualToListInTestLink(){
         //adding similar actions to testLink and local list of actions then ensuring getActions returns the same values.
         actions.add(myGoldAction);
@@ -44,7 +44,7 @@ class LinkTest {
     }
 
     @Test
-    @DisplayName("addActions()")
+    @DisplayName("Testing addActions() method")
     void testAddActionsAddsCorrectObject(){
         //Adding action to both testLink and the local test list of actions to ensure they both receive the actions.
         testLink.addAction(myHealthAction);
@@ -57,7 +57,7 @@ class LinkTest {
     }
 
     @Test
-    @DisplayName("getReference()")
+    @DisplayName("Testing getReference() method")
     void getReferenceTest(){
         //Creating local reference with same value as testLink reference, assertEquals
         String localTestReference = "Reference string";
@@ -69,7 +69,7 @@ class LinkTest {
     }
 
     @Test
-    @DisplayName("getText()")
+    @DisplayName("Testing getText() method")
     void getText(){
         //Creating local text with same value as testLink, assertEquals
         String localText = "String";
