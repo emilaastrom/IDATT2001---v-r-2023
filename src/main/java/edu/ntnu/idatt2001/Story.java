@@ -1,5 +1,6 @@
 package edu.ntnu.idatt2001;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -20,6 +21,7 @@ public class Story {
     public Story(String title, Passage openingPassage){
         this.title = title;
         this.openingPassage = openingPassage;
+        this.passages = new HashMap<Link, Passage>();
     }
 
     /**
