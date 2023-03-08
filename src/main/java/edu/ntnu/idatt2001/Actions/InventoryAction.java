@@ -15,7 +15,7 @@ public class InventoryAction implements Action {
      *
      * @param item the item
      */
-    InventoryAction(String item){
+    public InventoryAction(String item){
         this.item = item;
     }
 

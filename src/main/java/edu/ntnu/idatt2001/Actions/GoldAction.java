@@ -15,7 +15,7 @@ public class GoldAction implements Action {
      *
      * @param gold the gold
      */
-    GoldAction(int gold){
+    public GoldAction(int gold){
         this.gold = gold;
     }
 

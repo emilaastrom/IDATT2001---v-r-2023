@@ -15,7 +15,7 @@ public class ScoreAction implements Action {
      *
      * @param points the points
      */
-    ScoreAction(int points){
+    public ScoreAction(int points){
         this.points = points;
     };
 
