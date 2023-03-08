@@ -1,4 +1,4 @@
-package edu.ntnu.idatt2001.Goals;
+package edu.ntnu.idatt2001.Goal;
 
 import edu.ntnu.idatt2001.Player;
 
@@ -12,5 +12,5 @@ public interface Goal {
      * @param player the player
      * @return the boolean
      */
-    public boolean isFulfilled(Player player);
+    boolean isFulfilled(Player player);
 }

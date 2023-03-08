@@ -1,6 +1,5 @@
-package edu.ntnu.idatt2001.Actions;
+package edu.ntnu.idatt2001.Action;
 
-import edu.ntnu.idatt2001.Actions.Action;
 import edu.ntnu.idatt2001.Player;
 
 /**
