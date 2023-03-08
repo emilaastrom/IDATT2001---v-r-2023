@@ -64,4 +64,10 @@ public class PlayerTest {
         Assertions.assertThrows(IllegalArgumentException.class, () -> player.checkPositiveIntInput("Gold", -20));
     }
 
+    @Test
+    @DisplayName("Test getName()")
+    void getName() {
+        // Test that name is returned correctly
+        Assertions.assertEquals("TestPlayer", player.getName());
+    }
 }
