@@ -66,7 +66,18 @@ class LinkTest {
         //Changing local reference to be different from testLink reference, assertNotEquals
         localTestReference = "Updated and different reference string";
         assertNotEquals(testLink.getReference(), localTestReference);
+    }
 
+    @Test
+    @DisplayName("getText()")
+    void getText(){
+        //Creating local text with same value as testLink, assertEquals
+        String localText = "String";
+        assertEquals(testLink.getText(), localText);
+
+        //Changing local text value only, assertNotEquals
+        localText = "New string value";
+        assertNotEquals(testLink.getText(), localText);
     }
 
 
