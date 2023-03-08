@@ -33,7 +33,7 @@ public class ActionTest {
 
     @Test
     @DisplayName("Testing getActions() using all types of actions")
-    void getActions(){
+    void testingGetActionsMethodWithDifferentActionsAddedToTheList(){
         ArrayList<Action> emptyActionList = new ArrayList<>();
         assertEquals(myTestLink.getActions(),emptyActionList );
 
@@ -55,7 +55,7 @@ public class ActionTest {
 
     @Test
     @DisplayName("Testing execute()")
-    void execute(){
+    void testingExecuteMethodUsingDifferentActions(){
         //Adding actions to the link in an ordered list, which can be used to ensure the correct action is executed.
         myTestLink.addAction(myGoldAction);
         myTestLink.addAction(myHealthAction);
@@ -84,7 +84,7 @@ public class ActionTest {
         assertEquals(0, myTestPlayer.getInventory().size());
         assertNotEquals(1, myTestPlayer.getInventory().size());
 
-        //Using the third action (adding a dragon dagger(p++)), then making sure it is added correctly
+        //Using the third action (adding a dragon dagger(p++) to inventory), then making sure it is added correctly
         myTestLink.getActions().get(2).Execute(myTestPlayer);
         assertEquals(1, myTestPlayer.getInventory().size());
         assertNotEquals(0, myTestPlayer.getInventory().size());
