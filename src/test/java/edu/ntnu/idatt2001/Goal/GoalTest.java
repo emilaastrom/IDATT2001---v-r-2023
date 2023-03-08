@@ -31,53 +31,37 @@ public class GoalTest {
     }
 
     @Test
-    @DisplayName("Test Health isFulfilled() false")
+    @DisplayName("Test Health isFulfilled()")
     void isHealthNotFulfilled(){
         assertFalse(healthGoal.isFulfilled(player));
-    }
 
-    @Test
-    @DisplayName("Test Health isFulfilled() true")
-    void isHealthFulfilled(){
         player.addHealth(100);
         assertTrue(healthGoal.isFulfilled(player));
     }
 
     @Test
-    @DisplayName("Test Score isFulfilled() false")
+    @DisplayName("Test Score isFulfilled()")
     void isScoreNotFulfilled(){
         assertFalse(scoreGoal.isFulfilled(player));
-    }
 
-    @Test
-    @DisplayName("Test Score isFulfilled() true")
-    void isScoreFulfilled(){
         player.addScore(100);
         assertTrue(scoreGoal.isFulfilled(player));
     }
 
     @Test
-    @DisplayName("Test Gold isFulfilled() false")
+    @DisplayName("Test Gold isFulfilled()")
     void isGoldNotFulfilled(){
         assertFalse(goldGoal.isFulfilled(player));
-    }
 
-    @Test
-    @DisplayName("Test Gold isFulfilled() true")
-    void isGoldFulfilled(){
         player.addGold(100);
         assertTrue(goldGoal.isFulfilled(player));
     }
 
     @Test
-    @DisplayName("Test Inventory isFulfilled() false")
+    @DisplayName("Test Inventory isFulfilled()")
     void isInventoryFulfilled(){
         assertFalse(inventoryGoal.isFulfilled(player));
-    }
 
-    @Test
-    @DisplayName("Test Inventory isFulfilled() true")
-    void isInventoryNotFulfilled(){
         player.addToInventory("item1");
         player.addToInventory("item2");
         assertTrue(inventoryGoal.isFulfilled(player));
