@@ -32,7 +32,7 @@ public class GoalTest {
 
     @Test
     @DisplayName("Test Health isFulfilled()")
-    void isHealthNotFulfilled(){
+    void isHealthFulfilled(){
         assertFalse(healthGoal.isFulfilled(player));
 
         player.addHealth(100);
@@ -41,7 +41,7 @@ public class GoalTest {
 
     @Test
     @DisplayName("Test Score isFulfilled()")
-    void isScoreNotFulfilled(){
+    void isScoreFulfilled(){
         assertFalse(scoreGoal.isFulfilled(player));
 
         player.addScore(100);
@@ -50,7 +50,7 @@ public class GoalTest {
 
     @Test
     @DisplayName("Test Gold isFulfilled()")
-    void isGoldNotFulfilled(){
+    void isGoldFulfilled(){
         assertFalse(goldGoal.isFulfilled(player));
 
         player.addGold(100);
