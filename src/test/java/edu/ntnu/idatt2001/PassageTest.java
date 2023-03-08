@@ -53,10 +53,11 @@ class PassageTest {
     void getLinks() {
         //Creating local list of links with same value as testPassage links, assertEquals
         Link localLink = new Link("Test link", "Test reference");
-
         List<Link> localLinks = new ArrayList<>();
-        localLinks.add(localLink);
+        assertEquals(localLinks, testPassage.getLinks());
 
+        localLinks.add(localLink);
+        testPassage.addLink(localLink);
         assertEquals(localLinks, testPassage.getLinks());
 
         //Creating another local link and adding it to the local list of links, then ensuring they are not the same.

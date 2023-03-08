@@ -19,6 +19,7 @@ public class PlayerTest {
     @Test
     @DisplayName("Test addHealth()")
     void addHealth() {
+        // Test that health is added to player correctly
         int initialHealth = player.getHealth();
         player.addHealth(50);
         Assertions.assertEquals(initialHealth + 50, player.getHealth());
@@ -27,6 +28,7 @@ public class PlayerTest {
     @Test
     @DisplayName("Test addScore()")
     void addScore() {
+        // Test that score is added to player correctly
         int initialScore = player.getScore();
         player.addScore(100);
         Assertions.assertEquals(initialScore + 100, player.getScore());
@@ -35,6 +37,7 @@ public class PlayerTest {
     @Test
     @DisplayName("Test addGold()")
     void addGold() {
+        // Test that gold is added to player correctly
         int initialGold = player.getGold();
         player.addGold(200);
         Assertions.assertEquals(initialGold + 200, player.getGold());
@@ -43,6 +46,7 @@ public class PlayerTest {
     @Test
     @DisplayName("Test addToInventory()")
     void addToInventory() {
+        // Test that items are added to inventory
         int initialSize = player.getInventory().size();
         player.addToInventory("item1");
         player.addToInventory("item2");
@@ -55,6 +59,7 @@ public class PlayerTest {
     @Test
     @DisplayName("Test checkPositiveIntInput()")
     void checkPositiveIntInput() {
+        // Test that exception is thrown when input is negative
         Assertions.assertThrows(IllegalArgumentException.class, () -> player.checkPositiveIntInput("Health", -10));
         Assertions.assertThrows(IllegalArgumentException.class, () -> player.checkPositiveIntInput("Gold", -20));
     }
