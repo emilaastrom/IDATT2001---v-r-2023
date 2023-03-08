@@ -15,7 +15,7 @@ public class HealthAction implements Action {
      *
      * @param health the health
      */
-    HealthAction(int health){
+    public HealthAction(int health){
         this.health = health;
     }
 
