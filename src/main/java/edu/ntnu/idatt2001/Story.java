@@ -1,6 +1,7 @@
 package edu.ntnu.idatt2001;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -69,6 +70,32 @@ public class Story {
     public void addPassage(Passage passage){
         Link newLink = new Link(passage.getTitle(), passage.getTitle());
         passages.put(newLink, passage);
+    }
+
+    /**
+     * Removes a given passage, if it is not referenced from another passage in the story.
+     *
+     * @param link the link, referencing the passage to be removed
+     */
+    public void removePassage(Link link){
+        Passage passageToBeRemoved = passages.get(link);
+        boolean foundMultipleLinksToPassage = false;
+        for (int i=0; i < passages.size(); i++){
+
+            for (Map.Entry<Link, Passage> entry : passages.entrySet()){
+                Link currentLink = entry.getKey();
+                Passage currentPassage = entry.getValue();
+
+                List<Link> currentPassageLinks = currentPassage.getLinks();
+                for (Link linkInList : currentPassageLinks){
+                    if (linkInList.equals(currentLink) && currentPassage != passageToBeRemoved){
+                        foundMultipleLinksToPassage = true;
+                    }
+                }
+            }
+        }
+
+        if (!foundMultipleLinksToPassage) {passages.remove(link);}
     }
 
 }
