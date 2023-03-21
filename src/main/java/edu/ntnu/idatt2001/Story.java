@@ -1,5 +1,6 @@
 package edu.ntnu.idatt2001;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -77,9 +78,11 @@ public class Story {
      *
      * @param link the link, referencing the passage to be removed
      */
-    public void removePassage(Link link){
+    public boolean removePassage(Link link){
         Passage passageToBeRemoved = passages.get(link);
         boolean foundMultipleLinksToPassage = false;
+        boolean successfullyRemoved = false;
+
         for (int i=0; i < passages.size(); i++){
 
             for (Map.Entry<Link, Passage> entry : passages.entrySet()){
@@ -95,7 +98,29 @@ public class Story {
             }
         }
 
-        if (!foundMultipleLinksToPassage) {passages.remove(link);}
+        if (!foundMultipleLinksToPassage) {
+            passages.remove(link);
+            successfullyRemoved = true;
+        }
+
+        return successfullyRemoved;
+    }
+
+    public ArrayList<Link> getBrokenLinks(){
+        ArrayList<Link> deadLinks = new ArrayList<Link>();
+
+        for (Map.Entry<Link, Passage> entry : passages.entrySet()){
+            Link currentLink = entry.getKey();
+            Passage currentPassage = entry.getValue();
+
+            List<Link> currentPassageLinks = currentPassage.getLinks();
+            for (Link linkInList : currentPassageLinks){
+                if (passages.containsKey(linkInList) && passages.containsValue(null)){
+                    deadLinks.add(linkInList);
+                }
+            }
+        }
+        return deadLinks;
     }
 
 }
