@@ -51,6 +51,21 @@ public class Passage {
         return links;
     }
 
+    public String getLinksFormatted(){
+        StringBuilder outputString = new StringBuilder();
+        for (Link link : links){
+            outputString
+                .append("[")
+                .append(link.getText())
+                .append("]").append("(")
+                .append(link.getReference())
+                .append(")")
+                .append("\n");
+        }
+
+        return String.valueOf(outputString);
+    }
+
     /**
      * Add link.
      *
