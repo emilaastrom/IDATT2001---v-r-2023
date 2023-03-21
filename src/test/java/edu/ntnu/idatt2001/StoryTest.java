@@ -13,7 +13,9 @@ public class StoryTest {
 
     @BeforeEach
     public void setUp() {
-        story = new Story("Test", new Passage("Test", "Test"));
+        story = new Story("Test", new Passage("Title of test passage", "Content of test passage"));
+        story.getOpeningPassage().addLink(new Link("Name of first link", "New link in opening passage"));
+        story.getOpeningPassage().addLink(new Link("Name of second link", "Another link in opening passage"));
     }
 
     @Test
