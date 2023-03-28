@@ -23,9 +23,8 @@ public class Story {
     public Story(String title, Passage openingPassage){
         this.title = title;
         this.openingPassage = openingPassage;
-        this.passages = new HashMap<Link, Passage>();
+        this.passages = new HashMap<>();
     }
-
     /**
      * Gets title.
      *
@@ -74,6 +73,15 @@ public class Story {
     }
 
     /**
+     * Sets opening passage.
+     *
+     * @param openingPassage the opening passage
+     */
+    public void setOpeningPassage(Passage openingPassage) {
+        this.openingPassage = openingPassage;
+    }
+
+    /**
      * Removes a given passage, if it is not referenced from another passage in the story.
      *
      * @param link the link, referencing the passage to be removed
@@ -106,8 +114,13 @@ public class Story {
         return successfullyRemoved;
     }
 
+    /**
+     * gets a list of broken links.
+     *
+     * @return the array list containing the broken links
+     */
     public ArrayList<Link> getBrokenLinks(){
-        ArrayList<Link> deadLinks = new ArrayList<Link>();
+        ArrayList<Link> deadLinks = new ArrayList<>();
 
         for (Map.Entry<Link, Passage> entry : passages.entrySet()){
             Link currentLink = entry.getKey();

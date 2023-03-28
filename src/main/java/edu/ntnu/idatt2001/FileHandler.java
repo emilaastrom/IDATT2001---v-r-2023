@@ -6,6 +6,8 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class FileHandler {
 
@@ -41,17 +43,63 @@ public class FileHandler {
       }
     }
 
-    /*Scanner fileScanner = new Scanner(text);
-    //HUSK Å SJEKK FOR EXCEPTIONS (FileNotFoundException osv.)
 
-    public void readFile(String fileReference){
-      int lineNumber = 1;
-      while (fileScanner.hasNextLine()){
-        String line = fileScanner.nextLine();
-        //System.out.println("line " + lineNumber + " :" + line);
-        lineNumber++;
+    public static Story readFile(String fileReference){
+        File text = new File(fileReference);
+        Scanner fileScanner;
+        try {
+            fileScanner = new Scanner(text);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
 
-      }
-    }*/
+        String storyTitle;
+        Passage openingPassage = new Passage("","");
 
+        storyTitle = fileScanner.nextLine();
+        Story story = new Story(storyTitle,openingPassage);
+        fileScanner.nextLine();
+        int i=0;
+        while (fileScanner.hasNextLine()){
+            String line = fileScanner.nextLine();
+            if (line.startsWith("::")){
+                String title = line.substring(2);
+                line = fileScanner.nextLine();
+                String content = line;
+                Passage passage = new Passage(title, content);
+                if (fileScanner.hasNextLine()){
+                    line = fileScanner.nextLine();
+                }
+                while (line.startsWith("[")){
+                    String linkString = line;
+                    System.out.println(linkString);
+                    String linkTitle = "";
+                    String linkContent = "";
+
+
+                    Pattern patternForTitle = Pattern.compile("\\[(.*?)\\]");
+                    Pattern patternForContent = Pattern.compile("\\((.*?)\\)");
+
+                    Matcher matcher = patternForTitle.matcher(linkString);
+                    Matcher matcherContent = patternForContent.matcher(linkString);
+
+                    if (matcher.find()) {
+                        linkTitle = matcher.group(1);
+                    }
+                    if (matcherContent.find()) {
+                        linkContent = matcherContent.group(1);
+                    }
+                    passage.addLink(new Link(linkTitle, linkContent));
+                    line = fileScanner.nextLine();
+                }
+                if(i != 0){
+                    story.addPassage(passage);}
+                else{
+                    story.setOpeningPassage(passage);
+                }
+            i++;
+            }
+        }
+      return story;
+    }
 }

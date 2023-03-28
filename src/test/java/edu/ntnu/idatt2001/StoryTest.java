@@ -42,7 +42,7 @@ public class StoryTest {
     @DisplayName("Test getOpeningPassage() method")
     public void getOpeningPassage() {
         //Creating local title with same value as testPassage title, assertEquals
-        assertEquals("Test", story.getOpeningPassage().getTitle());
+        assertEquals("Title of test passage", story.getOpeningPassage().getTitle());
 
         //Making local title different from testPassage and then ensuring they are not the same.
         assertNotEquals("Test 2", story.getOpeningPassage().getTitle());
