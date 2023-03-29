@@ -72,7 +72,6 @@ public class FileHandler {
                 }
                 while (line.startsWith("[")){
                     String linkString = line;
-                    System.out.println(linkString);
                     String linkTitle = "";
                     String linkContent = "";
 
