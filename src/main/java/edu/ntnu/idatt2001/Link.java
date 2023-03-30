@@ -21,6 +21,7 @@ public class Link {
      * @param reference the reference
      */
     public Link(String text, String reference){
+        //TODO ensure that text and reference are not null
         this.text = text;
         this.reference = reference;
         actions = new ArrayList<>();

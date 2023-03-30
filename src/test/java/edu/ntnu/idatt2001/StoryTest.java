@@ -93,4 +93,42 @@ public class StoryTest {
         //Ensuring that passageOne is NOT removed from the story since it is linked to from passageTwo. False = not removed.
         assertFalse(story.removePassage(linkToPassageOne));
     }
+
+    @Test
+    @DisplayName("Test getBrokenLinks() method")
+    public void getBrokenLinks(){
+        //Creating two example passages.
+        Passage examplePassageOne = new Passage("ExamplePassageOneTitle", "Content of the examplePassage");
+        Passage examplePassageTwo = new Passage("ExamplePassageTwoTitle", "Content of the examplePassage");
+
+        //Creating different links, some of which are broken.
+        Link functionalLink = new Link("Functional link", "ExamplePassageTwoTitle");
+        Link brokenLinkOne = new Link("Broken link", "Broken reference");
+        Link brokenLinkTwo = new Link("Another broken link", "Another broken reference ");
+
+        //Adding all links to the example passages.
+        examplePassageOne.addLink(functionalLink);
+        examplePassageOne.addLink(brokenLinkOne);
+        examplePassageTwo.addLink(brokenLinkTwo);
+
+        //Adding the example passages to the story.
+        story.addPassage(examplePassageOne);
+        story.addPassage(examplePassageTwo);
+
+        //Creating an ArrayList of the links we expect to be broken.
+        ArrayList<Link> expectedBrokenLinks = new ArrayList<>();
+        expectedBrokenLinks.add(brokenLinkOne);
+        expectedBrokenLinks.add(brokenLinkTwo);
+        //Ensuring that the expectedBrokenLinks ArrayList is the same as the ArrayList returned by the getBrokenLinks() method.
+        assertEquals(expectedBrokenLinks, story.getBrokenLinks());
+
+        //Creating an ArrayList of a combination of functional and broken links.
+        ArrayList<Link> combinationOfFunctionalAndBrokenLinks = new ArrayList<>();
+        combinationOfFunctionalAndBrokenLinks.add(functionalLink);
+        combinationOfFunctionalAndBrokenLinks.add(brokenLinkOne);
+        combinationOfFunctionalAndBrokenLinks.add(brokenLinkTwo);
+        //Ensuring that the combinationOfFunctionalAndBrokenLinks ArrayList is NOT the same as the ArrayList returned by the getBrokenLinks() method.
+        assertNotEquals(combinationOfFunctionalAndBrokenLinks, story.getBrokenLinks());
+    }
+
 }

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * The type Story.
@@ -68,6 +69,7 @@ public class Story {
      * @param passage the passage
      */
     public void addPassage(Passage passage){
+        //TODO should first parameter be title? As it shows to user?
         Link newLink = new Link(passage.getTitle(), passage.getTitle());
         passages.put(newLink, passage);
     }
@@ -120,20 +122,31 @@ public class Story {
      * @return the array list containing the broken links
      */
     public ArrayList<Link> getBrokenLinks(){
-        ArrayList<Link> deadLinks = new ArrayList<>();
+        return passages.values().stream()
+                .flatMap(passage -> passage.getLinks().stream())
+                .filter(linkToCompare -> passages.keySet().stream()
+                        .noneMatch(inputLink -> linkToCompare.getReference().equals(inputLink.getReference())))
+                .collect(Collectors.toCollection(ArrayList::new));
 
-        for (Map.Entry<Link, Passage> entry : passages.entrySet()){
-            Link currentLink = entry.getKey();
-            Passage currentPassage = entry.getValue();
+        /*ArrayList<Link> deadLinks = new ArrayList<>();
 
-            List<Link> currentPassageLinks = currentPassage.getLinks();
-            for (Link linkInList : currentPassageLinks){
-                if (passages.containsKey(linkInList) && passages.containsValue(null)){
-                    deadLinks.add(linkInList);
+        for(Passage passage : passages.values())
+            for (Link linkToCompare : passage.getLinks()){
+                boolean broken = true;
+                for (Link inputLink : passages.keySet()){
+
+                            if (linkToCompare.getReference().equals(inputLink.getReference())) {
+                                //not dead
+                                broken = false;
+                                break;
+                            }
+                    }
+                    if (broken){
+                        deadLinks.add(linkToCompare);
+                    }
                 }
-            }
-        }
-        return deadLinks;
-    }
+            return deadLinks;
+        }*/
 
-}
+        }
+    }
