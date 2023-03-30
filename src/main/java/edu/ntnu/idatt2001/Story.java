@@ -100,9 +100,10 @@ public class Story {
                 Passage currentPassage = entry.getValue();
 
                 List<Link> currentPassageLinks = currentPassage.getLinks();
-                for (Link linkInList : currentPassageLinks){
-                    if (linkInList.equals(currentLink) && currentPassage != passageToBeRemoved){
+                for (Link linkInCurrentPassageList : currentPassageLinks){
+                    if ((linkInCurrentPassageList.equals(linkToBeRemoved)) && (currentPassage != passageToBeRemoved)) {
                         foundMultipleLinksToPassage = true;
+                        break;
                     }
                 }
             }

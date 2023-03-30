@@ -1,7 +1,7 @@
 package edu.ntnu.idatt2001;
 
 import org.junit.jupiter.api.*;
-
+import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class StoryTest {
