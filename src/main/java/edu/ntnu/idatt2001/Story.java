@@ -84,10 +84,10 @@ public class Story {
     /**
      * Removes a given passage, if it is not referenced from another passage in the story.
      *
-     * @param link the link, referencing the passage to be removed
+     * @param linkToBeRemoved the link, referencing the passage to be removed
      */
-    public boolean removePassage(Link link){
-        Passage passageToBeRemoved = passages.get(link);
+    public boolean removePassage(Link linkToBeRemoved){
+        Passage passageToBeRemoved = passages.get(linkToBeRemoved);
         boolean foundMultipleLinksToPassage = false;
         boolean successfullyRemoved = false;
 
@@ -107,7 +107,7 @@ public class Story {
         }
 
         if (!foundMultipleLinksToPassage) {
-            passages.remove(link);
+            passages.remove(linkToBeRemoved);
             successfullyRemoved = true;
         }
 
