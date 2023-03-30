@@ -1,6 +1,5 @@
-package edu.ntnu.idatt2001.Actions;
+package edu.ntnu.idatt2001.Action;
 
-import edu.ntnu.idatt2001.Actions.Action;
 import edu.ntnu.idatt2001.Player;
 
 /**
@@ -15,7 +14,7 @@ public class HealthAction implements Action {
      *
      * @param health the health
      */
-    HealthAction(int health){
+    public HealthAction(int health){
         this.health = health;
     }
 

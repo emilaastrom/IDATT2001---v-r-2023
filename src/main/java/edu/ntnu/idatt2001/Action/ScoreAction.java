@@ -1,6 +1,5 @@
-package edu.ntnu.idatt2001.Actions;
+package edu.ntnu.idatt2001.Action;
 
-import edu.ntnu.idatt2001.Actions.Action;
 import edu.ntnu.idatt2001.Player;
 
 /**
@@ -15,7 +14,7 @@ public class ScoreAction implements Action {
      *
      * @param points the points
      */
-    ScoreAction(int points){
+    public ScoreAction(int points){
         this.points = points;
     };
 

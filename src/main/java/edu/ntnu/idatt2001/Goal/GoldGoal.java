@@ -1,6 +1,5 @@
-package edu.ntnu.idatt2001.Goals;
+package edu.ntnu.idatt2001.Goal;
 
-import edu.ntnu.idatt2001.Goals.Goal;
 import edu.ntnu.idatt2001.Player;
 
 /**

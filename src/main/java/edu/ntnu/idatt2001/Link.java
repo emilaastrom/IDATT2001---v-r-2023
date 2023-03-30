@@ -1,6 +1,6 @@
 package edu.ntnu.idatt2001;
 
-import edu.ntnu.idatt2001.Actions.Action;
+import edu.ntnu.idatt2001.Action.Action;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +20,8 @@ public class Link {
      * @param text      the text
      * @param reference the reference
      */
-    Link(String text, String reference){
+    public Link(String text, String reference){
+        //TODO ensure that text and reference are not null
         this.text = text;
         this.reference = reference;
         actions = new ArrayList<>();

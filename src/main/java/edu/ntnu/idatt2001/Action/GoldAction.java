@@ -1,6 +1,5 @@
-package edu.ntnu.idatt2001.Actions;
+package edu.ntnu.idatt2001.Action;
 
-import edu.ntnu.idatt2001.Actions.Action;
 import edu.ntnu.idatt2001.Player;
 
 /**
@@ -15,7 +14,7 @@ public class GoldAction implements Action {
      *
      * @param gold the gold
      */
-    GoldAction(int gold){
+    public GoldAction(int gold){
         this.gold = gold;
     }
 

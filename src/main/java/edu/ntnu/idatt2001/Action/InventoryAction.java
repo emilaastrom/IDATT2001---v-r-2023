@@ -1,6 +1,5 @@
-package edu.ntnu.idatt2001.Actions;
+package edu.ntnu.idatt2001.Action;
 
-import edu.ntnu.idatt2001.Actions.Action;
 import edu.ntnu.idatt2001.Player;
 
 /**
@@ -15,7 +14,7 @@ public class InventoryAction implements Action {
      *
      * @param item the item
      */
-    InventoryAction(String item){
+    public InventoryAction(String item){
         this.item = item;
     }
 
