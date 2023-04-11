@@ -138,6 +138,23 @@ public class PathsApplication extends Application {
         Scene scene = new Scene(root, 1500  , 750);
         stage.setTitle("Paths");
         stage.setScene(scene);
+        stage.setResizable(false);
+        stage.initStyle(StageStyle.UNDECORATED);
         stage.show();
+
+
+        //EVENTS
+
+        //TEMPORARY CHOOSE ADVENTURE BUTTON
+        entryWindowChooseAdventureButton.setOnAction(event -> {
+            pathsWindow.setVisible(true);
+            entryWindow.setVisible(false);
+        });
+
+        //Allowing the stage to be moved around even with UNDECORATED StageStyle
+        windowStackPane.setOnMousePressed(pressEvent -> windowStackPane.setOnMouseDragged(dragEvent -> {
+            stage.setX(dragEvent.getScreenX() - pressEvent.getSceneX());
+            stage.setY(dragEvent.getScreenY() - pressEvent.getSceneY());
+        }));
     }
 }
