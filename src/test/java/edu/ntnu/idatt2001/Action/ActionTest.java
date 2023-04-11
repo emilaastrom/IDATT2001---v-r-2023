@@ -22,8 +22,7 @@ public class ActionTest {
     @BeforeEach
     void setUp(){
         myTestLink = new Link("Text string", "Reference string");
-        myTestPlayer = new Player("TestPlayer", 100, 100, 100);
-
+        myTestPlayer = new Player.PlayerBuilder("Test player").health(100).gold(100).score(100).build();
         myGoldAction = new GoldAction(50);
         myHealthAction = new HealthAction(50);
         myInventoryAction = new InventoryAction("Dragon dagger(p++)");

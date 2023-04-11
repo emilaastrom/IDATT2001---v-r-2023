@@ -38,7 +38,7 @@ class GameTest {
         testGoldGoal = new GoldGoal(1);
         testHealthGoal = new HealthGoal(6);
         goalList = new ArrayList<>();
-        player = new Player("Kåre", 100, 50, 25);
+        player = new Player.PlayerBuilder("Kåre").build();
         myGame = new Game(player,testStory, goalList);
     }
 

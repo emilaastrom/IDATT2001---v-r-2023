@@ -16,20 +16,16 @@ public class Player {
     /**
      * Instantiates a new Player.
      *
-     * @param name   the name
-     * @param health the health
-     * @param score  the score
-     * @param gold   the gold
+     * @param builder the builder
      */
-    public Player(String name,int health,int score,int gold){
-
+    public Player(PlayerBuilder builder){
+        name = builder.name;
+        health = builder.health;
+        score = builder.score;
+        gold = builder.gold;
+        inventory = builder.inventory;
         checkPositiveIntInput("Health", health);
         checkPositiveIntInput("Gold", gold);
-
-        this.name = name;
-        this.health = health;
-        this.score = score;
-        this.gold = gold;
     }
 
 
@@ -125,5 +121,81 @@ public class Player {
      */
     public void addToInventory(String item) {
         this.inventory.add(item);
+    }
+
+    /**
+     * Builder class for Player.
+     */
+    public static class PlayerBuilder {
+        //required
+        private String name;
+
+        //optional
+        private int health = 100;
+        private int score = 0;
+        private int gold = 0;
+        private List<String> inventory = new ArrayList<>();
+
+        /**
+         * Instantiates a new Player builder.
+         *
+         * @param name the name
+         */
+        public PlayerBuilder(String name) {
+            this.name = name;
+        }
+
+        /**
+         * Health player builder.
+         *
+         * @param health the health
+         * @return the player builder
+         */
+        public PlayerBuilder health(int health) {
+            this.health = health;
+            return this;
+        }
+
+        /**
+         * Score player builder.
+         *
+         * @param score the score
+         * @return the player builder
+         */
+        public PlayerBuilder score(int score) {
+            this.score = score;
+            return this;
+        }
+
+        /**
+         * Gold player builder.
+         *
+         * @param gold the gold
+         * @return the player builder
+         */
+        public PlayerBuilder gold(int gold) {
+            this.gold = gold;
+            return this;
+        }
+
+        /**
+         * Inventory player builder.
+         *
+         * @param inventory the inventory
+         * @return the player builder
+         */
+        public PlayerBuilder inventory(List<String> inventory) {
+            this.inventory = inventory;
+            return this;
+        }
+
+        /**
+         * Build player.
+         *
+         * @return the player
+         */
+        public Player build() {
+            return new Player(this);
+        }
     }
 }
