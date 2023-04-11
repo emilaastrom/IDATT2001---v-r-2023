@@ -13,7 +13,7 @@ public class PlayerTest {
 
     @BeforeEach
     void setUp() {
-        player = new Player("TestPlayer", 100, 0, 0);
+        player = new Player.PlayerBuilder("TestPlayer").build();
     }
 
     @Test

@@ -20,7 +20,7 @@ public class GoalTest {
     List<String> mandatoryItems;
     @BeforeEach
     void setup(){
-        player = new Player("TestPlayer", 0, 0, 0);
+        player = new Player.PlayerBuilder("TestPlayer").health(0).score(0).gold(0).build();
         mandatoryItems = new ArrayList<>();
         mandatoryItems.add("item1");
         mandatoryItems.add("item2");
