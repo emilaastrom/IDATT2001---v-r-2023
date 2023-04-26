@@ -12,9 +12,15 @@ import javafx.scene.paint.CycleMethod;
 import javafx.scene.paint.LinearGradient;
 import javafx.scene.paint.Stop;
 import javafx.scene.shape.Box;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.util.Duration;
+
+import java.io.File;
 
 public class PathsApplication extends Application {
     public static void main(String[] args) {
@@ -23,10 +29,10 @@ public class PathsApplication extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
+        playMusic();
+
         //STACKPANE FOR DIFFERENT WINDOWS
         StackPane windowStackPane = new StackPane();
-
-
 
         //ENTRYWINDOW
         VBox entryWindowVBox = new VBox();
@@ -34,22 +40,47 @@ public class PathsApplication extends Application {
         entryWindowVBox.setAlignment(javafx.geometry.Pos.CENTER);
         entryWindowVBox.setSpacing(30);
 
-        Image entryWindowLogo = new Image("file:src/main/resources/templogo.png");
+        Image entryWindowLogo = new Image("file:src/main/resources/logo.png");
         StackPane entryWindowLogoStackPane = new StackPane();
         entryWindowLogoStackPane.getChildren().add(new javafx.scene.image.ImageView(entryWindowLogo));
 
-        Button entryWindowChooseAdventureButton = new Button("CHOOSE YOUR ADVENTURE (.paths file)");
+        Button entryWindowChooseAdventureButton = new Button("CHOOSE YOUR ADVENTURE");
         entryWindowChooseAdventureButton.setStyle(
-                "-fx-background-color: #6AA84F; " +
-                "-fx-border-color: rgb(0,0,0); " +
-                "-fx-border-width: 1px; " +
-                "-fx-border-radius: 5px; " +
-                "-fx-font-size: 16px; " +
-                "-fx-font-weight: bold; " +
+                "-fx-background-color: rgba(0,0,0,0.7); " +
+                "-fx-border-color: #FFFFFF; " +
+                "-fx-border-width: 4px; " +
+                "-fx-border-radius: 0px; " +
                 "-fx-padding: 10px 20px 10px 20px; " +
                 "-fx-text-fill: rgb(255,255,255); " +
                 "-fx-background-radius: 5px;");
-        entryWindowVBox.getChildren().addAll(entryWindowLogoStackPane, entryWindowChooseAdventureButton);
+        entryWindowChooseAdventureButton.setFont(Font.loadFont("file:src/main/resources/textFont.otf", 16));
+        entryWindowChooseAdventureButton.setPrefWidth(400);
+
+        Button settingsButton = new Button("SETTINGS");
+        settingsButton.setStyle(
+            "-fx-background-color: rgba(0,0,0,0.7); " +
+                "-fx-border-color: #FFFFFF; " +
+                "-fx-border-width: 4px; " +
+                "-fx-border-radius: 0px; " +
+                "-fx-padding: 10px 20px 10px 20px; " +
+                "-fx-text-fill: rgb(255,255,255); " +
+                "-fx-background-radius: 5px;");
+        settingsButton.setFont(Font.loadFont("file:src/main/resources/textFont.otf", 16));
+        settingsButton.setPrefWidth(400);
+
+        Button exitGameButton = new Button("EXIT GAME");
+        exitGameButton.setStyle(
+            "-fx-background-color: rgba(0,0,0,0.7); " +
+                "-fx-border-color: #FFFFFF; " +
+                "-fx-border-width: 4px; " +
+                "-fx-border-radius: 0px; " +
+                "-fx-padding: 10px 20px 10px 20px; " +
+                "-fx-text-fill: rgb(255,255,255); " +
+                "-fx-background-radius: 5px;");
+        exitGameButton.setFont(Font.loadFont("file:src/main/resources/textFont.otf", 16));
+        exitGameButton.setPrefWidth(400);
+
+        entryWindowVBox.getChildren().addAll(entryWindowLogoStackPane, entryWindowChooseAdventureButton, settingsButton, exitGameButton);
 
         BorderPane entryWindow = new BorderPane();
         entryWindow.setVisible(true);
@@ -156,5 +187,14 @@ public class PathsApplication extends Application {
             stage.setX(dragEvent.getScreenX() - pressEvent.getSceneX());
             stage.setY(dragEvent.getScreenY() - pressEvent.getSceneY());
         }));
+    }
+
+    MediaPlayer mediaPlayer;
+    public void playMusic() {
+        String musicFile = "src/main/resources/music.mp3";
+        Media sound = new Media(new File(musicFile).toURI().toString());
+        mediaPlayer = new MediaPlayer(sound);
+        mediaPlayer.setOnEndOfMedia(() -> mediaPlayer.seek(Duration.ZERO));
+        mediaPlayer.play();
     }
 }
