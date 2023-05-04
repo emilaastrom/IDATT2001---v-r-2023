@@ -1,0 +1,36 @@
+@font-face {
+    /* Loading custom font from the same folder as the stylesheet */
+    src: url('textFont.otf');
+}
+
+.text{
+    /* Changes here affect all text elements, including text inside buttons*/
+    -fx-fill: #ffffff;
+    -fx-font-size: 20;
+    -fx-font-family: 'Retro Gaming';
+}
+
+.root{
+}
+
+
+.button{
+    /* Changes here affect all buttons */
+    -fx-background-color: rgba(0, 0, 0, 0.7);
+    -fx-border-color: #FFFFFF;
+    -fx-border-width: 4px;
+    -fx-border-radius: 0px;
+    -fx-padding: 10px 20px 10px 20px;
+    -fx-text-fill: rgb(255,255,255);
+    -fx-background-radius: 5px;
+    -fx-font-family: 'Retro Gaming';
+}
+
+.button:hover{
+    /* Changes button style when hovering */
+    -fx-background-color: rgba(130, 178, 106, 0.7);;
+}
+
+#mainMenuButton{
+    /* Changes here only affect the buttons on the main menu, using their ID */
+}
