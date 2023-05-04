@@ -7,13 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.CycleMethod;
-import javafx.scene.paint.LinearGradient;
-import javafx.scene.paint.Stop;
-import javafx.scene.shape.Box;
 import javafx.scene.text.Font;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.scene.media.Media;
@@ -45,40 +39,19 @@ public class PathsApplication extends Application {
         entryWindowLogoStackPane.getChildren().add(new javafx.scene.image.ImageView(entryWindowLogo));
 
         Button entryWindowChooseAdventureButton = new Button("CHOOSE YOUR ADVENTURE");
-        entryWindowChooseAdventureButton.setStyle(
-                "-fx-background-color: rgba(0,0,0,0.7); " +
-                "-fx-border-color: #FFFFFF; " +
-                "-fx-border-width: 4px; " +
-                "-fx-border-radius: 0px; " +
-                "-fx-padding: 10px 20px 10px 20px; " +
-                "-fx-text-fill: rgb(255,255,255); " +
-                "-fx-background-radius: 5px;");
         entryWindowChooseAdventureButton.setFont(Font.loadFont("file:src/main/resources/textFont.otf", 16));
         entryWindowChooseAdventureButton.setPrefWidth(400);
+        entryWindowChooseAdventureButton.setId("mainMenuButton");
 
         Button settingsButton = new Button("SETTINGS");
-        settingsButton.setStyle(
-            "-fx-background-color: rgba(0,0,0,0.7); " +
-                "-fx-border-color: #FFFFFF; " +
-                "-fx-border-width: 4px; " +
-                "-fx-border-radius: 0px; " +
-                "-fx-padding: 10px 20px 10px 20px; " +
-                "-fx-text-fill: rgb(255,255,255); " +
-                "-fx-background-radius: 5px;");
         settingsButton.setFont(Font.loadFont("file:src/main/resources/textFont.otf", 16));
         settingsButton.setPrefWidth(400);
+        settingsButton.setId("mainMenuButton");
 
         Button exitGameButton = new Button("EXIT GAME");
-        exitGameButton.setStyle(
-            "-fx-background-color: rgba(0,0,0,0.7); " +
-                "-fx-border-color: #FFFFFF; " +
-                "-fx-border-width: 4px; " +
-                "-fx-border-radius: 0px; " +
-                "-fx-padding: 10px 20px 10px 20px; " +
-                "-fx-text-fill: rgb(255,255,255); " +
-                "-fx-background-radius: 5px;");
         exitGameButton.setFont(Font.loadFont("file:src/main/resources/textFont.otf", 16));
         exitGameButton.setPrefWidth(400);
+        exitGameButton.setId("mainMenuButton");
 
         entryWindowVBox.getChildren().addAll(entryWindowLogoStackPane, entryWindowChooseAdventureButton, settingsButton, exitGameButton);
 
@@ -153,7 +126,7 @@ public class PathsApplication extends Application {
         BackgroundPosition backgroundPosition = BackgroundPosition.CENTER;
         BackgroundSize backgroundSize = new BackgroundSize(100, 100, true, true, true, false);
         BackgroundImage backgroundImage = new BackgroundImage(
-                new javafx.scene.image.Image("file:src/main/resources/background.jpg"),
+                new javafx.scene.image.Image("file:src/main/resources/forestBackground.jpg"),
                 backgroundRepeat,
                 backgroundRepeat,
                 backgroundPosition,
@@ -173,6 +146,8 @@ public class PathsApplication extends Application {
         stage.initStyle(StageStyle.UNDECORATED);
         stage.show();
 
+        String currentStylesheet = "file:src/main/resources/maintheme.css";
+        scene.getStylesheets().add(currentStylesheet);
 
         //EVENTS
 
