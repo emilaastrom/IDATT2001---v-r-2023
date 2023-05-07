@@ -1,5 +1,8 @@
 package edu.ntnu.idatt2001;
 
+import edu.ntnu.idatt2001.Model.Link;
+import edu.ntnu.idatt2001.Model.Passage;
+import edu.ntnu.idatt2001.Model.Story;
 import org.junit.jupiter.api.*;
 import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.*;

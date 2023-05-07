@@ -1,6 +1,6 @@
-package edu.ntnu.idatt2001.Action;
+package edu.ntnu.idatt2001.Model.Action;
 
-import edu.ntnu.idatt2001.Player;
+import edu.ntnu.idatt2001.Model.Player;
 
 /**
  * An action that affects player score.
@@ -17,6 +17,14 @@ public class ScoreAction implements Action {
     public ScoreAction(int points){
         this.points = points;
     };
+
+    public String getType(){
+        return "Score";
+    }
+
+    public String getAmount(){
+        return Integer.toString(points);
+    }
 
     @Override
     public void Execute(Player player){

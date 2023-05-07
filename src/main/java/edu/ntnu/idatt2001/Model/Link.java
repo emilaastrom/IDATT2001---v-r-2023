@@ -1,6 +1,6 @@
-package edu.ntnu.idatt2001;
+package edu.ntnu.idatt2001.Model;
 
-import edu.ntnu.idatt2001.Action.Action;
+import edu.ntnu.idatt2001.Model.Action.Action;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,5 +1,11 @@
-package edu.ntnu.idatt2001;
+package edu.ntnu.idatt2001.View;
 
+import edu.ntnu.idatt2001.Controller.MusicController;
+import edu.ntnu.idatt2001.Model.Goal.Goal;
+import edu.ntnu.idatt2001.Model.FileHandler;
+import edu.ntnu.idatt2001.Model.Game;
+import edu.ntnu.idatt2001.Model.Player;
+import edu.ntnu.idatt2001.Model.Story;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -8,13 +14,17 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
 
+import javax.swing.*;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PathsApplication extends Application {
     public static void main(String[] args) {
@@ -23,12 +33,15 @@ public class PathsApplication extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        playMusic();
+        MusicController.playMusic();
 
         //STACKPANE FOR DIFFERENT WINDOWS
         StackPane windowStackPane = new StackPane();
 
+        ////////////////////////////////////////////////////////////
         //ENTRYWINDOW
+        ////////////////////////////////////////////////////////////
+
         VBox entryWindowVBox = new VBox();
         entryWindowVBox.setPrefWidth(500);
         entryWindowVBox.setAlignment(javafx.geometry.Pos.CENTER);
@@ -39,18 +52,12 @@ public class PathsApplication extends Application {
         entryWindowLogoStackPane.getChildren().add(new javafx.scene.image.ImageView(entryWindowLogo));
 
         Button entryWindowChooseAdventureButton = new Button("CHOOSE YOUR ADVENTURE");
-        entryWindowChooseAdventureButton.setFont(Font.loadFont("file:src/main/resources/textFont.otf", 16));
-        entryWindowChooseAdventureButton.setPrefWidth(400);
         entryWindowChooseAdventureButton.setId("mainMenuButton");
 
         Button settingsButton = new Button("SETTINGS");
-        settingsButton.setFont(Font.loadFont("file:src/main/resources/textFont.otf", 16));
-        settingsButton.setPrefWidth(400);
         settingsButton.setId("mainMenuButton");
 
         Button exitGameButton = new Button("EXIT GAME");
-        exitGameButton.setFont(Font.loadFont("file:src/main/resources/textFont.otf", 16));
-        exitGameButton.setPrefWidth(400);
         exitGameButton.setId("mainMenuButton");
 
         entryWindowVBox.getChildren().addAll(entryWindowLogoStackPane, entryWindowChooseAdventureButton, settingsButton, exitGameButton);
@@ -61,8 +68,10 @@ public class PathsApplication extends Application {
         entryWindow.setStyle("-fx-background-color: rgb(0,0,0,0)");
 
 
-
+        ////////////////////////////////////////////////////////////
         //PATHSWINDOW
+        ////////////////////////////////////////////////////////////
+
         BorderPane pathsWindowCenterBox = new BorderPane();
         pathsWindowCenterBox.setPrefWidth(500);
         pathsWindowCenterBox.setPrefHeight(400);
@@ -153,6 +162,7 @@ public class PathsApplication extends Application {
 
         //TEMPORARY CHOOSE ADVENTURE BUTTON
         entryWindowChooseAdventureButton.setOnAction(event -> {
+            FileHandler.openGame(stage);
             pathsWindow.setVisible(true);
             entryWindow.setVisible(false);
         });
@@ -164,12 +174,5 @@ public class PathsApplication extends Application {
         }));
     }
 
-    MediaPlayer mediaPlayer;
-    public void playMusic() {
-        String musicFile = "src/main/resources/music.mp3";
-        Media sound = new Media(new File(musicFile).toURI().toString());
-        mediaPlayer = new MediaPlayer(sound);
-        mediaPlayer.setOnEndOfMedia(() -> mediaPlayer.seek(Duration.ZERO));
-        mediaPlayer.play();
-    }
+
 }
