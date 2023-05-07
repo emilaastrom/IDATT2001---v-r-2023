@@ -1,4 +1,6 @@
-package edu.ntnu.idatt2001;
+package edu.ntnu.idatt2001.Model;
+
+import edu.ntnu.idatt2001.Model.Action.Action;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,7 +61,23 @@ public class Passage {
                 .append(link.getText())
                 .append("]").append("(")
                 .append(link.getReference())
-                .append(")")
+                .append(")");
+                if(!link.getActions().isEmpty()){
+                    outputString
+                        .append("{");
+                }
+                for(Action action : link.getActions()){
+                    outputString
+                        .append(action.getType())
+                        .append(" ")
+                        .append(action.getAmount())
+                        .append(";");
+                }
+                if(!link.getActions().isEmpty()){
+                    outputString
+                        .append("}");
+                }
+            outputString
                 .append("\n");
         }
 
@@ -73,6 +91,11 @@ public class Passage {
      * @return the boolean
      */
     public boolean addLink (Link link){
+        links.add(link);
+        return true;
+    }
+
+    public boolean addLink (Link link, Action action){
         links.add(link);
         return true;
     }

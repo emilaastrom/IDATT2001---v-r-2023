@@ -1,5 +1,7 @@
 package edu.ntnu.idatt2001;
 
+import edu.ntnu.idatt2001.Model.Link;
+import edu.ntnu.idatt2001.Model.Passage;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

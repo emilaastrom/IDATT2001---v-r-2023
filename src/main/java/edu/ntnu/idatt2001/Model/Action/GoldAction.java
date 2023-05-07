@@ -1,13 +1,13 @@
-package edu.ntnu.idatt2001.Action;
+package edu.ntnu.idatt2001.Model.Action;
 
-import edu.ntnu.idatt2001.Player;
+import edu.ntnu.idatt2001.Model.Player;
 
 /**
  * An action that affects player gold.
  */
 public class GoldAction implements Action {
 
-    private final int gold;
+    private int gold;
 
     /**
      * Instantiates a new GoldAction.
@@ -15,7 +15,15 @@ public class GoldAction implements Action {
      * @param gold the gold
      */
     public GoldAction(int gold){
-        this.gold = gold;
+        this.gold += gold;
+    }
+
+    public String getType(){
+        return "Gold";
+    }
+
+    public String getAmount(){
+        return Integer.toString(gold);
     }
 
     @Override

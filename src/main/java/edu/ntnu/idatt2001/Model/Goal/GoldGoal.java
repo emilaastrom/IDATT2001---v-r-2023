@@ -1,6 +1,6 @@
-package edu.ntnu.idatt2001.Goal;
+package edu.ntnu.idatt2001.Model.Goal;
 
-import edu.ntnu.idatt2001.Player;
+import edu.ntnu.idatt2001.Model.Player;
 
 /**
  * The goal of reaching a certain amount of gold.

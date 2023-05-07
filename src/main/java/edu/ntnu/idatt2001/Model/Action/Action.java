@@ -1,11 +1,15 @@
-package edu.ntnu.idatt2001.Action;
+package edu.ntnu.idatt2001.Model.Action;
 
-import edu.ntnu.idatt2001.Player;
+import edu.ntnu.idatt2001.Model.Player;
 
 /**
  * The interface Action.
  */
 public interface Action {
+
+    String getType();
+
+    String getAmount();
 
     /**
      * Execute abstract method, defined in classes that are implementing this interface.

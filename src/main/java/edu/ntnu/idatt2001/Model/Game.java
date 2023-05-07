@@ -1,28 +1,24 @@
-package edu.ntnu.idatt2001;
+package edu.ntnu.idatt2001.Model;
 
-import edu.ntnu.idatt2001.Goal.Goal;
+import edu.ntnu.idatt2001.Model.Goal.Goal;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * The class Game.
  */
 public class Game {
-    private final Player player;
-    private final Story story;
-    private List<Goal> goals;
+    private static final Game instance = new Game();
+    private Player player = new Player.PlayerBuilder("").build();
+    private Story story = new Story("", new Passage("", ""));
+    private List<Goal> goals = new ArrayList<>();
 
-    /**
-     * Instantiates a new Game.
-     *
-     * @param player the player
-     * @param story  the story
-     * @param goals  the goals
-     */
-    public Game(Player player, Story story, List<Goal> goals){
-        this.player = player;
-        this.story = story;
-        this.goals = goals;
+
+    public Game(){
+    }
+
+    public static Game getInstance() {return instance;
     }
 
     /**
@@ -32,6 +28,22 @@ public class Game {
      */
     public Player getPlayer() {
         return player;
+    }
+
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
+
+    public void setStory(Story story) {
+        this.story = story;
+    }
+
+    public void setGoals(List<Goal> goals) {
+        this.goals = goals;
+    }
+
+    public void addGoal(Goal goal) {
+        this.goals.add(goal);
     }
 
     /**

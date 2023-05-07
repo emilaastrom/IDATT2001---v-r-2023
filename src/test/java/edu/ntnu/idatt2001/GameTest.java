@@ -1,8 +1,9 @@
 package edu.ntnu.idatt2001;
 
-import edu.ntnu.idatt2001.Goal.Goal;
-import edu.ntnu.idatt2001.Goal.GoldGoal;
-import edu.ntnu.idatt2001.Goal.HealthGoal;
+import edu.ntnu.idatt2001.Model.Goal.Goal;
+import edu.ntnu.idatt2001.Model.Goal.GoldGoal;
+import edu.ntnu.idatt2001.Model.Goal.HealthGoal;
+import edu.ntnu.idatt2001.Model.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -39,7 +40,7 @@ class GameTest {
         testHealthGoal = new HealthGoal(6);
         goalList = new ArrayList<>();
         player = new Player.PlayerBuilder("Kåre").build();
-        myGame = new Game(player,testStory, goalList);
+        //myGame = new Game(player,testStory, goalList);
     }
 
     @Test

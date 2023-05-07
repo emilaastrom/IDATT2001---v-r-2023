@@ -1,8 +1,17 @@
 package edu.ntnu.idatt2001;
 
+import edu.ntnu.idatt2001.Model.Action.Action;
+import edu.ntnu.idatt2001.Model.Action.GoldAction;
+import edu.ntnu.idatt2001.Model.Action.HealthAction;
+import edu.ntnu.idatt2001.Model.FileHandler;
+import edu.ntnu.idatt2001.Model.Link;
+import edu.ntnu.idatt2001.Model.Passage;
+import edu.ntnu.idatt2001.Model.Story;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
 
 public class FileHandlerTest {
 
@@ -14,7 +23,10 @@ public class FileHandlerTest {
     exampleStory.getOpeningPassage().addLink(new Link("Link1", "New link in opening passage"));
     exampleStory.getOpeningPassage().addLink(new Link("Link2", "Another link in opening passage"));
     Passage passage = new Passage("Title of test passage 2", "Content of test passage 2");
-    passage.addLink(new Link("Test link", "Test reference"));
+    Link link1 = new Link("Test link", "Test reference");
+    link1.addAction(new GoldAction(10));
+    link1.addAction(new HealthAction(20));
+    passage.addLink(link1);
     passage.addLink(new Link("Test link 2", "Test reference 2"));
     passage.addLink(new Link("Test link 3", "Test reference 3"));
     exampleStory.addPassage(passage);
@@ -30,7 +42,7 @@ public class FileHandlerTest {
     FileHandler.writeFile(exampleStory);
   }
 
-  @Test
+ @Test
   @DisplayName("Testing readFile() method")
   public void readFile(){
     Story story = FileHandler.readFile("exampleStory.paths");

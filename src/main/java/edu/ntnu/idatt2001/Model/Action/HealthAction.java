@@ -1,6 +1,6 @@
-package edu.ntnu.idatt2001.Action;
+package edu.ntnu.idatt2001.Model.Action;
 
-import edu.ntnu.idatt2001.Player;
+import edu.ntnu.idatt2001.Model.Player;
 
 /**
  * An action that affects player health.
@@ -16,6 +16,14 @@ public class HealthAction implements Action {
      */
     public HealthAction(int health){
         this.health = health;
+    }
+
+    public String getType(){
+        return "Health";
+    }
+
+    public String getAmount(){
+        return Integer.toString(health);
     }
 
     @Override
