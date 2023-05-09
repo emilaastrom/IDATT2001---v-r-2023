@@ -1,6 +1,5 @@
 package edu.ntnu.idatt2001;
 
-import edu.ntnu.idatt2001.Model.Action.Action;
 import edu.ntnu.idatt2001.Model.Action.GoldAction;
 import edu.ntnu.idatt2001.Model.Action.HealthAction;
 import edu.ntnu.idatt2001.Model.FileHandler;
@@ -10,8 +9,7 @@ import edu.ntnu.idatt2001.Model.Story;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class FileHandlerTest {
 
@@ -38,15 +36,29 @@ public class FileHandlerTest {
   @Test
   @DisplayName("Testing writeFile() method")
   public void writeFile(){
+
+    //TODO Update these unit tests to be more comprehensive
+
     //Testing that the method writeFile() writes the correct story to the file
+    Story story = FileHandler.readFile("exampleStory.paths");
     FileHandler.writeFile(exampleStory);
+
+    assertEquals(story.getOpeningPassage(), exampleStory.getOpeningPassage());
   }
 
  @Test
   @DisplayName("Testing readFile() method")
   public void readFile(){
+
+    //TODO Update these unit tests to be more comprehensive
+
     Story story = FileHandler.readFile("exampleStory.paths");
     FileHandler.writeFile(story);
+
+    assertEquals(story.getOpeningPassage(), exampleStory.getOpeningPassage());
+    assertEquals(story.getTitle(), exampleStory.getTitle());
+    assertEquals(story.getPassages().size(), exampleStory.getPassages().size());
+    //assertEquals(story.getPassages(), exampleStory.getPassages());
   }
 
 
