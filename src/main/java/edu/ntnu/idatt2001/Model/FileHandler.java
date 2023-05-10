@@ -84,19 +84,24 @@ public class FileHandler {
                     String linkTitle = "";
                     String linkContent = "";
 
+                    //Lists for storing the different types of actions
                     ArrayList<GoldAction> goldActionList = new ArrayList<>();
                     ArrayList<HealthAction> healthActionList = new ArrayList<>();
                     ArrayList<InventoryAction> inventoryActionList = new ArrayList<>();
                     ArrayList<ScoreAction> scoreActionList = new ArrayList<>();
-                    //Arraylist to keep track of which actions are being added. [0] = Gold, [1] = Health, [2] = Inventory, [3] = Score.
+
+                    /* Arraylist to keep track of which actions are being added.
+                    [0] = Gold, [1] = Health, [2] = Inventory, [3] = Score */
                     ArrayList<Boolean> activeActionList = new ArrayList<>(Arrays.asList(new Boolean[4]));
+                    //Ensuring the arraylist is always set to false, might be too much as it should always initialize to false.
                     Collections.fill(activeActionList, false);
 
-
+                    //Regex patterns for detecting TITLE, CONTENT and ACTIONS in link.
                     Pattern patternForTitle = Pattern.compile("\\[(.*?)\\]");
                     Pattern patternForContent = Pattern.compile("\\((.*?)\\)");
                     Pattern patternForAction = Pattern.compile("\\{(.*?)}");
 
+                    //Matcher for utilizing the regex patterns.
                     Matcher matcherTitle = patternForTitle.matcher(linkString);
                     Matcher matcherContent = patternForContent.matcher(linkString);
                     Matcher matcherAction = patternForAction.matcher(linkString);
@@ -111,49 +116,62 @@ public class FileHandler {
                     }
                     //Detecting ACTIONS in link
                     if (matcherAction.find()) {
+                        //Identifying actions and splitting them into an array.
                         String actionListString = matcherAction.group(1);
                         String[] actions = actionListString.split(";");
+                        //Looping through actions and tracking which types are being added.
                         for (String action : actions) {
-                            String currentType = action.split(" ")[0];
-                            String currentValue = action.split(" ")[1];
+                            //Splitting the action type/value into: type (INDEX 0) and value (INDEX 1).
+                            String[] currentTypeAndValue = action.split(" ");
 
-                            if (Objects.equals(currentType, "Gold")){
-                                goldActionList.add(new GoldAction(Integer.parseInt(currentValue)));
+                            //Keeping track of which types of actions are being added.
+                            if (Objects.equals(currentTypeAndValue[0], "Gold")){
+                                goldActionList.add(new GoldAction(Integer.parseInt(currentTypeAndValue[1])));
                                 activeActionList.set(0, true);
-                            } else if (Objects.equals(currentType, "Health")) {
-                                healthActionList.add(new HealthAction(Integer.parseInt(currentValue)));
+                            } else if (Objects.equals(currentTypeAndValue[0], "Health")) {
+                                healthActionList.add(new HealthAction(Integer.parseInt(currentTypeAndValue[1])));
                                 activeActionList.set(1, true);
-                            } else if (Objects.equals(currentType, "Score")) {
-                                scoreActionList.add(new ScoreAction(Integer.parseInt(currentValue)));
+                            } else if (Objects.equals(currentTypeAndValue[0], "Score")) {
+                                scoreActionList.add(new ScoreAction(Integer.parseInt(currentTypeAndValue[1])));
                                 activeActionList.set(2, true);
-                            } else if (Objects.equals(currentType, "Inventory")) {
-                                inventoryActionList.add(new InventoryAction(currentValue));
+                            } else if (Objects.equals(currentTypeAndValue[0], "Inventory")) {
+                                inventoryActionList.add(new InventoryAction(currentTypeAndValue[1]));
                                 activeActionList.set(3, true);
                             }
                         }
                     }
-                    //Building link including title, content & actions
                     Link link = new Link(linkTitle, linkContent);
+                        //Checking to see which types of actions have been activated and adding them to the link.
                         if (Objects.equals(activeActionList.get(0), true)){
                             for (GoldAction goldAction : goldActionList) {
                                 link.addAction(goldAction);
                             }
-                        } else if (Objects.equals(activeActionList.get(1), true)){
+                        }
+                        if (Objects.equals(activeActionList.get(1), true)){
                             for (HealthAction healthAction : healthActionList) {
                                 link.addAction(healthAction);
                             }
-                        } else if (Objects.equals(activeActionList.get(2), true)){
+                        }
+                        if (Objects.equals(activeActionList.get(2), true)){
                             for (ScoreAction scoreAction : scoreActionList) {
                                 link.addAction(scoreAction);
                             }
-                        } else if (Objects.equals(activeActionList.get(3), true)){
+                        }
+                        if (Objects.equals(activeActionList.get(3), true)){
                             for (InventoryAction inventoryAction : inventoryActionList) {
                                 link.addAction(inventoryAction);
                             }
                         }
                     passage.addLink(link);
-                    line = fileScanner.nextLine();
+
+                    if (fileScanner.hasNextLine()){
+                        //Checks to see if there is another line in the .paths file and continues the loop if there is.
+                        line = fileScanner.nextLine();
+                    } else {
+                        //Breaks the loop if there are no lines following the current one.
+                        break;
                     }
+                }
                 if(i != 0){
                     story.addPassage(passage);}
                 else{
