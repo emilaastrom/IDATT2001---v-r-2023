@@ -3,6 +3,7 @@ package edu.ntnu.idatt2001.Model;
 import edu.ntnu.idatt2001.Model.Action.Action;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -20,6 +21,14 @@ public class Link {
      * @param text      the text
      * @param reference the reference
      */
+    public Link(String text, String reference, Action[] actions){
+        //TODO ensure that text and reference are not null
+        this.text = text;
+        this.reference = reference;
+        this.actions = new ArrayList<>();
+        this.actions.addAll(Arrays.asList(actions));
+    }
+
     public Link(String text, String reference){
         //TODO ensure that text and reference are not null
         this.text = text;
