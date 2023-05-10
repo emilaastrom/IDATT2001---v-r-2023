@@ -70,6 +70,11 @@ public class Story {
      */
     public void addPassage(Passage passage){
         //TODO should first parameter be title? As it shows to user?
+        if (passages.containsValue(passage)){
+            throw new IllegalArgumentException("Passage already exists in story");
+            //TODO notify user that passage already exists
+        }
+
         Link newLink = new Link(passage.getTitle(), passage.getTitle());
         passages.put(newLink, passage);
     }
