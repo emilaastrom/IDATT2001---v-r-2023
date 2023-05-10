@@ -131,16 +131,7 @@ public class PathsApplication extends Application {
 
 
         //General JavaFX settings
-        BackgroundRepeat backgroundRepeat = BackgroundRepeat.REPEAT;
-        BackgroundPosition backgroundPosition = BackgroundPosition.CENTER;
-        BackgroundSize backgroundSize = new BackgroundSize(100, 100, true, true, true, false);
-        BackgroundImage backgroundImage = new BackgroundImage(
-                new javafx.scene.image.Image("file:src/main/resources/forestBackground.jpg"),
-                backgroundRepeat,
-                backgroundRepeat,
-                backgroundPosition,
-                backgroundSize);
-        Background background = new Background(backgroundImage);
+        Background background = setBackground("file:src/main/resources/backgroundpirate.png");
 
         windowStackPane.getChildren().addAll(entryWindow, pathsWindow);
         BorderPane root = new BorderPane();
@@ -172,6 +163,19 @@ public class PathsApplication extends Application {
             stage.setX(dragEvent.getScreenX() - pressEvent.getSceneX());
             stage.setY(dragEvent.getScreenY() - pressEvent.getSceneY());
         }));
+    }
+
+    public Background setBackground(String path) {
+        BackgroundRepeat backgroundRepeat = BackgroundRepeat.NO_REPEAT;
+        BackgroundPosition backgroundPosition = BackgroundPosition.CENTER;
+        BackgroundSize backgroundSize = new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, true, true, true, true);
+        BackgroundImage backgroundImage = new BackgroundImage(
+                new javafx.scene.image.Image(path),
+                backgroundRepeat,
+                backgroundRepeat,
+                backgroundPosition,
+                backgroundSize);
+        return new Background(backgroundImage);
     }
 
 

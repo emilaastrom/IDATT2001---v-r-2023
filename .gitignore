@@ -10,3 +10,5 @@
 *.class
 *.paths
 *.lst
+/target/
+/target/maven-status/
