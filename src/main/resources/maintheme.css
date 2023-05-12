@@ -32,6 +32,22 @@
     -fx-background-color: rgba(130, 178, 106, 0.7);;
 }
 
+.background{
+    -fx-background-repeat: no-repeat no-repeat;;
+    -fx-background-size: cover, auto;
+    -fx-background-position: center center;
+}
+
+.background_forest{
+    -fx-background-image: url("../resources/backgroundforest.png");
+}
+.background_space{
+    -fx-background-image: url("../resources/backgroundspace.png");
+}
+.background_pirate{
+    -fx-background-image: url("../resources/backgroundpirate.png");
+}
+
 #mainMenuButton{
     /* Changes here only affect the buttons on the main menu, using their ID */
 }
