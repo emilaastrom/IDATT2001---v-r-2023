@@ -193,14 +193,17 @@ public class FileHandler {
             String path = selectedFile.getAbsolutePath();
             try{
                 Story story = FileHandler.readFile(path);
+                try{
                 String inputValue = JOptionPane.showInputDialog("Please input a name");
                 Player player = new Player.PlayerBuilder(inputValue).build();
                 List<Goal> goals = new ArrayList<>();
                 Game.getInstance().setPlayer(player);
                 Game.getInstance().setStory(story);
                 Game.getInstance().setGoals(goals);
-                return true;
-
+                return true;}
+                catch (Exception e){
+                    return false;
+                }
             } catch (Exception e) {
                 return false;
             }
