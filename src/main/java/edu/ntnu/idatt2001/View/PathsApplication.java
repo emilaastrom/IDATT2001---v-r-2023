@@ -1,5 +1,6 @@
 package edu.ntnu.idatt2001.View;
 
+import edu.ntnu.idatt2001.Controller.BackgroundController;
 import edu.ntnu.idatt2001.Controller.MusicController;
 import edu.ntnu.idatt2001.Model.Goal.Goal;
 import edu.ntnu.idatt2001.Model.FileHandler;
@@ -43,7 +44,8 @@ public class PathsApplication extends Application {
         ////////////////////////////////////////////////////////////
 
         VBox entryWindowVBox = new VBox();
-        entryWindowVBox.setPrefWidth(500);
+        entryWindowVBox.setMinHeight(0);
+        entryWindowVBox.setMinWidth(0);
         entryWindowVBox.setAlignment(javafx.geometry.Pos.CENTER);
         entryWindowVBox.setSpacing(30);
 
@@ -123,6 +125,8 @@ public class PathsApplication extends Application {
         pathsWindowVBox.setAlignment(javafx.geometry.Pos.CENTER);
 
         BorderPane pathsWindow = new BorderPane();
+        pathsWindow.setMinWidth(0);
+        pathsWindow.setMinHeight(0);
         pathsWindow.setCenter(pathsWindowVBox);
         pathsWindow.setPadding(new javafx.geometry.Insets(50, 200, 50, 200));
         pathsWindow.setVisible(false);
@@ -131,31 +135,43 @@ public class PathsApplication extends Application {
 
 
         //General JavaFX settings
-        Background background = setBackground("file:src/main/resources/backgroundpirate.png");
 
         windowStackPane.getChildren().addAll(entryWindow, pathsWindow);
         BorderPane root = new BorderPane();
         root.setCenter(windowStackPane);
-        root.setBackground(background);
+        //root.setBackground(background);
 
 
-        Scene scene = new Scene(root, 1500  , 750);
+        Scene scene = new Scene(root, 1250  , 650);
         stage.setTitle("Paths");
         stage.setScene(scene);
-        stage.setResizable(false);
-        stage.initStyle(StageStyle.UNDECORATED);
+        stage.setMinWidth(750);
+        stage.setMinHeight(500);
+        //stage.setResizable(false);
+        //stage.initStyle(StageStyle.UNDECORATED);
+        //stage.setMaximized(true);
         stage.show();
+
+        Settings settingsWindow = new Settings(stage.getWidth(), stage.getHeight());
 
         String currentStylesheet = "file:src/main/resources/maintheme.css";
         scene.getStylesheets().add(currentStylesheet);
 
+        root.setBackground(BackgroundController.getCurrentBackground());
         //EVENTS
 
         //TEMPORARY CHOOSE ADVENTURE BUTTON
         entryWindowChooseAdventureButton.setOnAction(event -> {
-            FileHandler.openGame(stage);
-            pathsWindow.setVisible(true);
-            entryWindow.setVisible(false);
+           if(FileHandler.openGame(stage)) {
+                entryWindow.setVisible(false);
+                pathsWindow.setVisible(true);
+            }
+        });
+
+        settingsButton.setOnAction(event -> {
+            Settings settings = new Settings(stage.getWidth(), stage.getHeight());
+            settings.show();
+            //stage.setMaximized(true);
         });
 
         //Allowing the stage to be moved around even with UNDECORATED StageStyle
@@ -163,19 +179,6 @@ public class PathsApplication extends Application {
             stage.setX(dragEvent.getScreenX() - pressEvent.getSceneX());
             stage.setY(dragEvent.getScreenY() - pressEvent.getSceneY());
         }));
-    }
-
-    public Background setBackground(String path) {
-        BackgroundRepeat backgroundRepeat = BackgroundRepeat.NO_REPEAT;
-        BackgroundPosition backgroundPosition = BackgroundPosition.CENTER;
-        BackgroundSize backgroundSize = new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, true, true, true, true);
-        BackgroundImage backgroundImage = new BackgroundImage(
-                new javafx.scene.image.Image(path),
-                backgroundRepeat,
-                backgroundRepeat,
-                backgroundPosition,
-                backgroundSize);
-        return new Background(backgroundImage);
     }
 
 
