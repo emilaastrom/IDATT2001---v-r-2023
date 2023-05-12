@@ -17,7 +17,15 @@ public class MusicController {
     mediaPlayer.play();
   }
 
-  public static void stopMusic() {
-    mediaPlayer.stop();
+  public static void pauseMusic() {
+    mediaPlayer.pause();
+  }
+
+  public static void resumeMusic() {
+    mediaPlayer.play();
+  }
+
+  public static void musicVolume(double volume) {
+    mediaPlayer.volumeProperty().setValue(volume);
   }
 }
