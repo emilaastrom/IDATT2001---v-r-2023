@@ -43,7 +43,8 @@ public class PathsApplication extends Application {
         ////////////////////////////////////////////////////////////
 
         VBox entryWindowVBox = new VBox();
-        entryWindowVBox.setPrefWidth(500);
+        entryWindowVBox.setMinHeight(0);
+        entryWindowVBox.setMinWidth(0);
         entryWindowVBox.setAlignment(javafx.geometry.Pos.CENTER);
         entryWindowVBox.setSpacing(30);
 
@@ -123,6 +124,8 @@ public class PathsApplication extends Application {
         pathsWindowVBox.setAlignment(javafx.geometry.Pos.CENTER);
 
         BorderPane pathsWindow = new BorderPane();
+        pathsWindow.setMinWidth(0);
+        pathsWindow.setMinHeight(0);
         pathsWindow.setCenter(pathsWindowVBox);
         pathsWindow.setPadding(new javafx.geometry.Insets(50, 200, 50, 200));
         pathsWindow.setVisible(false);
@@ -131,9 +134,9 @@ public class PathsApplication extends Application {
 
 
         //General JavaFX settings
-        BackgroundRepeat backgroundRepeat = BackgroundRepeat.REPEAT;
+        BackgroundRepeat backgroundRepeat = BackgroundRepeat.NO_REPEAT;
         BackgroundPosition backgroundPosition = BackgroundPosition.CENTER;
-        BackgroundSize backgroundSize = new BackgroundSize(100, 100, true, true, true, false);
+        BackgroundSize backgroundSize = new BackgroundSize(100, 100, true, true, true, true);
         BackgroundImage backgroundImage = new BackgroundImage(
                 new javafx.scene.image.Image("file:src/main/resources/forestBackground.jpg"),
                 backgroundRepeat,
@@ -148,11 +151,13 @@ public class PathsApplication extends Application {
         root.setBackground(background);
 
 
-        Scene scene = new Scene(root, 1500  , 750);
+        Scene scene = new Scene(root, 1250  , 650);
         stage.setTitle("Paths");
         stage.setScene(scene);
-        stage.setResizable(false);
-        stage.initStyle(StageStyle.UNDECORATED);
+        stage.setMinWidth(750);
+        stage.setMinHeight(500);
+        //stage.setResizable(false);
+        //stage.initStyle(StageStyle.UNDECORATED);
         stage.show();
 
         String currentStylesheet = "file:src/main/resources/maintheme.css";
@@ -162,9 +167,10 @@ public class PathsApplication extends Application {
 
         //TEMPORARY CHOOSE ADVENTURE BUTTON
         entryWindowChooseAdventureButton.setOnAction(event -> {
-            FileHandler.openGame(stage);
-            pathsWindow.setVisible(true);
-            entryWindow.setVisible(false);
+            if(FileHandler.openGame(stage)) {
+                entryWindow.setVisible(false);
+                pathsWindow.setVisible(true);
+            }
         });
 
         //Allowing the stage to be moved around even with UNDECORATED StageStyle
