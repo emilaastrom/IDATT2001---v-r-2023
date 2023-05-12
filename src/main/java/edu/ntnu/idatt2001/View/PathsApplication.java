@@ -1,5 +1,6 @@
 package edu.ntnu.idatt2001.View;
 
+import edu.ntnu.idatt2001.Controller.BackgroundController;
 import edu.ntnu.idatt2001.Controller.MusicController;
 import edu.ntnu.idatt2001.Model.Goal.Goal;
 import edu.ntnu.idatt2001.Model.FileHandler;
@@ -134,21 +135,11 @@ public class PathsApplication extends Application {
 
 
         //General JavaFX settings
-        BackgroundRepeat backgroundRepeat = BackgroundRepeat.NO_REPEAT;
-        BackgroundPosition backgroundPosition = BackgroundPosition.CENTER;
-        BackgroundSize backgroundSize = new BackgroundSize(100, 100, true, true, true, true);
-        BackgroundImage backgroundImage = new BackgroundImage(
-                new javafx.scene.image.Image("file:src/main/resources/forestBackground.jpg"),
-                backgroundRepeat,
-                backgroundRepeat,
-                backgroundPosition,
-                backgroundSize);
-        Background background = new Background(backgroundImage);
 
         windowStackPane.getChildren().addAll(entryWindow, pathsWindow);
         BorderPane root = new BorderPane();
         root.setCenter(windowStackPane);
-        root.setBackground(background);
+        //root.setBackground(background);
 
 
         Scene scene = new Scene(root, 1250  , 650);
@@ -158,19 +149,29 @@ public class PathsApplication extends Application {
         stage.setMinHeight(500);
         //stage.setResizable(false);
         //stage.initStyle(StageStyle.UNDECORATED);
+        //stage.setMaximized(true);
         stage.show();
+
+        Settings settingsWindow = new Settings(stage.getWidth(), stage.getHeight());
 
         String currentStylesheet = "file:src/main/resources/maintheme.css";
         scene.getStylesheets().add(currentStylesheet);
 
+        root.setBackground(BackgroundController.getCurrentBackground());
         //EVENTS
 
         //TEMPORARY CHOOSE ADVENTURE BUTTON
         entryWindowChooseAdventureButton.setOnAction(event -> {
-            if(FileHandler.openGame(stage)) {
+           if(FileHandler.openGame(stage)) {
                 entryWindow.setVisible(false);
                 pathsWindow.setVisible(true);
             }
+        });
+
+        settingsButton.setOnAction(event -> {
+            Settings settings = new Settings(stage.getWidth(), stage.getHeight());
+            settings.show();
+            //stage.setMaximized(true);
         });
 
         //Allowing the stage to be moved around even with UNDECORATED StageStyle

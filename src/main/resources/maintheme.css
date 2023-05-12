@@ -3,7 +3,7 @@
     src: url('textFont.otf');
 }
 
-.text{
+.text, #DefaultText{
     /* Changes here affect all text elements, including text inside buttons*/
     -fx-fill: #ffffff;
     -fx-font-size: 20;
@@ -12,7 +12,6 @@
 
 .root{
 }
-
 
 .button{
     /* Changes here affect all buttons */
