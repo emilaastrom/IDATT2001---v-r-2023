@@ -66,7 +66,7 @@ public class ActionTest {
         assertNotEquals(150, myTestPlayer.getGold());
 
         //Using the first action (adding 50 gold) then ensuring the value is correct
-        myTestLink.getActions().get(0).Execute(myTestPlayer);
+        myTestLink.getActions().get(0).execute(myTestPlayer);
         assertNotEquals(100, myTestPlayer.getGold());
         assertEquals(150, myTestPlayer.getGold());
 
@@ -75,7 +75,7 @@ public class ActionTest {
         assertNotEquals(150, myTestPlayer.getHealth());
 
         //Using the second action (adding 50 health) then ensuring the value is correct
-        myTestLink.getActions().get(1).Execute(myTestPlayer);
+        myTestLink.getActions().get(1).execute(myTestPlayer);
         assertNotEquals(100, myTestPlayer.getHealth());
         assertEquals(150, myTestPlayer.getHealth());
 
@@ -84,7 +84,7 @@ public class ActionTest {
         assertNotEquals(1, myTestPlayer.getInventory().size());
 
         //Using the third action (adding a dragon dagger(p++) to inventory), then making sure it is added correctly
-        myTestLink.getActions().get(2).Execute(myTestPlayer);
+        myTestLink.getActions().get(2).execute(myTestPlayer);
         assertEquals(1, myTestPlayer.getInventory().size());
         assertNotEquals(0, myTestPlayer.getInventory().size());
         assertEquals("Dragon dagger(p++)", myTestPlayer.getInventory().get(0));
@@ -93,7 +93,7 @@ public class ActionTest {
         assertEquals(100, myTestPlayer.getScore());
 
         //Using the fourth action (adding 50 score) then ensuring the value is correct
-        myTestLink.getActions().get(3).Execute(myTestPlayer);
+        myTestLink.getActions().get(3).execute(myTestPlayer);
         assertEquals(150, myTestPlayer.getScore());
         assertNotEquals(100, myTestPlayer.getScore());
     }

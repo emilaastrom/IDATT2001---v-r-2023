@@ -27,7 +27,7 @@ public class GoldAction implements Action {
     }
 
     @Override
-    public void Execute(Player player){
+    public void execute(Player player){
         player.addGold(gold);
     }
 
