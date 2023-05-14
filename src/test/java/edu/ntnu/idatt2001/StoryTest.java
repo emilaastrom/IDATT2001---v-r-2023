@@ -52,16 +52,16 @@ public class StoryTest {
     @DisplayName("Test getPassage() method")
     public void getPassage() {
         //Creating local passage with same values as testPassage and ensuring they are the same.
-        Passage passage = new Passage("Test", "Test");
-        Link passageLink = new Link("Test", "Test");
-        story.getPassages().put(passageLink, passage);
-        assertEquals(passage, story.getPassage(passageLink));
+        Passage passage = new Passage("Title of p 1", "content");
+        Link passageLink = new Link("l text", "Title of p 2");
+        story.addPassage(passage);
+        assertNotEquals(passage, story.getPassage(passageLink));
 
         //Making local passage with a different title and then ensuring it is not the same as the one in testPassage.
-        Passage passage2 = new Passage("Test2", "Test2");
-        Link passageLink2 = new Link("Test2", "Test2");
-        story.getPassages().put(passageLink2, passage);
-        assertNotEquals(passage2, story.getPassage(passageLink));
+        Passage passage2 = new Passage("Title of p 2", "content 2");
+        Link passageLink2 = new Link("l text 2", "Test2");
+        story.addPassage(passage2);
+        assertEquals(passage2, story.getPassage(passageLink));
     }
 
     @Test

@@ -60,7 +60,13 @@ public class Story {
      * @return the passage
      */
     public Passage getPassage (Link link){
-        return passages.get(link);
+        String reference = link.getReference();
+        for (Passage value : passages.values()){
+            if (value.getTitle().equals(reference)){
+                return value;
+            }
+        }
+        return null;
     }
 
     /**
