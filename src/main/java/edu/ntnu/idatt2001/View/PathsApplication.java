@@ -275,7 +275,41 @@ public class PathsApplication extends Application {
         settingsStage.show();
     }
 
-    public VBox writePassage(Passage passage, Stage stage) {
+    public static void showExitConfirmation(){
+        mainWindowDimmer.setVisible(true);
+        Stage exitConfirmationStage = new Stage();
+        exitConfirmationStage.initModality(Modality.APPLICATION_MODAL);
+        BorderPane exitConfirmationRoot = new BorderPane();
+        exitConfirmationRoot.setId("ExitConfirmationRoot");
+        exitConfirmationRoot.setBackground(BackgroundController.setBackgroundSpace());
+        Scene exitConfirmationScene = new Scene(exitConfirmationRoot, 500, 150);
+        exitConfirmationStage.setScene(exitConfirmationScene);
+
+        Button exitConfirmationButton = new Button("Exit");
+        exitConfirmationButton.setId("ExitConfirmationButton");
+        exitConfirmationButton.setMaxWidth(150);
+        exitConfirmationButton.setOnAction(event -> {
+            System.exit(0);
+        });
+        Button exitConfirmationCancelButton = new Button("Cancel");
+        exitConfirmationCancelButton.setMaxWidth(150);
+        exitConfirmationCancelButton.setOnAction(event -> {
+            mainWindowDimmer.setVisible(false);
+            exitConfirmationStage.close();
+        });
+        exitConfirmationStage.addEventHandler(WindowEvent.WINDOW_HIDDEN, windowEvent -> {
+            mainWindowDimmer.setVisible(false);
+        });
+        HBox exitConfirmationButtonBox = new HBox();
+        exitConfirmationButtonBox.getChildren().addAll(exitConfirmationButton, exitConfirmationCancelButton);
+        exitConfirmationButtonBox.setAlignment(Pos.CENTER);
+        exitConfirmationButtonBox.setSpacing(20);
+        exitConfirmationRoot.setCenter(exitConfirmationButtonBox);
+        exitConfirmationScene.getStylesheets().add(currentStylesheet);
+        exitConfirmationStage.show();
+    }
+
+    public static VBox writePassage(Passage passage, Stage stage) {
         VBox pathsWindowCenterBoxVBox = new VBox();
         pathsWindowCenterBoxVBox.setSpacing(40);
         pathsWindowCenterBoxVBox.setAlignment(Pos.CENTER);
