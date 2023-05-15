@@ -38,6 +38,30 @@
 .root{
 }
 
+.slider{
+    /* Changes here affect all sliders */
+    -fx-background-color: linear-gradient(to right, rgba(49, 49, 49, 0.7), rgba(98, 98, 98, 0.7));
+    -fx-border-color: #FFFFFF;
+    -fx-border-width: 4px;
+    -fx-border-radius: 0px;
+    -fx-padding: 10px 20px 10px 20px;
+    -fx-text-fill: rgb(255,255,255);
+    -fx-background-radius: 5px;
+    -fx-font-family: 'Retro Gaming';
+}
+
+.slider .thumb{
+    -fx-pref-height: 20px;
+    -fx-pref-width: 5px;
+    -fx-padding: 20px 0px 20px 0px;
+    -fx-background-color: rgb(255, 255, 255);
+    -fx-background-radius: 0px;
+}
+
+.slider .track{
+    -fx-background-color: black;
+}
+
 .button{
     /* Changes here affect all buttons */
     -fx-background-color: rgba(0, 0, 0, 0.7);
@@ -79,4 +103,46 @@
 
 #mainMenuButton{
     /* Changes here only affect the buttons on the main menu, using their ID */
+}
+
+#SettingsRoot{
+}
+
+#CurrentThemeBox{
+    -fx-background-color: rgba(0, 0, 0, 0.1);
+    -fx-border-color: #FFFFFF;
+    -fx-border-width: 4px;
+    -fx-border-radius: 0px;
+    -fx-padding: 10px 20px 10px 20px;
+    -fx-text-fill: rgb(255,255,255);
+    -fx-background-radius: 5px;
+}
+
+#CurrentThemeBox:hover{
+    -fx-background-color: rgba(130, 178, 106, 0.7);;
+}
+
+titleText{
+    /* Changes here only affect the title text */
+    -fx-fill: #ffffff;
+    -fx-font-size: 30;
+    -fx-font-family: 'Retro Gaming';
+}
+
+#scoreText{
+    -fx-fill: #ffffff;
+    -fx-font-size: 40;
+    -fx-font-family: 'Retro Gaming';
+}
+
+#heartText{
+    -fx-fill: #be0707;
+    -fx-font-size: 40;
+    -fx-font-family: 'Retro Gaming';
+}
+#coinText {
+    /* Changes here only affect the title text */
+    -fx-fill: #e5dc19;
+    -fx-font-size: 40;
+    -fx-font-family: 'Retro Gaming';
 }
