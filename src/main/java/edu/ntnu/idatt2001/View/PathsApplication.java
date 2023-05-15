@@ -5,6 +5,7 @@ import edu.ntnu.idatt2001.Controller.MusicController;
 import edu.ntnu.idatt2001.Model.FileHandler;
 import edu.ntnu.idatt2001.Model.*;
 import edu.ntnu.idatt2001.Model.Action.Action;
+import edu.ntnu.idatt2001.Model.Goal.Goal;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
