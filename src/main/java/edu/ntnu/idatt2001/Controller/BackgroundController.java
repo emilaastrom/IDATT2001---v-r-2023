@@ -53,9 +53,9 @@ public class BackgroundController {
 
   public static Background rotateBackground() {
     switch (backgroundString) {
-      case "Forest" -> setBackgroundSpace();
-      case "Space" -> setBackgroundPirate();
-      case "Pirate" -> setBackgroundForest();
+      case "Space" -> setBackgroundForest();
+      case "Pirate" -> setBackgroundSpace();
+      case "Forest" -> setBackgroundPirate();
       default -> setBackgroundPirate();
     }
     return currentBackground;

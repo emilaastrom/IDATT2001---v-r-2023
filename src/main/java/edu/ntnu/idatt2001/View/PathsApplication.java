@@ -5,7 +5,6 @@ import edu.ntnu.idatt2001.Controller.MusicController;
 import edu.ntnu.idatt2001.Model.FileHandler;
 import edu.ntnu.idatt2001.Model.*;
 import edu.ntnu.idatt2001.Model.Action.Action;
-import edu.ntnu.idatt2001.Model.Goal.Goal;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -18,40 +17,49 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
-import javafx.scene.text.Font;
-import javafx.scene.text.Text;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 
 public class PathsApplication extends Application {
     static Stage settingsStage;
     static BorderPane settingsRoot;
     static BorderPane pathsWindowRoot;
-    Passage currentPassage;
-    VBox currentPassageVBox;
-    BorderPane pathsWindowCenterBox = new BorderPane();
-    BorderPane pathsWindowBottomBox = new BorderPane();
-    HBox pathsWindowBottomBoxHBox = new HBox();
-    HBox pathsWindowBottomBoxHBox2 = new HBox();
-    Text pathsWindowBottomBoxHBoxTextScore = new Text();
-    Text pathsWindowBottomBoxHBoxTextHeart = new Text();
-    Text pathsWindowBottomBoxHBoxTextCoin = new Text();
-    ImageView pathsWindowBottomBoxHBoxImageViewScore = new ImageView("file:src/main/resources/score.png");
-    ImageView pathsWindowBottomBoxHBoxImageViewHeart = new ImageView("file:src/main/resources/heart.png");
-    ImageView pathsWindowBottomBoxHBoxImageViewCoin = new ImageView("file:src/main/resources/coin.png");
-    ImageView pathsWindowBottomBoxHBoxImageViewChest = new ImageView("file:src/main/resources/chest.png");
+    static BorderPane mainWindowDimmer;
+    static String currentStylesheet;
+    static Passage currentPassage;
+    static VBox currentPassageVBox;
+    static BorderPane pathsWindowCenterBox = new BorderPane();
+    static BorderPane pathsWindowBottomBox = new BorderPane();
+    static HBox pathsWindowBottomBoxHBox = new HBox();
+    static HBox pathsWindowBottomBoxHBox2 = new HBox();
+    static Text pathsWindowBottomBoxHBoxTextScore = new Text();
+    static Text pathsWindowBottomBoxHBoxTextHeart = new Text();
+    static Text pathsWindowBottomBoxHBoxTextCoin = new Text();
+    static ImageView pathsWindowBottomBoxHBoxImageViewScore = new ImageView("file:src/main/resources/score.png");
+    static ImageView pathsWindowBottomBoxHBoxImageViewHeart = new ImageView("file:src/main/resources/heart.png");
+    static ImageView pathsWindowBottomBoxHBoxImageViewCoin = new ImageView("file:src/main/resources/coin.png");
+    static ImageView pathsWindowBottomBoxHBoxImageViewChest = new ImageView("file:src/main/resources/chest.png");
 
     public static void main(String[] args) {
         launch(args);
     }
 
     @Override
-    public void start(Stage stage) throws Exception {
+    public void start(Stage stage) {
         MusicController.playMusic();
+        showMainWindow(stage);
 
+    }
+
+    public static void showMainWindow(Stage stage){
         //STACKPANE FOR DIFFERENT WINDOWS
         StackPane windowStackPane = new StackPane();
+        mainWindowDimmer = new BorderPane();
+        mainWindowDimmer.setVisible(false);
+        mainWindowDimmer.setId("mainWindowDimmer");
+        mainWindowDimmer.setStyle("-fx-background-color: rgba(0, 0, 0, 0.5);");
+
 
         ////////////////////////////////////////////////////////////
         //ENTRYWINDOW
@@ -75,6 +83,7 @@ public class PathsApplication extends Application {
 
         Button exitGameButton = new Button("EXIT GAME");
         exitGameButton.setId("mainMenuButton");
+        exitGameButton.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> showExitConfirmation());
 
         entryWindowVBox.getChildren().addAll(entryWindowLogoStackPane, entryWindowChooseAdventureButton, settingsButton, exitGameButton);
 
@@ -92,20 +101,20 @@ public class PathsApplication extends Application {
         pathsWindowCenterBox.setPrefHeight(400);
         pathsWindowCenterBox.setStyle(
                 "-fx-background-color: rgb(0,0,0,0.5);" +
-                "-fx-border-color: rgb(255,255,255);" +
-                "-fx-border-width: 5px;"
+                        "-fx-border-color: rgb(255,255,255);" +
+                        "-fx-border-width: 5px;"
         );
 
         pathsWindowBottomBox.setPrefWidth(500);
         pathsWindowBottomBox.setPrefHeight(100);
         pathsWindowBottomBox.setStyle(
                 "-fx-background-color: rgb(0,0,0,0.5);" +
-                "-fx-border-color: rgb(255,255,255);" +
-                "-fx-border-width: 5px;"
+                        "-fx-border-color: rgb(255,255,255);" +
+                        "-fx-border-width: 5px;"
         );
 
         updateBottomBox();
-        
+
         pathsWindowBottomBoxHBox2.setSpacing(30);
         pathsWindowBottomBoxHBox2.setAlignment(Pos.CENTER_RIGHT);
         pathsWindowBottomBoxHBox2.setPadding(new javafx.geometry.Insets(0, 50, 0, 0));
@@ -132,9 +141,11 @@ public class PathsApplication extends Application {
 
         //General JavaFX settings
 
-        windowStackPane.getChildren().addAll(entryWindow, pathsWindow);
+        windowStackPane.getChildren().addAll(entryWindow, pathsWindow, mainWindowDimmer);
         pathsWindowRoot = new BorderPane();
         pathsWindowRoot.setCenter(windowStackPane);
+        //Defaulting to FOREST background
+        pathsWindowRoot.setBackground(BackgroundController.setBackgroundForest());
 //        root.setBackground(background);
 
 
@@ -145,32 +156,29 @@ public class PathsApplication extends Application {
         stage.setMinHeight(500);
         stage.show();
 
-        Settings settingsWindow = new Settings(stage.getWidth(), stage.getHeight());
+//        Settings settingsWindow = new Settings(stage.getWidth(), stage.getHeight());
 
-        String currentStylesheet = "file:src/main/resources/maintheme.css";
+        currentStylesheet = "file:src/main/resources/maintheme.css";
         scene.getStylesheets().add(currentStylesheet);
 
-        pathsWindowRoot.setBackground(BackgroundController.getCurrentBackground());
         //EVENTS
 
         //TEMPORARY CHOOSE ADVENTURE BUTTON
         entryWindowChooseAdventureButton.setOnAction(event -> {
-           if(FileHandler.openGame(stage)) {
+            if(FileHandler.openGame(stage)) {
                 entryWindow.setVisible(false);
                 pathsWindow.setVisible(true);
 
-               currentPassage = Game.getInstance().getStory().getOpeningPassage();
-               currentPassageVBox = writePassage(currentPassage, stage);
+                currentPassage = Game.getInstance().getStory().getOpeningPassage();
+                currentPassageVBox = writePassage(currentPassage, stage);
 
-               pathsWindowCenterBox.setCenter(currentPassageVBox);
+                pathsWindowCenterBox.setCenter(currentPassageVBox);
 
-               stage.show();
+                stage.show();
             }
         });
 
-        settingsButton.setOnAction(event -> {
-            showSettings();
-        });
+        settingsButton.setOnAction(event -> showSettings());
 
         //Allowing the stage to be moved around even with UNDECORATED StageStyle
         windowStackPane.setOnMousePressed(pressEvent -> windowStackPane.setOnMouseDragged(dragEvent -> {
@@ -180,14 +188,16 @@ public class PathsApplication extends Application {
     }
 
     public static void showSettings(){
+        mainWindowDimmer.setVisible(true);
         settingsStage = new Stage();
         settingsStage.initModality(Modality.APPLICATION_MODAL);
         settingsRoot = new BorderPane();
         settingsRoot.setId("SettingsRoot");
-        settingsRoot.setBackground(BackgroundController.getCurrentBackground());
+//        settingsRoot.setBackground(BackgroundController.setBackgroundSpace());
         Scene settingsScene = new Scene(settingsRoot, 500, 500);
         settingsStage.setScene(settingsScene);
         settingsStage.setTitle("Settings");
+        settingsStage.addEventHandler(WindowEvent.WINDOW_HIDDEN, windowEvent -> mainWindowDimmer.setVisible(false));
 
         VBox settingsTitleBox = new VBox();
         Text settingsTitle = new Text("Change settings!");
@@ -198,10 +208,13 @@ public class PathsApplication extends Application {
         HBox changeThemeBox = new HBox();
         Button themeButtonLeft = new Button("<");
         VBox currentThemeBox = new VBox();
-        Text currentThemeText = new Text("Forest");
+        Text currentThemeText = new Text(BackgroundController.getBackgroundString());
         currentThemeText.setId("DefaultText");
         currentThemeBox.getChildren().add(currentThemeText);
         currentThemeBox.setId("CurrentThemeBox");
+        currentThemeBox.setMinWidth(135);
+        currentThemeBox.setMaxWidth(135);
+        currentThemeBox.setAlignment(Pos.CENTER);
         Button themeButtonRight = new Button(">");
         themeButtonRight.setMaxSize(50, 50);
         themeButtonLeft.setMaxSize(50, 50);
@@ -210,12 +223,12 @@ public class PathsApplication extends Application {
         changeThemeBox.setAlignment(Pos.CENTER);
         changeThemeBox.setMinWidth(200);
         themeButtonLeft.setOnAction(event -> {
-            settingsRoot.setBackground(BackgroundController.rotateBackground());
+//            settingsRoot.setBackground(BackgroundController.rotateBackground());
             pathsWindowRoot.setBackground(BackgroundController.rotateBackground());
             currentThemeText.setText(BackgroundController.getBackgroundString());
         });
         themeButtonRight.setOnAction(event -> {
-            settingsRoot.setBackground(BackgroundController.rotateBackground());
+//            settingsRoot.setBackground(BackgroundController.rotateBackground());
             pathsWindowRoot.setBackground(BackgroundController.rotateBackground());
             currentThemeText.setText(BackgroundController.getBackgroundString());
         });
@@ -244,7 +257,7 @@ public class PathsApplication extends Application {
         settingsSoundSliderBox.setAlignment(Pos.CENTER);
 
         settingsSoundBox.getChildren().addAll(settingsSoundSlider);
-        settingsSoundSlider.addEventHandler(MouseEvent.DRAG_DETECTED, event -> {
+        settingsSoundSlider.addEventHandler(MouseEvent.MOUSE_DRAGGED, event -> {
             MusicController.musicVolume(settingsSoundSlider.getValue());
             System.out.println(settingsSoundSlider.getValue());
         });
@@ -275,7 +288,37 @@ public class PathsApplication extends Application {
         settingsStage.show();
     }
 
-    public VBox writePassage(Passage passage, Stage stage) {
+    public static void showExitConfirmation(){
+        mainWindowDimmer.setVisible(true);
+        Stage exitConfirmationStage = new Stage();
+        exitConfirmationStage.initModality(Modality.APPLICATION_MODAL);
+        BorderPane exitConfirmationRoot = new BorderPane();
+        exitConfirmationRoot.setId("ExitConfirmationRoot");
+        exitConfirmationRoot.setBackground(BackgroundController.setBackgroundSpace());
+        Scene exitConfirmationScene = new Scene(exitConfirmationRoot, 500, 150);
+        exitConfirmationStage.setScene(exitConfirmationScene);
+
+        Button exitConfirmationButton = new Button("Exit");
+        exitConfirmationButton.setId("ExitConfirmationButton");
+        exitConfirmationButton.setMaxWidth(150);
+        exitConfirmationButton.setOnAction(event -> System.exit(0));
+        Button exitConfirmationCancelButton = new Button("Cancel");
+        exitConfirmationCancelButton.setMaxWidth(150);
+        exitConfirmationCancelButton.setOnAction(event -> {
+            mainWindowDimmer.setVisible(false);
+            exitConfirmationStage.close();
+        });
+        exitConfirmationStage.addEventHandler(WindowEvent.WINDOW_HIDDEN, windowEvent -> mainWindowDimmer.setVisible(false));
+        HBox exitConfirmationButtonBox = new HBox();
+        exitConfirmationButtonBox.getChildren().addAll(exitConfirmationButton, exitConfirmationCancelButton);
+        exitConfirmationButtonBox.setAlignment(Pos.CENTER);
+        exitConfirmationButtonBox.setSpacing(20);
+        exitConfirmationRoot.setCenter(exitConfirmationButtonBox);
+        exitConfirmationScene.getStylesheets().add(currentStylesheet);
+        exitConfirmationStage.show();
+    }
+
+    public static VBox writePassage(Passage passage, Stage stage) {
         VBox pathsWindowCenterBoxVBox = new VBox();
         pathsWindowCenterBoxVBox.setSpacing(40);
         pathsWindowCenterBoxVBox.setAlignment(Pos.CENTER);
@@ -301,8 +344,7 @@ public class PathsApplication extends Application {
             linkButton.setId("linkButton");
             linkButton.setOnAction(event -> {
                 for(Action action : link.getActions()) {
-                    //TODO REMOVE COMMENT
-                    //action.execute(Game.getInstance().getPlayer());
+                    action.execute(Game.getInstance().getPlayer());
                 }
                 updateBottomBox();
 
@@ -317,7 +359,7 @@ public class PathsApplication extends Application {
         return pathsWindowCenterBoxVBox;
     }
 
-    private void updateBottomBox() {
+    private static void updateBottomBox() {
         pathsWindowBottomBox.getChildren().clear();
         pathsWindowBottomBoxHBox.getChildren().clear();
         pathsWindowBottomBoxHBox.setSpacing(30);

@@ -146,3 +146,15 @@ titleText{
     -fx-font-size: 40;
     -fx-font-family: 'Retro Gaming';
 }
+
+#ExitConfirmationButton {
+    -fx-background-color: rgba(109, 0, 0, 0.7);
+}
+
+#ExitConfirmationButton:hover {
+    -fx-background-color: rgba(255, 0, 0, 0.7);
+}
+
+#SettingsRoot {
+    -fx-background-image: url("file:src/main/resources/backgroundspace.png");
+}
