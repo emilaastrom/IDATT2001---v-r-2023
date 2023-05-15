@@ -11,4 +11,4 @@
 *.paths
 *.lst
 
-/target/*
+/target/

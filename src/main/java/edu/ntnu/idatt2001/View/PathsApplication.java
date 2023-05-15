@@ -36,7 +36,7 @@ public class PathsApplication extends Application {
     static VBox currentPassageVBox;
     static Player player;
     static List<Goal> goals;
-    static Game game;
+    static Game game = Game.getInstance();
     static Story story;
     static BorderPane pathsWindowCenterBox = new BorderPane();
     static BorderPane pathsWindowBottomBox = new BorderPane();
@@ -158,8 +158,6 @@ public class PathsApplication extends Application {
         pathsWindowRoot.setCenter(windowStackPane);
         //Defaulting to FOREST background
         pathsWindowRoot.setBackground(BackgroundController.setBackgroundForest());
-//        root.setBackground(background);
-
 
         Scene scene = new Scene(pathsWindowRoot, 1250  , 650);
         stage.setTitle("Paths");
@@ -167,8 +165,6 @@ public class PathsApplication extends Application {
         stage.setMinWidth(750);
         stage.setMinHeight(500);
         stage.show();
-
-//        Settings settingsWindow = new Settings(stage.getWidth(), stage.getHeight());
 
         currentStylesheet = "file:src/main/resources/maintheme.css";
         scene.getStylesheets().add(currentStylesheet);
@@ -199,7 +195,6 @@ public class PathsApplication extends Application {
                 try{
                     player = new Player.PlayerBuilder("Ola Nordmann").build();
                     goals = new ArrayList<>();
-                    game = new Game();
                     game.setPlayer(player);
                     game.setStory(story);
                     game.setGoals(goals);
@@ -303,7 +298,7 @@ public class PathsApplication extends Application {
         settingsSoundBox.getChildren().addAll(settingsSoundSlider);
         settingsSoundSlider.addEventHandler(MouseEvent.MOUSE_DRAGGED, event -> {
             MusicController.musicVolume(settingsSoundSlider.getValue());
-            System.out.println(settingsSoundSlider.getValue());
+//            System.out.println(settingsSoundSlider.getValue());
         });
 
 
