@@ -42,8 +42,6 @@ public class PathsApplication extends Application {
     ImageView pathsWindowBottomBoxHBoxImageViewCoin = new ImageView("file:src/main/resources/coin.png");
     ImageView pathsWindowBottomBoxHBoxImageViewChest = new ImageView("file:src/main/resources/chest.png");
 
-
-
     public static void main(String[] args) {
         launch(args);
     }
@@ -90,7 +88,6 @@ public class PathsApplication extends Application {
         //PATHSWINDOW
         ////////////////////////////////////////////////////////////
 
-        BorderPane pathsWindowCenterBox = new BorderPane();
         pathsWindowCenterBox.setPrefWidth(500);
         pathsWindowCenterBox.setPrefHeight(400);
         pathsWindowCenterBox.setStyle(
@@ -99,7 +96,6 @@ public class PathsApplication extends Application {
                 "-fx-border-width: 5px;"
         );
 
-        BorderPane pathsWindowBottomBox = new BorderPane();
         pathsWindowBottomBox.setPrefWidth(500);
         pathsWindowBottomBox.setPrefHeight(100);
         pathsWindowBottomBox.setStyle(
@@ -108,23 +104,8 @@ public class PathsApplication extends Application {
                 "-fx-border-width: 5px;"
         );
 
-        HBox pathsWindowBottomBoxHBox = new HBox();
-        pathsWindowBottomBoxHBox.setSpacing(30);
-        pathsWindowBottomBoxHBox.setAlignment(Pos.CENTER_LEFT);
-        pathsWindowBottomBoxHBox.setPadding(new javafx.geometry.Insets(0, 0, 0, 50));
-        ImageView pathsWindowBottomBoxHBoxImageViewScore = new ImageView("file:src/main/resources/score.png");
-        ImageView pathsWindowBottomBoxHBoxImageViewHeart = new ImageView("file:src/main/resources/heart.png");
-        ImageView pathsWindowBottomBoxHBoxImageViewCoin = new ImageView("file:src/main/resources/coin.png");
-        ImageView pathsWindowBottomBoxHBoxImageViewChest = new ImageView("file:src/main/resources/chest.png");
-        pathsWindowBottomBoxHBox.setFillHeight(true);
-
-        pathsWindowBottomBoxHBox.getChildren().addAll(pathsWindowBottomBoxHBoxImageViewScore,
-                pathsWindowBottomBoxHBoxImageViewHeart,
-                pathsWindowBottomBoxHBoxImageViewCoin,
-                pathsWindowBottomBoxHBoxImageViewChest);
-        pathsWindowBottomBox.setLeft(pathsWindowBottomBoxHBox);
-
-        HBox pathsWindowBottomBoxHBox2 = new HBox();
+        updateBottomBox();
+        
         pathsWindowBottomBoxHBox2.setSpacing(30);
         pathsWindowBottomBoxHBox2.setAlignment(Pos.CENTER_RIGHT);
         pathsWindowBottomBoxHBox2.setPadding(new javafx.geometry.Insets(0, 50, 0, 0));
@@ -133,7 +114,6 @@ public class PathsApplication extends Application {
         pathsWindowBottomBoxHBox2.getChildren().addAll(
                 pathsWindowBottomBoxHBox2ImageViewHelp,
                 pathsWindowBottomBoxHBox2ImageViewSettings);
-        pathsWindowBottomBox.setRight(pathsWindowBottomBoxHBox2);
 
         VBox pathsWindowVBox = new VBox();
         pathsWindowVBox.setSpacing(30);
@@ -178,6 +158,13 @@ public class PathsApplication extends Application {
            if(FileHandler.openGame(stage)) {
                 entryWindow.setVisible(false);
                 pathsWindow.setVisible(true);
+
+               currentPassage = Game.getInstance().getStory().getOpeningPassage();
+               currentPassageVBox = writePassage(currentPassage, stage);
+
+               pathsWindowCenterBox.setCenter(currentPassageVBox);
+
+               stage.show();
             }
         });
 

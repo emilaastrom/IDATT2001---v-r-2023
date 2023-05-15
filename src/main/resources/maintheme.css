@@ -3,16 +3,36 @@
     src: url('textFont.otf');
 }
 
-.text, #DefaultText{
+.text, #DefaultText, #contentText{
     /* Changes here affect all text elements, including text inside buttons*/
     -fx-fill: #ffffff;
     -fx-font-size: 20;
     -fx-font-family: 'Retro Gaming';
 }
 
-*{
-/*    -fx-border-color: red;
-    -fx-border-width: 1px;*/
+#titleText{
+    /* Changes here only affect the title text */
+    -fx-fill: #ffffff;
+    -fx-font-size: 30;
+    -fx-font-family: 'Retro Gaming';
+}
+
+#scoreText{
+    -fx-fill: #ffffff;
+    -fx-font-size: 40;
+    -fx-font-family: 'Retro Gaming';
+}
+
+#heartText{
+    -fx-fill: #be0707;
+    -fx-font-size: 40;
+    -fx-font-family: 'Retro Gaming';
+}
+#coinText{
+    /* Changes here only affect the title text */
+    -fx-fill: #e5dc19;
+    -fx-font-size: 40;
+    -fx-font-family: 'Retro Gaming';
 }
 
 .root{
@@ -53,6 +73,11 @@
     -fx-background-radius: 5px;
     -fx-font-family: 'Retro Gaming';
     -fx-pref-width: 400;
+}
+
+#linkButton{
+    /* Changes here only affect the link button */
+    -fx-padding: 5px 20px 5px 20px;
 }
 
 .button:hover{
