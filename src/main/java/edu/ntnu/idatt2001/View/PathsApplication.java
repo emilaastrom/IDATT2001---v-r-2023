@@ -14,11 +14,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Separator;
 import javafx.scene.control.Slider;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -364,6 +366,8 @@ public class PathsApplication extends Application {
         Text contentText = new Text();
         contentText.setText(Objects.requireNonNull(passage.getContent()));
         contentText.setId("contentText");
+        contentText.setWrappingWidth(800);
+        contentText.setTextAlignment(TextAlignment.CENTER);
 
         pathsWindowCenterBoxVBox.getChildren().clear();
         pathsWindowCenterBoxVBox.getChildren().addAll(titleText, contentText);

@@ -1,0 +1,24 @@
+Unveiling the Terror of the Darkwood Grove
+
+::Darkwood opening
+You're surrounded by tall trees, and the air is thick with the smell of pine. The ground is covered in a thick layer of pine needles, and the only sound is the wind rustling through the trees. You can't see any paths, but you can see a small clearing to the north.
+[Walk north](Darkwood north){Score 10;}
+[Climb a tree](Tumbling heights){Health -20;}
+
+::Darkwood north
+As you venture deeper into the forest, you are immediately engulfed by an unsettling atmosphere. The air grows thick and heavy, causing an eerie silence to settle around you.
+[Hide in a bush](You're hidden in a bush)
+[Start running](Shadowy figure)
+[Shout for help](Shadowy figure)
+
+::Tumbling heights
+You try to climb a tree, but you fall and hurt yourself.
+[Go north](Darkwood north)
+
+::You hide in a bush
+You're freezing cold, and feel the leaves and twigs scratch upon your knees. In the horizon, you see a shadowy figure. You can't seem to notice what they're doing.
+[Walk closer](Shadowy figure)
+
+::Shadowy figure
+You die
+
