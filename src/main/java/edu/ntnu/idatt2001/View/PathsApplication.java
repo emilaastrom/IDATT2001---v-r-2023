@@ -3,6 +3,9 @@ package edu.ntnu.idatt2001.View;
 import edu.ntnu.idatt2001.Controller.BackgroundController;
 import edu.ntnu.idatt2001.Controller.MusicController;
 import edu.ntnu.idatt2001.Model.FileHandler;
+import edu.ntnu.idatt2001.Model.*;
+import edu.ntnu.idatt2001.Model.Action.Action;
+import edu.ntnu.idatt2001.Model.Goal.Goal;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -15,6 +18,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 
@@ -22,6 +28,21 @@ public class PathsApplication extends Application {
     static Stage settingsStage;
     static BorderPane settingsRoot;
     static BorderPane pathsWindowRoot;
+    Passage currentPassage;
+    VBox currentPassageVBox;
+    BorderPane pathsWindowCenterBox = new BorderPane();
+    BorderPane pathsWindowBottomBox = new BorderPane();
+    HBox pathsWindowBottomBoxHBox = new HBox();
+    HBox pathsWindowBottomBoxHBox2 = new HBox();
+    Text pathsWindowBottomBoxHBoxTextScore = new Text();
+    Text pathsWindowBottomBoxHBoxTextHeart = new Text();
+    Text pathsWindowBottomBoxHBoxTextCoin = new Text();
+    ImageView pathsWindowBottomBoxHBoxImageViewScore = new ImageView("file:src/main/resources/score.png");
+    ImageView pathsWindowBottomBoxHBoxImageViewHeart = new ImageView("file:src/main/resources/heart.png");
+    ImageView pathsWindowBottomBoxHBoxImageViewCoin = new ImageView("file:src/main/resources/coin.png");
+    ImageView pathsWindowBottomBoxHBoxImageViewChest = new ImageView("file:src/main/resources/chest.png");
+
+
 
     public static void main(String[] args) {
         launch(args);
@@ -265,5 +286,75 @@ public class PathsApplication extends Application {
         settingsScene.getStylesheets().add("file:src/main/resources/maintheme.css");
         settingsRoot.setBackground(BackgroundController.getCurrentBackground());
         settingsStage.show();
+    }
+
+    public VBox writePassage(Passage passage, Stage stage) {
+        VBox pathsWindowCenterBoxVBox = new VBox();
+        pathsWindowCenterBoxVBox.setSpacing(40);
+        pathsWindowCenterBoxVBox.setAlignment(Pos.CENTER);
+
+        Text titleText = new Text();
+        titleText.setText(passage.getTitle());
+        titleText.setId("titleText");
+
+        Text contentText = new Text();
+        contentText.setText(passage.getContent());
+        contentText.setId("contentText");
+
+        pathsWindowCenterBoxVBox.getChildren().clear();
+        pathsWindowCenterBoxVBox.getChildren().addAll(titleText, contentText);
+
+        VBox buttonsVBox = new VBox();
+        buttonsVBox.setSpacing(10);
+        buttonsVBox.setAlignment(Pos.CENTER);
+        for(Link link : passage.getLinks()) {
+            Button linkButton = new Button();
+            linkButton.setText(link.getText());
+            linkButton.setPrefWidth(Region.USE_COMPUTED_SIZE);
+            linkButton.setId("linkButton");
+            linkButton.setOnAction(event -> {
+                for(Action action : link.getActions()) {
+                    //TODO REMOVE COMMENT
+                    //action.execute(Game.getInstance().getPlayer());
+                }
+                updateBottomBox();
+
+                currentPassage = Game.getInstance().getStory().getPassage(link);
+                currentPassageVBox = writePassage(currentPassage, stage);
+                pathsWindowCenterBox.setCenter(currentPassageVBox);
+                stage.show();
+            });
+            buttonsVBox.getChildren().add(linkButton);
+        }
+        pathsWindowCenterBoxVBox.getChildren().add(buttonsVBox);
+        return pathsWindowCenterBoxVBox;
+    }
+
+    private void updateBottomBox() {
+        pathsWindowBottomBox.getChildren().clear();
+        pathsWindowBottomBoxHBox.getChildren().clear();
+        pathsWindowBottomBoxHBox.setSpacing(30);
+        pathsWindowBottomBoxHBox.setAlignment(Pos.CENTER_LEFT);
+        pathsWindowBottomBoxHBox.setPadding(new javafx.geometry.Insets(0, 0, 0, 50));
+
+        pathsWindowBottomBoxHBoxTextScore = new Text(Integer.toString(Game.getInstance().getPlayer().getScore()));
+        pathsWindowBottomBoxHBoxTextHeart = new Text(Integer.toString(Game.getInstance().getPlayer().getHealth()));
+        pathsWindowBottomBoxHBoxTextCoin = new Text(Integer.toString(Game.getInstance().getPlayer().getGold()));
+
+        pathsWindowBottomBoxHBoxTextScore.setId("scoreText");
+        pathsWindowBottomBoxHBoxTextHeart.setId("heartText");
+        pathsWindowBottomBoxHBoxTextCoin.setId("coinText");
+        pathsWindowBottomBoxHBox.setFillHeight(true);
+
+        pathsWindowBottomBoxHBox.getChildren().addAll(
+                pathsWindowBottomBoxHBoxImageViewScore,
+                pathsWindowBottomBoxHBoxTextScore,
+                pathsWindowBottomBoxHBoxImageViewHeart,
+                pathsWindowBottomBoxHBoxTextHeart,
+                pathsWindowBottomBoxHBoxImageViewCoin,
+                pathsWindowBottomBoxHBoxTextCoin,
+                pathsWindowBottomBoxHBoxImageViewChest);
+        pathsWindowBottomBox.setLeft(pathsWindowBottomBoxHBox);
+        pathsWindowBottomBox.setRight(pathsWindowBottomBoxHBox2);
     }
 }

@@ -96,3 +96,28 @@
 #CurrentThemeBox:hover{
     -fx-background-color: rgba(130, 178, 106, 0.7);;
 }
+
+titleText{
+    /* Changes here only affect the title text */
+    -fx-fill: #ffffff;
+    -fx-font-size: 30;
+    -fx-font-family: 'Retro Gaming';
+}
+
+#scoreText{
+    -fx-fill: #ffffff;
+    -fx-font-size: 40;
+    -fx-font-family: 'Retro Gaming';
+}
+
+#heartText{
+    -fx-fill: #be0707;
+    -fx-font-size: 40;
+    -fx-font-family: 'Retro Gaming';
+}
+#coinText {
+    /* Changes here only affect the title text */
+    -fx-fill: #e5dc19;
+    -fx-font-size: 40;
+    -fx-font-family: 'Retro Gaming';
+}
