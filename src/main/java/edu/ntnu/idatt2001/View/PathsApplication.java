@@ -184,7 +184,7 @@ public class PathsApplication extends Application {
         settingsStage.initModality(Modality.APPLICATION_MODAL);
         settingsRoot = new BorderPane();
         settingsRoot.setId("SettingsRoot");
-        settingsRoot.setBackground(BackgroundController.getCurrentBackground());
+//        settingsRoot.setBackground(BackgroundController.setBackgroundSpace());
         Scene settingsScene = new Scene(settingsRoot, 500, 500);
         settingsStage.setScene(settingsScene);
         settingsStage.setTitle("Settings");
@@ -198,7 +198,7 @@ public class PathsApplication extends Application {
         HBox changeThemeBox = new HBox();
         Button themeButtonLeft = new Button("<");
         VBox currentThemeBox = new VBox();
-        Text currentThemeText = new Text("Forest");
+        Text currentThemeText = new Text(BackgroundController.getBackgroundString());
         currentThemeText.setId("DefaultText");
         currentThemeBox.getChildren().add(currentThemeText);
         currentThemeBox.setId("CurrentThemeBox");
@@ -210,12 +210,12 @@ public class PathsApplication extends Application {
         changeThemeBox.setAlignment(Pos.CENTER);
         changeThemeBox.setMinWidth(200);
         themeButtonLeft.setOnAction(event -> {
-            settingsRoot.setBackground(BackgroundController.rotateBackground());
+//            settingsRoot.setBackground(BackgroundController.rotateBackground());
             pathsWindowRoot.setBackground(BackgroundController.rotateBackground());
             currentThemeText.setText(BackgroundController.getBackgroundString());
         });
         themeButtonRight.setOnAction(event -> {
-            settingsRoot.setBackground(BackgroundController.rotateBackground());
+//            settingsRoot.setBackground(BackgroundController.rotateBackground());
             pathsWindowRoot.setBackground(BackgroundController.rotateBackground());
             currentThemeText.setText(BackgroundController.getBackgroundString());
         });
