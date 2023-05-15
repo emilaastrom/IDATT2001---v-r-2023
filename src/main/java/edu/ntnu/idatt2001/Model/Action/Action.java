@@ -16,6 +16,6 @@ public interface Action {
      *
      * @param player the player
      */
-    void Execute(Player player);
+    void execute(Player player);
 
 }
