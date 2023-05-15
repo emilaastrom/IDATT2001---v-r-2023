@@ -19,6 +19,10 @@ import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 
 public class PathsApplication extends Application {
@@ -29,6 +33,10 @@ public class PathsApplication extends Application {
     static String currentStylesheet;
     static Passage currentPassage;
     static VBox currentPassageVBox;
+    static Player player;
+    static List<Goal> goals;
+    static Game game;
+    static Story story;
     static BorderPane pathsWindowCenterBox = new BorderPane();
     static BorderPane pathsWindowBottomBox = new BorderPane();
     static HBox pathsWindowBottomBoxHBox = new HBox();
@@ -78,6 +86,9 @@ public class PathsApplication extends Application {
         Button entryWindowChooseAdventureButton = new Button("CHOOSE YOUR ADVENTURE");
         entryWindowChooseAdventureButton.setId("mainMenuButton");
 
+        Button entryWindowOpenAdventureButton = new Button("PRESELECTED ADVENTURE");
+        entryWindowOpenAdventureButton.setId("mainMenuButton");
+
         Button settingsButton = new Button("SETTINGS");
         settingsButton.setId("mainMenuButton");
 
@@ -85,7 +96,7 @@ public class PathsApplication extends Application {
         exitGameButton.setId("mainMenuButton");
         exitGameButton.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> showExitConfirmation());
 
-        entryWindowVBox.getChildren().addAll(entryWindowLogoStackPane, entryWindowChooseAdventureButton, settingsButton, exitGameButton);
+        entryWindowVBox.getChildren().addAll(entryWindowLogoStackPane, entryWindowChooseAdventureButton, entryWindowOpenAdventureButton, settingsButton, exitGameButton);
 
         BorderPane entryWindow = new BorderPane();
         entryWindow.setVisible(true);
@@ -175,6 +186,38 @@ public class PathsApplication extends Application {
                 pathsWindowCenterBox.setCenter(currentPassageVBox);
 
                 stage.show();
+            }
+        });
+
+        entryWindowOpenAdventureButton.setOnAction(event -> {
+            //FileHandler.openStaticGame(stage);
+            File selectedFile = new File("src/main/resources/exampleStory.paths");
+            String path = selectedFile.getAbsolutePath();
+            try{
+                story = FileHandler.readFile(path);
+                try{
+                    player = new Player.PlayerBuilder("Ola Nordmann").build();
+                    goals = new ArrayList<>();
+                    game = new Game();
+                    game.setPlayer(player);
+                    game.setStory(story);
+                    game.setGoals(goals);
+                    entryWindow.setVisible(false);
+                    pathsWindow.setVisible(true);
+                    game.begin();
+
+                    currentPassage = game.getStory().getOpeningPassage();
+                    currentPassageVBox = writePassage(currentPassage, stage);
+
+                    pathsWindowCenterBox.setCenter(currentPassageVBox);
+
+                    stage.show();
+                }
+                catch (Exception e){
+                    e.printStackTrace();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         });
 
@@ -291,10 +334,10 @@ public class PathsApplication extends Application {
     public static void showExitConfirmation(){
         mainWindowDimmer.setVisible(true);
         Stage exitConfirmationStage = new Stage();
+        exitConfirmationStage.setTitle("Exit confirmation");
         exitConfirmationStage.initModality(Modality.APPLICATION_MODAL);
         BorderPane exitConfirmationRoot = new BorderPane();
         exitConfirmationRoot.setId("ExitConfirmationRoot");
-        exitConfirmationRoot.setBackground(BackgroundController.setBackgroundSpace());
         Scene exitConfirmationScene = new Scene(exitConfirmationRoot, 500, 150);
         exitConfirmationStage.setScene(exitConfirmationScene);
 
@@ -324,11 +367,11 @@ public class PathsApplication extends Application {
         pathsWindowCenterBoxVBox.setAlignment(Pos.CENTER);
 
         Text titleText = new Text();
-        titleText.setText(passage.getTitle());
+        titleText.setText(Objects.requireNonNull(passage.getTitle()));
         titleText.setId("titleText");
 
         Text contentText = new Text();
-        contentText.setText(passage.getContent());
+        contentText.setText(Objects.requireNonNull(passage.getContent()));
         contentText.setId("contentText");
 
         pathsWindowCenterBoxVBox.getChildren().clear();
