@@ -7,9 +7,11 @@ import edu.ntnu.idatt2001.Model.*;
 import edu.ntnu.idatt2001.Model.Action.Action;
 import javafx.application.Application;
 import javafx.geometry.Insets;
+import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Separator;
 import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -40,6 +42,8 @@ public class PathsApplication extends Application {
     static ImageView pathsWindowBottomBoxHBoxImageViewHeart = new ImageView("file:src/main/resources/heart.png");
     static ImageView pathsWindowBottomBoxHBoxImageViewCoin = new ImageView("file:src/main/resources/coin.png");
     static ImageView pathsWindowBottomBoxHBoxImageViewChest = new ImageView("file:src/main/resources/chest.png");
+    static ImageView pathsWindowBottomBoxHBox2ImageViewHelp = new ImageView("file:src/main/resources/help.png");
+    static ImageView pathsWindowBottomBoxHBox2ImageViewSettings = new ImageView("file:src/main/resources/settings.png");
 
     public static void main(String[] args) {
         launch(args);
@@ -114,15 +118,6 @@ public class PathsApplication extends Application {
         );
 
         updateBottomBox();
-
-        pathsWindowBottomBoxHBox2.setSpacing(30);
-        pathsWindowBottomBoxHBox2.setAlignment(Pos.CENTER_RIGHT);
-        pathsWindowBottomBoxHBox2.setPadding(new javafx.geometry.Insets(0, 50, 0, 0));
-        ImageView pathsWindowBottomBoxHBox2ImageViewHelp = new ImageView("file:src/main/resources/help.png");
-        ImageView pathsWindowBottomBoxHBox2ImageViewSettings = new ImageView("file:src/main/resources/settings.png");
-        pathsWindowBottomBoxHBox2.getChildren().addAll(
-                pathsWindowBottomBoxHBox2ImageViewHelp,
-                pathsWindowBottomBoxHBox2ImageViewSettings);
 
         VBox pathsWindowVBox = new VBox();
         pathsWindowVBox.setSpacing(30);
@@ -294,7 +289,6 @@ public class PathsApplication extends Application {
         exitConfirmationStage.initModality(Modality.APPLICATION_MODAL);
         BorderPane exitConfirmationRoot = new BorderPane();
         exitConfirmationRoot.setId("ExitConfirmationRoot");
-        exitConfirmationRoot.setBackground(BackgroundController.setBackgroundSpace());
         Scene exitConfirmationScene = new Scene(exitConfirmationRoot, 500, 150);
         exitConfirmationStage.setScene(exitConfirmationScene);
 
@@ -362,9 +356,9 @@ public class PathsApplication extends Application {
     private static void updateBottomBox() {
         pathsWindowBottomBox.getChildren().clear();
         pathsWindowBottomBoxHBox.getChildren().clear();
-        pathsWindowBottomBoxHBox.setSpacing(30);
+        pathsWindowBottomBoxHBox.setSpacing(5);
         pathsWindowBottomBoxHBox.setAlignment(Pos.CENTER_LEFT);
-        pathsWindowBottomBoxHBox.setPadding(new javafx.geometry.Insets(0, 0, 0, 50));
+        pathsWindowBottomBoxHBox.setPadding(new javafx.geometry.Insets(0, 0, 0, 20));
 
         pathsWindowBottomBoxHBoxTextScore = new Text(Integer.toString(Game.getInstance().getPlayer().getScore()));
         pathsWindowBottomBoxHBoxTextHeart = new Text(Integer.toString(Game.getInstance().getPlayer().getHealth()));
@@ -375,14 +369,44 @@ public class PathsApplication extends Application {
         pathsWindowBottomBoxHBoxTextCoin.setId("coinText");
         pathsWindowBottomBoxHBox.setFillHeight(true);
 
+        HBox scoreBox = new HBox();
+        scoreBox.setSpacing(10);
+        scoreBox.setAlignment(Pos.CENTER_LEFT);
+        scoreBox.setMinWidth(175);
+        scoreBox.setMaxWidth(175);
+        scoreBox.getChildren().addAll(pathsWindowBottomBoxHBoxImageViewScore, pathsWindowBottomBoxHBoxTextScore);
+
+        HBox heartBox = new HBox();
+        heartBox.setSpacing(10);
+        heartBox.setAlignment(Pos.CENTER_LEFT);
+        heartBox.setMinWidth(175);
+        heartBox.setMaxWidth(175);
+        heartBox.getChildren().addAll(pathsWindowBottomBoxHBoxImageViewHeart, pathsWindowBottomBoxHBoxTextHeart);
+
+        HBox coinBox = new HBox();
+        coinBox.setSpacing(10);
+        coinBox.setAlignment(Pos.CENTER_LEFT);
+        coinBox.setMinWidth(175);
+        coinBox.setMaxWidth(175);
+        coinBox.getChildren().addAll(pathsWindowBottomBoxHBoxImageViewCoin, pathsWindowBottomBoxHBoxTextCoin);
+
         pathsWindowBottomBoxHBox.getChildren().addAll(
-                pathsWindowBottomBoxHBoxImageViewScore,
-                pathsWindowBottomBoxHBoxTextScore,
-                pathsWindowBottomBoxHBoxImageViewHeart,
-                pathsWindowBottomBoxHBoxTextHeart,
-                pathsWindowBottomBoxHBoxImageViewCoin,
-                pathsWindowBottomBoxHBoxTextCoin,
-                pathsWindowBottomBoxHBoxImageViewChest);
+                scoreBox,
+                heartBox,
+                coinBox);
+
+        Separator separator = new Separator();
+        separator.setOrientation(Orientation.VERTICAL);
+
+        Separator separator2 = new Separator();
+        separator2.setOrientation(Orientation.VERTICAL);
+
+        pathsWindowBottomBoxHBox2.getChildren().clear();
+        pathsWindowBottomBoxHBox2.setSpacing(15);
+        pathsWindowBottomBoxHBox2.setAlignment(Pos.CENTER_RIGHT);
+        pathsWindowBottomBoxHBox2.setPadding(new javafx.geometry.Insets(0, 20, 0, 0));
+        pathsWindowBottomBoxHBox2.getChildren().addAll(separator,pathsWindowBottomBoxHBoxImageViewChest,separator2,pathsWindowBottomBoxHBox2ImageViewHelp, pathsWindowBottomBoxHBox2ImageViewSettings);
+
         pathsWindowBottomBox.setLeft(pathsWindowBottomBoxHBox);
         pathsWindowBottomBox.setRight(pathsWindowBottomBoxHBox2);
     }
