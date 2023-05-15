@@ -49,71 +49,7 @@ public class PathsApplication extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         MusicController.playMusic();
-
-        //STACKPANE FOR DIFFERENT WINDOWS
-        StackPane windowStackPane = new StackPane();
-
-        ////////////////////////////////////////////////////////////
-        //ENTRYWINDOW
-        ////////////////////////////////////////////////////////////
-
-        VBox entryWindowVBox = new VBox();
-        entryWindowVBox.setMinHeight(0);
-        entryWindowVBox.setMinWidth(0);
-        entryWindowVBox.setAlignment(javafx.geometry.Pos.CENTER);
-        entryWindowVBox.setSpacing(30);
-
-        Image entryWindowLogo = new Image("file:src/main/resources/logo.png");
-        StackPane entryWindowLogoStackPane = new StackPane();
-        entryWindowLogoStackPane.getChildren().add(new javafx.scene.image.ImageView(entryWindowLogo));
-
-        Button entryWindowChooseAdventureButton = new Button("CHOOSE YOUR ADVENTURE");
-        entryWindowChooseAdventureButton.setId("mainMenuButton");
-
-        Button settingsButton = new Button("SETTINGS");
-        settingsButton.setId("mainMenuButton");
-
-        Button exitGameButton = new Button("EXIT GAME");
-        exitGameButton.setId("mainMenuButton");
-
-        entryWindowVBox.getChildren().addAll(entryWindowLogoStackPane, entryWindowChooseAdventureButton, settingsButton, exitGameButton);
-
-        BorderPane entryWindow = new BorderPane();
-        entryWindow.setVisible(true);
-        entryWindow.setCenter(entryWindowVBox);
-        entryWindow.setStyle("-fx-background-color: rgb(0,0,0,0)");
-
-
-        ////////////////////////////////////////////////////////////
-        //PATHSWINDOW
-        ////////////////////////////////////////////////////////////
-
-        pathsWindowCenterBox.setPrefWidth(500);
-        pathsWindowCenterBox.setPrefHeight(400);
-        pathsWindowCenterBox.setStyle(
-                "-fx-background-color: rgb(0,0,0,0.5);" +
-                "-fx-border-color: rgb(255,255,255);" +
-                "-fx-border-width: 5px;"
-        );
-
-        pathsWindowBottomBox.setPrefWidth(500);
-        pathsWindowBottomBox.setPrefHeight(100);
-        pathsWindowBottomBox.setStyle(
-                "-fx-background-color: rgb(0,0,0,0.5);" +
-                "-fx-border-color: rgb(255,255,255);" +
-                "-fx-border-width: 5px;"
-        );
-
-        updateBottomBox();
-        
-        pathsWindowBottomBoxHBox2.setSpacing(30);
-        pathsWindowBottomBoxHBox2.setAlignment(Pos.CENTER_RIGHT);
-        pathsWindowBottomBoxHBox2.setPadding(new javafx.geometry.Insets(0, 50, 0, 0));
-        ImageView pathsWindowBottomBoxHBox2ImageViewHelp = new ImageView("file:src/main/resources/help.png");
-        ImageView pathsWindowBottomBoxHBox2ImageViewSettings = new ImageView("file:src/main/resources/settings.png");
-        pathsWindowBottomBoxHBox2.getChildren().addAll(
-                pathsWindowBottomBoxHBox2ImageViewHelp,
-                pathsWindowBottomBoxHBox2ImageViewSettings);
+        showMainWindow(stage);
 
         VBox pathsWindowVBox = new VBox();
         pathsWindowVBox.setSpacing(30);
