@@ -58,6 +58,10 @@
     -fx-background-radius: 0px;
 }
 
+.slider .thumb:hover{
+    -fx-cursor: hand;
+}
+
 .slider .track{
     -fx-background-color: black;
 }
@@ -82,7 +86,13 @@
 
 .button:hover{
     /* Changes button style when hovering */
-    -fx-background-color: rgba(130, 178, 106, 0.7);;
+    -fx-background-color: rgba(130, 178, 106, 0.7);
+    -fx-cursor: hand;
+}
+
+.separator *.line{
+    /* Changes here affect all separators */
+    -fx-border-width: 4px;
 }
 
 .background{
@@ -119,7 +129,7 @@
 }
 
 #CurrentThemeBox:hover{
-    -fx-background-color: rgba(130, 178, 106, 0.7);;
+    -fx-background-color: rgba(130, 178, 106, 0.7);
 }
 
 titleText{
@@ -147,6 +157,12 @@ titleText{
     -fx-font-family: 'Retro Gaming';
 }
 
+#ExitConfirmationRoot {
+    -fx-background-image: url("file:src/main/resources/backgroundsettings.png");
+    -fx-background-repeat: no-repeat no-repeat;
+    -fx-background-size: cover, auto;
+}
+
 #ExitConfirmationButton {
     -fx-background-color: rgba(109, 0, 0, 0.7);
 }
@@ -156,5 +172,7 @@ titleText{
 }
 
 #SettingsRoot {
-    -fx-background-image: url("file:src/main/resources/backgroundspace.png");
+    -fx-background-image: url("file:src/main/resources/backgroundsettings.png");
+    -fx-background-repeat: no-repeat no-repeat;
+    -fx-background-size: cover, auto;
 }
