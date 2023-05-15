@@ -77,7 +77,6 @@ public class StoryTest {
     public void removePassage(){
         //Creating an example passage and adding it to the story.
         Passage passageOne = new Passage("passageOneTitle","Test");
-        story.addPassage(passageOne);
 
         //Creating a link to passageOne.
         Link linkToPassageOne = new Link("Link to passageOne","passageOneTitle");

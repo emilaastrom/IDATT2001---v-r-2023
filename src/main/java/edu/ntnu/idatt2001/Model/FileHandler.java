@@ -183,6 +183,27 @@ public class FileHandler {
             return story;
         }
 
+    public static void openStaticGame(Stage stage){
+        File selectedFile = new File("src/main/resources/exampleStory.paths");
+        String path = selectedFile.getAbsolutePath();
+        try{
+            Story story = FileHandler.readFile(path);
+            try{
+                String inputValue = JOptionPane.showInputDialog("Please input a name");
+                Player player = new Player.PlayerBuilder("Ola Nordmann").build();
+                List<Goal> goals = new ArrayList<>();
+                Game.getInstance().setPlayer(player);
+                Game.getInstance().setStory(story);
+                Game.getInstance().setGoals(goals);
+            }
+            catch (Exception e){
+                e.printStackTrace();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public static boolean openGame(Stage stage){
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Open Resource File");
