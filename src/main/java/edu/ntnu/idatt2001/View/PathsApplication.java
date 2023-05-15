@@ -2,32 +2,27 @@ package edu.ntnu.idatt2001.View;
 
 import edu.ntnu.idatt2001.Controller.BackgroundController;
 import edu.ntnu.idatt2001.Controller.MusicController;
-import edu.ntnu.idatt2001.Model.Goal.Goal;
 import edu.ntnu.idatt2001.Model.FileHandler;
-import edu.ntnu.idatt2001.Model.Game;
-import edu.ntnu.idatt2001.Model.Player;
-import edu.ntnu.idatt2001.Model.Story;
 import javafx.application.Application;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
-import javafx.scene.text.Font;
-import javafx.stage.FileChooser;
+import javafx.scene.text.Text;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
-import javafx.util.Duration;
 
-import javax.swing.*;
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 
 public class PathsApplication extends Application {
+    static Stage settingsStage;
+    static BorderPane settingsRoot;
+    static BorderPane pathsWindowRoot;
+
     public static void main(String[] args) {
         launch(args);
     }
@@ -137,19 +132,16 @@ public class PathsApplication extends Application {
         //General JavaFX settings
 
         windowStackPane.getChildren().addAll(entryWindow, pathsWindow);
-        BorderPane root = new BorderPane();
-        root.setCenter(windowStackPane);
-        //root.setBackground(background);
+        pathsWindowRoot = new BorderPane();
+        pathsWindowRoot.setCenter(windowStackPane);
+//        root.setBackground(background);
 
 
-        Scene scene = new Scene(root, 1250  , 650);
+        Scene scene = new Scene(pathsWindowRoot, 1250  , 650);
         stage.setTitle("Paths");
         stage.setScene(scene);
         stage.setMinWidth(750);
         stage.setMinHeight(500);
-        //stage.setResizable(false);
-        //stage.initStyle(StageStyle.UNDECORATED);
-        //stage.setMaximized(true);
         stage.show();
 
         Settings settingsWindow = new Settings(stage.getWidth(), stage.getHeight());
@@ -157,7 +149,7 @@ public class PathsApplication extends Application {
         String currentStylesheet = "file:src/main/resources/maintheme.css";
         scene.getStylesheets().add(currentStylesheet);
 
-        root.setBackground(BackgroundController.getCurrentBackground());
+        pathsWindowRoot.setBackground(BackgroundController.getCurrentBackground());
         //EVENTS
 
         //TEMPORARY CHOOSE ADVENTURE BUTTON
@@ -169,9 +161,7 @@ public class PathsApplication extends Application {
         });
 
         settingsButton.setOnAction(event -> {
-            Settings settings = new Settings(stage.getWidth(), stage.getHeight());
-            settings.show();
-            //stage.setMaximized(true);
+            showSettings();
         });
 
         //Allowing the stage to be moved around even with UNDECORATED StageStyle
@@ -181,5 +171,99 @@ public class PathsApplication extends Application {
         }));
     }
 
+    public static void showSettings(){
+        settingsStage = new Stage();
+        settingsStage.initModality(Modality.APPLICATION_MODAL);
+        settingsRoot = new BorderPane();
+        settingsRoot.setId("SettingsRoot");
+        settingsRoot.setBackground(BackgroundController.getCurrentBackground());
+        Scene settingsScene = new Scene(settingsRoot, 500, 500);
+        settingsStage.setScene(settingsScene);
+        settingsStage.setTitle("Settings");
 
+        VBox settingsTitleBox = new VBox();
+        Text settingsTitle = new Text("Change settings!");
+        settingsTitle.setId("DefaultText");
+        settingsTitleBox.getChildren().add(settingsTitle);
+        settingsTitleBox.setAlignment(Pos.CENTER);
+
+        HBox changeThemeBox = new HBox();
+        Button themeButtonLeft = new Button("<");
+        VBox currentThemeBox = new VBox();
+        Text currentThemeText = new Text("Forest");
+        currentThemeText.setId("DefaultText");
+        currentThemeBox.getChildren().add(currentThemeText);
+        currentThemeBox.setId("CurrentThemeBox");
+        Button themeButtonRight = new Button(">");
+        themeButtonRight.setMaxSize(50, 50);
+        themeButtonLeft.setMaxSize(50, 50);
+        changeThemeBox.setSpacing(15);
+        changeThemeBox.getChildren().addAll(themeButtonLeft, currentThemeBox, themeButtonRight);
+        changeThemeBox.setAlignment(Pos.CENTER);
+        changeThemeBox.setMinWidth(200);
+        themeButtonLeft.setOnAction(event -> {
+            settingsRoot.setBackground(BackgroundController.rotateBackground());
+            pathsWindowRoot.setBackground(BackgroundController.rotateBackground());
+            currentThemeText.setText(BackgroundController.getBackgroundString());
+        });
+        themeButtonRight.setOnAction(event -> {
+            settingsRoot.setBackground(BackgroundController.rotateBackground());
+            pathsWindowRoot.setBackground(BackgroundController.rotateBackground());
+            currentThemeText.setText(BackgroundController.getBackgroundString());
+        });
+
+        VBox settingsSoundBox = new VBox();
+        settingsSoundBox.setAlignment(Pos.CENTER);
+        Button muteButton = new Button("Stop music");
+        muteButton.setMaxWidth(284);
+        settingsSoundBox.getChildren().addAll(muteButton);
+        muteButton.setOnAction(event -> {
+            if (muteButton.getText().equals("Stop music")) {
+                muteButton.setText("Play music");
+                MusicController.pauseMusic();
+            } else {
+                muteButton.setText("Stop music");
+                MusicController.playMusic();
+            }
+        });
+
+        VBox settingsSoundSliderBox = new VBox();
+        Slider settingsSoundSlider = new Slider();
+        settingsSoundSlider.setMin(0);
+        settingsSoundSlider.setMax(100);
+        settingsSoundSlider.setValue(50);
+        settingsSoundSlider.setMaxWidth(284);
+        settingsSoundSliderBox.setAlignment(Pos.CENTER);
+
+        settingsSoundBox.getChildren().addAll(settingsSoundSlider);
+        settingsSoundSlider.addEventHandler(MouseEvent.DRAG_DETECTED, event -> {
+            MusicController.musicVolume(settingsSoundSlider.getValue());
+            System.out.println(settingsSoundSlider.getValue());
+        });
+
+
+
+        VBox settingsListBox = new VBox();
+        settingsListBox.setAlignment(Pos.CENTER);
+        settingsListBox.setSpacing(30);
+        settingsListBox.getChildren().addAll(changeThemeBox, settingsSoundSliderBox, settingsSoundBox);
+
+        VBox settingsExitBox = new VBox();
+        Button settingsExitButton = new Button("Close");
+        settingsExitButton.setMaxWidth(200);
+        settingsExitButton.setOnAction(event -> settingsStage.close());
+        settingsExitBox.getChildren().add(settingsExitButton);
+        settingsExitBox.setAlignment(Pos.CENTER);
+
+        settingsRoot.setTop(settingsTitleBox);
+        settingsRoot.setCenter(settingsListBox);
+        settingsRoot.setBottom(settingsExitBox);
+        settingsRoot.setMinWidth(0);
+        settingsRoot.setPrefWidth(500);
+        settingsRoot.setPadding(new Insets(30, 30, 30, 30));
+//
+        settingsScene.getStylesheets().add("file:src/main/resources/maintheme.css");
+        settingsRoot.setBackground(BackgroundController.getCurrentBackground());
+        settingsStage.show();
+    }
 }
