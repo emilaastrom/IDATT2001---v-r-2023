@@ -93,7 +93,11 @@ public class Player {
      * @param health the health
      */
     public void addHealth(int health) {
-        checkPositiveIntInput("health after addition", this.health += health);
+        try{
+            checkPositiveIntInput("health after addition", this.health += health);
+        } catch (IllegalArgumentException e) {
+            this.health = 0;
+        }
     }
 
     /**
@@ -121,6 +125,13 @@ public class Player {
      */
     public void addToInventory(String item) {
         this.inventory.add(item);
+    }
+    public void removeFromInventory(String item){
+        if(this.inventory.contains(item)){
+            this.inventory.remove(item);
+        } else{
+            throw new IllegalArgumentException("Item not in inventory");
+        }
     }
 
     /**
