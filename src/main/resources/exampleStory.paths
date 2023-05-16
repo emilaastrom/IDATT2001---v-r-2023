@@ -17,17 +17,22 @@ You try to climb a tree, but you fall and hurt yourself.
 
 ::You hide in a bush
 You're freezing cold, and feel the leaves and twigs scratch upon your knees. In the horizon, you see a shadowy figure. You can't seem to notice what they're doing.
-[Walk closer](Shadowy figure)
-[Pickup a stick](Attack options)
+[Sneak closer](Shadowy figure)
+[Pickup a stick](Attack options){Inventory stick;}
 
 ::Attack options
 The shadowy figure is now aware of your presence. You can see them holding a knife, and they're walking towards you.
-[Attack with stick](You attack)
+[Walk towards it](Shadowy figure)
 [Run away](Shadowy figure)
 
 ::Shadowy figure
-You die
+As the shadowy figure approaches you, you can see that their eyes are glowing red, and it has huge black wings. You hear a rumbling voice whispering in your ear, "I AM MOTHMAN."
+[Attack with stick](You attack){Gold 100;Inventory -stick;}
+[Run away](You die){Health -100;}
 
 ::You attack
 You hit the shadowy figure with the stick, and they fall to the ground. You can see that they're bleeding, and they're not moving.
+
+::You die
+You try to run away, but the shadowy figure grabs you and throws you to the ground. You can feel their claws digging into your skin, and you can hear their voice whispering in your ear, "I AM MOTHMAN."
 
