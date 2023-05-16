@@ -2,6 +2,8 @@ package edu.ntnu.idatt2001.View;
 
 import edu.ntnu.idatt2001.Controller.BackgroundController;
 import edu.ntnu.idatt2001.Controller.MusicController;
+import edu.ntnu.idatt2001.Controller.UserInformer;
+import edu.ntnu.idatt2001.Model.Action.InventoryAction;
 import edu.ntnu.idatt2001.Model.FileHandler;
 import edu.ntnu.idatt2001.Model.*;
 import edu.ntnu.idatt2001.Model.Action.Action;
@@ -11,23 +13,24 @@ import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Separator;
-import javafx.scene.control.Slider;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.atomic.AtomicReference;
 
 
 public class PathsApplication extends Application {
@@ -44,6 +47,7 @@ public class PathsApplication extends Application {
     static List<Goal> goals;
     static Game game = Game.getInstance();
     static Story story;
+    static Stage inventoryStage;
     static BorderPane pathsWindowCenterBox = new BorderPane();
     static BorderPane pathsWindowBottomBox = new BorderPane();
     static HBox pathsWindowBottomBoxHBox = new HBox();
@@ -73,6 +77,7 @@ public class PathsApplication extends Application {
         StackPane windowStackPane = new StackPane();
         mainWindowDimmer = new BorderPane();
         mainWindowDimmer.setVisible(false);
+        mainWindowDimmer.setMouseTransparent(true);
         mainWindowDimmer.setStyle("-fx-background-color: rgba(0, 0, 0, 0.5);");
         mainWindowDimmer.setId("mainWindowDimmer");
 
@@ -231,8 +236,6 @@ public class PathsApplication extends Application {
         gameSelectionRoot = new BorderPane();
         gameSelectionRoot.setId("GameSelectionRoot");
 
-        
-
     }
 
     public static void showSettings(){
@@ -367,6 +370,7 @@ public class PathsApplication extends Application {
     }
 
     public static VBox writePassage(Passage passage, Stage stage) {
+        try{
         VBox pathsWindowCenterBoxVBox = new VBox();
         pathsWindowCenterBoxVBox.setSpacing(40);
         pathsWindowCenterBoxVBox.setAlignment(Pos.CENTER);
@@ -387,14 +391,51 @@ public class PathsApplication extends Application {
         VBox buttonsVBox = new VBox();
         buttonsVBox.setSpacing(10);
         buttonsVBox.setAlignment(Pos.CENTER);
-        for(Link link : passage.getLinks()) {
+            for (Link link : passage.getLinks()) {
+                //check if link is active
+                List<Action> actions = link.getActions();
+                boolean activeLink = true;
+                boolean itemNotFound = false;
+                for (Object action : actions) {
+                    //check if action is inventory action
+                    if (action instanceof InventoryAction inventoryAction) {
+                        //check if action is subtract item-action
+                        if (inventoryAction.getAmount().startsWith("-")) {
+                            boolean found = false;
+                            for (String item : Game.getInstance().getPlayer().getInventory()) {
+                                if (item.equals(inventoryAction.getAmount().substring(1))) {
+                                    found = true;
+                                    break;
+                                }
+                            }
+                            if (!found) {
+                                activeLink = false;
+                                break;
+                            }
+                        }
+                    }
+                }
+
+                if (!activeLink) {
+                    itemNotFound = true;
+                }
+                //if item not found, skip this link
+                if (itemNotFound) {
+                    continue;
+                }
+
             Button linkButton = new Button();
             linkButton.setText(link.getText());
             linkButton.setPrefWidth(Region.USE_COMPUTED_SIZE);
             linkButton.setId("linkButton");
             linkButton.setOnAction(event -> {
                 for(Action action : link.getActions()) {
-                    action.execute(Game.getInstance().getPlayer());
+                    try {
+                        action.execute(Game.getInstance().getPlayer());
+                    } catch (Exception e) {
+                        UserInformer.errorWarning("You can't do that action",e.getMessage());
+                        throw new RuntimeException(e);
+                    }
                 }
                 updateBottomBox();
 
@@ -406,7 +447,11 @@ public class PathsApplication extends Application {
             buttonsVBox.getChildren().add(linkButton);
         }
         pathsWindowCenterBoxVBox.getChildren().add(buttonsVBox);
-        return pathsWindowCenterBoxVBox;
+        return pathsWindowCenterBoxVBox;}
+        catch (Exception e){
+            System.out.println("Error in writePassage");
+            return null;
+        }
     }
 
     private static void updateBottomBox() {
@@ -451,19 +496,83 @@ public class PathsApplication extends Application {
                 heartBox,
                 coinBox);
 
+        StackPane chestPane = new StackPane();
+        chestPane.setId("chestPane");
+        chestPane.setMinWidth(75);
+        chestPane.setMinHeight(75);
+        StackPane.setAlignment(pathsWindowBottomBoxHBoxImageViewChest, Pos.CENTER);
+        chestPane.getChildren().add(pathsWindowBottomBoxHBoxImageViewChest);
+        chestPane.setPadding(new javafx.geometry.Insets(0, 15, 0, 15));
+
+        StackPane helpPane = new StackPane();
+        helpPane.setId("helpPane");
+        helpPane.setMinWidth(75);
+        helpPane.setMinHeight(75);
+        StackPane.setAlignment(pathsWindowBottomBoxHBox2ImageViewHelp, Pos.CENTER);
+        helpPane.getChildren().add(pathsWindowBottomBoxHBox2ImageViewHelp);
+        helpPane.setPadding(new javafx.geometry.Insets(0, 15, 0, 15));
+
+        StackPane settingsPane = new StackPane();
+        settingsPane.setId("settingsPane");
+        settingsPane.setMinWidth(75);
+        settingsPane.setMinHeight(75);
+        StackPane.setAlignment(pathsWindowBottomBoxHBox2ImageViewSettings, Pos.CENTER);
+        settingsPane.getChildren().add(pathsWindowBottomBoxHBox2ImageViewSettings);
+        settingsPane.setPadding(new javafx.geometry.Insets(0, 15, 0, 15));
+
         pathsWindowBottomBoxHBox2.getChildren().clear();
-        pathsWindowBottomBoxHBox2.setSpacing(15);
+        pathsWindowBottomBoxHBox2.setSpacing(0);
         pathsWindowBottomBoxHBox2.setAlignment(Pos.CENTER_RIGHT);
-        pathsWindowBottomBoxHBox2.setPadding(new javafx.geometry.Insets(0, 20, 0, 0));
         pathsWindowBottomBoxHBox2.getChildren().addAll(
             new Separator(Orientation.VERTICAL),
-            pathsWindowBottomBoxHBoxImageViewChest,
+            chestPane,
             new Separator(Orientation.VERTICAL),
-            pathsWindowBottomBoxHBox2ImageViewHelp,
+            helpPane,
             new Separator(Orientation.VERTICAL),
-            pathsWindowBottomBoxHBox2ImageViewSettings);
+            settingsPane);
 
         pathsWindowBottomBox.setLeft(pathsWindowBottomBoxHBox);
         pathsWindowBottomBox.setRight(pathsWindowBottomBoxHBox2);
+
+
+        chestPane.addEventHandler(MouseEvent.MOUSE_ENTERED, event -> showInventory());
+        chestPane.addEventHandler(MouseEvent.MOUSE_EXITED, event -> {
+            inventoryStage.close();
+            mainWindowDimmer.setVisible(false);
+        });
+
+        helpPane.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> showHelp());
+
+        settingsPane.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> showSettings());
+
     }
+
+    public static void showHelp(){
+
+    }
+
+    public static void showInventory(){
+        inventoryStage = new Stage(StageStyle.UNDECORATED);
+        BorderPane inventoryRoot = new BorderPane();
+        inventoryRoot.setPadding(new Insets(30, 30, 30, 30));
+        inventoryRoot.setId("inventoryRoot");
+        Text tooltip = new Text();
+        tooltip.setId("tooltip");
+        StringBuilder inventoryString = new StringBuilder("Inventory:\r\n\n");
+        for(String item : game.getPlayer().getInventory()){
+            inventoryString
+                .append("- ")
+                .append(item.substring(0, 1).toUpperCase())
+                .append(item.substring(1).toLowerCase())
+                .append("\r\n");
+        }
+        tooltip.setText(inventoryString.toString());
+        inventoryRoot.setTop(tooltip);
+        Scene tooltipScene = new Scene(inventoryRoot,pathsWindowCenterBox.getWidth()/2,pathsWindowCenterBox.getHeight()/5*4);
+        tooltipScene.getStylesheets().add(currentStylesheet);
+        inventoryStage.setScene(tooltipScene);
+        mainWindowDimmer.setVisible(true);
+        inventoryStage.show();
+    }
+
 }
