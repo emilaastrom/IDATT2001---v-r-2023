@@ -33,6 +33,8 @@ import java.util.Objects;
 public class PathsApplication extends Application {
     static Stage settingsStage;
     static BorderPane settingsRoot;
+    static Stage gameSelectionStage;
+    static BorderPane gameSelectionRoot;
     static BorderPane pathsWindowRoot;
     static BorderPane mainWindowDimmer;
     static String currentStylesheet;
@@ -64,7 +66,6 @@ public class PathsApplication extends Application {
     public void start(Stage stage) {
         MusicController.playMusic();
         showMainWindow(stage);
-
     }
 
     public static void showMainWindow(Stage stage){
@@ -72,8 +73,8 @@ public class PathsApplication extends Application {
         StackPane windowStackPane = new StackPane();
         mainWindowDimmer = new BorderPane();
         mainWindowDimmer.setVisible(false);
-        mainWindowDimmer.setId("mainWindowDimmer");
         mainWindowDimmer.setStyle("-fx-background-color: rgba(0, 0, 0, 0.5);");
+        mainWindowDimmer.setId("mainWindowDimmer");
 
 
         ////////////////////////////////////////////////////////////
@@ -221,6 +222,17 @@ public class PathsApplication extends Application {
             stage.setX(dragEvent.getScreenX() - pressEvent.getSceneX());
             stage.setY(dragEvent.getScreenY() - pressEvent.getSceneY());
         }));
+    }
+
+    public static void showGameSelection(){
+        mainWindowDimmer.setVisible(true);
+        gameSelectionStage = new Stage();
+        gameSelectionStage.initModality(Modality.APPLICATION_MODAL);
+        gameSelectionRoot = new BorderPane();
+        gameSelectionRoot.setId("GameSelectionRoot");
+
+        
+
     }
 
     public static void showSettings(){
@@ -439,17 +451,17 @@ public class PathsApplication extends Application {
                 heartBox,
                 coinBox);
 
-        Separator separator = new Separator();
-        separator.setOrientation(Orientation.VERTICAL);
-
-        Separator separator2 = new Separator();
-        separator2.setOrientation(Orientation.VERTICAL);
-
         pathsWindowBottomBoxHBox2.getChildren().clear();
         pathsWindowBottomBoxHBox2.setSpacing(15);
         pathsWindowBottomBoxHBox2.setAlignment(Pos.CENTER_RIGHT);
         pathsWindowBottomBoxHBox2.setPadding(new javafx.geometry.Insets(0, 20, 0, 0));
-        pathsWindowBottomBoxHBox2.getChildren().addAll(separator,pathsWindowBottomBoxHBoxImageViewChest,separator2,pathsWindowBottomBoxHBox2ImageViewHelp, pathsWindowBottomBoxHBox2ImageViewSettings);
+        pathsWindowBottomBoxHBox2.getChildren().addAll(
+            new Separator(Orientation.VERTICAL),
+            pathsWindowBottomBoxHBoxImageViewChest,
+            new Separator(Orientation.VERTICAL),
+            pathsWindowBottomBoxHBox2ImageViewHelp,
+            new Separator(Orientation.VERTICAL),
+            pathsWindowBottomBoxHBox2ImageViewSettings);
 
         pathsWindowBottomBox.setLeft(pathsWindowBottomBoxHBox);
         pathsWindowBottomBox.setRight(pathsWindowBottomBoxHBox2);

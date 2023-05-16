@@ -7,7 +7,7 @@ You're surrounded by tall trees, and the air is thick with the smell of pine. Th
 
 ::Darkwood north
 As you venture deeper into the forest, you are immediately engulfed by an unsettling atmosphere. The air grows thick and heavy, causing an eerie silence to settle around you.
-[Hide in a bush](You're hidden in a bush)
+[Hide in a bush](You hide in a bush)
 [Start running](Shadowy figure)
 [Shout for help](Shadowy figure)
 
@@ -18,7 +18,16 @@ You try to climb a tree, but you fall and hurt yourself.
 ::You hide in a bush
 You're freezing cold, and feel the leaves and twigs scratch upon your knees. In the horizon, you see a shadowy figure. You can't seem to notice what they're doing.
 [Walk closer](Shadowy figure)
+[Pickup a stick](Attack options)
+
+::Attack options
+The shadowy figure is now aware of your presence. You can see them holding a knife, and they're walking towards you.
+[Attack with stick](You attack)
+[Run away](Shadowy figure)
 
 ::Shadowy figure
 You die
+
+::You attack
+You hit the shadowy figure with the stick, and they fall to the ground. You can see that they're bleeding, and they're not moving.
 
