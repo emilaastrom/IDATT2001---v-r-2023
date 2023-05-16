@@ -18,20 +18,101 @@ You try to climb a tree, but you fall and hurt yourself.
 ::You hide in a bush
 You're freezing cold, and feel the leaves and twigs scratch upon your knees. In the horizon, you see a shadowy figure. You can't seem to notice what they're doing.
 [Sneak closer](Shadowy figure)
-[Pickup a stick](Attack options){Inventory stick;}
+[Pickup a stick](Encounter){Inventory stick;}
 
-::Attack options
+::Encounter
 The shadowy figure is now aware of your presence. You can see them holding a knife, and they're walking towards you.
 [Walk towards it](Shadowy figure)
 [Run away](Shadowy figure)
 
 ::Shadowy figure
 As the shadowy figure approaches you, you can see that their eyes are glowing red, and it has huge black wings. You hear a rumbling voice whispering in your ear, "I AM MOTHMAN."
-[Attack with stick](You attack){Gold 100;Inventory -stick;}
+[Attack with stick](You attack){Score 100;Inventory -stick;}
 [Run away](You die){Health -100;}
 
 ::You attack
 You hit the shadowy figure with the stick, and they fall to the ground. You can see that they're bleeding, and they're not moving.
+[Loot the body](You loot){Gold 100;Inventory knife;Inventory wings;}
+[Rest](You rest){Health 100;Gold 100;}
+[Walk away](You walk away, you're tired)
+
+::You rest
+You rest for a while, and fall asleep. You wake up and you feel better, however the body has disappeared. With only a knife and gold left on the ground.
+[Pickup the knife](You pickup){Inventory knife;}
+[Walk away](You walk away)
+
+::You pickup
+You pickup the knife, and you feel a strange power coming from it. You can hear a voice whispering in your ear, "I AM MOTHMAN."
+[Walk away](You walk away)
+
+::You walk away
+You walk away from the crime scene, and you begin to feel a strange power coming from the knife. You can hear a voice whispering in your ear, "I AM MOTHMAN."
+[Drop the knife](You drop){Inventory -knife;}
+[Keep the knife](You keep)
+
+::You keep
+You keep the knife, and you feel yourself transforming into a creature of the night. You see red and feel wings emerging from your back. Uncontrollably you whisper: "I AM MOTHMAN.".
+
+::You drop
+You drop the knife, and feel a drop of relief. The darkness from the forest seems to disappear, and the knife disappears with it.
+[Equip wings and fly away](You fly away){Inventory -wings;}
+[Find civilization](You find civilization)
+
+::You walk away, you're tired
+You walk away from the crime scene, and you feel extremely tired. You fall to the ground from exhaustion, and you can hear a voice whispering in your ear, "I AM MOTHMAN.". You fall asleep, and you never wake up.
+
+::You find civilization
+You look around and find a small village.
+[Go into a shop](You go into a shop)
+[Move into a house](You move into a house)
+[Find your way home](You find your way home)
+
+::You go into a shop
+There is a nice shopkeeper, and he greets you with a smile. "Hello, what can I do for you?"
+[Buy a sword - 100 gold](You buy a sword){Inventory sword;Gold -100;}
+[Buy a potion - 100 gold](You buy a potion){Inventory potion;Gold -100;}
+[Walk outside](You find civilization)
+
+::You buy a sword
+You buy a sword
+[Walk outside](You find civilization)
+
+::You buy a potion
+You buy a potion
+[Walk outside](You find civilization)
+[Drink potion](You drink potion){Inventory -potion;}
+
+::You drink potion
+You drink the potion, and you wake up in your own house. You try to explain to people what happened, but they don't believe you. You live pretty happily, but every once in a while, in your sleep, you hear a voice whispering in your ear, "I AM MOTHMAN."
+
+::You move into a house
+You move into a house, you start a new life and you live happily ever after.
+
+::You find your way home
+You walk away from the village and try to find your home, but the task is hard. You walk for days and days, until you're encountered by a pack of wolves.
+[Attack the wolves with hands](You attack the wolves with hands){Health -100;}
+[Attack the wolves with sword](You attack the wolves){Inventory -sword;}
+[Run away](You try to run away from the wolves)
+
+::You attack the wolves with your hands
+You try to attack the wolves with your hands, but they're too strong. They rip you apart, and you die.
+
+::You attack the wolves
+You attack the wolves with your sword, and you manage to kill them all.
+[Walk home](You walk home)
+
+::You try to run away from the wolves
+You try to run away from the wolves, but they're too fast. They catch up to you, and they rip you apart. You die.
+
+::You walk home
+After many days you find your home, and you live happily ever after.
+
+::You fly away
+You use your wings to fly away from the forest, and you never return. You find your home, the wings disappear, and you live happily ever after.
+
+::You loot
+You loot the body, and find a knife and a pair of wings. You also find 100 gold pieces.
+[Walk away](You walk away)
 
 ::You die
 You try to run away, but the shadowy figure grabs you and throws you to the ground. You can feel their claws digging into your skin, and you can hear their voice whispering in your ear, "I AM MOTHMAN."
