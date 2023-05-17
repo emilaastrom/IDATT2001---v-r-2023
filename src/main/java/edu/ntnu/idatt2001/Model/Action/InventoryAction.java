@@ -28,7 +28,12 @@ public class InventoryAction implements Action {
 
     @Override
     public void execute(Player player){
+        if(item.startsWith("-")){
+            player.removeFromInventory(item.substring(1));
+            return;
+        }else{
         player.addToInventory(item);
+    }
     }
 
 }

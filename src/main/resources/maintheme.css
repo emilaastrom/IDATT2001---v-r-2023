@@ -79,6 +79,13 @@
     -fx-pref-width: 400;
 }
 
+#tooltip {
+    -fx-font-family: 'Retro Gaming';
+    -fx-fill: white;
+    -fx-background-color: rgba(0, 0, 0, 0.5);
+    -fx-font-size: 20px;
+}
+
 #linkButton{
     /* Changes here only affect the link button */
     -fx-padding: 5px 20px 5px 20px;
@@ -171,8 +178,23 @@ titleText{
     -fx-background-color: rgba(255, 0, 0, 0.7);
 }
 
-#SettingsRoot {
+#SettingsRoot, #inventoryRoot {
+    -fx-border-color: #FFFFFF;
+    -fx-border-width: 4px;
     -fx-background-image: url("file:src/main/resources/backgroundsettings.png");
     -fx-background-repeat: no-repeat no-repeat;
     -fx-background-size: cover, auto;
+}
+#chestPane:hover{
+    -fx-background-color: rgba(0, 0, 0, 0.7);
+    -fx-cursor: OPEN_HAND;
+}
+
+#settingsPane:hover, #helpPane:hover {
+    -fx-background-color: rgba(130, 178, 106, 0.7);
+    -fx-cursor: hand;
+}
+
+.separator {
+    -fx-padding: 0px -5px 0px -5px;
 }
