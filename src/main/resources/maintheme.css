@@ -178,7 +178,7 @@ titleText{
     -fx-background-color: rgba(255, 0, 0, 0.7);
 }
 
-#SettingsRoot, #inventoryRoot {
+#SettingsRoot, #inventoryRoot, #gameSettingsRoot {
     -fx-border-color: #FFFFFF;
     -fx-border-width: 4px;
     -fx-background-image: url("file:src/main/resources/backgroundsettings.png");

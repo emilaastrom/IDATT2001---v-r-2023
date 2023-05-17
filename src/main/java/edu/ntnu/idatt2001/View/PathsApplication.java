@@ -543,8 +543,71 @@ public class PathsApplication extends Application {
 
         helpPane.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> showHelp());
 
-        settingsPane.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> showSettings());
+        settingsPane.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            showGameSettings();
+            //            showSettings();
+        });
 
+    }
+
+    public static void showGameSettings(){
+        mainWindowDimmer.setVisible(true);
+        Stage gameSettingsStage = new Stage();
+        gameSettingsStage.initModality(Modality.APPLICATION_MODAL);
+        gameSettingsStage.setTitle("Game Settings");
+        BorderPane gameSettingsRoot = new BorderPane();
+        Scene gameSettingsScene = new Scene(gameSettingsRoot,pathsWindowCenterBox.getWidth()/2,pathsWindowCenterBox.getHeight());
+
+        gameSettingsRoot.setPadding(new Insets(30, 30, 30, 30));
+        gameSettingsRoot.setId("gameSettingsRoot");
+
+        VBox gameSettingsTopBox = new VBox();
+        gameSettingsTopBox.setAlignment(Pos.CENTER);
+        Text gameSettingsTitle= new Text("Game Settings");
+        gameSettingsTitle.setId("tooltip");
+        gameSettingsTopBox.getChildren().addAll(gameSettingsTitle);
+
+        VBox gameSettingsMiddleBox = new VBox();
+        gameSettingsMiddleBox.setPadding(new Insets(50, 30, 30, 30));
+        gameSettingsMiddleBox.setSpacing(10);
+        Button generalSettingsButton = new Button("General Settings");
+        generalSettingsButton.setId("generalSettingsButton");
+        generalSettingsButton.setOnAction(event -> {
+            gameSettingsStage.close();
+            showSettings();
+        });
+        Button mainMenuButton = new Button("Main Menu");
+        mainMenuButton.setId("mainMenuButton");
+        mainMenuButton.setOnAction(event -> {
+            gameSettingsStage.close();
+            mainWindowDimmer.setVisible(false);
+            //TODO fix double stage when going back to main menu
+            showMainWindow(new Stage());
+        });
+
+        gameSettingsMiddleBox.getChildren().addAll(mainMenuButton, generalSettingsButton);
+
+        VBox generalSettingsBottomBox = new VBox();
+        generalSettingsBottomBox.setAlignment(Pos.CENTER);
+        generalSettingsBottomBox.setPadding(new Insets(30, 30, 30, 30));
+        generalSettingsBottomBox.setAlignment(Pos.CENTER);
+        Button closeGameSettingsButton = new Button("Close");
+        closeGameSettingsButton.setMaxWidth(200);
+        closeGameSettingsButton.setOnAction(event -> {
+            gameSettingsStage.close();
+            mainWindowDimmer.setVisible(false);
+        });
+        generalSettingsBottomBox.getChildren().addAll(closeGameSettingsButton);
+
+
+        gameSettingsRoot.setTop(gameSettingsTopBox);
+        gameSettingsRoot.setCenter(gameSettingsMiddleBox);
+        gameSettingsRoot.setBottom(generalSettingsBottomBox);
+        gameSettingsStage.setScene(gameSettingsScene);
+        gameSettingsScene.getStylesheets().add(currentStylesheet);
+        gameSettingsStage.show();
+
+        gameSettingsStage.addEventHandler(WindowEvent.WINDOW_HIDDEN, event -> mainWindowDimmer.setVisible(false));
     }
 
     public static void showHelp(){
