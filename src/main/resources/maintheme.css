@@ -35,9 +35,6 @@
     -fx-font-family: 'Retro Gaming';
 }
 
-.root{
-}
-
 .slider{
     /* Changes here affect all sliders */
     -fx-background-color: linear-gradient(to right, rgba(49, 49, 49, 0.7), rgba(98, 98, 98, 0.7));
@@ -122,9 +119,6 @@
     /* Changes here only affect the buttons on the main menu, using their ID */
 }
 
-#SettingsRoot{
-}
-
 #CurrentThemeBox{
     -fx-background-color: rgba(0, 0, 0, 0.1);
     -fx-border-color: #FFFFFF;
@@ -164,12 +158,6 @@ titleText{
     -fx-font-family: 'Retro Gaming';
 }
 
-#ExitConfirmationRoot {
-    -fx-background-image: url("file:src/main/resources/backgroundsettings.png");
-    -fx-background-repeat: no-repeat no-repeat;
-    -fx-background-size: cover, auto;
-}
-
 #ExitConfirmationButton {
     -fx-background-color: rgba(109, 0, 0, 0.7);
 }
@@ -178,7 +166,7 @@ titleText{
     -fx-background-color: rgba(255, 0, 0, 0.7);
 }
 
-#SettingsRoot, #inventoryRoot {
+#SettingsRoot, #inventoryRoot, #SettingsRoot, #ExitConfirmationRoot{
     -fx-border-color: #FFFFFF;
     -fx-border-width: 4px;
     -fx-background-image: url("file:src/main/resources/backgroundsettings.png");
