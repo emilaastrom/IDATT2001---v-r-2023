@@ -1,36 +1,51 @@
 package edu.ntnu.idatt2001.Controller;
 
+import edu.ntnu.idatt2001.Main;
 import edu.ntnu.idatt2001.Model.Action.Action;
 import edu.ntnu.idatt2001.Model.Action.InventoryAction;
 import edu.ntnu.idatt2001.Model.Game;
 import edu.ntnu.idatt2001.Model.Link;
 import edu.ntnu.idatt2001.Model.Passage;
 import edu.ntnu.idatt2001.Model.Story;
+import edu.ntnu.idatt2001.View.InventoryView;
+import edu.ntnu.idatt2001.View.SettingsView;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.control.Separator;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
 public class PathsController {
+  InventoryView inventoryView = new InventoryView(new InventoryController());
 
   public PathsController() {
   }
 
-  public void showInventory() {
+  public void showInventory(double width, double height, BorderPane dimmer) {
+    inventoryView.showInventory(width, height, dimmer);
+  }
+
+  public void hideInventory(BorderPane dimmer){
+    inventoryView.hideInventory(dimmer);
   }
 
   public void showHelp() {
   }
 
-  public void showSettings() {
+  public void showSettings(Pane root, BorderPane dimmer) {
+    SettingsView settingsView = new SettingsView(new SettingsController(), root, dimmer);
+    dimmer.setVisible(true);
   }
+
   public Story getStory(){
     return Game.getInstance().getStory();
   }

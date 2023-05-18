@@ -27,5 +27,6 @@ public class MusicController {
 
   public static void musicVolume(double volume) {
     mediaPlayer.volumeProperty().setValue(volume);
+    mediaPlayer.setVolume(volume);
   }
 }

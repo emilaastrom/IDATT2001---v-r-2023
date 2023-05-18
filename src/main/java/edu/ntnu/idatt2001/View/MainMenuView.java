@@ -2,6 +2,7 @@ package edu.ntnu.idatt2001.View;
 
 import edu.ntnu.idatt2001.Controller.BackgroundController;
 import edu.ntnu.idatt2001.Controller.MainMenuController;
+import edu.ntnu.idatt2001.Controller.MusicController;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
@@ -9,6 +10,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
 public class MainMenuView {
@@ -36,6 +38,7 @@ public class MainMenuView {
     this.controller = controller;
     this.stage = stage;
 
+    MusicController.playMusic();
 
     createAndConfigurePane();
 
@@ -80,6 +83,7 @@ public class MainMenuView {
     entryWindowOpenAdventureButton.setId("mainMenuButton");
 
     settingsButton.setId("mainMenuButton");
+    settingsButton.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> controller.showSettings(mainMenuRoot, mainWindowDimmer));
 
     exitGameButton.setId("mainMenuButton");
   }

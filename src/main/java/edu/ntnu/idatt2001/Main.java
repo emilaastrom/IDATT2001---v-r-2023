@@ -10,7 +10,7 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 public class Main extends Application {
-  private String currentStylesheet;
+  public static String currentStylesheet;
   private static Scene scene;
   @Override
   public void start(Stage primaryStage) {

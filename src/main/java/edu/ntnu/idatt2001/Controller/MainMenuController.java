@@ -3,6 +3,9 @@ package edu.ntnu.idatt2001.Controller;
 import edu.ntnu.idatt2001.Main;
 import edu.ntnu.idatt2001.Model.FileHandler;
 import edu.ntnu.idatt2001.View.PathsView;
+import edu.ntnu.idatt2001.View.SettingsView;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 public class MainMenuController {
@@ -15,4 +18,11 @@ public class MainMenuController {
       Main.changeScene(pathsView.getRoot(), stage);
     }
   }
+
+  public void showSettings(Pane root, BorderPane dimmer) {
+    SettingsView settingsView = new SettingsView(new SettingsController(), root, dimmer);
+    dimmer.setVisible(true);
+  }
+
+
 }
