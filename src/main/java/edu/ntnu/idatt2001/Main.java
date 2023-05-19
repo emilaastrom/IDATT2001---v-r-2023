@@ -4,9 +4,7 @@ import edu.ntnu.idatt2001.Controller.MainMenuController;
 import edu.ntnu.idatt2001.View.MainMenuView;
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 public class Main extends Application {

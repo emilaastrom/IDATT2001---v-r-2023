@@ -101,6 +101,14 @@ public class SettingsView {
     Button muteButton = new Button("Stop music");
     muteButton.setMaxWidth(284);
     settingsSoundBox.getChildren().addAll(muteButton);
+
+    VBox settingsSoundSliderBox = new VBox();
+    Slider settingsSoundSlider = MusicController.getVolumeSlider();
+    settingsSoundSlider.setMaxWidth(284);
+    settingsSoundSliderBox.setAlignment(Pos.CENTER);
+
+    settingsSoundBox.getChildren().addAll(settingsSoundSlider);
+
     muteButton.setOnAction(event -> {
       if (muteButton.getText().equals("Stop music")) {
         muteButton.setText("Play music");

@@ -6,13 +6,13 @@ import edu.ntnu.idatt2001.Controller.MainMenuController;
 import edu.ntnu.idatt2001.Controller.MusicController;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
 public class MainMenuView {
@@ -79,9 +79,11 @@ public class MainMenuView {
 
   public void createAndLayoutControls(){
     entryWindowChooseAdventureButton.setId("mainMenuButton");
-    entryWindowChooseAdventureButton.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> new GameSelectionView(new GameSelectionController(), stage));
+    entryWindowChooseAdventureButton.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> controller.showGameSelection(stage));
     settingsButton.setId("mainMenuButton");
     settingsButton.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> controller.showSettings(mainMenuRoot, mainWindowDimmer));
+    exitGameButton.setId("mainMenuButton");
+    exitGameButton.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> controller.showExitConfirmation(mainWindowDimmer));
   }
 
   public void updateControllerFromListeners(){

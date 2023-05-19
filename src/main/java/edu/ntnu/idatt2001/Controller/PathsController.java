@@ -2,6 +2,7 @@ package edu.ntnu.idatt2001.Controller;
 
 import edu.ntnu.idatt2001.Main;
 import edu.ntnu.idatt2001.Model.Action.Action;
+import edu.ntnu.idatt2001.Model.Action.GoldAction;
 import edu.ntnu.idatt2001.Model.Action.InventoryAction;
 import edu.ntnu.idatt2001.Model.Game;
 import edu.ntnu.idatt2001.Model.Link;
@@ -73,6 +74,13 @@ public class PathsController {
               }
             }
             if (!found) {
+              activeLink = false;
+              break;
+            }
+          }
+        } else if (action instanceof GoldAction goldAction) {
+          if (goldAction.getAmount().startsWith("-")) {
+            if (Game.getInstance().getPlayer().getGold() < Integer.parseInt(goldAction.getAmount().substring(1))) {
               activeLink = false;
               break;
             }
