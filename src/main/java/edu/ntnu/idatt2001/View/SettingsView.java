@@ -1,14 +1,14 @@
 package edu.ntnu.idatt2001.View;
 
-import edu.ntnu.idatt2001.Controller.BackgroundController;
-import edu.ntnu.idatt2001.Controller.MusicController;
-import edu.ntnu.idatt2001.Controller.SettingsController;
+import edu.ntnu.idatt2001.Controller.*;
 import edu.ntnu.idatt2001.Main;
-import javafx.beans.InvalidationListener;
-import javafx.beans.Observable;
+import edu.ntnu.idatt2001.Model.Game;
+import javafx.geometry.Insets;
+import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Separator;
 import javafx.scene.control.Slider;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
@@ -19,6 +19,8 @@ import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
 
 public class SettingsView {
 
@@ -27,13 +29,17 @@ public class SettingsView {
   private Stage stage;
   private Scene scene;
   private Pane superRoot;
+  private Stage superStage;
   private BorderPane dimmer;
+  private Boolean isGameSettings;
 
-  public SettingsView(SettingsController controller, Pane superRoot, BorderPane dimmer) {
+  public SettingsView(SettingsController controller, Pane superRoot, Stage superStage, BorderPane dimmer, Boolean isGameSettings) {
     settingsRoot = new BorderPane();
     settingsRoot.setId("SettingsRoot");
+    this.isGameSettings = isGameSettings;
     this.controller = controller;
     this.superRoot = superRoot;
+    this.superStage = superStage;
     this.dimmer = dimmer;
 
     createAndConfigureStage();
@@ -48,7 +54,7 @@ public class SettingsView {
   }
   
   private void createAndConfigureStage() {
-    this.scene = new Scene(settingsRoot, 500, 500);
+    this.scene = new Scene(settingsRoot, 500, 750);
     this.stage = new Stage();
     stage.initModality(Modality.APPLICATION_MODAL);
     stage.setScene(scene);
@@ -57,8 +63,8 @@ public class SettingsView {
   private void createAndLayoutControls() {
     scene.getStylesheets().add(Main.currentStylesheet);
 
-
     VBox settingsTitleBox = new VBox();
+    settingsTitleBox.setPadding(new Insets(20));
     Text settingsTitle = new Text("Change settings!");
     settingsTitle.setId("DefaultText");
     settingsTitleBox.getChildren().add(settingsTitle);
@@ -113,18 +119,55 @@ public class SettingsView {
       }
     });
 
+    VBox settingsSoundSliderBox = new VBox();
+    Slider settingsSoundSlider = new Slider();
+    settingsSoundSlider.setMin(0);
+    settingsSoundSlider.setMax(100);
+    settingsSoundSlider.setValue(50);
+    settingsSoundSlider.setMaxWidth(284);
+    settingsSoundSliderBox.setAlignment(Pos.CENTER);
+
+    settingsSoundBox.getChildren().addAll(settingsSoundSlider);
+    settingsSoundSlider.addEventHandler(MouseEvent.MOUSE_DRAGGED, event -> MusicController.musicVolume(settingsSoundSlider.getValue()));
+    settingsSoundSlider.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> MusicController.musicVolume(settingsSoundSlider.getValue()));
+    settingsSoundSlider.setBlockIncrement(5);
+
+    //VBox for containing the different buttons and volume slider in settings
     VBox settingsListBox = new VBox();
     settingsListBox.setAlignment(Pos.CENTER);
     settingsListBox.setSpacing(30);
+    //Adding in game settings if opened from pathsView
+    if (isGameSettings) {
+      Button restartButton = new Button("Restart");
+      restartButton.setMaxWidth(200);
+      restartButton.setOnAction(event -> {
+        //TODO RESTART GAME
+        controller.restartGame();
+      });
+      Button mainMenuButton = new Button("Main menu");
+      mainMenuButton.setMaxWidth(200);
+      mainMenuButton.setOnAction(event -> {
+        //TODO MAIN MENU
+        controller.showMainMenu(superStage);
+        closeStage();
+      });
+      Separator separator = new Separator(Orientation.HORIZONTAL);
+      separator.setMaxWidth(350);
+      settingsListBox.getChildren().addAll(restartButton, mainMenuButton, separator);
+    }
+    //Adding general settings to list of buttons in settings
     settingsListBox.getChildren().addAll(changeThemeBox, settingsSoundSliderBox, settingsSoundBox);
 
+    //Creating exit button in its own VBox for alignment purposes
     VBox settingsExitBox = new VBox();
+    settingsExitBox.setPadding(new Insets(20));
     Button settingsExitButton = new Button("Close");
     settingsExitButton.setMaxWidth(200);
     settingsExitButton.setOnAction(event -> closeStage());
     settingsExitBox.getChildren().add(settingsExitButton);
     settingsExitBox.setAlignment(Pos.CENTER);
 
+    //Adding different boxes to the root of settings
     settingsRoot.setTop(settingsTitleBox);
     settingsRoot.setCenter(settingsListBox);
     settingsRoot.setBottom(settingsExitBox);

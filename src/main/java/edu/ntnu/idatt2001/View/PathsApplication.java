@@ -1,3 +1,4 @@
+/*
 package edu.ntnu.idatt2001.View;
 
 import edu.ntnu.idatt2001.Controller.BackgroundController;
@@ -168,7 +169,7 @@ public class PathsApplication  {
 
         //TEMPORARY CHOOSE ADVENTURE BUTTON
         entryWindowChooseAdventureButton.setOnAction(event -> {
-            if(FileHandler.openGame(stage)) {
+            if(FileHandler.openGame(stage, "TESTPLAYERNAME in pathsapplication")) {
                 entryWindow.setVisible(false);
                 pathsWindow.setVisible(true);
 
@@ -560,3 +561,4 @@ public class PathsApplication  {
     }
 
 }
+*/

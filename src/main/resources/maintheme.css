@@ -173,7 +173,18 @@ titleText{
     -fx-background-size: cover, auto;
 }
 
-.text-field{
+.text-field, .tooltip{
+    -fx-background-color: rgba(0, 0, 0, 0.7);
+    -fx-border-color: #FFFFFF;
+    -fx-border-width: 4px;
+    -fx-border-radius: 0px;
+    -fx-padding: 10px 20px 10px 20px;
+    -fx-text-fill: rgb(255,255,255);
+    -fx-background-radius: 5px;
+    -fx-font-family: 'Retro Gaming';
+}
+
+.check-box .box{
     -fx-background-color: rgba(0, 0, 0, 0.7);
     -fx-border-color: #FFFFFF;
     -fx-border-width: 4px;

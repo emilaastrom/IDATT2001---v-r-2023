@@ -12,10 +12,10 @@ public class Main extends Application {
   private static Scene scene;
   @Override
   public void start(Stage primaryStage) {
-    MainMenuController mainMenuController = new MainMenuController();
+    MainMenuController mainMenuController = new MainMenuController(primaryStage);
     MainMenuView view = new MainMenuView(mainMenuController,primaryStage);
 
-    scene = new Scene(view.getRoot(), 1000, 700);
+    scene = new Scene(view.getRoot(), 1250, 700);
     currentStylesheet = "file:src/main/resources/maintheme.css";
     scene.getStylesheets().add(currentStylesheet);
     primaryStage.setScene(scene);

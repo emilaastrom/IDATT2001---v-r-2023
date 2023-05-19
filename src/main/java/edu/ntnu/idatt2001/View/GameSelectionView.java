@@ -2,14 +2,15 @@ package edu.ntnu.idatt2001.View;
 
 import edu.ntnu.idatt2001.Controller.GameSelectionController;
 import edu.ntnu.idatt2001.Model.Game;
+import edu.ntnu.idatt2001.Model.Goal.Goal;
+import edu.ntnu.idatt2001.Model.Goal.GoldGoal;
+import edu.ntnu.idatt2001.Model.Goal.HealthGoal;
+import edu.ntnu.idatt2001.Model.Goal.ScoreGoal;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Separator;
-import javafx.scene.control.TextField;
-import javafx.scene.control.Tooltip;
+import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
@@ -22,6 +23,9 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.atomic.AtomicReference;
 
 import static edu.ntnu.idatt2001.Main.currentStylesheet;
@@ -35,6 +39,7 @@ public class GameSelectionView {
         root = new BorderPane();
         root.setId("GameSelectionRoot");
         game = Game.getInstance();
+        gameSelectionScene = new Scene(root, stage.getWidth(), stage.getHeight());
         this.controller = controller;
         this.stage = stage;
         createAndConfigurePane();
@@ -67,30 +72,29 @@ public class GameSelectionView {
             currentPathsFile.setId("DefaultText");
 
 
-        Button gameSelectionButton = new Button("Custom");
-            gameSelectionButton.setMaxWidth(150);
+        Button customGameButton = new Button("Custom");
+            customGameButton.setMaxWidth(150);
         Tooltip gameSelectionButtonToolTip = new Tooltip("Choose a .paths file from your computer");
             gameSelectionButtonToolTip.setShowDelay(Duration.millis(50));
-            gameSelectionButton.setTooltip(gameSelectionButtonToolTip);
+            customGameButton.setTooltip(gameSelectionButtonToolTip);
 
-        Button gameSelectionButton2 = new Button("Example");
-            gameSelectionButton2.setMaxWidth(150);
+        Button exampleGameButton = new Button("Example");
+            exampleGameButton.setMaxWidth(150);
         Tooltip gameSelectionButton2ToolTip = new Tooltip("Choose the provided example game \n(workaround for macOS v13+ issue with file chooser)");
             gameSelectionButton2ToolTip.setShowDelay(Duration.millis(50));
             gameSelectionButton2ToolTip.setWrapText(true);
-            gameSelectionButton2.setTooltip(gameSelectionButton2ToolTip);
+            exampleGameButton.setTooltip(gameSelectionButton2ToolTip);
         AtomicReference<Boolean> exampleGameChosen = new AtomicReference<>();
 
         HBox gameSelectionButtonsBox = new HBox();
             gameSelectionButtonsBox.setAlignment(Pos.CENTER);
             gameSelectionButtonsBox.setSpacing(10);
-            gameSelectionButtonsBox.getChildren().addAll(gameSelectionButton, gameSelectionButton2);
+            gameSelectionButtonsBox.getChildren().addAll(customGameButton, exampleGameButton);
 
         TextField nameField = new TextField();
         //Tooltip that shows when hovering over the nameField, explaining field use and max length
         Tooltip nameFieldToolTip = new Tooltip("Main character name - max 20 characters");
             nameFieldToolTip.setShowDelay(Duration.millis(50));
-            nameField.setTooltip(nameFieldToolTip);
             nameField.setTooltip(nameFieldToolTip);
             nameField.setId("textField");
             nameField.setPromptText("CHARACTER NAME");
@@ -101,6 +105,88 @@ public class GameSelectionView {
             if (nameField.getText().length() >= 20) event.consume();
         });
 
+        HBox scoreGoalBox = new HBox();
+            scoreGoalBox.setAlignment(Pos.CENTER);
+            scoreGoalBox.setSpacing(10);
+        CheckBox enableScoreGoal = new CheckBox();
+        enableScoreGoal.setSelected(false);
+        enableScoreGoal.setPadding(new Insets(0, 0, 0, 10));
+        enableScoreGoal.setTooltip(new Tooltip("Enable or disable the score goal"));
+        Tooltip enableScoreGoalToolTip = new Tooltip("Enable or disable the score goal");
+        enableScoreGoalToolTip.setShowDelay(Duration.millis(50));
+        enableScoreGoal.setTooltip(enableScoreGoalToolTip);
+
+        TextField scoreGoalField = new TextField();
+        scoreGoalField.setPromptText("SCORE GOAL");
+        scoreGoalField.setMaxWidth(250);
+        scoreGoalField.setAlignment(Pos.CENTER);
+        scoreGoalField.setDisable(true);
+        scoreGoalField.addEventHandler(KeyEvent.KEY_TYPED, event -> {
+            if (!event.getCharacter().matches("[0-9]")) event.consume();
+        });
+
+        enableScoreGoal.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            scoreGoalField.setDisable(!enableScoreGoal.isSelected());
+        });
+
+        scoreGoalBox.getChildren().addAll(enableScoreGoal, scoreGoalField);
+
+        HBox healthGoalBox = new HBox();
+        healthGoalBox.setAlignment(Pos.CENTER);
+        healthGoalBox.setSpacing(10);
+        CheckBox enableHealthGoal = new CheckBox();
+        enableHealthGoal.setSelected(false);
+        enableHealthGoal.setPadding(new Insets(0, 0, 0, 10));
+        enableHealthGoal.setTooltip(new Tooltip("Enable or disable the health goal"));
+        Tooltip enableHealthGoalToolTip = new Tooltip("Enable or disable the health goal");
+        enableHealthGoalToolTip.setShowDelay(Duration.millis(50));
+        enableHealthGoal.setTooltip(enableHealthGoalToolTip);
+
+        TextField healthGoalField = new TextField();
+        healthGoalField.setPromptText("HEALTH GOAL");
+        healthGoalField.setMaxWidth(250);
+        healthGoalField.setAlignment(Pos.CENTER);
+        healthGoalField.setDisable(true);
+        healthGoalField.addEventHandler(KeyEvent.KEY_TYPED, event -> {
+            if (!event.getCharacter().matches("[0-9]")) event.consume();
+        });
+
+        enableHealthGoal.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            healthGoalField.setDisable(!enableHealthGoal.isSelected());
+        });
+        healthGoalBox.getChildren().addAll(enableHealthGoal, healthGoalField);
+
+
+        HBox goldGoalBox = new HBox();
+        goldGoalBox.setAlignment(Pos.CENTER);
+        goldGoalBox.setSpacing(10);
+        CheckBox enableGoldGoal = new CheckBox();
+        enableGoldGoal.setSelected(false);
+        enableGoldGoal.setPadding(new Insets(0, 0, 0, 10));
+        Tooltip enableGoldGoalToolTip = new Tooltip("Enable or disable the gold goal");
+        enableGoldGoalToolTip.setShowDelay(Duration.millis(50));
+        enableGoldGoal.setTooltip(enableGoldGoalToolTip);
+
+        TextField goldGoalField = new TextField();
+        goldGoalField.setPromptText("GOLD GOAL");
+        goldGoalField.setMaxWidth(250);
+        goldGoalField.setAlignment(Pos.CENTER);
+        goldGoalField.setDisable(true);
+        goldGoalField.addEventHandler(KeyEvent.KEY_TYPED, event -> {
+            if (!event.getCharacter().matches("[0-9]")) event.consume();
+        });
+
+        goldGoalBox.getChildren().addAll(enableGoldGoal, goldGoalField);
+
+
+        enableGoldGoal.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            goldGoalField.setDisable(!enableGoldGoal.isSelected());
+        });
+
+        VBox goalBox = new VBox();
+        goalBox.setAlignment(Pos.CENTER);
+        goalBox.setSpacing(5);
+        goalBox.getChildren().addAll(scoreGoalBox, healthGoalBox, goldGoalBox);
 
         Separator gameSelectionButtonsSeparator = new Separator(Orientation.HORIZONTAL);
             gameSelectionButtonsSeparator.setMaxWidth(600);
@@ -109,10 +195,21 @@ public class GameSelectionView {
         Button loadGameButton = new Button("Load game");
             loadGameButton.setId("LoadGameButton");
             loadGameButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+                List<Goal> goalList = new ArrayList<>();
+                if (enableGoldGoal.isSelected()){
+                    goalList.add(new GoldGoal(Integer.parseInt(goldGoalField.getText())));
+                }
+                if (enableHealthGoal.isSelected()){
+                    goalList.add(new HealthGoal(Integer.parseInt(healthGoalField.getText())));
+                }
+                if (enableScoreGoal.isSelected()){
+                    goalList.add(new ScoreGoal(Integer.parseInt(scoreGoalField.getText())));
+                }
+                //Loading either SELECTED GAME or EXAMPLE GAME
                 if (exampleGameChosen.get().equals(false)){
-                    controller.chooseGameFile(stage);
+                    controller.chooseGameFile(stage, nameField.getText(), goalList);
                 } else {
-                    controller.loadExampleFile(stage, String.valueOf(pathToGameFile));
+                    controller.loadExampleFile(stage, String.valueOf(pathToGameFile), nameField.getText(), goalList);
                 }
             });
         VBox loadGameBox = new VBox();
@@ -124,7 +221,9 @@ public class GameSelectionView {
                 currentPathsFile,
                 gameSelectionButtonsBox,
                 gameSelectionButtonsSeparator,
-                nameField);
+                nameField,
+                goalBox
+                );
             root.setBottom(loadGameBox);
             gameSelectionBox.setSpacing(50);
             root.setCenter(gameSelectionBox);
@@ -137,7 +236,7 @@ public class GameSelectionView {
             fileChooser.setInitialDirectory(new File("src/main/resources"));
 
     //        Story[] myStory = new Story[1];
-            gameSelectionButton.setOnAction(event -> {
+            customGameButton.setOnAction(event -> {
                 exampleGameChosen.set(false);
                 File selectedFile = fileChooser.showOpenDialog(stage);
     //            myStory[0] = FileHandler.readFile(selectedFile.getAbsolutePath());
@@ -146,7 +245,7 @@ public class GameSelectionView {
                 }
         });
 
-            gameSelectionButton2.setOnAction(event -> {
+            exampleGameButton.setOnAction(event -> {
             currentPathsFile.setText("Current file: " + "\nsrc/main/resources/exampleStory.paths");
             pathToGameFile.set("src/main/resources/exampleStory.paths");
             exampleGameChosen.set(true);

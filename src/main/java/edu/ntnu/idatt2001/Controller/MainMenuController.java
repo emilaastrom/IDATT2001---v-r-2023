@@ -11,12 +11,14 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 public class MainMenuController {
-  public MainMenuController() {
+  Stage stage;
+  public MainMenuController(Stage stage) {
+    this.stage = stage;
   }
 
   public void chooseAdventure(Stage stage) {
-    if(FileHandler.openGame(stage)) {
-      PathsView pathsView = new PathsView(new PathsController(), stage);
+    if(FileHandler.openGame(stage, "Player", null)) {
+      PathsView pathsView = new PathsView(new PathsController(stage), stage);
       Main.changeScene(pathsView.getRoot(), stage);
     }
   }
@@ -27,7 +29,7 @@ public class MainMenuController {
   }
 
   public void showSettings(Pane root, BorderPane dimmer) {
-    SettingsView settingsView = new SettingsView(new SettingsController(), root, dimmer);
+    SettingsView settingsView = new SettingsView(new SettingsController(), root, stage, dimmer, false);
     dimmer.setVisible(true);
   }
 
