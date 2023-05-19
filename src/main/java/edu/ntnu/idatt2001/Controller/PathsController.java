@@ -42,7 +42,7 @@ public class PathsController {
   }
 
   public void showSettings(Pane root, BorderPane dimmer) {
-    SettingsView settingsView = new SettingsView(new SettingsController(), root, dimmer);
+    SettingsView settingsView = new SettingsView(new SettingsController(), root, stage, dimmer, true);
     dimmer.setVisible(true);
   }
 
