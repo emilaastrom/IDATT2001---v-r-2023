@@ -119,19 +119,6 @@ public class SettingsView {
       }
     });
 
-    VBox settingsSoundSliderBox = new VBox();
-    Slider settingsSoundSlider = new Slider();
-    settingsSoundSlider.setMin(0);
-    settingsSoundSlider.setMax(100);
-    settingsSoundSlider.setValue(50);
-    settingsSoundSlider.setMaxWidth(284);
-    settingsSoundSliderBox.setAlignment(Pos.CENTER);
-
-    settingsSoundBox.getChildren().addAll(settingsSoundSlider);
-    settingsSoundSlider.addEventHandler(MouseEvent.MOUSE_DRAGGED, event -> MusicController.musicVolume(settingsSoundSlider.getValue()));
-    settingsSoundSlider.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> MusicController.musicVolume(settingsSoundSlider.getValue()));
-    settingsSoundSlider.setBlockIncrement(5);
-
     //VBox for containing the different buttons and volume slider in settings
     VBox settingsListBox = new VBox();
     settingsListBox.setAlignment(Pos.CENTER);
