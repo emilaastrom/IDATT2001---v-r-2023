@@ -1,7 +1,9 @@
 package edu.ntnu.idatt2001.Model;
 
+import edu.ntnu.idatt2001.Controller.UserInformer;
 import edu.ntnu.idatt2001.Model.Goal.Goal;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,6 +15,8 @@ public class Game {
     private Player player = new Player.PlayerBuilder("").build();
     private Story story = new Story("", new Passage("", ""));
     private List<Goal> goals = new ArrayList<>();
+    private final ArrayList<Passage> passageHistory = new ArrayList<>();
+    private final ArrayList<Link> linkHistory = new ArrayList<>();
 
 
     public Game(){
@@ -77,7 +81,19 @@ public class Game {
      * @param link the link
      */
     public Passage go(Link link){
+        passageHistory.add(story.getPassage(link));
+        linkHistory.add(link);
         return story.getPassage(link);
+    }
+
+    public void goBack(){
+        if(passageHistory.size() > 0){
+            go(linkHistory.get(linkHistory.size()-1));
+            linkHistory.remove(linkHistory.size()-1);
+            passageHistory.remove(passageHistory.size()-1);
+        } else {
+            UserInformer.errorWarning("Error", "No passages to go back to");
+        }
     }
 
 }

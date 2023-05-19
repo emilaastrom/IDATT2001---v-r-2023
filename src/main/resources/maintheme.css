@@ -116,7 +116,6 @@
 }
 
 #mainMenuButton{
-    /* Changes here only affect the buttons on the main menu, using their ID */
 }
 
 #CurrentThemeBox{
@@ -166,13 +165,25 @@ titleText{
     -fx-background-color: rgba(255, 0, 0, 0.7);
 }
 
-#SettingsRoot, #inventoryRoot, #SettingsRoot, #ExitConfirmationRoot{
+#SettingsRoot, #inventoryRoot, #SettingsRoot, #ExitConfirmationRoot, #GameSelectionRoot{
     -fx-border-color: #FFFFFF;
     -fx-border-width: 4px;
     -fx-background-image: url("file:src/main/resources/backgroundsettings.png");
     -fx-background-repeat: no-repeat no-repeat;
     -fx-background-size: cover, auto;
 }
+
+.text-field{
+    -fx-background-color: rgba(0, 0, 0, 0.7);
+    -fx-border-color: #FFFFFF;
+    -fx-border-width: 4px;
+    -fx-border-radius: 0px;
+    -fx-padding: 10px 20px 10px 20px;
+    -fx-text-fill: rgb(255,255,255);
+    -fx-background-radius: 5px;
+    -fx-font-family: 'Retro Gaming';
+}
+
 #chestPane:hover{
     -fx-background-color: rgba(0, 0, 0, 0.7);
     -fx-cursor: OPEN_HAND;

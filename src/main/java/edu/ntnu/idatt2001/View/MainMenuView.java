@@ -1,6 +1,7 @@
 package edu.ntnu.idatt2001.View;
 
 import edu.ntnu.idatt2001.Controller.BackgroundController;
+import edu.ntnu.idatt2001.Controller.GameSelectionController;
 import edu.ntnu.idatt2001.Controller.MainMenuController;
 import edu.ntnu.idatt2001.Controller.MusicController;
 import javafx.scene.Parent;
@@ -27,7 +28,6 @@ public class MainMenuView {
   private Image entryWindowLogo = new Image("file:src/main/resources/logo.png");
   private VBox entryWindowVBox = new VBox();
   private Button entryWindowChooseAdventureButton = new Button("CHOOSE YOUR ADVENTURE");
-  private Button entryWindowOpenAdventureButton = new Button("PRESELECTED ADVENTURE");
   private Button settingsButton = new Button("SETTINGS");
   private Button exitGameButton = new Button("EXIT GAME");
   private BorderPane entryWindow = new BorderPane();
@@ -66,7 +66,7 @@ public class MainMenuView {
 
     entryWindowLogoStackPane.getChildren().add(new javafx.scene.image.ImageView(entryWindowLogo));
 
-    entryWindowVBox.getChildren().addAll(entryWindowLogoStackPane, entryWindowChooseAdventureButton, entryWindowOpenAdventureButton, settingsButton, exitGameButton);
+    entryWindowVBox.getChildren().addAll(entryWindowLogoStackPane, entryWindowChooseAdventureButton, settingsButton, exitGameButton);
 
     entryWindow.setVisible(true);
     entryWindow.setCenter(entryWindowVBox);
@@ -78,14 +78,9 @@ public class MainMenuView {
 
   public void createAndLayoutControls(){
     entryWindowChooseAdventureButton.setId("mainMenuButton");
-    entryWindowChooseAdventureButton.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> controller.chooseAdventure(stage));
-
-    entryWindowOpenAdventureButton.setId("mainMenuButton");
-
+    entryWindowChooseAdventureButton.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> new GameSelectionView(new GameSelectionController(), stage));
     settingsButton.setId("mainMenuButton");
     settingsButton.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> controller.showSettings(mainMenuRoot, mainWindowDimmer));
-
-    exitGameButton.setId("mainMenuButton");
   }
 
   public void updateControllerFromListeners(){

@@ -183,13 +183,12 @@ public class FileHandler {
             return story;
         }
 
-    public static void openStaticGame(Stage stage){
-        File selectedFile = new File("src/main/resources/exampleStory.paths");
-        String path = selectedFile.getAbsolutePath();
+    public static void openStaticGame(Stage stage, String path){
+        File selectedFile = new File(path);
+        String absolutePath = selectedFile.getAbsolutePath();
         try{
-            Story story = FileHandler.readFile(path);
+            Story story = FileHandler.readFile(absolutePath);
             try{
-                String inputValue = JOptionPane.showInputDialog("Please input a name");
                 Player player = new Player.PlayerBuilder("Ola Nordmann").build();
                 List<Goal> goals = new ArrayList<>();
                 Game.getInstance().setPlayer(player);
