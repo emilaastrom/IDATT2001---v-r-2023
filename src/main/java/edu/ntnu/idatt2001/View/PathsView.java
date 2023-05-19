@@ -58,8 +58,6 @@ public class PathsView {
     this.controller = controller;
     this.stage = stage;
 
-
-
     createAndConfigurePane();
 
     createAndLayoutControls();
@@ -222,7 +220,9 @@ public class PathsView {
       controller.hideInventory(pathsDimmer);
     });
 
-    helpPane.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> controller.showHelp());
+    helpPane.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+      undoMove();
+    });
 
     settingsPane.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> controller.showSettings(pathsRoot, pathsDimmer));
   }
@@ -273,13 +273,21 @@ public class PathsView {
         }
       }
       updateBottomBox();
-      currentPassage = Game.getInstance().getStory().getPassage(link);
+      currentPassage = game.go(link);
       currentPassageVBox = showPassages(currentPassage, stage);
       pathsWindowCenterBox.setCenter(currentPassageVBox);
       stage.show();
     });
     linkButton.setWrapText(true);
     return linkButton;
+  }
+
+  public void undoMove(){
+    updateBottomBox();
+    currentPassage = game.goSilent(game.goBack());
+    currentPassageVBox = showPassages(currentPassage, stage);
+    pathsWindowCenterBox.setCenter(currentPassageVBox);
+    stage.show();
   }
 
   }
