@@ -33,7 +33,7 @@ import java.util.Objects;
 import java.util.concurrent.atomic.AtomicReference;
 
 
-public class PathsApplication extends Application {
+public class PathsApplication  {
     static Stage settingsStage;
     static BorderPane settingsRoot;
     static Stage gameSelectionStage;
@@ -62,15 +62,7 @@ public class PathsApplication extends Application {
     static ImageView pathsWindowBottomBoxHBox2ImageViewHelp = new ImageView("file:src/main/resources/help.png");
     static ImageView pathsWindowBottomBoxHBox2ImageViewSettings = new ImageView("file:src/main/resources/settings.png");
 
-    public static void main(String[] args) {
-        launch(args);
-    }
 
-    @Override
-    public void start(Stage stage) {
-        MusicController.playMusic();
-        showMainWindow(stage);
-    }
 
     public static void showMainWindow(Stage stage){
         //STACKPANE FOR DIFFERENT WINDOWS
@@ -295,7 +287,6 @@ public class PathsApplication extends Application {
                 MusicController.pauseMusic();
             } else {
                 muteButton.setText("Stop music");
-                MusicController.playMusic();
             }
         });
 
@@ -306,13 +297,6 @@ public class PathsApplication extends Application {
         settingsSoundSlider.setValue(50);
         settingsSoundSlider.setMaxWidth(284);
         settingsSoundSliderBox.setAlignment(Pos.CENTER);
-
-        settingsSoundBox.getChildren().addAll(settingsSoundSlider);
-        settingsSoundSlider.addEventHandler(MouseEvent.MOUSE_DRAGGED, event -> {
-            MusicController.musicVolume(settingsSoundSlider.getValue());
-//            System.out.println(settingsSoundSlider.getValue());
-        });
-
 
 
         VBox settingsListBox = new VBox();

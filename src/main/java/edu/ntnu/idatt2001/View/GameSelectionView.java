@@ -29,14 +29,12 @@ import static edu.ntnu.idatt2001.Main.currentStylesheet;
 public class GameSelectionView {
     BorderPane root;
     Game game;
-    Scene gameSelectionScene;
     GameSelectionController controller;
     Stage stage;
-    GameSelectionView(GameSelectionController controller, Stage stage) {
+    public GameSelectionView(GameSelectionController controller, Stage stage) {
         root = new BorderPane();
         root.setId("GameSelectionRoot");
         game = Game.getInstance();
-        gameSelectionScene = new Scene(root, stage.getWidth(), stage.getWidth());
         this.controller = controller;
         this.stage = stage;
         createAndConfigurePane();
@@ -45,9 +43,11 @@ public class GameSelectionView {
         observeModelAndUpdateControls();
     }
 
-    private void createAndConfigurePane() {
+    public BorderPane getRoot() {
+        return root;
+    }
 
-        stage.setScene(gameSelectionScene);
+    private void createAndConfigurePane() {
 
         VBox gameSelectionTitleBox = new VBox();
         AtomicReference<String> pathToGameFile = new AtomicReference<>("");
@@ -128,7 +128,6 @@ public class GameSelectionView {
             root.setBottom(loadGameBox);
             gameSelectionBox.setSpacing(50);
             root.setCenter(gameSelectionBox);
-            gameSelectionScene.getStylesheets().add(currentStylesheet);
 
         FileChooser fileChooser = new FileChooser();
             fileChooser.setTitle("Choose a .paths file");
