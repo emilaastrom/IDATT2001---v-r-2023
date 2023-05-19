@@ -104,7 +104,10 @@
     -fx-background-size: cover, auto;
     -fx-background-position: center center;
 }
-
+.dialog-pane{
+    -fx-border-color:black;
+    -fx-border-width:2.0px;
+}
 .background_forest{
     -fx-background-image: url("../resources/backgroundforest.png");
 }
@@ -165,9 +168,29 @@ titleText{
     -fx-background-color: rgba(255, 0, 0, 0.7);
 }
 
-#SettingsRoot, #inventoryRoot, #SettingsRoot, #ExitConfirmationRoot, #GameSelectionRoot{
+#SettingsRoot, #inventoryRoot, #SettingsRoot, #ExitConfirmationRoot, #GameSelectionRoot, #DialogPane{
     -fx-border-color: #FFFFFF;
     -fx-border-width: 4px;
+    -fx-background-image: url("file:src/main/resources/backgroundsettings.png");
+    -fx-background-repeat: no-repeat no-repeat;
+    -fx-background-size: cover, auto;
+}
+.dialog-pane > *.content.label{
+    -fx-alignment: center;
+    -fx-wrap-text: true;
+    -fx-padding: 50, 0, 50, 0;
+}
+
+.dialog-pane:header *.header-panel *.label{
+    -fx-alignment: center;
+}
+
+.dialog-pane > *.button-bar *.button{
+    -fx-alignment: center;
+    -fx-pref-width: 500;
+}
+
+.dialog-pane:header *.header-panel{
     -fx-background-image: url("file:src/main/resources/backgroundsettings.png");
     -fx-background-repeat: no-repeat no-repeat;
     -fx-background-size: cover, auto;
@@ -200,7 +223,7 @@ titleText{
     -fx-cursor: OPEN_HAND;
 }
 
-#settingsPane:hover, #helpPane:hover {
+#settingsPane:hover, #undoPane:hover {
     -fx-background-color: rgba(130, 178, 106, 0.7);
     -fx-cursor: hand;
 }

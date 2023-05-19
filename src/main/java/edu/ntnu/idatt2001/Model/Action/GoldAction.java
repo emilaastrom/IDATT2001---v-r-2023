@@ -31,5 +31,10 @@ public class GoldAction implements Action {
         player.addGold(gold);
     }
 
+    @Override
+    public void undo(Player player){
+        player.addGold(-gold);
+    }
+
 
 }

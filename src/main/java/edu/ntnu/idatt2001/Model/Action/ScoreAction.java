@@ -31,4 +31,9 @@ public class ScoreAction implements Action {
         player.addScore(points);
     }
 
+    @Override
+    public void undo(Player player){
+        player.addScore(-points);
+    }
+
 }
