@@ -2,6 +2,7 @@ package edu.ntnu.idatt2001.Controller;
 
 import edu.ntnu.idatt2001.Main;
 import edu.ntnu.idatt2001.Model.FileHandler;
+import edu.ntnu.idatt2001.View.ExitConfirmationView;
 import edu.ntnu.idatt2001.View.GameSelectionView;
 import edu.ntnu.idatt2001.View.PathsView;
 import edu.ntnu.idatt2001.View.SettingsView;
@@ -30,5 +31,8 @@ public class MainMenuController {
     dimmer.setVisible(true);
   }
 
-
+  public void showExitConfirmation(BorderPane dimmer) {
+    ExitConfirmationView exitConfirmationView = new ExitConfirmationView(dimmer);
+    exitConfirmationView.ExitConfirmation();
+  }
 }
