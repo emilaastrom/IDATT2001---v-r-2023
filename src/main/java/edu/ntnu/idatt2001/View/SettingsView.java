@@ -19,6 +19,8 @@ import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
 
 public class SettingsView {
 
