@@ -39,7 +39,6 @@ public class GameSelectionView {
         root = new BorderPane();
         root.setId("GameSelectionRoot");
         game = Game.getInstance();
-        gameSelectionScene = new Scene(root, stage.getWidth(), stage.getHeight());
         this.controller = controller;
         this.stage = stage;
         createAndConfigurePane();
@@ -196,13 +195,13 @@ public class GameSelectionView {
             loadGameButton.setId("LoadGameButton");
             loadGameButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
                 List<Goal> goalList = new ArrayList<>();
-                if (enableGoldGoal.isSelected()){
+                if (enableGoldGoal.isSelected() && goldGoalField.getText().length() > 0){
                     goalList.add(new GoldGoal(Integer.parseInt(goldGoalField.getText())));
                 }
-                if (enableHealthGoal.isSelected()){
+                if (enableHealthGoal.isSelected() && healthGoalField.getText().length() > 0){
                     goalList.add(new HealthGoal(Integer.parseInt(healthGoalField.getText())));
                 }
-                if (enableScoreGoal.isSelected()){
+                if (enableScoreGoal.isSelected() && scoreGoalField.getText().length() > 0){
                     goalList.add(new ScoreGoal(Integer.parseInt(scoreGoalField.getText())));
                 }
                 //Loading either SELECTED GAME or EXAMPLE GAME
