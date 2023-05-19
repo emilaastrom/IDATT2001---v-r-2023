@@ -26,8 +26,10 @@ import java.util.List;
 
 public class PathsController {
   InventoryView inventoryView = new InventoryView(new InventoryController());
+  Stage stage;
 
-  public PathsController() {
+  public PathsController(Stage stage) {
+    this.stage = stage;
   }
 
   public void showInventory(double width, double height, BorderPane dimmer) {

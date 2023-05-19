@@ -15,8 +15,8 @@ public class MainMenuController {
   }
 
   public void chooseAdventure(Stage stage) {
-    if(FileHandler.openGame(stage)) {
-      PathsView pathsView = new PathsView(new PathsController(), stage);
+    if(FileHandler.openGame(stage, "Player", null)) {
+      PathsView pathsView = new PathsView(new PathsController(stage), stage);
       Main.changeScene(pathsView.getRoot(), stage);
     }
   }

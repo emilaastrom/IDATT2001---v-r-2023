@@ -12,8 +12,8 @@ public class GameSelectionController {
 
     public void chooseGameFile(Stage stage, String playerName, List<Goal> playerGoals){
         try{
-            if(FileHandler.openGame(stage)) {
-                PathsView pathsView = new PathsView(new PathsController(), stage);
+            if(FileHandler.openGame(stage, playerName, playerGoals)) {
+                PathsView pathsView = new PathsView(new PathsController(stage), stage);
                 Main.changeScene(pathsView.getRoot(), stage);
             }
         } catch (Exception e) {

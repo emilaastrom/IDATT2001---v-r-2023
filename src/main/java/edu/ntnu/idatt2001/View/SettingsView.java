@@ -27,6 +27,7 @@ public class SettingsView {
   private Stage stage;
   private Scene scene;
   private Pane superRoot;
+  private Stage superStage;
   private BorderPane dimmer;
   private Boolean isGameSettings;
 
@@ -36,6 +37,7 @@ public class SettingsView {
     this.isGameSettings = isGameSettings;
     this.controller = controller;
     this.superRoot = superRoot;
+    this.superStage = superStage;
     this.dimmer = dimmer;
 
     createAndConfigureStage();
