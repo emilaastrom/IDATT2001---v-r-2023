@@ -183,17 +183,15 @@ public class FileHandler {
             return story;
         }
 
-    public static void openStaticGame(Stage stage, String path){
+    public static void openStaticGame(Stage stage, String path, String playerName, List<Goal> playerGoals){
         File selectedFile = new File(path);
         String absolutePath = selectedFile.getAbsolutePath();
         try{
             Story story = FileHandler.readFile(absolutePath);
             try{
-                Player player = new Player.PlayerBuilder("Ola Nordmann").build();
-                List<Goal> goals = new ArrayList<>();
-                Game.getInstance().setPlayer(player);
+                Game.getInstance().setPlayer(new Player.PlayerBuilder(playerName).build());
                 Game.getInstance().setStory(story);
-                Game.getInstance().setGoals(goals);
+                Game.getInstance().setGoals(playerGoals);
             }
             catch (Exception e){
                 e.printStackTrace();
@@ -203,7 +201,7 @@ public class FileHandler {
         }
     }
 
-    public static boolean openGame(Stage stage){
+    public static boolean openGame(Stage stage, String playerName, List<Goal> playerGoals){
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Open Resource File");
         fileChooser.getExtensionFilters().addAll(
@@ -215,11 +213,10 @@ public class FileHandler {
                 Story story = FileHandler.readFile(path);
                 try{
                 String inputValue = JOptionPane.showInputDialog("Please input a name");
-                Player player = new Player.PlayerBuilder(inputValue).build();
-                List<Goal> goals = new ArrayList<>();
+                Player player = new Player.PlayerBuilder(playerName).build();
                 Game.getInstance().setPlayer(player);
                 Game.getInstance().setStory(story);
-                Game.getInstance().setGoals(goals);
+                Game.getInstance().setGoals(playerGoals);
                 return true;}
                 catch (Exception e){
                     return false;
