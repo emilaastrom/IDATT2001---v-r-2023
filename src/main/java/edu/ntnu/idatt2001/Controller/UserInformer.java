@@ -3,6 +3,10 @@ package edu.ntnu.idatt2001.Controller;
 import java.util.Optional;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.DialogPane;
+import javafx.stage.Modality;
+
+import static edu.ntnu.idatt2001.Main.currentStylesheet;
 
 /**
  * Is responsible for informing the user of various important things.
@@ -24,9 +28,17 @@ public class UserInformer {
     }
 
     Alert alert = new Alert(Alert.AlertType.ERROR);
-    alert.setTitle("En feil oppstod");
+    alert.setTitle("An error has occurred");
     alert.setHeaderText(title);
     alert.setContentText(body);
+    alert.initModality(Modality.APPLICATION_MODAL);
+
+    DialogPane dialogPane = alert.getDialogPane();
+    dialogPane.setMinWidth(500);
+    dialogPane.setMaxWidth(500);
+    dialogPane.getStylesheets().add(currentStylesheet);
+    dialogPane.setId("DialogPane");
+    dialogPane.getStyleClass().add("DialogPane");
 
     alert.showAndWait();
   }

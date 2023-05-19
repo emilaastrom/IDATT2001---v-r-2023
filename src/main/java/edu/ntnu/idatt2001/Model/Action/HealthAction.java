@@ -31,4 +31,9 @@ public class HealthAction implements Action {
         player.addHealth(health);
     }
 
+    @Override
+    public void undo(Player player){
+        player.addHealth(-health);
+    }
+
 }
