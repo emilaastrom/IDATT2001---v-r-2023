@@ -4,6 +4,8 @@ import edu.ntnu.idatt2001.Controller.BackgroundController;
 import edu.ntnu.idatt2001.Controller.MusicController;
 import edu.ntnu.idatt2001.Controller.SettingsController;
 import edu.ntnu.idatt2001.Main;
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -93,6 +95,14 @@ public class SettingsView {
     Button muteButton = new Button("Stop music");
     muteButton.setMaxWidth(284);
     settingsSoundBox.getChildren().addAll(muteButton);
+
+    VBox settingsSoundSliderBox = new VBox();
+    Slider settingsSoundSlider = MusicController.getVolumeSlider();
+    settingsSoundSlider.setMaxWidth(284);
+    settingsSoundSliderBox.setAlignment(Pos.CENTER);
+
+    settingsSoundBox.getChildren().addAll(settingsSoundSlider);
+
     muteButton.setOnAction(event -> {
       if (muteButton.getText().equals("Stop music")) {
         muteButton.setText("Play music");
@@ -102,19 +112,6 @@ public class SettingsView {
         MusicController.playMusic();
       }
     });
-
-    VBox settingsSoundSliderBox = new VBox();
-    Slider settingsSoundSlider = new Slider();
-    settingsSoundSlider.setMin(0);
-    settingsSoundSlider.setMax(100);
-    settingsSoundSlider.setValue(50);
-    settingsSoundSlider.setMaxWidth(284);
-    settingsSoundSliderBox.setAlignment(Pos.CENTER);
-
-    settingsSoundBox.getChildren().addAll(settingsSoundSlider);
-    settingsSoundSlider.addEventHandler(MouseEvent.MOUSE_DRAGGED, event -> MusicController.musicVolume(settingsSoundSlider.getValue()));
-    settingsSoundSlider.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> MusicController.musicVolume(settingsSoundSlider.getValue()));
-    settingsSoundSlider.setBlockIncrement(5);
 
     VBox settingsListBox = new VBox();
     settingsListBox.setAlignment(Pos.CENTER);
