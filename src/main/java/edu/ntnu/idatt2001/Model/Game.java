@@ -22,8 +22,7 @@ public class Game {
     public Game(){
     }
 
-    public static Game getInstance() {return instance;
-    }
+    public static Game getInstance() {return instance;}
 
     /**
      * Gets player.
@@ -86,14 +85,28 @@ public class Game {
         return story.getPassage(link);
     }
 
-    public void goBack(){
-        if(passageHistory.size() > 0){
-            go(linkHistory.get(linkHistory.size()-1));
+    public Passage goSilent(Link link){
+        return story.getPassage(link);
+    }
+
+    public Link goBack(){
+        if(linkHistory.size() > 1){
+            Link link = linkHistory.get(linkHistory.size()-2);
+            Passage passage = passageHistory.get(passageHistory.size()-1);
             linkHistory.remove(linkHistory.size()-1);
-            passageHistory.remove(passageHistory.size()-1);
+//            passageHistory.remove(passageHistory.size()-1);
+            return link;
         } else {
             UserInformer.errorWarning("Error", "No passages to go back to");
+            return null;
         }
     }
 
+    public void restartGame() {
+        //TODO restartGame() function
+
+        passageHistory.clear();
+        linkHistory.clear();
+        begin();
+    }
 }
