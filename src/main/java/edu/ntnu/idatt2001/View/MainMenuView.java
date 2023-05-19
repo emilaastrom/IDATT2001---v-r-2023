@@ -81,6 +81,8 @@ public class MainMenuView {
     entryWindowChooseAdventureButton.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> controller.showGameSelection(stage));
     settingsButton.setId("mainMenuButton");
     settingsButton.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> controller.showSettings(mainMenuRoot, mainWindowDimmer));
+    exitGameButton.setId("mainMenuButton");
+    exitGameButton.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> controller.showExitConfirmation(mainWindowDimmer));
   }
 
   public void updateControllerFromListeners(){
