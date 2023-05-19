@@ -35,12 +35,11 @@ public class GameSelectionView {
     Game game;
     GameSelectionController controller;
     Stage stage;
-    public GameSelectionView(GameSelectionController controller, Stage stage) {
+    public GameSelectionView(GameSelectionController controller) {
+        this.controller = controller;
         root = new BorderPane();
         root.setId("GameSelectionRoot");
         game = Game.getInstance();
-        this.controller = controller;
-        this.stage = stage;
         createAndConfigurePane();
         createAndLayoutControls();
         updateControllerFromListeners();

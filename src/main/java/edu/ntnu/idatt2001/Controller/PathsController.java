@@ -26,11 +26,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PathsController {
-  InventoryView inventoryView = new InventoryView(new InventoryController());
-  Stage stage;
+  InventoryView inventoryView;
 
-  public PathsController(Stage stage) {
-    this.stage = stage;
+  public PathsController(InventoryView InventoryView) {
+    this.inventoryView = InventoryView;
   }
 
   public void showInventory(double width, double height, BorderPane dimmer) {
@@ -44,9 +43,8 @@ public class PathsController {
   public void showHelp() {
   }
 
-  public void showSettings(Pane root, BorderPane dimmer) {
-    SettingsView settingsView = new SettingsView(new SettingsController(), root, stage, dimmer, true);
-    dimmer.setVisible(true);
+  public void showSettings() {
+    Main.showGameSettings();
   }
 
   public Story getStory(){

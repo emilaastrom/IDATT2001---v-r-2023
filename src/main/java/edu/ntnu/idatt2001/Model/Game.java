@@ -104,9 +104,8 @@ public class Game {
 
     public void restartGame() {
         //TODO restartGame() function
-
+        Game.getInstance().setPlayer(new Player.PlayerBuilder(Game.getInstance().getPlayer().getName()).build());
         passageHistory.clear();
         linkHistory.clear();
-        begin();
     }
 }
