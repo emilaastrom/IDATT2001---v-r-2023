@@ -11,7 +11,7 @@ import java.util.Objects;
 public class Passage {
   private final String title;
   private final String content;
-  private List<Link> links;
+  private final List<Link> links;
 
   /**
    * Instantiates a new Passage.
@@ -97,10 +97,6 @@ public class Passage {
     links.add(link);
   }
 
-  public boolean addLink(Link link, Action action) {
-    links.add(link);
-    return true;
-  }
 
   /**
    * Has links.
@@ -108,11 +104,7 @@ public class Passage {
    * @return the boolean
    */
   public boolean hasLinks() {
-    if (links.isEmpty()) {
-      return false;
-    } else {
-      return true;
-    }
+    return !links.isEmpty();
   }
 
   @Override

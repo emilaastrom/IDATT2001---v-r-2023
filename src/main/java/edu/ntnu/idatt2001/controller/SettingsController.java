@@ -8,7 +8,7 @@ import javafx.scene.layout.Pane;
  * Controller for SettingsView.
  */
 public class SettingsController {
-  private Pane mainMenuRoot;
+  private final Pane mainMenuRoot;
 
   public SettingsController(Pane mainMenuRoot) {
     this.mainMenuRoot = mainMenuRoot;

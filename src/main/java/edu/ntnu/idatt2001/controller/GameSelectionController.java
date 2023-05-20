@@ -13,7 +13,7 @@ import javafx.stage.Stage;
  */
 public class GameSelectionController {
 
-  private PathsView pathsView;
+  private final PathsView pathsView;
 
   public GameSelectionController(PathsView pathsView) {
     this.pathsView = pathsView;

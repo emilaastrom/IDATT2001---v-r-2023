@@ -16,17 +16,17 @@ import javafx.scene.layout.VBox;
  * The MainMenuView class responsible for visualizing the main menu.
  */
 public class MainMenuView {
-  private StackPane mainMenuRoot = new StackPane();
-  private BorderPane mainWindowDimmer;
-  private MainMenuController controller;
-  private Pane gameSelectionRoot;
-  private StackPane entryWindowLogoStackPane = new StackPane();
-  private Image entryWindowLogo = new Image("file:src/main/resources/logo.png");
-  private VBox entryWindowBox = new VBox();
-  private Button entryWindowChooseAdventureButton = new Button("CHOOSE YOUR ADVENTURE");
-  private Button settingsButton = new Button("SETTINGS");
-  private Button exitGameButton = new Button("EXIT GAME");
-  private BorderPane entryWindow = new BorderPane();
+  private final StackPane mainMenuRoot = new StackPane();
+  private final BorderPane mainWindowDimmer;
+  private final MainMenuController controller;
+  private final Pane gameSelectionRoot;
+  private final StackPane entryWindowLogoStackPane = new StackPane();
+  private final Image entryWindowLogo = new Image("file:src/main/resources/logo.png");
+  private final VBox entryWindowBox = new VBox();
+  private final Button entryWindowChooseAdventureButton = new Button("CHOOSE YOUR ADVENTURE");
+  private final Button settingsButton = new Button("SETTINGS");
+  private final Button exitGameButton = new Button("EXIT GAME");
+  private final BorderPane entryWindow = new BorderPane();
 
 
   /**
@@ -99,7 +99,7 @@ public class MainMenuView {
             mouseEvent -> Main.changeScene(gameSelectionRoot));
     settingsButton.setId("mainMenuButton");
     settingsButton.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent ->
-            controller.showSettings(mainMenuRoot, mainWindowDimmer));
+            controller.showSettings(mainWindowDimmer));
     exitGameButton.setId("mainMenuButton");
     exitGameButton.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent ->
             controller.showExitConfirmation(mainWindowDimmer));

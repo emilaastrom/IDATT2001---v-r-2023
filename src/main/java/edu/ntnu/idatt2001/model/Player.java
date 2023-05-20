@@ -11,7 +11,7 @@ public class Player {
   private int health;
   private int score;
   private int gold;
-  private List<String> inventory = new ArrayList<>();
+  private final List<String> inventory;
 
   /**
    * Instantiates a new Player.
@@ -150,7 +150,7 @@ public class Player {
    */
   public static class PlayerBuilder {
     //required
-    private String name;
+    private final String name;
 
     //optional
     private int health = 100;

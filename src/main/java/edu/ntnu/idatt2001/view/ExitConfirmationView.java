@@ -14,12 +14,10 @@ import javafx.stage.WindowEvent;
  * The ExitConfirmationView class responsible for visualizing the exit confirmation.
  */
 public class ExitConfirmationView {
-  private BorderPane dimmer;
-  private Stage exitConfirmationStage = new Stage();
-  private BorderPane exitConfirmationRoot = new BorderPane();
-  private Scene exitConfirmationScene = new Scene(exitConfirmationRoot, 500, 150);
-  private Button exitConfirmationCancelButton = new Button("Cancel");
-  private Button exitConfirmationButton = new Button("Confirm");
+  private final BorderPane dimmer;
+  private final Stage exitConfirmationStage = new Stage();
+  private final Button exitConfirmationCancelButton = new Button("Cancel");
+  private final Button exitConfirmationButton = new Button("Confirm");
 
   /**
    * Instantiates a new Exit confirmation view.
@@ -28,6 +26,8 @@ public class ExitConfirmationView {
    */
   public ExitConfirmationView(BorderPane dimmer) {
     this.dimmer = dimmer;
+    BorderPane exitConfirmationRoot = new BorderPane();
+    Scene exitConfirmationScene = new Scene(exitConfirmationRoot, 500, 150);
     exitConfirmationStage.setTitle("Exit confirmation");
     exitConfirmationStage.initModality(Modality.APPLICATION_MODAL);
     exitConfirmationStage.setResizable(false);

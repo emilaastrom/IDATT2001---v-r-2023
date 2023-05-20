@@ -11,7 +11,7 @@ import javafx.util.Duration;
  */
 public class MusicController {
   private static MediaPlayer mediaPlayer;
-  private static Slider volumeSlider = new Slider(0, 100, 50);
+  private static final Slider volumeSlider = new Slider(0, 100, 50);
 
   /**
    * Play music.
@@ -32,9 +32,6 @@ public class MusicController {
     mediaPlayer.pause();
   }
 
-  public static MediaPlayer getMediaPlayer() {
-    return mediaPlayer;
-  }
 
   public static Slider getVolumeSlider() {
     return volumeSlider;

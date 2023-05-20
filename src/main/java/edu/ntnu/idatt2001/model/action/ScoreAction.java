@@ -16,7 +16,7 @@ public class ScoreAction implements Action {
      */
     public ScoreAction(int points){
         this.points = points;
-    };
+    }
 
     public String getType(){
         return "Score";

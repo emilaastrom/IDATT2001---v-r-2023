@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 public class Story {
 
   private final String title;
-  private Map<Link, Passage> passages;
+  private final Map<Link, Passage> passages;
   private Passage openingPassage;
 
   /**
@@ -108,7 +108,6 @@ public class Story {
     for (int i = 0; i < passages.size(); i++) {
 
       for (Map.Entry<Link, Passage> entry : passages.entrySet()) {
-        Link currentLink = entry.getKey();
         Passage currentPassage = entry.getValue();
 
         List<Link> currentPassageLinks = currentPassage.getLinks();

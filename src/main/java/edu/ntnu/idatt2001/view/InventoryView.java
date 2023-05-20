@@ -18,7 +18,7 @@ public class InventoryView {
    * The Inventory stage.
    */
   Stage inventoryStage = new Stage(StageStyle.UNDECORATED);
-  private InventoryController controller;
+  private final InventoryController controller;
 
   /**
    * Instantiates a new Inventory view.

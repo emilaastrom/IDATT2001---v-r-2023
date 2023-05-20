@@ -27,7 +27,7 @@ public class MainMenuController {
     Main.changeScene(gameSelectionRoot);
   }
 
-  public void showSettings(Pane root, BorderPane dimmer) {
+  public void showSettings(BorderPane dimmer) {
     Main.showMainMenuSettings();
     dimmer.setVisible(true);
   }

@@ -12,7 +12,7 @@ import java.util.Objects;
 public class Link {
   private final String text;
   private final String reference;
-  private List<Action> actions;
+  private final List<Action> actions;
 
   /**
    * Instantiates a new Link.
