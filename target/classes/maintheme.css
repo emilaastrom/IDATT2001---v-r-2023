@@ -3,16 +3,65 @@
     src: url('textFont.otf');
 }
 
-.text{
+#DefaultText, #contentText{
     /* Changes here affect all text elements, including text inside buttons*/
     -fx-fill: #ffffff;
     -fx-font-size: 20;
     -fx-font-family: 'Retro Gaming';
 }
 
-.root{
+#titleText{
+    /* Changes here only affect the title text */
+    -fx-fill: #ffffff;
+    -fx-font-size: 30;
+    -fx-font-family: 'Retro Gaming';
 }
 
+#scoreText{
+    -fx-fill: #ffffff;
+    -fx-font-size: 40;
+    -fx-font-family: 'Retro Gaming';
+}
+
+#heartText{
+    -fx-fill: #be0707;
+    -fx-font-size: 40;
+    -fx-font-family: 'Retro Gaming';
+}
+#coinText{
+    /* Changes here only affect the title text */
+    -fx-fill: #e5dc19;
+    -fx-font-size: 40;
+    -fx-font-family: 'Retro Gaming';
+}
+
+.slider{
+    /* Changes here affect all sliders */
+    -fx-background-color: linear-gradient(to right, rgba(49, 49, 49, 0.7), rgba(98, 98, 98, 0.7));
+    -fx-border-color: #FFFFFF;
+    -fx-border-width: 4px;
+    -fx-border-radius: 0px;
+    -fx-padding: 10px 20px 10px 20px;
+    -fx-text-fill: rgb(255,255,255);
+    -fx-background-radius: 5px;
+    -fx-font-family: 'Retro Gaming';
+}
+
+.slider .thumb{
+    -fx-pref-height: 20px;
+    -fx-pref-width: 5px;
+    -fx-padding: 20px 0px 20px 0px;
+    -fx-background-color: rgb(255, 255, 255);
+    -fx-background-radius: 0px;
+}
+
+.slider .thumb:hover{
+    -fx-cursor: hand;
+}
+
+.slider .track{
+    -fx-background-color: black;
+}
 
 .button{
     /* Changes here affect all buttons */
@@ -23,15 +72,178 @@
     -fx-padding: 10px 20px 10px 20px;
     -fx-text-fill: rgb(255,255,255);
     -fx-background-radius: 5px;
+    -fx-font-size: 20px;
     -fx-font-family: 'Retro Gaming';
     -fx-pref-width: 400;
+}
+#endButton{
+    -fx-padding: 5px 0px 5px 0px;
+    -fx-background-image: url("../resources/goldButton.png");
+    -fx-background-repeat: no-repeat no-repeat;;
+    -fx-background-size: cover, auto;
+    -fx-border-width: 0px;
+    -fx-pref-width: 464px;
+    -fx-pref-height: 58px;
+    -fx-text-fill: Black;
+}
+#goalText{
+    /* Changes here only affect the goal text */
+    -fx-font-size: 20;
+    -fx-font-family: 'Retro Gaming';
+}
+
+#tooltip {
+    -fx-font-family: 'Retro Gaming';
+    -fx-fill: white;
+    -fx-background-color: rgba(0, 0, 0, 0.5);
+    -fx-font-size: 20px;
+}
+
+#linkButton{
+    /* Changes here only affect the link button */
+    -fx-padding: 5px 20px 5px 20px;
 }
 
 .button:hover{
     /* Changes button style when hovering */
-    -fx-background-color: rgba(130, 178, 106, 0.7);;
+    -fx-background-color: rgba(130, 178, 106, 0.7);
+    -fx-cursor: hand;
+}
+
+.separator *.line{
+    /* Changes here affect all separators */
+    -fx-border-width: 4px;
+}
+
+.background{
+    -fx-background-repeat: no-repeat no-repeat;;
+    -fx-background-size: cover, auto;
+    -fx-background-position: center center;
+}
+.dialog-pane{
+    -fx-border-color:black;
+    -fx-border-width:2.0px;
+}
+.background_forest{
+    -fx-background-image: url("../resources/backgroundforest.png");
+}
+.background_space{
+    -fx-background-image: url("../resources/backgroundspace.png");
+}
+.background_pirate{
+    -fx-background-image: url("../resources/backgroundpirate.png");
 }
 
 #mainMenuButton{
-    /* Changes here only affect the buttons on the main menu, using their ID */
+}
+
+#CurrentThemeBox{
+    -fx-background-color: rgba(0, 0, 0, 0.1);
+    -fx-border-color: #FFFFFF;
+    -fx-border-width: 4px;
+    -fx-border-radius: 0px;
+    -fx-padding: 10px 20px 10px 20px;
+    -fx-text-fill: rgb(255,255,255);
+    -fx-background-radius: 5px;
+}
+
+#CurrentThemeBox:hover{
+    -fx-background-color: rgba(130, 178, 106, 0.7);
+}
+
+titleText{
+    /* Changes here only affect the title text */
+    -fx-fill: #ffffff;
+    -fx-font-size: 30;
+    -fx-font-family: 'Retro Gaming';
+}
+
+#scoreText{
+    -fx-fill: #ffffff;
+    -fx-font-size: 40;
+    -fx-font-family: 'Retro Gaming';
+}
+
+#heartText{
+    -fx-fill: #be0707;
+    -fx-font-size: 40;
+    -fx-font-family: 'Retro Gaming';
+}
+#coinText {
+    /* Changes here only affect the title text */
+    -fx-fill: #e5dc19;
+    -fx-font-size: 40;
+    -fx-font-family: 'Retro Gaming';
+}
+
+#ExitConfirmationButton {
+    -fx-background-color: rgba(109, 0, 0, 0.7);
+}
+
+#ExitConfirmationButton:hover {
+    -fx-background-color: rgba(255, 0, 0, 0.7);
+}
+
+#SettingsRoot, #inventoryRoot, #SettingsRoot, #ExitConfirmationRoot, #GameSelectionRoot, #DialogPane{
+    -fx-border-color: #FFFFFF;
+    -fx-border-width: 4px;
+    -fx-background-image: url("file:src/main/resources/backgroundsettings.png");
+    -fx-background-repeat: no-repeat no-repeat;
+    -fx-background-size: cover, auto;
+}
+.dialog-pane > *.content.label{
+    -fx-alignment: center;
+    -fx-wrap-text: true;
+    -fx-padding: 50, 0, 50, 0;
+}
+
+.dialog-pane:header *.header-panel *.label{
+    -fx-alignment: center;
+}
+
+.dialog-pane > *.button-bar *.button{
+    -fx-alignment: center;
+    -fx-pref-width: 500;
+}
+
+.dialog-pane:header *.header-panel{
+    -fx-background-image: url("file:src/main/resources/backgroundsettings.png");
+    -fx-background-repeat: no-repeat no-repeat;
+    -fx-background-size: cover, auto;
+}
+
+.text-field, .tooltip{
+    -fx-background-color: rgba(0, 0, 0, 0.7);
+    -fx-border-color: #FFFFFF;
+    -fx-border-width: 4px;
+    -fx-border-radius: 0px;
+    -fx-padding: 10px 20px 10px 20px;
+    -fx-text-fill: rgb(255,255,255);
+    -fx-background-radius: 5px;
+    -fx-font-family: 'Retro Gaming';
+}
+
+.check-box .box{
+    -fx-background-color: rgba(0, 0, 0, 0.7);
+    -fx-border-color: #FFFFFF;
+    -fx-border-width: 4px;
+    -fx-border-radius: 0px;
+    -fx-padding: 10px 20px 10px 20px;
+    -fx-text-fill: rgb(255,255,255);
+    -fx-background-radius: 5px;
+    -fx-font-family: 'Retro Gaming';
+}
+
+#chestPane:hover{
+    -fx-background-color: rgba(0, 0, 0, 0.7);
+    -fx-cursor: OPEN_HAND;
+}
+
+#settingsPane:hover, #undoPane:hover {
+    -fx-background-color: rgba(130, 178, 106, 0.7);
+    -fx-cursor: hand;
+}
+
+.separator {
+    -fx-padding: 0px -5px 0px -5px;
 }

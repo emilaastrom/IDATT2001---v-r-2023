@@ -22,10 +22,13 @@ public class GameSelectionController {
   /**
    * Choose users own game file and show main menu.
    */
-  public void chooseGameFile(Stage stage, String playerName, List<Goal> playerGoals) {
+  public void chooseGameFile(Stage stage, String path, String playerName, List<Goal> playerGoals) {
     try {
-      if (FileHandler.openGame(stage, playerName, playerGoals)) {
+      if (FileHandler.openGame(stage, path, playerName, playerGoals)) {
         Main.changeScene(this.pathsView.getRoot());
+        this.pathsView.setCurrentPassageVbox(this.pathsView.showPassages(
+            Game.getInstance().getStory().getOpeningPassage()));
+        Main.updateStage();
       }
     } catch (Exception e) {
       e.printStackTrace();
@@ -37,9 +40,8 @@ public class GameSelectionController {
    */
   public void loadExampleFile(Stage stage, String path, String playerName, List<Goal> playerGoals) {
     FileHandler.openStaticGame(stage, path, playerName, playerGoals);
-    System.out.println(path + playerName + playerGoals);
     Main.changeScene(this.pathsView.getRoot());
-    this.pathsView.setCurrentPassageVBox(
+    this.pathsView.setCurrentPassageVbox(
             this.pathsView.showPassages(Game.getInstance().getStory().getOpeningPassage()));
     Main.updateStage();
   }

@@ -30,6 +30,8 @@ public class Main extends Application {
   private static InventoryView inventoryView;
   private static SettingsView mainMenuSettingsView;
   private static SettingsView gameSettingsView;
+  private static ExitConfirmationView exitConfirmationView;
+  private static MainMenuView mainMenuView;
 
   @Override
   public void start(Stage primaryStage) {
@@ -43,7 +45,7 @@ public class Main extends Application {
 
 
     ExitConfirmationController exitConfirmationController = new ExitConfirmationController();
-    ExitConfirmationView exitConfirmationView = new ExitConfirmationView(dimmer);
+    exitConfirmationView = new ExitConfirmationView(dimmer);
 
     InventoryController inventoryController = new InventoryController();
     inventoryView = new InventoryView(inventoryController);
@@ -57,7 +59,7 @@ public class Main extends Application {
     MainMenuController mainMenuController = new MainMenuController(
             gameSelectionView.getRoot(),
             exitConfirmationView);
-    MainMenuView mainMenuView = new MainMenuView(mainMenuController, gameSelectionView.getRoot(), dimmer);
+    mainMenuView = new MainMenuView(mainMenuController, gameSelectionView.getRoot(), dimmer);
 
     SettingsController settingsController = new SettingsController(mainMenuView.getRoot());
     mainMenuSettingsView = new SettingsView(
@@ -113,6 +115,10 @@ public class Main extends Application {
 
   public static void showGameSettings() {
     gameSettingsView.showStage();
+  }
+
+  public static void showExitConfirmation() {
+    exitConfirmationView.mainMenuConfirmation(mainMenuView.getRoot());
   }
 
 }

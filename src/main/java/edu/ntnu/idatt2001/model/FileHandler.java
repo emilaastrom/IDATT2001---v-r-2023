@@ -237,30 +237,20 @@ public class FileHandler {
    * @param playerGoals the player goals
    * @return the boolean
    */
-  public static boolean openGame(Stage stage, String playerName, List<Goal> playerGoals) {
-    FileChooser fileChooser = new FileChooser();
-    fileChooser.setTitle("Open Resource File");
-    fileChooser.getExtensionFilters().addAll(
-            new FileChooser.ExtensionFilter("Paths Files", "*.paths"));
-    File selectedFile = fileChooser.showOpenDialog(stage);
-    if (selectedFile != null) {
-      String path = selectedFile.getAbsolutePath();
+  public static boolean openGame(
+      Stage stage, String path, String playerName, List<Goal> playerGoals) {
+    try {
+      Story story = FileHandler.readFile(path);
       try {
-        Story story = FileHandler.readFile(path);
-        try {
-          String inputValue = JOptionPane.showInputDialog("Please input a name");
-          Player player = new Player.PlayerBuilder(playerName).build();
-          Game.getInstance().setPlayer(player);
-          Game.getInstance().setStory(story);
-          Game.getInstance().setGoals(playerGoals);
-          return true;
-        } catch (Exception e) {
-          return false;
-        }
+        Player player = new Player.PlayerBuilder(playerName).build();
+        Game.getInstance().setPlayer(player);
+        Game.getInstance().setStory(story);
+        Game.getInstance().setGoals(playerGoals);
+        return true;
       } catch (Exception e) {
         return false;
       }
-    } else {
+    } catch (Exception e) {
       return false;
     }
   }
