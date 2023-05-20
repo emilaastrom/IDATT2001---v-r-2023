@@ -29,17 +29,17 @@ public class SettingsView {
   private Stage stage;
   private Scene scene;
   private Pane superRoot;
-  private Stage superStage;
   private BorderPane dimmer;
   private Boolean isGameSettings;
+  private PathsView pathsView;
 
-  public SettingsView(SettingsController controller, Pane superRoot, Stage superStage, BorderPane dimmer, Boolean isGameSettings) {
+  public SettingsView(SettingsController controller,PathsView pathsView,Pane superRoot, BorderPane dimmer, Boolean isGameSettings) {
+    this.pathsView = pathsView;
+    this.controller = controller;
     settingsRoot = new BorderPane();
     settingsRoot.setId("SettingsRoot");
     this.isGameSettings = isGameSettings;
-    this.controller = controller;
     this.superRoot = superRoot;
-    this.superStage = superStage;
     this.dimmer = dimmer;
 
     createAndConfigureStage();
@@ -49,19 +49,17 @@ public class SettingsView {
     updateControllerFromListeners();
 
     observeModelAndUpdateControls();
-
-    showStage();
   }
   
   private void createAndConfigureStage() {
     this.scene = new Scene(settingsRoot, 500, 750);
+    scene.getStylesheets().add("file:src/main/resources/maintheme.css");
     this.stage = new Stage();
     stage.initModality(Modality.APPLICATION_MODAL);
     stage.setScene(scene);
   }
 
-  private void createAndLayoutControls() {
-    scene.getStylesheets().add(Main.currentStylesheet);
+  private void createAndLayoutControls() {;
 
     VBox settingsTitleBox = new VBox();
     settingsTitleBox.setPadding(new Insets(20));
@@ -130,12 +128,17 @@ public class SettingsView {
       restartButton.setOnAction(event -> {
         //TODO RESTART GAME
         controller.restartGame();
+        pathsView.setCurrentPassageVBox(pathsView.showPassages(Game.getInstance().begin()));
+        pathsView.updateBottomBox();
+        Main.updateStage();
+        closeStage();
       });
       Button mainMenuButton = new Button("Main menu");
       mainMenuButton.setMaxWidth(200);
       mainMenuButton.setOnAction(event -> {
         //TODO MAIN MENU
-        controller.showMainMenu(superStage);
+
+        controller.showMainMenu();
         closeStage();
       });
       Separator separator = new Separator(Orientation.HORIZONTAL);
@@ -167,7 +170,7 @@ public class SettingsView {
     stage.addEventHandler(WindowEvent.WINDOW_HIDDEN, event -> dimmer.setVisible(false));
   }
 
-  private void showStage() {
+  public void showStage() {
     stage.show();
   }
 

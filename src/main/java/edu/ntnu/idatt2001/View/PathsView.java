@@ -3,6 +3,7 @@ package edu.ntnu.idatt2001.View;
 import edu.ntnu.idatt2001.Controller.BackgroundController;
 import edu.ntnu.idatt2001.Controller.PathsController;
 import edu.ntnu.idatt2001.Controller.UserInformer;
+import edu.ntnu.idatt2001.Main;
 import edu.ntnu.idatt2001.Model.*;
 import edu.ntnu.idatt2001.Model.Action.Action;
 import edu.ntnu.idatt2001.Model.Goal.Goal;
@@ -49,15 +50,13 @@ public class PathsView {
   private VBox pathsWindowVBox = new VBox();
 
   private PathsController controller ;
-  private Stage stage;
   private BorderPane pathsDimmer;
 
   StackPane pathsRoot = new StackPane();
 
 
-  public PathsView(PathsController controller, Stage stage) {
+  public PathsView(PathsController controller) {
     this.controller = controller;
-    this.stage = stage;
 
     createAndConfigurePane();
 
@@ -67,7 +66,6 @@ public class PathsView {
 
     observeModelAndUpdateControls();
 
-    showPassages(Game.getInstance().getStory().getOpeningPassage(), stage);
     pathsWindowCenterBox.setCenter(currentPassageVBox);
 
 }
@@ -104,7 +102,7 @@ public class PathsView {
     pathsWindowVBox.getChildren().addAll(pathsWindowCenterBox, pathsWindowBottomBox);
     pathsWindowVBox.setAlignment(javafx.geometry.Pos.CENTER);
 
-    currentPassageVBox = showPassages(currentPassage, stage);
+    currentPassageVBox = showPassages(currentPassage);
     pathsWindowCenterBox.setCenter(currentPassageVBox);
 
     pathsWindow.setMinWidth(0);
@@ -135,7 +133,7 @@ public class PathsView {
         return pathsRoot;
     }
 
-  private void updateBottomBox() {
+  public void updateBottomBox() {
     pathsWindowBottomBox.getChildren().clear();
     pathsWindowBottomBoxHBox.getChildren().clear();
     pathsWindowBottomBoxHBox.setSpacing(5);
@@ -229,10 +227,10 @@ public class PathsView {
       undoMove();
     });
 
-    settingsPane.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> controller.showSettings(pathsRoot, pathsDimmer));
+    settingsPane.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> controller.showSettings());
   }
 
-  public VBox showPassages(Passage passage, Stage stage) {
+  public VBox showPassages(Passage passage) {
     try{
       VBox pathsWindowCenterBoxVBox = new VBox();
       pathsWindowCenterBoxVBox.setSpacing(40);
@@ -279,9 +277,9 @@ public class PathsView {
       }
       updateBottomBox();
       currentPassage = game.go(link);
-      currentPassageVBox = showPassages(currentPassage, stage);
+      currentPassageVBox = showPassages(currentPassage);
       pathsWindowCenterBox.setCenter(currentPassageVBox);
-      stage.show();
+      Main.updateStage();
     });
     linkButton.setWrapText(true);
     return linkButton;
@@ -289,10 +287,14 @@ public class PathsView {
 
   public void undoMove(){
     currentPassage = game.goSilent(game.goBack());
-    currentPassageVBox = showPassages(currentPassage, stage);
+    currentPassageVBox = showPassages(currentPassage);
     pathsWindowCenterBox.setCenter(currentPassageVBox);
     updateBottomBox();
-    stage.show();
+    Main.updateStage();
   }
 
+  public void setCurrentPassageVBox(VBox currentPassageVBox) {
+    this.currentPassageVBox = currentPassageVBox;
+    pathsWindowCenterBox.setCenter(currentPassageVBox);
   }
+}
