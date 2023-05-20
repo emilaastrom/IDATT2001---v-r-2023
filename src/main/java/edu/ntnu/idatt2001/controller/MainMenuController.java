@@ -38,4 +38,8 @@ public class MainMenuController {
     dimmer.setVisible(true);
     exitConfirmationView.exitConfirmation();
   }
+
+  public void showHelp() {
+    Main.showHelp();
+  }
 }

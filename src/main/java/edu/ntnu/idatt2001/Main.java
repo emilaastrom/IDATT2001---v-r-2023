@@ -1,12 +1,8 @@
 package edu.ntnu.idatt2001;
 
-import edu.ntnu.idatt2001.controller.ExitConfirmationController;
-import edu.ntnu.idatt2001.controller.GameSelectionController;
-import edu.ntnu.idatt2001.controller.InventoryController;
-import edu.ntnu.idatt2001.controller.MainMenuController;
-import edu.ntnu.idatt2001.controller.PathsController;
-import edu.ntnu.idatt2001.controller.SettingsController;
+import edu.ntnu.idatt2001.controller.*;
 import edu.ntnu.idatt2001.view.ExitConfirmationView;
+import edu.ntnu.idatt2001.view.HelpView;
 import edu.ntnu.idatt2001.view.GameSelectionView;
 import edu.ntnu.idatt2001.view.InventoryView;
 import edu.ntnu.idatt2001.view.MainMenuView;
@@ -30,6 +26,7 @@ public class Main extends Application {
   private static InventoryView inventoryView;
   private static SettingsView mainMenuSettingsView;
   private static SettingsView gameSettingsView;
+  private static HelpView helpView;
   private static ExitConfirmationView exitConfirmationView;
   private static MainMenuView mainMenuView;
 
@@ -60,6 +57,9 @@ public class Main extends Application {
             gameSelectionView.getRoot(),
             exitConfirmationView);
     mainMenuView = new MainMenuView(mainMenuController, gameSelectionView.getRoot(), dimmer);
+
+    HelpController helpController = new HelpController();
+    helpView = new HelpView(helpController, mainMenuView.getRoot());
 
     SettingsController settingsController = new SettingsController(mainMenuView.getRoot());
     mainMenuSettingsView = new SettingsView(
@@ -120,5 +120,7 @@ public class Main extends Application {
   public static void showExitConfirmation() {
     exitConfirmationView.mainMenuConfirmation(mainMenuView.getRoot());
   }
+
+  public static void showHelp() {helpView.showHelp();}
 
 }

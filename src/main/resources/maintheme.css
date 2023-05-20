@@ -184,7 +184,7 @@ titleText{
     -fx-background-color: rgba(255, 0, 0, 0.7);
 }
 
-#SettingsRoot, #inventoryRoot, #SettingsRoot, #ExitConfirmationRoot, #GameSelectionRoot, #DialogPane{
+#SettingsRoot, #inventoryRoot, #SettingsRoot, #ExitConfirmationRoot, #GameSelectionRoot, #DialogPane, #HelpRoot{
     -fx-border-color: #FFFFFF;
     -fx-border-width: 4px;
     -fx-background-image: url("file:src/main/resources/backgroundsettings.png");
@@ -246,4 +246,12 @@ titleText{
 
 .separator {
     -fx-padding: 0px -5px 0px -5px;
+}
+
+#helpButton {
+    -fx-pref-width: 200;
+}
+
+#helpMainButton {
+    -fx-pref-width: 250;
 }

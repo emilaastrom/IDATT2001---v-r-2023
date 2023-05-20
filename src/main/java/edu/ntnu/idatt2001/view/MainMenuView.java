@@ -25,6 +25,7 @@ public class MainMenuView {
   private final VBox entryWindowBox = new VBox();
   private final Button entryWindowChooseAdventureButton = new Button("CHOOSE YOUR ADVENTURE");
   private final Button settingsButton = new Button("SETTINGS");
+  private final Button helpButton = new Button("HOW TO PLAY");
   private final Button exitGameButton = new Button("EXIT GAME");
   private final BorderPane entryWindow = new BorderPane();
 
@@ -80,6 +81,7 @@ public class MainMenuView {
             entryWindowLogoStackPane,
             entryWindowChooseAdventureButton,
             settingsButton,
+            helpButton,
             exitGameButton);
 
     entryWindow.setVisible(true);
@@ -100,6 +102,9 @@ public class MainMenuView {
     settingsButton.setId("mainMenuButton");
     settingsButton.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent ->
             controller.showSettings(mainWindowDimmer));
+    helpButton.setId("mainMenuButton");
+    helpButton.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent ->
+            controller.showHelp());
     exitGameButton.setId("mainMenuButton");
     exitGameButton.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent ->
             controller.showExitConfirmation(mainWindowDimmer));
