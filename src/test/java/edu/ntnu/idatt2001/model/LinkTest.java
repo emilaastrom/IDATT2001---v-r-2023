@@ -1,4 +1,4 @@
-package edu.ntnu.idatt2001;
+package edu.ntnu.idatt2001.model;
 
 import edu.ntnu.idatt2001.model.action.Action;
 import edu.ntnu.idatt2001.model.action.GoldAction;

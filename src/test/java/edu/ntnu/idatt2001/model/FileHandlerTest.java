@@ -1,4 +1,4 @@
-package edu.ntnu.idatt2001;
+package edu.ntnu.idatt2001.model;
 
 import edu.ntnu.idatt2001.model.action.GoldAction;
 import edu.ntnu.idatt2001.model.action.HealthAction;
@@ -7,9 +7,15 @@ import edu.ntnu.idatt2001.model.FileHandler;
 import edu.ntnu.idatt2001.model.Link;
 import edu.ntnu.idatt2001.model.Passage;
 import edu.ntnu.idatt2001.model.Story;
+import edu.ntnu.idatt2001.model.goal.Goal;
+import javafx.stage.Stage;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class FileHandlerTest {
@@ -34,6 +40,17 @@ public class FileHandlerTest {
 
     exampleStory.addPassage(new Passage("Title of test passage 3", "Content of test passage 3"));
     exampleStory.addPassage(new Passage("Title of test passage 4", "Content of test passage 4"));
+
+  }
+
+  @Test
+  @DisplayName("Testing openGame() method")
+  public void openGame(){
+  }
+
+  @Test
+  @DisplayName("Testing openStaticGame() method")
+  public void openStaticGame(){
 
   }
 

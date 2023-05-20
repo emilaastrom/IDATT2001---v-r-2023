@@ -1,4 +1,4 @@
-package edu.ntnu.idatt2001.Goal;
+package edu.ntnu.idatt2001.model.goal;
 
 import edu.ntnu.idatt2001.model.goal.GoldGoal;
 import edu.ntnu.idatt2001.model.goal.HealthGoal;
