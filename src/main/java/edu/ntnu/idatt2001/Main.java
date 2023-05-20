@@ -61,20 +61,12 @@ public class Main extends Application {
     HelpController helpController = new HelpController();
     helpView = new HelpView(helpController, mainMenuView.getRoot());
 
-    SettingsController settingsController = new SettingsController(mainMenuView.getRoot());
-    mainMenuSettingsView = new SettingsView(
-            settingsController,
-            pathsView,
-            mainMenuView.getRoot(),
-            dimmer,
-            false);
-
+    SettingsController settingsController = new SettingsController(mainMenuView.getRoot(),pathsView.getRoot());
     settingsView = new SettingsView(
-            settingsController,
-            pathsView,
-            pathsView.getRoot(),
-            dimmer,
-            true);
+        settingsController,
+        pathsView,
+        dimmer);
+
 
 
 
@@ -114,7 +106,7 @@ public class Main extends Application {
   }
 
   public static void showGameSettings() {
-    settingsView.showStage();
+    settingsView.showStage(true);
   }
 
   public static void showExitConfirmation() {
