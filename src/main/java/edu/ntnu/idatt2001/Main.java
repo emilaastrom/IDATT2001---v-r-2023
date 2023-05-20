@@ -29,7 +29,7 @@ public class Main extends Application {
   private static Stage stage;
   private static InventoryView inventoryView;
   private static SettingsView mainMenuSettingsView;
-  private static SettingsView gameSettingsView;
+  private static SettingsView settingsView;
   private static ExitConfirmationView exitConfirmationView;
   private static MainMenuView mainMenuView;
 
@@ -61,22 +61,11 @@ public class Main extends Application {
             exitConfirmationView);
     mainMenuView = new MainMenuView(mainMenuController, gameSelectionView.getRoot(), dimmer);
 
-    SettingsController settingsController = new SettingsController(mainMenuView.getRoot());
-    mainMenuSettingsView = new SettingsView(
-            settingsController,
-            pathsView,
-            mainMenuView.getRoot(),
-            dimmer,
-            false);
-
-    gameSettingsView = new SettingsView(
-            settingsController,
-            pathsView,
-            pathsView.getRoot(),
-            dimmer,
-            true);
-
-
+    SettingsController settingsController = new SettingsController(mainMenuView.getRoot(),pathsView.getRoot());
+    settingsView = new SettingsView(
+        settingsController,
+        pathsView,
+        dimmer);
 
     scene = new Scene(mainMenuView.getRoot(), 1250, 700);
     mainMenuScene = scene;
@@ -110,11 +99,11 @@ public class Main extends Application {
   }
 
   public static void showMainMenuSettings() {
-    mainMenuSettingsView.showStage();
+    settingsView.showStage(false);
   }
 
   public static void showGameSettings() {
-    gameSettingsView.showStage();
+    settingsView.showStage(true);
   }
 
   public static void showExitConfirmation() {

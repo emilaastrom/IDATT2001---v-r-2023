@@ -9,14 +9,16 @@ import javafx.scene.layout.Pane;
  */
 public class SettingsController {
   private final Pane mainMenuRoot;
+  private final Pane pathsRoot;
 
   /**
    * Instantiates a new SettingsController.
    *
    * @param mainMenuRoot main menu root
    */
-  public SettingsController(Pane mainMenuRoot) {
+  public SettingsController(Pane mainMenuRoot, Pane pathsRoot) {
     this.mainMenuRoot = mainMenuRoot;
+    this.pathsRoot = pathsRoot;
   }
 
   /**
@@ -31,5 +33,13 @@ public class SettingsController {
    */
   public void restartGame() {
     Game.getInstance().restartGame();
+  }
+
+  public Pane getMainMenuRoot() {
+    return mainMenuRoot;
+  }
+
+  public Pane getPathsRoot() {
+    return pathsRoot;
   }
 }
