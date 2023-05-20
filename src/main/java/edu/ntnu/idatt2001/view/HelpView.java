@@ -5,13 +5,16 @@ import edu.ntnu.idatt2001.controller.HelpController;
 import javafx.scene.control.Button;
 import javafx.scene.layout.*;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 
 public class HelpView {
   private final BorderPane helpRoot;
   private final BorderPane setupRoot;
   private final BorderPane gameRoot;
-  Button setupHelp;
-  Button gameHelp;
+  private Button setupHelp;
+  private Button gameHelp;
+  private Button gameToHelp;
+  private Button setupToHelp;
   private final StackPane superRoot;
   private final HelpController controller;
 
@@ -51,8 +54,6 @@ public class HelpView {
     helpText.setTextAlignment(javafx.scene.text.TextAlignment.CENTER);
     setupHelp = new Button("Setup");
     gameHelp = new Button("Game");
-    setupHelp.setId("helpButton");
-    gameHelp.setId("helpButton");
 
     HBox helpButtonBox = new HBox();
     helpButtonBox.setAlignment(javafx.geometry.Pos.CENTER);
@@ -91,33 +92,25 @@ public class HelpView {
     gameHelpTopBox.setPadding(new javafx.geometry.Insets(60, 0, 0, 0));
 
     //Main part of game-help
-    Text gameHelpText = new Text("The game is played by two players, \n" +
-            "where each player takes turns placing their ships on the board. \n" +
-            "The first player to sink all of the other players ships wins. \n" +
-            "The game is played by clicking on the board, \n" +
-            "and the game will automatically switch between players. \n" +
-            "The game will also automatically switch between the setup and game phase. \n" +
-            "The game will also automatically switch between the setup and game phase. \n" +
-            "The game will also automatically switch between the setup and game phase. \n" +
-            "The game will also automatically switch between the setup and game phase. \n" +
-            "The game will also automatically switch between the setup and game phase. \n" +
-            "The game will also automatically switch between the setup and game phase. \n" +
-            "The game will also automatically switch between the setup and game phase. \n" +
-            "The game will also automatically switch between the setup and game phase. \n" +
-            "The game will also automatically switch between the setup and game phase. \n");
+    Text gameHelpText = new Text("The game is played by pressing buttons based on your wishes, \n" +
+            "For each button pressed, you are presented with different opportunities. \n\n" +
+            "In some cases, your actions will affect your player state. \n" +
+            "You may gain or lose score, health, gold or even items, \n\n" +
+            "Check your items by hovering the backpack icon. \n\n" +
+            "If you wish to undo moves, you can click the red undo icon. \n\n" +
+            "If you wish to reset, return to the main menu or change settings \n" +
+            "you can open the settings by clicking the cogwheel icon. \n\n\n");
     gameHelpText.setId("DefaultText");
     gameHelpText.wrappingWidthProperty().bind(gameRoot.widthProperty().subtract(200));
-    gameHelpText.setTextAlignment(javafx.scene.text.TextAlignment.CENTER);
+    gameHelpText.setTextAlignment(TextAlignment.JUSTIFY);
 
 
 
-    Button backToHelp = new Button("Back");
-    backToHelp.setId("helpMainButton");
-    backToHelp.setOnAction(event -> showHelp());
+    gameToHelp = new Button("Back");
 
     VBox gameMainBox = new VBox();
     gameMainBox.setAlignment(javafx.geometry.Pos.CENTER);
-    gameMainBox.getChildren().addAll(gameHelpText, backToHelp);
+    gameMainBox.getChildren().addAll(gameHelpText, gameToHelp);
 
     //General game-help configuration
     gameRoot.setTop(gameHelpTopBox);
@@ -134,33 +127,22 @@ public class HelpView {
     setupHelpTopBox.setPadding(new javafx.geometry.Insets(60, 0, 0, 0));
 
     //Main part of setup-help
-    Text setupHelpText = new Text("The setup is done by placing your ships on the board. \n" +
-            "You can place your ships by clicking on the board. \n" +
-            "You can rotate your ships by pressing the R key. \n" +
-            "You can remove your ships by pressing the X key. \n" +
-            "You can place your ships by clicking on the board. \n" +
-            "You can rotate your ships by pressing the R key. \n" +
-            "You can remove your ships by pressing the X key. \n" +
-            "You can place your ships by clicking on the board. \n" +
-            "You can rotate your ships by pressing the R key. \n" +
-            "You can remove your ships by pressing the X key. \n" +
-            "You can place your ships by clicking on the board. \n" +
-            "You can rotate your ships by pressing the R key. \n" +
-            "You can remove your ships by pressing the X key. \n" +
-            "You can place your ships by clicking on the board. \n" +
-            "You can rotate your ships by pressing the R key. \n" +
-            "You can remove your ships by pressing the X key. \n");
+    Text setupHelpText = new Text("Start off by selecting your game file. \n" +
+            "You can choose your own '.paths' file, or play our example game. \n\n" +
+            "Choose the name of your character (up to 20 characters). \n\n" +
+            "If you wish, you can set up different goals. \n" +
+            "These goals will be presented to you in the end game screen. \n" +
+            "Enable the goals you wish by checking the boxes left of the input fields.\n\n" +
+            "Once you are done with the setup, press the 'Load Game' button to start playing.\n\n\n");
     setupHelpText.setId("DefaultText");
     setupHelpText.wrappingWidthProperty().bind(setupRoot.widthProperty().subtract(200));
-    setupHelpText.setTextAlignment(javafx.scene.text.TextAlignment.CENTER);
+    setupHelpText.setTextAlignment(TextAlignment.JUSTIFY);
 
-    Button backToHelp = new Button("Back");
-    backToHelp.setId("helpMainButton");
-    backToHelp.setOnAction(event -> showHelp());
+    setupToHelp = new Button("Back");
 
     VBox setupMainBox = new VBox();
     setupMainBox.setAlignment(javafx.geometry.Pos.CENTER);
-    setupMainBox.getChildren().addAll(setupHelpText, backToHelp);
+    setupMainBox.getChildren().addAll(setupHelpText, setupToHelp);
 
     //General setup-help configuration
     setupRoot.setTop(setupHelpTopBox);
@@ -170,6 +152,12 @@ public class HelpView {
   private void createAndLayoutControls() {
     setupHelp.addEventHandler(javafx.scene.input.MouseEvent.MOUSE_CLICKED, event -> showSetupHelp());
     gameHelp.addEventHandler(javafx.scene.input.MouseEvent.MOUSE_CLICKED, event -> showGameHelp());
+    setupHelp.setId("helpButton");
+    gameHelp.setId("helpButton");
+    gameToHelp.setId("helpMainButton");
+    gameToHelp.setOnAction(event -> showHelp());
+    setupToHelp.setId("helpMainButton");
+    setupToHelp.setOnAction(event -> showHelp());
   }
 
   private void updateControllerFromListeners() {
