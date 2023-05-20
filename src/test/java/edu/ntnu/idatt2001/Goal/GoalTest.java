@@ -1,10 +1,10 @@
 package edu.ntnu.idatt2001.Goal;
 
-import edu.ntnu.idatt2001.Model.Goal.GoldGoal;
-import edu.ntnu.idatt2001.Model.Goal.HealthGoal;
-import edu.ntnu.idatt2001.Model.Goal.InventoryGoal;
-import edu.ntnu.idatt2001.Model.Goal.ScoreGoal;
-import edu.ntnu.idatt2001.Model.Player;
+import edu.ntnu.idatt2001.model.goal.GoldGoal;
+import edu.ntnu.idatt2001.model.goal.HealthGoal;
+import edu.ntnu.idatt2001.model.goal.InventoryGoal;
+import edu.ntnu.idatt2001.model.goal.ScoreGoal;
+import edu.ntnu.idatt2001.model.Player;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

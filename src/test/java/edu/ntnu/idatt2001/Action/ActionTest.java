@@ -1,8 +1,8 @@
 package edu.ntnu.idatt2001.Action;
 
-import edu.ntnu.idatt2001.Model.Action.*;
-import edu.ntnu.idatt2001.Model.Link;
-import edu.ntnu.idatt2001.Model.Player;
+import edu.ntnu.idatt2001.model.action.*;
+import edu.ntnu.idatt2001.model.Link;
+import edu.ntnu.idatt2001.model.Player;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

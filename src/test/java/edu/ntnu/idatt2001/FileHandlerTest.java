@@ -1,12 +1,12 @@
 package edu.ntnu.idatt2001;
 
-import edu.ntnu.idatt2001.Model.Action.GoldAction;
-import edu.ntnu.idatt2001.Model.Action.HealthAction;
-import edu.ntnu.idatt2001.Model.Action.ScoreAction;
-import edu.ntnu.idatt2001.Model.FileHandler;
-import edu.ntnu.idatt2001.Model.Link;
-import edu.ntnu.idatt2001.Model.Passage;
-import edu.ntnu.idatt2001.Model.Story;
+import edu.ntnu.idatt2001.model.action.GoldAction;
+import edu.ntnu.idatt2001.model.action.HealthAction;
+import edu.ntnu.idatt2001.model.action.ScoreAction;
+import edu.ntnu.idatt2001.model.FileHandler;
+import edu.ntnu.idatt2001.model.Link;
+import edu.ntnu.idatt2001.model.Passage;
+import edu.ntnu.idatt2001.model.Story;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
