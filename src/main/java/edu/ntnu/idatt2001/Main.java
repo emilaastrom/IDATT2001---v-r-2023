@@ -30,7 +30,6 @@ public class Main extends Application {
   private static InventoryView inventoryView;
   private static SettingsView mainMenuSettingsView;
   private static SettingsView gameSettingsView;
-  private static MainMenuView mainMenuView;
 
   @Override
   public void start(Stage primaryStage) {
@@ -58,7 +57,7 @@ public class Main extends Application {
     MainMenuController mainMenuController = new MainMenuController(
             gameSelectionView.getRoot(),
             exitConfirmationView);
-    mainMenuView = new MainMenuView(mainMenuController, gameSelectionView.getRoot(), dimmer);
+    MainMenuView mainMenuView = new MainMenuView(mainMenuController, gameSelectionView.getRoot(), dimmer);
 
     SettingsController settingsController = new SettingsController(mainMenuView.getRoot());
     mainMenuSettingsView = new SettingsView(

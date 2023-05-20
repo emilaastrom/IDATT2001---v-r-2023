@@ -27,14 +27,13 @@ import javafx.stage.WindowEvent;
  */
 public class SettingsView {
 
-  private BorderPane settingsRoot;
-  private SettingsController controller;
+  private final BorderPane settingsRoot;
+  private final SettingsController controller;
   private Stage stage;
-  private Scene scene;
-  private Pane superRoot;
-  private BorderPane dimmer;
-  private Boolean isGameSettings;
-  private PathsView pathsView;
+  private final Pane superRoot;
+  private final BorderPane dimmer;
+  private final Boolean isGameSettings;
+  private final PathsView pathsView;
 
 
   /**
@@ -70,7 +69,7 @@ public class SettingsView {
   }
   
   private void createAndConfigureStage() {
-    this.scene = new Scene(settingsRoot, 500, 750);
+    Scene scene = new Scene(settingsRoot, 500, 750);
     scene.getStylesheets().add("file:src/main/resources/maintheme.css");
     this.stage = new Stage();
     stage.initModality(Modality.APPLICATION_MODAL);

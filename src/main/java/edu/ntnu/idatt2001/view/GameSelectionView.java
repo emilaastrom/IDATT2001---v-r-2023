@@ -34,9 +34,9 @@ import javafx.util.Duration;
  * The type Game selection view.
  */
 public class GameSelectionView {
-  private BorderPane root;
-  private Game game;
-  private GameSelectionController controller;
+  private final BorderPane root;
+  private final Game game;
+  private final GameSelectionController controller;
   private Stage stage;
 
   /**
@@ -140,9 +140,8 @@ public class GameSelectionView {
       }
     });
 
-    enableScoreGoal.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-      scoreGoalField.setDisable(!enableScoreGoal.isSelected());
-    });
+    enableScoreGoal.addEventHandler(MouseEvent.MOUSE_CLICKED, event ->
+            scoreGoalField.setDisable(!enableScoreGoal.isSelected()));
 
     scoreGoalBox.getChildren().addAll(enableScoreGoal, scoreGoalField);
 
@@ -168,9 +167,8 @@ public class GameSelectionView {
       }
     });
 
-    enableHealthGoal.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-      healthGoalField.setDisable(!enableHealthGoal.isSelected());
-    });
+    enableHealthGoal.addEventHandler(MouseEvent.MOUSE_CLICKED, event ->
+            healthGoalField.setDisable(!enableHealthGoal.isSelected()));
     healthGoalBox.getChildren().addAll(enableHealthGoal, healthGoalField);
 
 
@@ -198,9 +196,8 @@ public class GameSelectionView {
     goldGoalBox.getChildren().addAll(enableGoldGoal, goldGoalField);
 
 
-    enableGoldGoal.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-      goldGoalField.setDisable(!enableGoldGoal.isSelected());
-    });
+    enableGoldGoal.addEventHandler(MouseEvent.MOUSE_CLICKED, event ->
+            goldGoalField.setDisable(!enableGoldGoal.isSelected()));
 
     VBox goalBox = new VBox();
     goalBox.setAlignment(Pos.CENTER);
