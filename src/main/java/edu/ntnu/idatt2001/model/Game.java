@@ -106,9 +106,13 @@ public class Game {
         }
     }
 
+    /**
+     * Restarts the game.
+     */
     public void restartGame() {
         //TODO restartGame() function
-        Game.getInstance().setPlayer(new Player.PlayerBuilder(Game.getInstance().getPlayer().getName()).build());
+        Game.getInstance().setPlayer(
+                new Player.PlayerBuilder(Game.getInstance().getPlayer().getName()).build());
         passageHistory.clear();
         linkHistory.clear();
     }

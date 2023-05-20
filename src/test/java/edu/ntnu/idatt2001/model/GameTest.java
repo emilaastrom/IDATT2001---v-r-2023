@@ -3,7 +3,6 @@ package edu.ntnu.idatt2001.model;
 import edu.ntnu.idatt2001.model.goal.Goal;
 import edu.ntnu.idatt2001.model.goal.GoldGoal;
 import edu.ntnu.idatt2001.model.goal.HealthGoal;
-import edu.ntnu.idatt2001.model.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

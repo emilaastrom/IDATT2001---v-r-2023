@@ -1,16 +1,14 @@
 package edu.ntnu.idatt2001.model.action;
 
-import edu.ntnu.idatt2001.model.action.*;
+import static org.junit.jupiter.api.Assertions.*;
+
 import edu.ntnu.idatt2001.model.Link;
 import edu.ntnu.idatt2001.model.Player;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 public class ActionTest {
     GoldAction myGoldAction;

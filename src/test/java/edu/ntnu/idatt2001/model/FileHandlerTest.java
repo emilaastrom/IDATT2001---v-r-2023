@@ -1,22 +1,13 @@
 package edu.ntnu.idatt2001.model;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import edu.ntnu.idatt2001.model.action.GoldAction;
 import edu.ntnu.idatt2001.model.action.HealthAction;
 import edu.ntnu.idatt2001.model.action.ScoreAction;
-import edu.ntnu.idatt2001.model.FileHandler;
-import edu.ntnu.idatt2001.model.Link;
-import edu.ntnu.idatt2001.model.Passage;
-import edu.ntnu.idatt2001.model.Story;
-import edu.ntnu.idatt2001.model.goal.Goal;
-import javafx.stage.Stage;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 public class FileHandlerTest {
 
