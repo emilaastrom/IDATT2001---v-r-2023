@@ -1,6 +1,6 @@
 package edu.ntnu.idatt2001;
 
-import edu.ntnu.idatt2001.Model.Player;
+import edu.ntnu.idatt2001.model.Player;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

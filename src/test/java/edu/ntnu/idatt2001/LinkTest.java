@@ -1,9 +1,9 @@
 package edu.ntnu.idatt2001;
 
-import edu.ntnu.idatt2001.Model.Action.Action;
-import edu.ntnu.idatt2001.Model.Action.GoldAction;
-import edu.ntnu.idatt2001.Model.Action.HealthAction;
-import edu.ntnu.idatt2001.Model.Link;
+import edu.ntnu.idatt2001.model.action.Action;
+import edu.ntnu.idatt2001.model.action.GoldAction;
+import edu.ntnu.idatt2001.model.action.HealthAction;
+import edu.ntnu.idatt2001.model.Link;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
