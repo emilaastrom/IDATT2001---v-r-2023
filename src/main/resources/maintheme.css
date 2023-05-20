@@ -3,7 +3,7 @@
     src: url('textFont.otf');
 }
 
-.text, #DefaultText, #contentText{
+#DefaultText, #contentText{
     /* Changes here affect all text elements, including text inside buttons*/
     -fx-fill: #ffffff;
     -fx-font-size: 20;
@@ -73,6 +73,7 @@
     -fx-text-fill: rgb(255,255,255);
     -fx-background-radius: 5px;
     -fx-font-family: 'Retro Gaming';
+    -fx-font-size: 20px;
     -fx-pref-width: 400;
 }
 
@@ -86,6 +87,16 @@
 #linkButton{
     /* Changes here only affect the link button */
     -fx-padding: 5px 20px 5px 20px;
+}
+#endButton{
+    -fx-padding: 5px 0px 5px 0px;
+    -fx-background-image: url("../resources/goldButton.png");
+    -fx-background-repeat: no-repeat no-repeat;;
+    -fx-background-size: cover, auto;
+    -fx-border-width: 0px;
+    -fx-pref-width: 464px;
+    -fx-pref-height: 58px;
+    -fx-text-fill: Black;
 }
 
 .button:hover{
@@ -139,6 +150,12 @@ titleText{
     /* Changes here only affect the title text */
     -fx-fill: #ffffff;
     -fx-font-size: 30;
+    -fx-font-family: 'Retro Gaming';
+}
+
+#goalText{
+    /* Changes here only affect the title text */
+    -fx-font-size: 20;
     -fx-font-family: 'Retro Gaming';
 }
 

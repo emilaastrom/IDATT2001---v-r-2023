@@ -1,7 +1,7 @@
 package edu.ntnu.idatt2001;
 
-import edu.ntnu.idatt2001.Controller.*;
-import edu.ntnu.idatt2001.View.*;
+import edu.ntnu.idatt2001.controller.*;
+import edu.ntnu.idatt2001.view.*;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
@@ -17,6 +17,8 @@ public class Main extends Application {
   private static SettingsView mainMenuSettingsView;
   private static SettingsView gameSettingsView;
   private static MainMenuView mainMenuView;
+  private static ExitConfirmationController exitConfirmationController;
+  private static ExitConfirmationView exitConfirmationView;
   @Override
   public void start(Stage primaryStage) {
     stage = primaryStage;
@@ -28,8 +30,8 @@ public class Main extends Application {
     dimmer.setId("mainWindowDimmer");
 
 
-    ExitConfirmationController exitConfirmationController = new ExitConfirmationController();
-    ExitConfirmationView exitConfirmationView = new ExitConfirmationView(dimmer);
+    exitConfirmationController = new ExitConfirmationController();
+    exitConfirmationView = new ExitConfirmationView(dimmer);
 
     InventoryController inventoryController = new InventoryController();
     inventoryView = new InventoryView(inventoryController);
@@ -83,6 +85,10 @@ public class Main extends Application {
 
   public static void showGameSettings(){
     gameSettingsView.showStage();
+  }
+
+  public static void showExitConfirmation(){
+    exitConfirmationView.mainMenuConfirmation(mainMenuView.getRoot());
   }
 
 }
