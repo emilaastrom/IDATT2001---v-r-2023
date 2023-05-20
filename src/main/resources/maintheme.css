@@ -104,6 +104,18 @@
     -fx-padding: 5px 20px 5px 20px;
 }
 
+#brokenLinkButton{
+    /* Changes here only affect the broken link button */
+    -fx-padding: 5px 20px 5px 20px;
+    -fx-background-color: rgba(215, 22, 22, 0.7);
+}
+
+#brokenLinkButton:hover{
+    /* Changes here only affect the broken link button when hovering */
+    -fx-background-color: rgba(215, 22, 22, 0.7);
+    -fx-cursor: default;
+}
+
 .button:hover{
     /* Changes button style when hovering */
     -fx-background-color: rgba(130, 178, 106, 0.7);
@@ -192,12 +204,18 @@ titleText{
     -fx-background-size: cover, auto;
 }
 .dialog-pane > *.content.label{
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 15;
+    -fx-font-family: 'Retro Gaming';
     -fx-alignment: center;
     -fx-wrap-text: true;
     -fx-padding: 50, 0, 50, 0;
 }
 
 .dialog-pane:header *.header-panel *.label{
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 20;
+    -fx-font-family: 'Retro Gaming';
     -fx-alignment: center;
 }
 

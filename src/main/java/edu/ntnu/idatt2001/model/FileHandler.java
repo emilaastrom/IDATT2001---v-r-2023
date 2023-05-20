@@ -1,5 +1,6 @@
 package edu.ntnu.idatt2001.model;
 
+import edu.ntnu.idatt2001.controller.UserInformer;
 import edu.ntnu.idatt2001.model.action.GoldAction;
 import edu.ntnu.idatt2001.model.action.HealthAction;
 import edu.ntnu.idatt2001.model.action.InventoryAction;
@@ -241,6 +242,9 @@ public class FileHandler {
       Stage stage, String path, String playerName, List<Goal> playerGoals) {
     try {
       Story story = FileHandler.readFile(path);
+      if (story.getBrokenLinks().size()>0){
+        UserInformer.errorWarning("The story you are trying to open has broken links.", "The broken links will be marked red in the game.");
+      }
       try {
         Player player = new Player.PlayerBuilder(playerName).build();
         Game.getInstance().setPlayer(player);
