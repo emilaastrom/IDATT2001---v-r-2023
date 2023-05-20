@@ -11,8 +11,7 @@ import javafx.util.Duration;
  */
 public class MusicController {
   private static MediaPlayer mediaPlayer;
-  private static final Slider volumeSlider = new Slider(0, 100, 100);
-  private static final Slider volumeSlider2 = new Slider(0, 100, 100);
+  private static final Slider volumeSlider = new Slider(0, 100, 50);
 
   /**
    * Play music.
@@ -23,6 +22,7 @@ public class MusicController {
     mediaPlayer = new MediaPlayer(sound);
     mediaPlayer.setOnEndOfMedia(() -> mediaPlayer.seek(Duration.ZERO));
     mediaPlayer.play();
+    mediaPlayer.volumeProperty().bind(volumeSlider.valueProperty().divide(200));
   }
 
   /**
@@ -35,15 +35,7 @@ public class MusicController {
   /**
    * gets the volume slider.
    */
-  public static Slider getVolumeSlider(boolean isMainMenu) {
-    if (isMainMenu) {
-      return volumeSlider2;
-    } else {
-      return volumeSlider;
-    }
-  }
-
-  public static MediaPlayer getMediaPlayer() {
-    return mediaPlayer;
+  public static Slider getVolumeSlider() {
+    return volumeSlider;
   }
 }

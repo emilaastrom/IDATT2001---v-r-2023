@@ -12,10 +12,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Separator;
 import javafx.scene.control.Slider;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -30,11 +27,15 @@ public class SettingsView {
   private final BorderPane settingsRoot;
   private final SettingsController controller;
   private Stage stage;
-  private final Pane superRoot;
   private final BorderPane dimmer;
-  private final Boolean isGameSettings;
   private final PathsView pathsView;
-  private Slider settingsSoundSlider = new Slider();
+  private final VBox settingsListBox = new VBox();
+  private final Button restartButton = new Button("Restart");
+  private final Button mainMenuButton = new Button("Main menu");
+  private final Separator separator = new Separator(Orientation.HORIZONTAL);
+  private final VBox settingsSoundBox = new VBox();
+  private final HBox changeThemeBox = new HBox();
+
 
 
   /**
@@ -42,22 +43,16 @@ public class SettingsView {
    *
    * @param controller     the settings controller
    * @param pathsView      the paths view
-   * @param superRoot      the super root
    * @param dimmer         the dimmer
-   * @param isGameSettings the is game settings
    */
   public SettingsView(
           SettingsController controller,
           PathsView pathsView,
-          Pane superRoot,
-          BorderPane dimmer,
-          Boolean isGameSettings) {
+          BorderPane dimmer) {
     this.pathsView = pathsView;
     this.controller = controller;
     settingsRoot = new BorderPane();
     settingsRoot.setId("SettingsRoot");
-    this.isGameSettings = isGameSettings;
-    this.superRoot = superRoot;
     this.dimmer = dimmer;
 
     createAndConfigureStage();
@@ -86,7 +81,6 @@ public class SettingsView {
     settingsTitleBox.getChildren().add(settingsTitle);
     settingsTitleBox.setAlignment(Pos.CENTER);
 
-    HBox changeThemeBox = new HBox();
     changeThemeBox.setSpacing(15);
     changeThemeBox.setAlignment(Pos.CENTER);
     changeThemeBox.setMinWidth(200);
@@ -104,24 +98,26 @@ public class SettingsView {
     themeButtonRight.setMaxSize(50, 50);
     changeThemeBox.getChildren().addAll(themeButtonLeft, currentThemeBox, themeButtonRight);
     themeButtonLeft.setOnAction(event -> {
-      superRoot.setBackground(BackgroundController.rotateBackground());
+      Background background = BackgroundController.rotateBackground();
+      controller.getMainMenuRoot().setBackground(background);
+      controller.getPathsRoot().setBackground(background);
       currentThemeText.setText(BackgroundController.getBackgroundString());
     });
     themeButtonRight.setOnAction(event -> {
-      superRoot.setBackground(BackgroundController.rotateBackground());
+      Background background = BackgroundController.rotateBackground();
+      controller.getMainMenuRoot().setBackground(background);
+      controller.getPathsRoot().setBackground(background);
       currentThemeText.setText(BackgroundController.getBackgroundString());
     });
 
-    VBox settingsSoundBox = new VBox();
     settingsSoundBox.setAlignment(Pos.CENTER);
     Button muteButton = new Button("Stop music");
     muteButton.setMaxWidth(284);
-
-    settingsSoundSlider = MusicController.getVolumeSlider(isGameSettings);
-    System.out.println(settingsSoundSlider.getValue());
+    settingsSoundBox.getChildren().addAll(muteButton);
+    Slider settingsSoundSlider = MusicController.getVolumeSlider();
     settingsSoundSlider.setMaxWidth(284);
 
-    settingsSoundBox.getChildren().addAll(muteButton,settingsSoundSlider);
+    settingsSoundBox.getChildren().addAll(settingsSoundSlider);
 
     muteButton.setOnAction(event -> {
       if (muteButton.getText().equals("Stop music")) {
@@ -130,17 +126,13 @@ public class SettingsView {
       } else {
         muteButton.setText("Stop music");
         MusicController.playMusic();
-        MusicController.getMediaPlayer().volumeProperty().bind(settingsSoundSlider.valueProperty().divide(200));
       }
     });
 
     //VBox for containing the different buttons and volume slider in settings
-    VBox settingsListBox = new VBox();
     settingsListBox.setAlignment(Pos.CENTER);
     settingsListBox.setSpacing(30);
-    //Adding in game settings if opened from pathsView
-    if (isGameSettings) {
-      Button restartButton = new Button("Restart");
+
       restartButton.setMaxWidth(200);
       restartButton.setOnAction(event -> {
         //TODO RESTART GAME
@@ -150,7 +142,6 @@ public class SettingsView {
         Main.updateStage();
         closeStage();
       });
-      Button mainMenuButton = new Button("Main menu");
       mainMenuButton.setMaxWidth(200);
       mainMenuButton.setOnAction(event -> {
         //TODO MAIN MENU
@@ -158,10 +149,9 @@ public class SettingsView {
         controller.showMainMenu();
         closeStage();
       });
-      Separator separator = new Separator(Orientation.HORIZONTAL);
       separator.setMaxWidth(350);
       settingsListBox.getChildren().addAll(restartButton, mainMenuButton, separator);
-    }
+
     //Adding general settings to list of buttons in settings
     settingsListBox.getChildren().addAll(changeThemeBox, settingsSoundBox);
 
@@ -187,10 +177,15 @@ public class SettingsView {
     stage.addEventHandler(WindowEvent.WINDOW_HIDDEN, event -> dimmer.setVisible(false));
   }
 
-  public void showStage() {
+  public void showStage(boolean isGameSettings) {
     stage.show();
-    dimmer.setVisible(true);
-    MusicController.getMediaPlayer().volumeProperty().bind(settingsSoundSlider.valueProperty().divide(200));
+    if (isGameSettings) {
+      settingsListBox.getChildren().clear();
+      settingsListBox.getChildren().addAll(restartButton, mainMenuButton, separator, changeThemeBox, settingsSoundBox);
+    } else {
+      settingsListBox.getChildren().clear();
+      settingsListBox.getChildren().addAll(changeThemeBox, settingsSoundBox);
+    }
   }
 
   private void closeStage() {
