@@ -12,7 +12,7 @@ public class HelpView {
   private final BorderPane gameRoot;
   Button setupHelp;
   Button gameHelp;
-  private StackPane superRoot;
+  private final StackPane superRoot;
   private final HelpController controller;
 
 
@@ -168,12 +168,8 @@ public class HelpView {
   }
 
   private void createAndLayoutControls() {
-    setupHelp.addEventHandler(javafx.scene.input.MouseEvent.MOUSE_CLICKED, event -> {
-      showSetupHelp();
-    });
-    gameHelp.addEventHandler(javafx.scene.input.MouseEvent.MOUSE_CLICKED, event -> {
-      showGameHelp();
-    });
+    setupHelp.addEventHandler(javafx.scene.input.MouseEvent.MOUSE_CLICKED, event -> showSetupHelp());
+    gameHelp.addEventHandler(javafx.scene.input.MouseEvent.MOUSE_CLICKED, event -> showGameHelp());
   }
 
   private void updateControllerFromListeners() {
