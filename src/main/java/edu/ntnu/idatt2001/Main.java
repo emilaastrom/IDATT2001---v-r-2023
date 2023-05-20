@@ -62,19 +62,18 @@ public class Main extends Application {
     mainMenuView = new MainMenuView(mainMenuController, gameSelectionView.getRoot(), dimmer);
 
     SettingsController settingsController = new SettingsController(mainMenuView.getRoot());
+    gameSettingsView = new SettingsView(
+        settingsController,
+        pathsView,
+        pathsView.getRoot(),
+        dimmer,
+        true);
     mainMenuSettingsView = new SettingsView(
             settingsController,
             pathsView,
             mainMenuView.getRoot(),
             dimmer,
             false);
-
-    gameSettingsView = new SettingsView(
-            settingsController,
-            pathsView,
-            pathsView.getRoot(),
-            dimmer,
-            true);
 
 
 

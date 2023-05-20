@@ -34,6 +34,7 @@ public class SettingsView {
   private final BorderPane dimmer;
   private final Boolean isGameSettings;
   private final PathsView pathsView;
+  private Slider settingsSoundSlider = new Slider();
 
 
   /**
@@ -69,7 +70,7 @@ public class SettingsView {
   }
   
   private void createAndConfigureStage() {
-    Scene scene = new Scene(settingsRoot, 500, 750);
+    Scene scene = new Scene(settingsRoot, 500, 600);
     scene.getStylesheets().add("file:src/main/resources/maintheme.css");
     this.stage = new Stage();
     stage.initModality(Modality.APPLICATION_MODAL);
@@ -115,14 +116,12 @@ public class SettingsView {
     settingsSoundBox.setAlignment(Pos.CENTER);
     Button muteButton = new Button("Stop music");
     muteButton.setMaxWidth(284);
-    settingsSoundBox.getChildren().addAll(muteButton);
 
-    VBox settingsSoundSliderBox = new VBox();
-    Slider settingsSoundSlider = MusicController.getVolumeSlider();
+    settingsSoundSlider = MusicController.getVolumeSlider(isGameSettings);
+    System.out.println(settingsSoundSlider.getValue());
     settingsSoundSlider.setMaxWidth(284);
-    settingsSoundSliderBox.setAlignment(Pos.CENTER);
 
-    settingsSoundBox.getChildren().addAll(settingsSoundSlider);
+    settingsSoundBox.getChildren().addAll(muteButton,settingsSoundSlider);
 
     muteButton.setOnAction(event -> {
       if (muteButton.getText().equals("Stop music")) {
@@ -131,6 +130,7 @@ public class SettingsView {
       } else {
         muteButton.setText("Stop music");
         MusicController.playMusic();
+        MusicController.getMediaPlayer().volumeProperty().bind(settingsSoundSlider.valueProperty().divide(200));
       }
     });
 
@@ -163,7 +163,7 @@ public class SettingsView {
       settingsListBox.getChildren().addAll(restartButton, mainMenuButton, separator);
     }
     //Adding general settings to list of buttons in settings
-    settingsListBox.getChildren().addAll(changeThemeBox, settingsSoundSliderBox, settingsSoundBox);
+    settingsListBox.getChildren().addAll(changeThemeBox, settingsSoundBox);
 
     //Creating exit button in its own VBox for alignment purposes
     VBox settingsExitBox = new VBox();
@@ -189,6 +189,8 @@ public class SettingsView {
 
   public void showStage() {
     stage.show();
+    dimmer.setVisible(true);
+    MusicController.getMediaPlayer().volumeProperty().bind(settingsSoundSlider.valueProperty().divide(200));
   }
 
   private void closeStage() {
