@@ -145,7 +145,7 @@ public class SettingsView {
       restartButton.setOnAction(event -> {
         //TODO RESTART GAME
         controller.restartGame();
-        pathsView.setCurrentPassageVBox(pathsView.showPassages(Game.getInstance().begin()));
+        pathsView.setCurrentPassageVbox(pathsView.showPassages(Game.getInstance().begin()));
         pathsView.updateBottomBox();
         Main.updateStage();
         closeStage();

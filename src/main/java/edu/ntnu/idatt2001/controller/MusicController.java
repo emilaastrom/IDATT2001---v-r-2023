@@ -32,7 +32,9 @@ public class MusicController {
     mediaPlayer.pause();
   }
 
-
+  /**
+   * gets the volume slider.
+   */
   public static Slider getVolumeSlider() {
     return volumeSlider;
   }

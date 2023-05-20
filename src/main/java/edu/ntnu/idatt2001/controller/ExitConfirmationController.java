@@ -9,8 +9,4 @@ public class ExitConfirmationController {
 
   }
 
-/*  public void showMainMenu(Stage stage) {
-      MainMenuView mainMenuView = new MainMenuView(new MainMenuController(stage), stage);
-      Main.changeScene(mainMenuView.getRoot(),stage);
-  }*/
 }

@@ -23,15 +23,17 @@ public class MainMenuController {
     this.exitConfirmationView = exitConfirmationView;
   }
 
-  public void showGameSelection() {
-    Main.changeScene(gameSelectionRoot);
-  }
-
+  /**
+   * Shows the game selection.
+   */
   public void showSettings(BorderPane dimmer) {
     Main.showMainMenuSettings();
     dimmer.setVisible(true);
   }
 
+  /**
+   * Shows exit confirmation.
+   */
   public void showExitConfirmation(BorderPane dimmer) {
     dimmer.setVisible(true);
     exitConfirmationView.exitConfirmation();

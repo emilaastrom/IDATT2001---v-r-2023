@@ -10,15 +10,25 @@ import javafx.scene.layout.Pane;
 public class SettingsController {
   private final Pane mainMenuRoot;
 
+  /**
+   * Instantiates a new SettingsController.
+   *
+   * @param mainMenuRoot main menu root
+   */
   public SettingsController(Pane mainMenuRoot) {
     this.mainMenuRoot = mainMenuRoot;
   }
 
-
+  /**
+   * Shows the main menu.
+   */
   public void showMainMenu() {
-    Main.changeScene(mainMenuRoot);
+    Main.showExitConfirmation();
   }
 
+  /**
+   * Restarts the game.
+   */
   public void restartGame() {
     Game.getInstance().restartGame();
   }

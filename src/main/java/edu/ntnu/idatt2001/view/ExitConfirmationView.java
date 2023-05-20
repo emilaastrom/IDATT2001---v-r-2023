@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -27,11 +28,11 @@ public class ExitConfirmationView {
   public ExitConfirmationView(BorderPane dimmer) {
     this.dimmer = dimmer;
     BorderPane exitConfirmationRoot = new BorderPane();
-    Scene exitConfirmationScene = new Scene(exitConfirmationRoot, 500, 150);
     exitConfirmationStage.setTitle("Exit confirmation");
     exitConfirmationStage.initModality(Modality.APPLICATION_MODAL);
     exitConfirmationStage.setResizable(false);
     exitConfirmationStage.initStyle(javafx.stage.StageStyle.UNDECORATED);
+    Scene exitConfirmationScene = new Scene(exitConfirmationRoot, 500, 150);
     exitConfirmationRoot.setId("ExitConfirmationRoot");
     exitConfirmationStage.setScene(exitConfirmationScene);
     exitConfirmationButton.setId("ExitConfirmationButton");
@@ -65,14 +66,13 @@ public class ExitConfirmationView {
   /**
    * Main menu confirmation.
    */
-  public void mainMenuConfirmation() {
+  public void mainMenuConfirmation(Pane root) {
     exitConfirmationButton.setOnAction(event -> {
-      Main.mainMenu();
+      Main.changeScene(root);
       exitConfirmationStage.close();
       dimmer.setVisible(false);
       Main.updateStage();
     });
-    exitConfirmationStage.close();
     exitConfirmationCancelButton.setOnAction(event -> {
       dimmer.setVisible(false);
       exitConfirmationStage.close();

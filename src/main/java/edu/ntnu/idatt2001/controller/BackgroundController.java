@@ -44,25 +44,50 @@ public class BackgroundController {
             + pathString.substring(index).substring(1);
   }
 
+  /**
+   * Sets the background to forest.
+   *
+   * @return the new background
+   */
   public static Background setBackgroundForest() {
     currentBackground = setBackground("file:src/main/resources/backgroundforest.png");
     return currentBackground;
   }
 
+  /**
+   * Sets the background to space.
+   *
+   * @return the new background
+   */
   public static Background setBackgroundSpace() {
     currentBackground = setBackground("file:src/main/resources/backgroundspace.png");
     return currentBackground;
   }
 
+  /**
+   * Sets the background to pirate.
+   *
+   * @return the new background
+   */
   public static Background setBackgroundPirate() {
     currentBackground = setBackground("file:src/main/resources/backgroundpirate.png");
     return currentBackground;
   }
 
+  /**
+   * Gets the current background.
+   *
+   * @return the current background
+   */
   public static Background getCurrentBackground() {
     return currentBackground;
   }
 
+  /**
+   * Gets the background string.
+   *
+   * @return the background string
+   */
   public static String getBackgroundString() {
     return backgroundString;
   }

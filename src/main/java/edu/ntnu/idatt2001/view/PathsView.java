@@ -1,12 +1,21 @@
 package edu.ntnu.idatt2001.view;
 
+import edu.ntnu.idatt2001.Main;
 import edu.ntnu.idatt2001.controller.BackgroundController;
 import edu.ntnu.idatt2001.controller.PathsController;
 import edu.ntnu.idatt2001.controller.UserInformer;
-import edu.ntnu.idatt2001.Main;
-import edu.ntnu.idatt2001.model.*;
+import edu.ntnu.idatt2001.model.Game;
+import edu.ntnu.idatt2001.model.Link;
+import edu.ntnu.idatt2001.model.Passage;
+import edu.ntnu.idatt2001.model.Player;
+import edu.ntnu.idatt2001.model.Story;
 import edu.ntnu.idatt2001.model.action.Action;
 import edu.ntnu.idatt2001.model.goal.Goal;
+import edu.ntnu.idatt2001.model.goal.GoldGoal;
+import edu.ntnu.idatt2001.model.goal.HealthGoal;
+import edu.ntnu.idatt2001.model.goal.ScoreGoal;
+import java.util.List;
+import java.util.Objects;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
@@ -15,18 +24,23 @@ import javafx.scene.control.Separator;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.*;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
-import java.util.List;
-import java.util.Objects;
-
+/**
+ * The view for the paths window.
+ */
 public class PathsView {
   private String currentStylesheet;
   private Passage currentPassage;
-  private VBox currentPassageVBox = new VBox();
+  private VBox currentPassageVbox = new VBox();
   static Player player;
   static List<Goal> goals;
   static Game game = Game.getInstance();
@@ -34,26 +48,37 @@ public class PathsView {
   private Stage inventoryStage;
   private BorderPane pathsWindowCenterBox = new BorderPane();
   private BorderPane pathsWindowBottomBox = new BorderPane();
-  private HBox pathsWindowBottomBoxHBox = new HBox();
-  private HBox pathsWindowBottomBoxHBox2 = new HBox();
-  private Text pathsWindowBottomBoxHBoxTextScore = new Text();
-  private Text pathsWindowBottomBoxHBoxTextHeart = new Text();
-  private Text pathsWindowBottomBoxHBoxTextCoin = new Text();
-  private ImageView pathsWindowBottomBoxHBoxImageViewScore = new ImageView("file:src/main/resources/score.png");
-  private ImageView pathsWindowBottomBoxHBoxImageViewHeart = new ImageView("file:src/main/resources/heart.png");
-  private ImageView pathsWindowBottomBoxHBoxImageViewCoin = new ImageView("file:src/main/resources/coin.png");
-  private ImageView pathsWindowBottomBoxHBoxImageViewChest = new ImageView("file:src/main/resources/chest.png");
-  private ImageView pathsWindowBottomBoxHBox2ImageViewUndo = new ImageView("file:src/main/resources/undo.png");
-  private ImageView pathsWindowBottomBoxHBox2ImageViewSettings = new ImageView("file:src/main/resources/settings.png");
+  private HBox pathsWindowBottomBoxHbox = new HBox();
+  private HBox pathsWindowBottomBoxHbox2 = new HBox();
+  private Text pathsWindowBottomBoxHboxTextScore = new Text();
+  private Text pathsWindowBottomBoxHboxTextHeart = new Text();
+  private Text pathsWindowBottomBoxHboxTextCoin = new Text();
+  private ImageView pathsWindowBottomBoxHboxImageViewScore = new ImageView(
+      "file:src/main/resources/score.png");
+  private ImageView pathsWindowBottomBoxHboxImageViewHeart = new ImageView(
+      "file:src/main/resources/heart.png");
+  private ImageView pathsWindowBottomBoxHboxImageViewCoin = new ImageView(
+      "file:src/main/resources/coin.png");
+  private ImageView pathsWindowBottomBoxHboxImageViewChest = new ImageView(
+      "file:src/main/resources/chest.png");
+  private ImageView pathsWindowBottomBoxHbox2ImageViewUndo = new ImageView(
+      "file:src/main/resources/undo.png");
+  private ImageView pathsWindowBottomBoxHbox2ImageViewSettings = new ImageView(
+      "file:src/main/resources/settings.png");
   private BorderPane pathsWindow = new BorderPane();
-  private VBox pathsWindowVBox = new VBox();
-
-  private PathsController controller ;
+  private VBox pathsWindowVbox = new VBox();
+  private PathsController controller;
   private BorderPane pathsDimmer;
-
   StackPane pathsRoot = new StackPane();
+  VBox pathsWindowCenterBoxVbox = new VBox();
+  Text titleText = new Text();
+  Text contentText = new Text();
 
+  /**
+   * Constructor for PathsView.
 
+   * @param controller the controller for the paths window.
+   */
   public PathsView(PathsController controller) {
     this.controller = controller;
 
@@ -65,9 +90,9 @@ public class PathsView {
 
     observeModelAndUpdateControls();
 
-    pathsWindowCenterBox.setCenter(currentPassageVBox);
+    pathsWindowCenterBox.setCenter(currentPassageVbox);
 
-}
+  }
 
   private void createAndConfigurePane() {
     pathsRoot.setBackground(BackgroundController.getCurrentBackground());
@@ -77,17 +102,17 @@ public class PathsView {
     pathsWindowCenterBox.setPrefWidth(500);
     pathsWindowCenterBox.setPrefHeight(400);
     pathsWindowCenterBox.setStyle(
-        "-fx-background-color: rgb(0,0,0,0.5);" +
-            "-fx-border-color: rgb(255,255,255);" +
-            "-fx-border-width: 5px;"
+        "-fx-background-color: rgb(0,0,0,0.5);"
+            + "-fx-border-color: rgb(255,255,255);"
+            + "-fx-border-width: 5px;"
     );
 
     pathsWindowBottomBox.setPrefWidth(500);
     pathsWindowBottomBox.setPrefHeight(100);
     pathsWindowBottomBox.setStyle(
-        "-fx-background-color: rgb(0,0,0,0.5);" +
-            "-fx-border-color: rgb(255,255,255);" +
-            "-fx-border-width: 5px;"
+        "-fx-background-color: rgb(0,0,0,0.5);"
+            + "-fx-border-color: rgb(255,255,255);"
+            + "-fx-border-width: 5px;"
     );
 
     updateBottomBox();
@@ -97,16 +122,16 @@ public class PathsView {
     pathsDimmer.setMouseTransparent(true);
     pathsDimmer.setStyle("-fx-background-color: rgba(0, 0, 0, 0.5);");
     pathsDimmer.setId("mainWindowDimmer");
-    pathsWindowVBox.setSpacing(30);
-    pathsWindowVBox.getChildren().addAll(pathsWindowCenterBox, pathsWindowBottomBox);
-    pathsWindowVBox.setAlignment(javafx.geometry.Pos.CENTER);
+    pathsWindowVbox.setSpacing(30);
+    pathsWindowVbox.getChildren().addAll(pathsWindowCenterBox, pathsWindowBottomBox);
+    pathsWindowVbox.setAlignment(javafx.geometry.Pos.CENTER);
 
-    currentPassageVBox = showPassages(currentPassage);
-    pathsWindowCenterBox.setCenter(currentPassageVBox);
+    currentPassageVbox = showPassages(currentPassage);
+    pathsWindowCenterBox.setCenter(currentPassageVbox);
 
     pathsWindow.setMinWidth(0);
     pathsWindow.setMinHeight(0);
-    pathsWindow.setCenter(pathsWindowVBox);
+    pathsWindow.setCenter(pathsWindowVbox);
     pathsWindow.setPadding(new javafx.geometry.Insets(50, 200, 50, 200));
     pathsWindow.setStyle("-fx-background-color: rgb(0, 0, 0, 0)");
 
@@ -114,62 +139,74 @@ public class PathsView {
 
     pathsRoot.getChildren().addAll(pathsWindow, pathsDimmer);
 
-    }
+  }
 
-    private void createAndLayoutControls() {
+  private void createAndLayoutControls() {
 
-    }
+  }
 
-    private void updateControllerFromListeners() {
+  private void updateControllerFromListeners() {
 
-    }
+  }
 
-    private void observeModelAndUpdateControls() {
+  private void observeModelAndUpdateControls() {
 
-    }
+  }
 
-    public StackPane getRoot() {
-        return pathsRoot;
-    }
+  /**
+   * Method for getting the root of the paths window.
+   */
+  public StackPane getRoot() {
+    return pathsRoot;
+  }
 
+  /**
+   * Method for updating the bottom box of the paths window.
+   */
   public void updateBottomBox() {
     pathsWindowBottomBox.getChildren().clear();
-    pathsWindowBottomBoxHBox.getChildren().clear();
-    pathsWindowBottomBoxHBox.setSpacing(5);
-    pathsWindowBottomBoxHBox.setAlignment(Pos.CENTER_LEFT);
-    pathsWindowBottomBoxHBox.setPadding(new Insets(0, 0, 0, 20));
+    pathsWindowBottomBoxHbox.getChildren().clear();
+    pathsWindowBottomBoxHbox.setSpacing(5);
+    pathsWindowBottomBoxHbox.setAlignment(Pos.CENTER_LEFT);
+    pathsWindowBottomBoxHbox.setPadding(new Insets(0, 0, 0, 20));
 
-    pathsWindowBottomBoxHBoxTextScore = new Text(Integer.toString(Game.getInstance().getPlayer().getScore()));
-    pathsWindowBottomBoxHBoxTextHeart = new Text(Integer.toString(Game.getInstance().getPlayer().getHealth()));
-    pathsWindowBottomBoxHBoxTextCoin = new Text(Integer.toString(Game.getInstance().getPlayer().getGold()));
+    pathsWindowBottomBoxHboxTextScore = new Text(
+        Integer.toString(Game.getInstance().getPlayer().getScore()));
+    pathsWindowBottomBoxHboxTextHeart = new Text(
+        Integer.toString(Game.getInstance().getPlayer().getHealth()));
+    pathsWindowBottomBoxHboxTextCoin = new Text(
+        Integer.toString(Game.getInstance().getPlayer().getGold()));
 
-    pathsWindowBottomBoxHBoxTextScore.setId("scoreText");
-    pathsWindowBottomBoxHBoxTextHeart.setId("heartText");
-    pathsWindowBottomBoxHBoxTextCoin.setId("coinText");
-    pathsWindowBottomBoxHBox.setFillHeight(true);
+    pathsWindowBottomBoxHboxTextScore.setId("scoreText");
+    pathsWindowBottomBoxHboxTextHeart.setId("heartText");
+    pathsWindowBottomBoxHboxTextCoin.setId("coinText");
+    pathsWindowBottomBoxHbox.setFillHeight(true);
 
     HBox scoreBox = new HBox();
     scoreBox.setSpacing(10);
     scoreBox.setAlignment(Pos.CENTER_LEFT);
     scoreBox.setMinWidth(175);
     scoreBox.setMaxWidth(175);
-    scoreBox.getChildren().addAll(pathsWindowBottomBoxHBoxImageViewScore, pathsWindowBottomBoxHBoxTextScore);
+    scoreBox.getChildren().addAll(
+        pathsWindowBottomBoxHboxImageViewScore, pathsWindowBottomBoxHboxTextScore);
 
     HBox heartBox = new HBox();
     heartBox.setSpacing(10);
     heartBox.setAlignment(Pos.CENTER_LEFT);
     heartBox.setMinWidth(175);
     heartBox.setMaxWidth(175);
-    heartBox.getChildren().addAll(pathsWindowBottomBoxHBoxImageViewHeart, pathsWindowBottomBoxHBoxTextHeart);
+    heartBox.getChildren().addAll(
+        pathsWindowBottomBoxHboxImageViewHeart, pathsWindowBottomBoxHboxTextHeart);
 
     HBox coinBox = new HBox();
     coinBox.setSpacing(10);
     coinBox.setAlignment(Pos.CENTER_LEFT);
     coinBox.setMinWidth(175);
     coinBox.setMaxWidth(175);
-    coinBox.getChildren().addAll(pathsWindowBottomBoxHBoxImageViewCoin, pathsWindowBottomBoxHBoxTextCoin);
+    coinBox.getChildren().addAll(
+        pathsWindowBottomBoxHboxImageViewCoin, pathsWindowBottomBoxHboxTextCoin);
 
-    pathsWindowBottomBoxHBox.getChildren().addAll(
+    pathsWindowBottomBoxHbox.getChildren().addAll(
         scoreBox,
         heartBox,
         coinBox);
@@ -178,16 +215,16 @@ public class PathsView {
     chestPane.setId("chestPane");
     chestPane.setMinWidth(75);
     chestPane.setMinHeight(75);
-    StackPane.setAlignment(pathsWindowBottomBoxHBoxImageViewChest, Pos.CENTER);
-    chestPane.getChildren().add(pathsWindowBottomBoxHBoxImageViewChest);
+    StackPane.setAlignment(pathsWindowBottomBoxHboxImageViewChest, Pos.CENTER);
+    chestPane.getChildren().add(pathsWindowBottomBoxHboxImageViewChest);
     chestPane.setPadding(new Insets(0, 15, 0, 15));
 
     StackPane undoPane = new StackPane();
     undoPane.setId("undoPane");
     undoPane.setMinWidth(75);
     undoPane.setMinHeight(75);
-    StackPane.setAlignment(pathsWindowBottomBoxHBox2ImageViewUndo, Pos.CENTER);
-    undoPane.getChildren().add(pathsWindowBottomBoxHBox2ImageViewUndo);
+    StackPane.setAlignment(pathsWindowBottomBoxHbox2ImageViewUndo, Pos.CENTER);
+    undoPane.getChildren().add(pathsWindowBottomBoxHbox2ImageViewUndo);
     undoPane.setPadding(new Insets(0, 15, 0, 15));
     Tooltip undoTooltip = new Tooltip("Undo");
     Tooltip.install(undoPane, undoTooltip);
@@ -196,16 +233,16 @@ public class PathsView {
     settingsPane.setId("settingsPane");
     settingsPane.setMinWidth(75);
     settingsPane.setMinHeight(75);
-    StackPane.setAlignment(pathsWindowBottomBoxHBox2ImageViewSettings, Pos.CENTER);
-    settingsPane.getChildren().add(pathsWindowBottomBoxHBox2ImageViewSettings);
+    StackPane.setAlignment(pathsWindowBottomBoxHbox2ImageViewSettings, Pos.CENTER);
+    settingsPane.getChildren().add(pathsWindowBottomBoxHbox2ImageViewSettings);
     settingsPane.setPadding(new Insets(0, 15, 0, 15));
     Tooltip settingsTooltip = new Tooltip("Settings");
     Tooltip.install(settingsPane, settingsTooltip);
 
-    pathsWindowBottomBoxHBox2.getChildren().clear();
-    pathsWindowBottomBoxHBox2.setSpacing(0);
-    pathsWindowBottomBoxHBox2.setAlignment(Pos.CENTER_RIGHT);
-    pathsWindowBottomBoxHBox2.getChildren().addAll(
+    pathsWindowBottomBoxHbox2.getChildren().clear();
+    pathsWindowBottomBoxHbox2.setSpacing(0);
+    pathsWindowBottomBoxHbox2.setAlignment(Pos.CENTER_RIGHT);
+    pathsWindowBottomBoxHbox2.getChildren().addAll(
         new Separator(Orientation.VERTICAL),
         chestPane,
         new Separator(Orientation.VERTICAL),
@@ -213,11 +250,13 @@ public class PathsView {
         new Separator(Orientation.VERTICAL),
         settingsPane);
 
-    pathsWindowBottomBox.setLeft(pathsWindowBottomBoxHBox);
-    pathsWindowBottomBox.setRight(pathsWindowBottomBoxHBox2);
+    pathsWindowBottomBox.setLeft(pathsWindowBottomBoxHbox);
+    pathsWindowBottomBox.setRight(pathsWindowBottomBoxHbox2);
 
 
-    chestPane.addEventHandler(MouseEvent.MOUSE_ENTERED, event -> controller.showInventory(pathsWindowCenterBox.getWidth()/2, pathsWindowCenterBox.getHeight()/2, pathsDimmer));
+    chestPane.addEventHandler(MouseEvent.MOUSE_ENTERED, event ->
+        controller.showInventory(pathsWindowCenterBox.getWidth() / 2,
+            pathsWindowCenterBox.getHeight() / 2, pathsDimmer));
     chestPane.addEventHandler(MouseEvent.MOUSE_EXITED, event -> {
       controller.hideInventory(pathsDimmer);
     });
@@ -229,71 +268,174 @@ public class PathsView {
     settingsPane.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> controller.showSettings());
   }
 
+  /**
+   * Method for showing the passages.
+   */
   public VBox showPassages(Passage passage) {
-    try{
-      VBox pathsWindowCenterBoxVBox = new VBox();
-      pathsWindowCenterBoxVBox.setSpacing(40);
-      pathsWindowCenterBoxVBox.setAlignment(Pos.CENTER);
+    try {
+      pathsWindowCenterBoxVbox.setSpacing(40);
+      pathsWindowCenterBoxVbox.setAlignment(Pos.CENTER);
 
-      Text titleText = new Text();
       titleText.setText(Objects.requireNonNull(passage.getTitle()));
-     titleText.setId("titleText");
+      titleText.setId("titleText");
 
-      Text contentText = new Text();
       contentText.setText(Objects.requireNonNull(passage.getContent()));
       contentText.setId("contentText");
       contentText.setWrappingWidth(800);
       contentText.setTextAlignment(TextAlignment.CENTER);
 
-      pathsWindowCenterBoxVBox.getChildren().clear();
-      pathsWindowCenterBoxVBox.getChildren().addAll(titleText, contentText);
+      pathsWindowCenterBoxVbox.getChildren().clear();
+      pathsWindowCenterBoxVbox.getChildren().addAll(titleText, contentText);
 
-      VBox buttonsVBox = new VBox();
-      buttonsVBox.setSpacing(10);
-      buttonsVBox.setAlignment(Pos.CENTER);
-      controller.getCurrentPassageLinks(passage).forEach(link -> buttonsVBox.getChildren().add(newButton(link)));
+      VBox buttonsVbox = new VBox();
+      buttonsVbox.setSpacing(10);
+      buttonsVbox.setAlignment(Pos.CENTER);
+      if (controller.getCurrentPassageLinks(passage).isEmpty()) {
+        Button statsButton = new Button("View stats");
+        statsButton.setId("endButton");
+        buttonsVbox.getChildren().add(statsButton);
+        statsButton.setOnAction(event -> showStats());
 
-      pathsWindowCenterBoxVBox.getChildren().add(buttonsVBox);
-      return pathsWindowCenterBoxVBox;}
-    catch (Exception e){
+      } else {
+        controller.getCurrentPassageLinks(passage).forEach(
+            link -> buttonsVbox.getChildren().add(newButton(link)));
+      }
+      pathsWindowCenterBoxVbox.getChildren().add(buttonsVbox);
+      return pathsWindowCenterBoxVbox;
+    } catch (Exception e) {
       System.out.println("Error in writePassage");
       return null;
     }
   }
-  private Button newButton(Link link){
+
+  /**
+   * Method showing the stats of the player.
+   */
+  public void showStats() {
+    VBox contentVboxText = new VBox();
+    contentVboxText.setAlignment(Pos.CENTER);
+    pathsWindowCenterBoxVbox.setSpacing(10);
+    titleText.setText("Game Over\n");
+    if (Game.getInstance().getGoals().isEmpty()) {
+      contentText.setText(
+          Game.getInstance().getPlayer().getName() + " have reached the end of the game!");
+      contentVboxText.getChildren().add(contentText);
+    } else {
+      contentText.setText(Game.getInstance().getPlayer().getName() + "'s stats/goals:");
+      contentVboxText.getChildren().add(contentText);
+      for (Goal goal : Game.getInstance().getGoals()) {
+        if (goal instanceof ScoreGoal) {
+          Text scoreGoalText = new Text(
+              "Score: " + Game.getInstance().getPlayer().getScore() + "/"
+                  + ((ScoreGoal) goal).getScoreGoal());
+          if (goal.isFulfilled(Game.getInstance().getPlayer())) {
+            scoreGoalText.setFill(Color.GREEN);
+          } else {
+            scoreGoalText.setFill(Color.RED);
+          }
+          scoreGoalText.setId("goalText");
+          scoreGoalText.setTextAlignment(TextAlignment.CENTER);
+          contentVboxText.getChildren().add(scoreGoalText);
+        }
+        if (goal instanceof GoldGoal) {
+          Text goldGoalText = new Text(
+              "Gold: " + Game.getInstance().getPlayer().getGold() + "/"
+                  + ((GoldGoal) goal).getGoldGoal());
+          if (goal.isFulfilled(Game.getInstance().getPlayer())) {
+            goldGoalText.setFill(Color.GREEN);
+          } else {
+            goldGoalText.setFill(Color.RED);
+          }
+          goldGoalText.setId("goalText");
+          goldGoalText.setTextAlignment(TextAlignment.CENTER);
+          contentVboxText.getChildren().add(goldGoalText);
+        }
+        if (goal instanceof HealthGoal) {
+          Text healthGoalText = new Text(
+              "Health: " + Game.getInstance().getPlayer().getHealth() + "/"
+                  + ((HealthGoal) goal).getHealthGoal());
+          if (goal.isFulfilled(Game.getInstance().getPlayer())) {
+            healthGoalText.setFill(Color.GREEN);
+          } else {
+            healthGoalText.setFill(Color.RED);
+          }
+          healthGoalText.setId("goalText");
+          healthGoalText.setTextAlignment(TextAlignment.CENTER);
+          contentVboxText.getChildren().add(healthGoalText);
+        }
+      }
+    }
+
+    Button restartButton = new Button("Restart");
+    restartButton.setId("endButton");
+    restartButton.setOnAction(event -> {
+      try {
+        controller.restartGame();
+        setCurrentPassageVbox(showPassages(Game.getInstance().begin()));
+        updateBottomBox();
+        Main.updateStage();
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
+    });
+
+    Button exitButton = new Button("Main Menu");
+    exitButton.setId("endButton");
+    exitButton.setOnAction(event -> {
+      try {
+        Main.showExitConfirmation();
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
+    });
+
+    pathsWindowCenterBoxVbox.getChildren().clear();
+    pathsWindowCenterBoxVbox.getChildren().addAll(
+        titleText, contentVboxText, restartButton, exitButton);
+  }
+
+  /**
+   * Method for creating a button for a link.
+   */
+  private Button newButton(Link link) {
     Button linkButton = new Button();
     linkButton.setText(link.getText());
     linkButton.setPrefWidth(Region.USE_COMPUTED_SIZE);
     linkButton.setId("linkButton");
     linkButton.setOnAction(event -> {
-      for(Action action : link.getActions()) {
+      for (Action action : link.getActions()) {
         try {
           action.execute(Game.getInstance().getPlayer());
         } catch (Exception e) {
-          UserInformer.errorWarning("You can't do that action",e.getMessage());
-          //throw new RuntimeException(e);
+          UserInformer.errorWarning("You can't do that action", e.getMessage());
         }
       }
       updateBottomBox();
       currentPassage = game.go(link);
-      currentPassageVBox = showPassages(currentPassage);
-      pathsWindowCenterBox.setCenter(currentPassageVBox);
+      currentPassageVbox = showPassages(currentPassage);
+      pathsWindowCenterBox.setCenter(currentPassageVbox);
       Main.updateStage();
     });
     linkButton.setWrapText(true);
     return linkButton;
   }
 
-  public void undoMove(){
+  /**
+   * Method undoing the last move.
+   */
+  public void undoMove() {
     currentPassage = game.goSilent(game.goBack());
-    currentPassageVBox = showPassages(currentPassage);
-    pathsWindowCenterBox.setCenter(currentPassageVBox);
+    currentPassageVbox = showPassages(currentPassage);
+    pathsWindowCenterBox.setCenter(currentPassageVbox);
     updateBottomBox();
     Main.updateStage();
   }
 
-  public void setCurrentPassageVBox(VBox currentPassageVBox) {
-    this.currentPassageVBox = currentPassageVBox;
-    pathsWindowCenterBox.setCenter(currentPassageVBox);
+  /**
+   * Method for setting the current passage.
+   */
+  public void setCurrentPassageVbox(VBox currentPassageVbox) {
+    this.currentPassageVbox = currentPassageVbox;
+    pathsWindowCenterBox.setCenter(currentPassageVbox);
   }
 }

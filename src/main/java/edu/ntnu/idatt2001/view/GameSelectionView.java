@@ -80,6 +80,7 @@ public class GameSelectionView {
     Text currentPathsFile = new Text("Current file: ");
     currentPathsFile.setTextAlignment(TextAlignment.CENTER);
     currentPathsFile.setId("DefaultText");
+    currentPathsFile.setWrappingWidth(700);
 
 
     Button customGameButton = new Button("Custom");
@@ -226,9 +227,7 @@ public class GameSelectionView {
       //Loading either SELECTED GAME or EXAMPLE GAME
       if (exampleGameChosen.get().equals(false)) {
         controller.chooseGameFile(
-                stage,
-                nameField.getText(),
-                goalList);
+            stage, String.valueOf(pathToGameFile), nameField.getText(), goalList);
       } else {
         controller.loadExampleFile(
                 stage,
@@ -260,16 +259,12 @@ public class GameSelectionView {
     );
     fileChooser.setInitialDirectory(new File("src/main/resources"));
 
-    //        Story[] myStory = new Story[1];
     customGameButton.setOnAction(event -> {
       exampleGameChosen.set(false);
       File selectedFile = fileChooser.showOpenDialog(stage);
-      //            myStory[0] = FileHandler.readFile(selectedFile.getAbsolutePath());
-      AtomicReference<File> chosenPathsFile = new AtomicReference<>(null);
-      if (chosenPathsFile.get() != null) {
-        currentPathsFile.setText("Current file: "
-                + chosenPathsFile.get().getAbsolutePath()
-                + "\nTitle: " + game.getStory().getTitle());
+      if (selectedFile != null) {
+        currentPathsFile.setText("Current file: " + selectedFile.getAbsolutePath());
+        pathToGameFile.set(selectedFile.getAbsolutePath());
       }
     });
 
