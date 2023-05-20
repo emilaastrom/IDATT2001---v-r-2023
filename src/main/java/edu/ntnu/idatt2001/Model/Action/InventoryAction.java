@@ -36,5 +36,14 @@ public class InventoryAction implements Action {
     }
     }
 
+    @Override
+    public void undo(Player player){
+        if(item.startsWith("-")){
+            player.addToInventory(item.substring(1));
+        }else{
+        player.removeFromInventory(item);
+    }
+    }
+
 }
 

@@ -12,6 +12,7 @@ import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Separator;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -43,7 +44,7 @@ public class PathsView {
   private ImageView pathsWindowBottomBoxHBoxImageViewHeart = new ImageView("file:src/main/resources/heart.png");
   private ImageView pathsWindowBottomBoxHBoxImageViewCoin = new ImageView("file:src/main/resources/coin.png");
   private ImageView pathsWindowBottomBoxHBoxImageViewChest = new ImageView("file:src/main/resources/chest.png");
-  private ImageView pathsWindowBottomBoxHBox2ImageViewHelp = new ImageView("file:src/main/resources/help.png");
+  private ImageView pathsWindowBottomBoxHBox2ImageViewUndo = new ImageView("file:src/main/resources/undo.png");
   private ImageView pathsWindowBottomBoxHBox2ImageViewSettings = new ImageView("file:src/main/resources/settings.png");
   private BorderPane pathsWindow = new BorderPane();
   private VBox pathsWindowVBox = new VBox();
@@ -182,13 +183,15 @@ public class PathsView {
     chestPane.getChildren().add(pathsWindowBottomBoxHBoxImageViewChest);
     chestPane.setPadding(new Insets(0, 15, 0, 15));
 
-    StackPane helpPane = new StackPane();
-    helpPane.setId("helpPane");
-    helpPane.setMinWidth(75);
-    helpPane.setMinHeight(75);
-    StackPane.setAlignment(pathsWindowBottomBoxHBox2ImageViewHelp, Pos.CENTER);
-    helpPane.getChildren().add(pathsWindowBottomBoxHBox2ImageViewHelp);
-    helpPane.setPadding(new Insets(0, 15, 0, 15));
+    StackPane undoPane = new StackPane();
+    undoPane.setId("undoPane");
+    undoPane.setMinWidth(75);
+    undoPane.setMinHeight(75);
+    StackPane.setAlignment(pathsWindowBottomBoxHBox2ImageViewUndo, Pos.CENTER);
+    undoPane.getChildren().add(pathsWindowBottomBoxHBox2ImageViewUndo);
+    undoPane.setPadding(new Insets(0, 15, 0, 15));
+    Tooltip undoTooltip = new Tooltip("Undo");
+    Tooltip.install(undoPane, undoTooltip);
 
     StackPane settingsPane = new StackPane();
     settingsPane.setId("settingsPane");
@@ -197,6 +200,8 @@ public class PathsView {
     StackPane.setAlignment(pathsWindowBottomBoxHBox2ImageViewSettings, Pos.CENTER);
     settingsPane.getChildren().add(pathsWindowBottomBoxHBox2ImageViewSettings);
     settingsPane.setPadding(new Insets(0, 15, 0, 15));
+    Tooltip settingsTooltip = new Tooltip("Settings");
+    Tooltip.install(settingsPane, settingsTooltip);
 
     pathsWindowBottomBoxHBox2.getChildren().clear();
     pathsWindowBottomBoxHBox2.setSpacing(0);
@@ -205,7 +210,7 @@ public class PathsView {
         new Separator(Orientation.VERTICAL),
         chestPane,
         new Separator(Orientation.VERTICAL),
-        helpPane,
+        undoPane,
         new Separator(Orientation.VERTICAL),
         settingsPane);
 
@@ -218,7 +223,7 @@ public class PathsView {
       controller.hideInventory(pathsDimmer);
     });
 
-    helpPane.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+    undoPane.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
       undoMove();
     });
 
@@ -281,7 +286,6 @@ public class PathsView {
   }
 
   public void undoMove(){
-    updateBottomBox();
     currentPassage = game.goSilent(game.goBack());
     currentPassageVBox = showPassages(currentPassage);
     pathsWindowCenterBox.setCenter(currentPassageVBox);

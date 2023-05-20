@@ -1,6 +1,7 @@
 package edu.ntnu.idatt2001.Model;
 
 import edu.ntnu.idatt2001.Controller.UserInformer;
+import edu.ntnu.idatt2001.Model.Action.Action;
 import edu.ntnu.idatt2001.Model.Goal.Goal;
 
 import java.lang.reflect.Array;
@@ -91,6 +92,10 @@ public class Game {
 
     public Link goBack(){
         if(linkHistory.size() > 1){
+            List<Action> actionsToUndo = linkHistory.get(linkHistory.size()-1).getActions();
+            for (Action action : actionsToUndo) {
+                action.undo(player);
+            }
             Link link = linkHistory.get(linkHistory.size()-2);
             Passage passage = passageHistory.get(passageHistory.size()-1);
             linkHistory.remove(linkHistory.size()-1);

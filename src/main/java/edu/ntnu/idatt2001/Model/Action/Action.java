@@ -18,4 +18,11 @@ public interface Action {
      */
     void execute(Player player);
 
+    /**
+     * Undo abstract method, defined in classes that are implementing this interface.
+     *
+     * @param player the player
+     */
+    void undo(Player player);
+
 }
