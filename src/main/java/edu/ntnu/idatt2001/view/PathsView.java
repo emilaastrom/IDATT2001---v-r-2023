@@ -401,21 +401,25 @@ public class PathsView {
     Button linkButton = new Button();
     linkButton.setText(link.getText());
     linkButton.setPrefWidth(Region.USE_COMPUTED_SIZE);
-    linkButton.setId("linkButton");
-    linkButton.setOnAction(event -> {
-      for (Action action : link.getActions()) {
-        try {
-          action.execute(Game.getInstance().getPlayer());
-        } catch (Exception e) {
-          UserInformer.errorWarning("You can't do that action", e.getMessage());
+    if (Game.getInstance().getStory().getBrokenLinks().contains(link)) {
+      linkButton.setId("brokenLinkButton");
+    } else {
+      linkButton.setId("linkButton");
+      linkButton.setOnAction(event -> {
+        for (Action action : link.getActions()) {
+          try {
+            action.execute(Game.getInstance().getPlayer());
+          } catch (Exception e) {
+            UserInformer.errorWarning("You can't do that action", e.getMessage());
+          }
         }
-      }
-      updateBottomBox();
-      currentPassage = game.go(link);
-      currentPassageVbox = showPassages(currentPassage);
-      pathsWindowCenterBox.setCenter(currentPassageVbox);
-      Main.updateStage();
-    });
+        updateBottomBox();
+        currentPassage = game.go(link);
+        currentPassageVbox = showPassages(currentPassage);
+        pathsWindowCenterBox.setCenter(currentPassageVbox);
+        Main.updateStage();
+      });
+    }
     linkButton.setWrapText(true);
     return linkButton;
   }
