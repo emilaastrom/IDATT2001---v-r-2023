@@ -110,7 +110,7 @@ public class Main extends Application {
   }
 
   public static void showMainMenuSettings() {
-    mainMenuSettingsView.showStage();
+    settingsView.showStage(false);
   }
 
   public static void showGameSettings() {
