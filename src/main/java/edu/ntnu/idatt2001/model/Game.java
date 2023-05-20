@@ -124,4 +124,22 @@ public class Game {
     passageHistory.clear();
     linkHistory.clear();
   }
+
+  /**
+   * Gets passage history.
+   *
+   * @return the passage history
+   */
+  public ArrayList<Passage> getPassageHistory() {
+    return passageHistory;
+  }
+
+  /**
+   * Gets link history.
+   *
+   * @return the link history
+   */
+  public ArrayList<Link> getLinkHistory() {
+    return linkHistory;
+  }
 }

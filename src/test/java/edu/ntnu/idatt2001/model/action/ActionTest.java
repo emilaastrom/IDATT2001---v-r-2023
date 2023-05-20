@@ -1,20 +1,20 @@
-package edu.ntnu.idatt2001.Action;
+package edu.ntnu.idatt2001.model.action;
 
-import edu.ntnu.idatt2001.model.action.*;
+import static org.junit.jupiter.api.Assertions.*;
+
 import edu.ntnu.idatt2001.model.Link;
 import edu.ntnu.idatt2001.model.Player;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
 import java.util.ArrayList;
-
-import static org.junit.jupiter.api.Assertions.*;
+import java.util.List;
 
 public class ActionTest {
     GoldAction myGoldAction;
     HealthAction myHealthAction;
     InventoryAction myInventoryAction;
+    InventoryAction myRemoveInventoryAction;
     ScoreAction myScoreAction;
     Link myTestLink;
     Player myTestPlayer;
@@ -26,6 +26,7 @@ public class ActionTest {
         myGoldAction = new GoldAction(50);
         myHealthAction = new HealthAction(50);
         myInventoryAction = new InventoryAction("Dragon dagger(p++)");
+        myRemoveInventoryAction = new InventoryAction("-Dragon dagger(p++)");
         myScoreAction = new ScoreAction(50);
     }
 
@@ -34,7 +35,7 @@ public class ActionTest {
     @DisplayName("Testing getActions() using all types of actions")
     void testingGetActionsMethodWithDifferentActionsAddedToTheList(){
         ArrayList<Action> emptyActionList = new ArrayList<>();
-        assertEquals(myTestLink.getActions(),emptyActionList );
+        assertEquals(myTestLink.getActions(),emptyActionList);
 
         myTestLink.addAction(myGoldAction);
         assertNotNull(myTestLink.getActions());
@@ -47,8 +48,11 @@ public class ActionTest {
         myTestLink.addAction(myInventoryAction);
         assertEquals(myInventoryAction, myTestLink.getActions().get(2));
 
+        myTestLink.addAction(myRemoveInventoryAction);
+        assertEquals(myRemoveInventoryAction, myTestLink.getActions().get(3));
+
         myTestLink.addAction(myScoreAction);
-        assertEquals(myScoreAction, myTestLink.getActions().get(3));
+        assertEquals(myScoreAction, myTestLink.getActions().get(4));
     }
 
 
@@ -59,6 +63,7 @@ public class ActionTest {
         myTestLink.addAction(myGoldAction);
         myTestLink.addAction(myHealthAction);
         myTestLink.addAction(myInventoryAction);
+        myTestLink.addAction(myRemoveInventoryAction);
         myTestLink.addAction(myScoreAction);
 
         //ensuring myTestPlayer has the initial gold value of 100
@@ -92,9 +97,71 @@ public class ActionTest {
         //ensuring myTestPlayer has the initial score value of 100
         assertEquals(100, myTestPlayer.getScore());
 
-        //Using the fourth action (adding 50 score) then ensuring the value is correct
+        //Using the fourth action (removing a dragon dagger(p++) from inventory), then making sure it is removed correctly
         myTestLink.getActions().get(3).execute(myTestPlayer);
+        assertEquals(0, myTestPlayer.getInventory().size());
+        assertNotEquals(1, myTestPlayer.getInventory().size());
+        assertEquals(0, myTestPlayer.getInventory().size());
+
+        //Using the fifth action (adding 50 score) then ensuring the value is correct
+        myTestLink.getActions().get(4).execute(myTestPlayer);
         assertEquals(150, myTestPlayer.getScore());
         assertNotEquals(100, myTestPlayer.getScore());
+    }
+
+    @Test
+    @DisplayName("Testing getType() using all types of actions")
+    void testingGetType(){
+        assertEquals("Gold", myGoldAction.getType());
+        assertEquals("Health", myHealthAction.getType());
+        assertEquals("Inventory", myInventoryAction.getType());
+        assertEquals("Inventory", myRemoveInventoryAction.getType());
+        assertEquals("Score", myScoreAction.getType());
+    }
+
+    @Test
+    @DisplayName("Testing getAmount() using all types of actions")
+    void testingGetAmount(){
+        assertEquals(String.valueOf(50), myGoldAction.getAmount());
+        assertEquals(String.valueOf(50), myHealthAction.getAmount());
+        assertEquals("Dragon dagger(p++)", myInventoryAction.getAmount());
+        assertEquals("-Dragon dagger(p++)", myRemoveInventoryAction.getAmount());
+        assertEquals(String.valueOf(50), myScoreAction.getAmount());
+    }
+
+    @Test
+    @DisplayName("Testing undo() using all types of actions")
+    void testingUndo(){
+        myTestPlayer.getInventory().add("Dragon dagger(p++)");
+
+        int initialHealth = myTestPlayer.getHealth();
+        int initialGold = myTestPlayer.getGold();
+        int initialScore = myTestPlayer.getScore();
+        List<String> initialInventory = new ArrayList<>(myTestPlayer.getInventory());
+
+        myHealthAction.execute(myTestPlayer);
+        assertNotEquals(initialHealth, myTestPlayer.getHealth());
+        myHealthAction.undo(myTestPlayer);
+        assertEquals(initialHealth, myTestPlayer.getHealth());
+
+        myGoldAction.execute(myTestPlayer);
+        assertNotEquals(initialGold, myTestPlayer.getGold());
+        myGoldAction.undo(myTestPlayer);
+        assertEquals(initialGold, myTestPlayer.getGold());
+
+        myScoreAction.execute(myTestPlayer);
+        assertNotEquals(initialScore, myTestPlayer.getScore());
+        myScoreAction.undo(myTestPlayer);
+        assertEquals(initialScore, myTestPlayer.getScore());
+
+        myInventoryAction.execute(myTestPlayer);
+        assertNotEquals(initialInventory, myTestPlayer.getInventory());
+        myInventoryAction.undo(myTestPlayer);
+        assertEquals(initialInventory, myTestPlayer.getInventory());
+
+        myRemoveInventoryAction.execute(myTestPlayer);
+        assertNotEquals(initialInventory, myTestPlayer.getInventory());
+        myRemoveInventoryAction.undo(myTestPlayer);
+        assertEquals(initialInventory, myTestPlayer.getInventory());
     }
 }
