@@ -25,7 +25,7 @@ public class Main extends Application {
   private static Stage stage;
   private static InventoryView inventoryView;
   private static SettingsView mainMenuSettingsView;
-  private static SettingsView gameSettingsView;
+  private static SettingsView settingsView;
   private static HelpView helpView;
   private static ExitConfirmationView exitConfirmationView;
   private static MainMenuView mainMenuView;
@@ -69,7 +69,7 @@ public class Main extends Application {
             dimmer,
             false);
 
-    gameSettingsView = new SettingsView(
+    settingsView = new SettingsView(
             settingsController,
             pathsView,
             pathsView.getRoot(),
@@ -114,7 +114,7 @@ public class Main extends Application {
   }
 
   public static void showGameSettings() {
-    gameSettingsView.showStage();
+    settingsView.showStage();
   }
 
   public static void showExitConfirmation() {
