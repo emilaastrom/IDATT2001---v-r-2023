@@ -7,13 +7,9 @@ import edu.ntnu.idatt2001.controller.UserInformer;
 import edu.ntnu.idatt2001.model.Game;
 import edu.ntnu.idatt2001.model.Link;
 import edu.ntnu.idatt2001.model.Passage;
-import edu.ntnu.idatt2001.model.Player;
-import edu.ntnu.idatt2001.model.Story;
-import edu.ntnu.idatt2001.model.goal.Goal;
 import edu.ntnu.idatt2001.model.goal.GoldGoal;
 import edu.ntnu.idatt2001.model.goal.HealthGoal;
 import edu.ntnu.idatt2001.model.goal.ScoreGoal;
-import java.util.List;
 import java.util.Objects;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
@@ -31,7 +27,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
-import javafx.stage.Stage;
 
 /**
  * The view for the paths window.
@@ -40,28 +35,28 @@ public class PathsView {
   private Passage currentPassage;
   private VBox currentPassageVbox = new VBox();
   static Game game = Game.getInstance();
-  private BorderPane pathsWindowCenterBox = new BorderPane();
-  private BorderPane pathsWindowBottomBox = new BorderPane();
-  private HBox pathsWindowBottomBoxHbox = new HBox();
-  private HBox pathsWindowBottomBoxHbox2 = new HBox();
+  private final BorderPane pathsWindowCenterBox = new BorderPane();
+  private final BorderPane pathsWindowBottomBox = new BorderPane();
+  private final HBox pathsWindowBottomBoxHbox = new HBox();
+  private final HBox pathsWindowBottomBoxHbox2 = new HBox();
   private Text pathsWindowBottomBoxHboxTextScore = new Text();
   private Text pathsWindowBottomBoxHboxTextHeart = new Text();
   private Text pathsWindowBottomBoxHboxTextCoin = new Text();
-  private ImageView pathsWindowBottomBoxHboxImageViewScore = new ImageView(
+  private final ImageView pathsWindowBottomBoxHboxImageViewScore = new ImageView(
       "file:src/main/resources/score.png");
-  private ImageView pathsWindowBottomBoxHboxImageViewHeart = new ImageView(
+  private final ImageView pathsWindowBottomBoxHboxImageViewHeart = new ImageView(
       "file:src/main/resources/heart.png");
-  private ImageView pathsWindowBottomBoxHboxImageViewCoin = new ImageView(
+  private final ImageView pathsWindowBottomBoxHboxImageViewCoin = new ImageView(
       "file:src/main/resources/coin.png");
-  private ImageView pathsWindowBottomBoxHboxImageViewChest = new ImageView(
+  private final ImageView pathsWindowBottomBoxHboxImageViewChest = new ImageView(
       "file:src/main/resources/chest.png");
-  private ImageView pathsWindowBottomBoxHbox2ImageViewUndo = new ImageView(
+  private final ImageView pathsWindowBottomBoxHbox2ImageViewUndo = new ImageView(
       "file:src/main/resources/undo.png");
-  private ImageView pathsWindowBottomBoxHbox2ImageViewSettings = new ImageView(
+  private final ImageView pathsWindowBottomBoxHbox2ImageViewSettings = new ImageView(
       "file:src/main/resources/settings.png");
-  private BorderPane pathsWindow = new BorderPane();
-  private VBox pathsWindowVbox = new VBox();
-  private PathsController controller;
+  private final BorderPane pathsWindow = new BorderPane();
+  private final VBox pathsWindowVbox = new VBox();
+  private final PathsController controller;
   private BorderPane pathsDimmer;
   StackPane pathsRoot = new StackPane();
   VBox pathsWindowCenterBoxVbox = new VBox();
