@@ -428,11 +428,15 @@ public class PathsView {
    * Method undoing the last move.
    */
   public void undoMove() {
-    currentPassage = game.goSilent(game.goBack());
-    currentPassageVbox = showPassages(currentPassage);
-    pathsWindowCenterBox.setCenter(currentPassageVbox);
-    updateBottomBox();
-    Main.updateStage();
+    try {
+      currentPassage = game.goSilent(game.goBack());
+      currentPassageVbox = showPassages(currentPassage);
+      pathsWindowCenterBox.setCenter(currentPassageVbox);
+      updateBottomBox();
+      Main.updateStage();
+    } catch (Exception e) {
+      UserInformer.errorWarning("Error", "Make a move first!");
+    }
   }
 
   /**
