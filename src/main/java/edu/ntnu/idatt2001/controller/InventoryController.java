@@ -17,13 +17,9 @@ public class InventoryController {
   public String getInventoryString() {
     StringBuilder inventoryString = new StringBuilder("Inventory:\r\n\n");
     Game game = Game.getInstance();
-    for (String item : game.getPlayer().getInventory()) {
-      inventoryString
-          .append("- ")
-          .append(item.substring(0, 1).toUpperCase())
-          .append(item.substring(1).toLowerCase())
-          .append("\r\n");
-    }
+    game.getPlayer().getInventory().stream()
+            .map(item -> "- " + item.substring(0, 1).toUpperCase() + item.substring(1).toLowerCase() + "\r\n")
+            .forEach(inventoryString::append);
     return inventoryString.toString();
   }
 }

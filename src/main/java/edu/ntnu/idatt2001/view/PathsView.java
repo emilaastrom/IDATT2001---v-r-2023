@@ -317,47 +317,28 @@ public class PathsView {
     } else {
       contentText.setText(Game.getInstance().getPlayer().getName() + "'s stats/goals:");
       contentVboxText.getChildren().add(contentText);
-      for (Goal goal : Game.getInstance().getGoals()) {
-        if (goal instanceof ScoreGoal) {
-          Text scoreGoalText = new Text(
-              "Score: " + Game.getInstance().getPlayer().getScore() + "/"
-                  + ((ScoreGoal) goal).getScoreGoal());
-          if (goal.isFulfilled(Game.getInstance().getPlayer())) {
-            scoreGoalText.setFill(Color.GREEN);
-          } else {
-            scoreGoalText.setFill(Color.RED);
-          }
-          scoreGoalText.setId("goalText");
-          scoreGoalText.setTextAlignment(TextAlignment.CENTER);
-          contentVboxText.getChildren().add(scoreGoalText);
-        }
-        if (goal instanceof GoldGoal) {
-          Text goldGoalText = new Text(
-              "Gold: " + Game.getInstance().getPlayer().getGold() + "/"
-                  + ((GoldGoal) goal).getGoldGoal());
-          if (goal.isFulfilled(Game.getInstance().getPlayer())) {
-            goldGoalText.setFill(Color.GREEN);
-          } else {
-            goldGoalText.setFill(Color.RED);
-          }
-          goldGoalText.setId("goalText");
-          goldGoalText.setTextAlignment(TextAlignment.CENTER);
-          contentVboxText.getChildren().add(goldGoalText);
-        }
-        if (goal instanceof HealthGoal) {
-          Text healthGoalText = new Text(
-              "Health: " + Game.getInstance().getPlayer().getHealth() + "/"
-                  + ((HealthGoal) goal).getHealthGoal());
-          if (goal.isFulfilled(Game.getInstance().getPlayer())) {
-            healthGoalText.setFill(Color.GREEN);
-          } else {
-            healthGoalText.setFill(Color.RED);
-          }
-          healthGoalText.setId("goalText");
-          healthGoalText.setTextAlignment(TextAlignment.CENTER);
-          contentVboxText.getChildren().add(healthGoalText);
-        }
-      }
+      Game.getInstance().getGoals().stream()
+              .filter(goal -> goal instanceof ScoreGoal || goal instanceof GoldGoal || goal instanceof HealthGoal)
+              .forEach(goal -> {
+                Text goalText;
+                if (goal instanceof ScoreGoal) {
+                  goalText = new Text("Score: " + Game.getInstance().getPlayer().getScore() + "/" + ((ScoreGoal) goal).getScoreGoal());
+                } else if (goal instanceof GoldGoal) {
+                  goalText = new Text("Gold: " + Game.getInstance().getPlayer().getGold() + "/" + ((GoldGoal) goal).getGoldGoal());
+                } else {
+                  goalText = new Text("Health: " + Game.getInstance().getPlayer().getHealth() + "/" + ((HealthGoal) goal).getHealthGoal());
+                }
+
+                if (goal.isFulfilled(Game.getInstance().getPlayer())) {
+                  goalText.setFill(Color.GREEN);
+                } else {
+                  goalText.setFill(Color.RED);
+                }
+
+                goalText.setId("goalText");
+                goalText.setTextAlignment(TextAlignment.CENTER);
+                contentVboxText.getChildren().add(goalText);
+              });
     }
 
     Button restartButton = new Button("Restart");
@@ -400,13 +381,13 @@ public class PathsView {
     } else {
       linkButton.setId("linkButton");
       linkButton.setOnAction(event -> {
-        for (Action action : link.getActions()) {
+        link.getActions().forEach(action -> {
           try {
             action.execute(Game.getInstance().getPlayer());
           } catch (Exception e) {
             UserInformer.errorWarning("You can't do that action", e.getMessage());
           }
-        }
+        });
         updateBottomBox();
         currentPassage = game.go(link);
         currentPassageVbox = showPassages(currentPassage);

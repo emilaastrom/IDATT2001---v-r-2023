@@ -79,48 +79,31 @@ public class PathsController {
    */
   public ArrayList<Link> getCurrentPassageLinks(Passage passage) {
     ArrayList<Link> links = new ArrayList<>();
-    for (Link link : passage.getLinks()) {
-      //check if link is active
-      List<Action> actions = link.getActions();
-      boolean activeLink = true;
-      boolean itemNotFound = false;
-      //TODO consider replacing with streams if possible
-      for (Object action : actions) {
-        //check if action is inventory action
-        if (action instanceof InventoryAction inventoryAction) {
-          //check if action is subtract item-action
-          if (inventoryAction.getAmount().startsWith("-")) {
-            boolean found = false;
-            for (String item : Game.getInstance().getPlayer().getInventory()) {
-              if (item.equals(inventoryAction.getAmount().substring(1))) {
-                found = true;
-                break;
+    passage.getLinks().stream()
+      .filter(somePassage -> {
+        boolean itemNotFound = false;
+        List<Action> actions = somePassage.getActions();
+        boolean activeLink = actions.stream()
+          .allMatch(action -> {
+            if (action instanceof InventoryAction otherAction) {
+              if (otherAction.getAmount().startsWith("-")) {
+                return Game.getInstance().getPlayer().getInventory().stream()
+                        .anyMatch(item -> item.equals(otherAction.getAmount().substring(1)));
+              }
+            } else if (action instanceof GoldAction goldAction) {
+              if (goldAction.getAmount().startsWith("-")) {
+                return Game.getInstance().getPlayer().getGold() >= Integer.parseInt(goldAction.getAmount().substring(1));
               }
             }
-            if (!found) {
-              activeLink = false;
-              break;
-            }
-          }
-        } else if (action instanceof GoldAction goldAction) {
-          if (goldAction.getAmount().startsWith("-")) {
-            if (Game.getInstance().getPlayer().getGold()
-                < Integer.parseInt(goldAction.getAmount().substring(1))) {
-              activeLink = false;
-              break;
-            }
-          }
+            return true;
+           });
+        if (!activeLink) {
+            itemNotFound = true;
         }
-      }
-      if (!activeLink) {
-        itemNotFound = true;
-      }
-      //if item not found, skip this link
-      if (itemNotFound) {
-        continue;
-      }
-      links.add(link);
-    }
+        //if item not found, skip this link
+        return !itemNotFound;
+      })
+      .forEach(links::add);
     return links;
   }
 }
