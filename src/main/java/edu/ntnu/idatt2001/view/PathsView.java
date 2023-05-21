@@ -9,7 +9,6 @@ import edu.ntnu.idatt2001.model.Link;
 import edu.ntnu.idatt2001.model.Passage;
 import edu.ntnu.idatt2001.model.Player;
 import edu.ntnu.idatt2001.model.Story;
-import edu.ntnu.idatt2001.model.action.Action;
 import edu.ntnu.idatt2001.model.goal.Goal;
 import edu.ntnu.idatt2001.model.goal.GoldGoal;
 import edu.ntnu.idatt2001.model.goal.HealthGoal;
@@ -38,14 +37,9 @@ import javafx.stage.Stage;
  * The view for the paths window.
  */
 public class PathsView {
-  private String currentStylesheet;
   private Passage currentPassage;
   private VBox currentPassageVbox = new VBox();
-  static Player player;
-  static List<Goal> goals;
   static Game game = Game.getInstance();
-  static Story story;
-  private Stage inventoryStage;
   private BorderPane pathsWindowCenterBox = new BorderPane();
   private BorderPane pathsWindowBottomBox = new BorderPane();
   private HBox pathsWindowBottomBoxHbox = new HBox();
