@@ -318,7 +318,7 @@ public class PathsView {
     titleText.setText("Game Over\n");
     if (Game.getInstance().getGoals().isEmpty()) {
       contentText.setText(
-          Game.getInstance().getPlayer().getName() + " have reached the end of the game!");
+          Game.getInstance().getPlayer().getName() + " reached the end of the game!");
       contentVboxText.getChildren().add(contentText);
     } else {
       contentText.setText(Game.getInstance().getPlayer().getName() + "'s stats/goals:");
