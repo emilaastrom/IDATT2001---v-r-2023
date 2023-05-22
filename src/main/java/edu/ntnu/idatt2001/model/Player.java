@@ -40,6 +40,7 @@ public class Player {
           String valueType,
           int valueAmount)
           throws IllegalArgumentException {
+    // If the value is negative, throw an exception
     if (valueAmount < 0) {
       throw new IllegalArgumentException("Error value regarding: "
               + valueType
@@ -53,6 +54,7 @@ public class Player {
    * @return the name
    */
   public String getName() {
+    // If name is null or empty, change it to "You"
     if (name == null) {
       return "You";
     }
@@ -104,9 +106,11 @@ public class Player {
    * @param health the health
    */
   public void addHealth(int health) {
+    //add health
     try {
       checkPositiveIntInput("health after addition", this.health += health);
     } catch (IllegalArgumentException e) {
+      // If the health is negative, set it to 0
       this.health = 0;
     }
   }
@@ -146,6 +150,7 @@ public class Player {
   public void removeFromInventory(String item) {
     if (this.inventory.contains(item)) {
       this.inventory.remove(item);
+      // If the item is not in the inventory, throw an exception
     } else {
       throw new IllegalArgumentException("Item not in inventory");
     }

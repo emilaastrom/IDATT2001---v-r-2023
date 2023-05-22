@@ -7,33 +7,52 @@ import edu.ntnu.idatt2001.model.Player;
  */
 public class HealthAction implements Action {
 
-    private final int health;
+  private final int health;
 
-    /**
-     * Instantiates a new HealthAction.
-     *
-     * @param health the health
-     */
-    public HealthAction(int health){
-        this.health = health;
-    }
+  /**
+   * Instantiates a new HealthAction.
+   *
+   * @param health the health
+   */
+  public HealthAction(int health) {
+    this.health = health;
+  }
 
-    public String getType(){
-        return "Health";
-    }
+  /**
+   * Gets type.
+   *
+   * @return the type
+   */
+  public String getType() {
+    return "Health";
+  }
 
-    public String getAmount(){
-        return Integer.toString(health);
-    }
+  /**
+   * Gets amount.
+   *
+   * @return the amount
+   */
+  public String getAmount() {
+    return Integer.toString(health);
+  }
 
-    @Override
-    public void execute(Player player){
-        player.addHealth(health);
-    }
+  /**
+   * Execute the action.
+   *
+   * @param player the player
+   */
+  @Override
+  public void execute(Player player) {
+    player.addHealth(health);
+  }
 
-    @Override
-    public void undo(Player player){
-        player.addHealth(-health);
-    }
-
+  /**
+   * Undo the action.
+   *
+   * @param player the player
+   */
+  @Override
+  public void undo(Player player) {
+    player.addHealth(-health);
+  }
 }

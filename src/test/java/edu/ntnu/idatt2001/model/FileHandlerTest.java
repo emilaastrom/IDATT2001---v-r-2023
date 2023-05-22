@@ -53,7 +53,7 @@ public class FileHandlerTest {
 
     //Testing that the method writeFile() writes the correct story to the file
     Story story = FileHandler.readFile("exampleStory.paths");
-    FileHandler.writeFile(exampleStory);
+    FileHandler.writeFile(exampleStory, "exampleStory");
 
     assertEquals(story.getOpeningPassage(), exampleStory.getOpeningPassage());
   }
@@ -65,7 +65,7 @@ public class FileHandlerTest {
     //TODO Update these unit tests to be more comprehensive
 
     Story story = FileHandler.readFile("exampleStory.paths");
-    FileHandler.writeFile(story);
+    FileHandler.writeFile(story, "exampleStory");
 
     assertEquals(story.getOpeningPassage(), exampleStory.getOpeningPassage());
     assertEquals(story.getTitle(), exampleStory.getTitle());

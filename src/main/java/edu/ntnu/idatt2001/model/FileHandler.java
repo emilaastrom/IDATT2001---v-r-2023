@@ -30,19 +30,21 @@ public class FileHandler {
    *
    * @param story the story
    */
-  public static void writeFile(Story story) {
+  public static void writeFile(Story story, String name) {
 
-    File text = new File("exampleStory.paths");
+    File pathsFile = new File(name + ".paths");
 
     try {
-      BufferedWriter fileWriter = new BufferedWriter(new FileWriter(text));
+      BufferedWriter fileWriter = new BufferedWriter(new FileWriter(pathsFile));
+
+      //Writes title and opening passage to file
       fileWriter.write(story.getTitle() + "\n\n");
       fileWriter.write("::"
               + story.getOpeningPassage().getTitle() + "\n"
               + story.getOpeningPassage().getContent() + "\n"
               + story.getOpeningPassage().getLinksFormatted());
 
-
+      //Writes all passages to file
       for (Map.Entry<Link, Passage> entry : story.getPassages().entrySet()) {
         Passage currentPassage = entry.getValue();
 
@@ -60,7 +62,6 @@ public class FileHandler {
       fileNotFoundException.printStackTrace();
     }
   }
-
 
   /**
    * Reading the given file.
@@ -80,8 +81,11 @@ public class FileHandler {
     String storyTitle;
     Passage openingPassage = new Passage("", "");
 
+    //Reading title
     storyTitle = fileScanner.nextLine();
+    //initializing story with empty opening passage
     Story story = new Story(storyTitle, openingPassage);
+
     fileScanner.nextLine();
     int i = 0;
     while (fileScanner.hasNextLine()) {
@@ -207,8 +211,10 @@ public class FileHandler {
     File selectedFile = new File(path);
     String absolutePath = selectedFile.getAbsolutePath();
     try {
+      //initializing story
       Story story = FileHandler.readFile(absolutePath);
       try {
+        //setting up game
         Game.getInstance().setPlayer(new Player.PlayerBuilder(playerName).build());
         Game.getInstance().setStory(story);
         Game.getInstance().setGoals(playerGoals);
@@ -232,14 +238,20 @@ public class FileHandler {
       Stage stage, String path, String playerName, List<Goal> playerGoals) {
     try {
       Story story = FileHandler.readFile(path);
-      if (story.getBrokenLinks().size()>0){
-        UserInformer.errorWarning("The story you are trying to open has broken links.", "The broken links will be marked red in the game.");
+
+      //Notifies the user if there are broken links in the story.
+      if (story.getBrokenLinks().size() > 0) {
+        UserInformer.errorWarning(
+            "The story you are trying to open has broken links.",
+            "The broken links will be marked red in the game.");
       }
       try {
+        //setting up game
         Player player = new Player.PlayerBuilder(playerName).build();
         Game.getInstance().setPlayer(player);
         Game.getInstance().setStory(story);
         Game.getInstance().setGoals(playerGoals);
+
         return true;
       } catch (Exception e) {
         return false;
