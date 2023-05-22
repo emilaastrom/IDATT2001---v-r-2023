@@ -39,7 +39,6 @@ public class Main extends Application {
     dimmer.setId("mainWindowDimmer");
 
 
-    ExitConfirmationController exitConfirmationController = new ExitConfirmationController();
     exitConfirmationView = new ExitConfirmationView(dimmer);
 
     InventoryController inventoryController = new InventoryController();
@@ -95,8 +94,9 @@ public class Main extends Application {
     settingsView.showStage(true);
   }
 
-  public static void showExitConfirmation() {
-    exitConfirmationView.mainMenuConfirmation(mainMenuView.getRoot());
+  public static void showExitConfirmation(PathsView pathsView) {
+    pathsView.getPathsDimmer().setVisible(true);
+    exitConfirmationView.mainMenuConfirmation(mainMenuView.getRoot(), pathsView.getPathsDimmer());
   }
 
   public static void showHelp() {helpView.showHelp();}

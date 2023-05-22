@@ -52,6 +52,7 @@ public class ExitConfirmationView {
    * Display exit confirmation.
    */
   public void exitConfirmation() {
+    dimmer.setVisible(true);
     exitConfirmationButton.setOnAction(event -> System.exit(0));
     exitConfirmationCancelButton.setOnAction(event -> {
       exitConfirmationStage.close();
@@ -66,7 +67,9 @@ public class ExitConfirmationView {
   /**
    * Main menu confirmation.
    */
-  public void mainMenuConfirmation(Pane root) {
+  public void mainMenuConfirmation(Pane root, BorderPane dimmer) {
+    exitConfirmationStage.addEventHandler(WindowEvent.WINDOW_SHOWING, windowEvent ->
+            dimmer.setVisible(true));
     exitConfirmationButton.setOnAction(event -> {
       Main.changeScene(root);
       exitConfirmationStage.close();
@@ -79,8 +82,6 @@ public class ExitConfirmationView {
     });
     exitConfirmationStage.addEventHandler(WindowEvent.WINDOW_HIDDEN, windowEvent ->
             dimmer.setVisible(false));
-    System.out.println("showing");
-    dimmer.setVisible(true);
     exitConfirmationStage.show();
   }
 }

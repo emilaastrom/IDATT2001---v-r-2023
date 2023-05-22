@@ -250,11 +250,12 @@ public class PathsView {
       controller.hideInventory(pathsDimmer);
     });
 
-    undoPane.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-      undoMove();
-    });
+    undoPane.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> undoMove());
 
-    settingsPane.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> controller.showSettings());
+    settingsPane.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+      controller.showSettings();
+      pathsDimmer.setVisible(true);
+    });
   }
 
   /**
@@ -353,7 +354,7 @@ public class PathsView {
     exitButton.setId("endButton");
     exitButton.setOnAction(event -> {
       try {
-        Main.showExitConfirmation();
+        Main.showExitConfirmation(this);
       } catch (Exception e) {
         e.printStackTrace();
       }
@@ -416,4 +417,12 @@ public class PathsView {
     this.currentPassageVbox = currentPassageVbox;
     pathsWindowCenterBox.setCenter(currentPassageVbox);
   }
+
+  /**
+   * Getter for the pathsView dimmer to be enabled/disabled by different stages.
+   */
+  public BorderPane getPathsDimmer() {
+    return pathsDimmer;
+  }
+
 }

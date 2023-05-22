@@ -144,10 +144,8 @@ public class SettingsView {
       });
       mainMenuButton.setMaxWidth(200);
       mainMenuButton.setOnAction(event -> {
-        //TODO MAIN MENU
-
-        controller.showMainMenu();
         closeStage();
+        controller.showMainMenu(pathsView);
       });
       separator.setMaxWidth(350);
       settingsListBox.getChildren().addAll(restartButton, mainMenuButton, separator);
@@ -182,6 +180,7 @@ public class SettingsView {
     if (isGameSettings) {
       settingsListBox.getChildren().clear();
       settingsListBox.getChildren().addAll(restartButton, mainMenuButton, separator, changeThemeBox, settingsSoundBox);
+      stage.addEventHandler(WindowEvent.WINDOW_HIDDEN, event -> pathsView.getPathsDimmer().setVisible(false));
     } else {
       settingsListBox.getChildren().clear();
       settingsListBox.getChildren().addAll(changeThemeBox, settingsSoundBox);
@@ -190,10 +189,6 @@ public class SettingsView {
 
   private void closeStage() {
     stage.close();
-  }
-
-  public Pane getRoot() {
-    return settingsRoot;
   }
 
 }
