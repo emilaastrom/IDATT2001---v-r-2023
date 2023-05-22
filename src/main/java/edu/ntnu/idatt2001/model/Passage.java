@@ -58,6 +58,7 @@ public class Passage {
    */
   public String getLinksFormatted() {
     StringBuilder outputString = new StringBuilder();
+    // For each link, append the text and reference to the outputString
     links.stream().forEach(link -> {
       outputString.append("[")
               .append(link.getText())
@@ -65,6 +66,7 @@ public class Passage {
               .append(link.getReference())
               .append(")");
 
+      // If the link has actions, append them to the outputString
       if (!link.getActions().isEmpty()) {
         outputString.append("{");
         link.getActions().stream()
@@ -98,6 +100,9 @@ public class Passage {
     return !links.isEmpty();
   }
 
+  /**
+   * Equals boolean for Passage.
+   */
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -112,11 +117,17 @@ public class Passage {
             && Objects.equals(links, passage.links);
   }
 
+  /**
+   * Hash code int for Passage.
+   */
   @Override
   public int hashCode() {
     return Objects.hash(title, content, links);
   }
 
+  /**
+   * To string for Passage.
+   */
   @Override
   public String toString() {
     return "Passage{"

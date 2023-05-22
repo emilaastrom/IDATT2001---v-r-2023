@@ -36,10 +36,16 @@ public class SettingsController {
     Game.getInstance().restartGame();
   }
 
+  /**
+   * Gets main menu root.
+   */
   public Pane getMainMenuRoot() {
     return mainMenuRoot;
   }
 
+  /**
+   * Gets pathsView (game screen) root.
+   */
   public Pane getPathsRoot() {
     return pathsRoot;
   }

@@ -39,18 +39,36 @@ public class Game {
     return player;
   }
 
+  /**
+   * Sets player.
+   *
+   * @param player the player
+   */
   public void setPlayer(Player player) {
     this.player = player;
   }
 
+  /**
+   * Sets story.
+   *
+   * @param story the story
+   */
   public void setStory(Story story) {
     this.story = story;
   }
 
+  /**
+   * Sets goals.
+   *
+   * @param goals the goals
+   */
   public void setGoals(List<Goal> goals) {
     this.goals = goals;
   }
 
+  /**
+   * add a goal to the game.
+   */
   public void addGoal(Goal goal) {
     this.goals.add(goal);
   }
@@ -91,6 +109,11 @@ public class Game {
     return story.getPassage(link);
   }
 
+  /**
+   * Goes to a given passage, without adding it to the history.
+   *
+   * @param link the link
+   */
   public Passage goSilent(Link link) {
     return story.getPassage(link);
   }
@@ -100,12 +123,13 @@ public class Game {
    */
   public Link goBack() {
     try {
+      //Checking if there is a passage to go back to
       if (linkHistory.size() > 1) {
-
         List<Action> actionsToUndo = linkHistory.get(linkHistory.size() - 1).getActions();
         //Executing undo action for each action in the list
         actionsToUndo.forEach(action -> action.undo(player));
         Link link = linkHistory.get(linkHistory.size() - 2);
+        //Removing the last passage and link from the history
         linkHistory.remove(linkHistory.size() - 1);
         return link;
       } else {
@@ -121,8 +145,10 @@ public class Game {
    * Restarts the game.
    */
   public void restartGame() {
+    //Setting the player to a new player with the same name
     Game.getInstance().setPlayer(
         new Player.PlayerBuilder(Game.getInstance().getPlayer().getName()).build());
+    //Clearing the history
     passageHistory.clear();
     linkHistory.clear();
   }

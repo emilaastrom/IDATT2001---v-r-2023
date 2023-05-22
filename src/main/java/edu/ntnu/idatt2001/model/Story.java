@@ -62,9 +62,7 @@ public class Story {
    */
   public Passage getPassage(Link link) {
     String reference = link.getReference();
-    if (reference == null) {
-      return null;
-    }
+    //find passage with title equal to link reference
     return passages.values().stream()
             .filter(passage -> passage.getTitle().equals(reference))
             .findFirst()
@@ -77,13 +75,13 @@ public class Story {
    * @param passage the passage
    */
   public void addPassage(Passage passage) {
-    //TODO should first parameter be title? As it shows to user?
+    //check if passage already exists
     if (passages.containsValue(passage)) {
       throw new IllegalArgumentException("Passage already exists in story");
-      //TODO notify user that passage already exists
     }
-
+    //make new link with title equal to passage title
     Link newLink = new Link(passage.getTitle(), passage.getTitle());
+    //adds passage to passages map
     passages.put(newLink, passage);
   }
 
@@ -106,12 +104,14 @@ public class Story {
     boolean foundMultipleLinksToPassage = false;
     boolean successfullyRemoved = false;
 
+    //check if there are multiple links to the passage to be removed
     for (int i = 0; i < passages.size(); i++) {
-
+      //iterate through all passages
       for (Map.Entry<Link, Passage> entry : passages.entrySet()) {
         Passage currentPassage = entry.getValue();
 
         List<Link> currentPassageLinks = currentPassage.getLinks();
+        //check if the current passage has a link to the passage to be removed
         for (Link linkInCurrentPassageList : currentPassageLinks) {
           if ((linkInCurrentPassageList.equals(linkToBeRemoved))
                   && (currentPassage != passageToBeRemoved)) {
@@ -122,6 +122,7 @@ public class Story {
       }
     }
 
+    //if there are no links to the passage, remove it
     if (!foundMultipleLinksToPassage) {
       passages.remove(linkToBeRemoved);
       successfullyRemoved = true;
@@ -136,30 +137,14 @@ public class Story {
    * @return the array list containing the broken links
    */
   public ArrayList<Link> getBrokenLinks() {
+    //checks if the link reference is equal to any of the passages titles
     return passages.values().stream()
+      //gets all the passages
       .flatMap(passage -> passage.getLinks().stream())
+      //gets all the links
       .filter(linkToCompare -> passages.keySet().stream()
+      //if none of the passages titles are equal to the link reference, add it to the list
       .noneMatch(inputLink -> linkToCompare.getReference().equals(inputLink.getReference())))
       .collect(Collectors.toCollection(ArrayList::new));
-
-    /*ArrayList<Link> deadLinks = new ArrayList<>();
-
-    for(Passage passage : passages.values())
-        for (Link linkToCompare : passage.getLinks()){
-            boolean broken = true;
-            for (Link inputLink : passages.keySet()){
-                        if (linkToCompare.getReference().equals(inputLink.getReference())) {
-                            //not dead
-                            broken = false;
-                            break;
-                        }
-                }
-                if (broken){
-                    deadLinks.add(linkToCompare);
-                }
-            }
-        return deadLinks;
-    }*/
-
   }
 }

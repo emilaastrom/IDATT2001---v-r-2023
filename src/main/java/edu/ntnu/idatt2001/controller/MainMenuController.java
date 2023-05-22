@@ -39,6 +39,9 @@ public class MainMenuController {
     exitConfirmationView.exitConfirmation();
   }
 
+  /**
+   * Shows help stage.
+   */
   public void showHelp() {
     Main.showHelp();
   }

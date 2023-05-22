@@ -17,11 +17,14 @@ public class MusicController {
    * Play music.
    */
   public static void playMusic() {
+    //gets the music file
     String musicFile = "src/main/resources/soundtrack.mp3";
     Media sound = new Media(new File(musicFile).toURI().toString());
     mediaPlayer = new MediaPlayer(sound);
+    //loops the music
     mediaPlayer.setOnEndOfMedia(() -> mediaPlayer.seek(Duration.ZERO));
     mediaPlayer.play();
+    //binds the volume slider to the volume of the media player
     mediaPlayer.volumeProperty().bind(volumeSlider.valueProperty().divide(200));
   }
 

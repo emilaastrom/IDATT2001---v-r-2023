@@ -79,22 +79,28 @@ public class PathsController {
    */
   public ArrayList<Link> getCurrentPassageLinks(Passage passage) {
     ArrayList<Link> links = new ArrayList<>();
+    //filter out links that require items that the player does not have
     passage.getLinks().stream()
       .filter(somePassage -> {
         boolean itemNotFound = false;
         List<Action> actions = somePassage.getActions();
         boolean activeLink = actions.stream()
           .allMatch(action -> {
+            //if the action is an inventory action
             if (action instanceof InventoryAction otherAction) {
+              //if the amount is negative, check if the player has the item
               if (otherAction.getAmount().startsWith("-")) {
                 return Game.getInstance().getPlayer().getInventory().stream()
                         .anyMatch(item -> item.equals(otherAction.getAmount().substring(1)));
               }
+              //if the action is a gold action
             } else if (action instanceof GoldAction goldAction) {
+              //if the amount is negative, check if the player has enough gold
               if (goldAction.getAmount().startsWith("-")) {
                 return Game.getInstance().getPlayer().getGold() >= Integer.parseInt(goldAction.getAmount().substring(1));
               }
             }
+            //if the action is not an inventory or gold action, return true
             return true;
            });
         if (!activeLink) {

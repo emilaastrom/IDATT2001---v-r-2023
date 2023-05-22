@@ -21,7 +21,6 @@ public class Link {
    * @param reference the reference
    */
   public Link(String text, String reference, Action[] actions) {
-    //TODO ensure that text and reference are not null
     this.text = text;
     this.reference = reference;
     this.actions = new ArrayList<>();
@@ -35,7 +34,6 @@ public class Link {
    * @param reference the reference
    */
   public Link(String text, String reference) {
-    //TODO ensure that text and reference are not null
     this.text = text;
     this.reference = reference;
     actions = new ArrayList<>();
@@ -77,6 +75,10 @@ public class Link {
     actions.add(action);
   }
 
+  /**
+   * equals method for Link.
+   *
+   */
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -91,11 +93,19 @@ public class Link {
             && actions.equals(link.actions);
   }
 
+  /**
+   * hashCode method for Link.
+   *
+   */
   @Override
   public int hashCode() {
     return Objects.hash(text, reference, actions);
   }
 
+  /**
+   * toString method for Link.
+   *
+   */
   @Override
   public String toString() {
     return "Link{"
