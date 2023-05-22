@@ -92,7 +92,6 @@ You move into a house, you start a new life and you live happily ever after.
 You walk away from the village and try to find your home, but the task is hard. You walk for days and days, until you're encountered by a pack of wolves.
 [Attack the wolves with hands](You attack the wolves with your hands){Health -100;}
 [Attack the wolves with sword](You attack the wolves){Inventory -sword;Score 100;}
-[Run away](You try to run away from the wolves){Score 30;}
 
 ::You attack the wolves with your hands
 You try to attack the wolves with your hands, but they're too strong. They rip you apart, and you die.
@@ -100,9 +99,6 @@ You try to attack the wolves with your hands, but they're too strong. They rip y
 ::You attack the wolves
 You attack the wolves with your sword, and you manage to kill them all.
 [Walk home](You walk home){Score 50;}
-
-::You try to run away from the wolves
-You try to run away from the wolves, but they're too fast. They catch up to you, and they rip you apart. You die.
 
 ::You walk home
 After many days you find your home, and you live happily ever after.
