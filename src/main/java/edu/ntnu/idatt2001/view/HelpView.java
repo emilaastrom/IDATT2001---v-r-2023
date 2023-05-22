@@ -6,6 +6,9 @@ import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 
+/**
+ * The type Help view.
+ */
 public class HelpView {
   private final BorderPane helpRoot;
   private final BorderPane setupRoot;
@@ -16,6 +19,11 @@ public class HelpView {
   private Button setupToHelp;
   private final StackPane superRoot;
 
+  /**
+   * Constructor for help view.
+   *
+   * @param superRoot the root of the main menu
+   */
   public HelpView(StackPane superRoot) {
     this.helpRoot = new BorderPane();
     this.setupRoot = new BorderPane();
@@ -28,12 +36,10 @@ public class HelpView {
     createAndConfigureGameHelpPane();
     createAndConfigureSetupHelpPane();
     createAndLayoutControls();
-    updateControllerFromListeners();
-    observeModelAndUpdateControls();
   }
 
   private void createAndConfigureHelpPane() {
-    //Top part of help
+    //Top part of help pane
     Text helpTitle = new Text("Help");
     helpTitle.setId("titleText");
 
@@ -73,13 +79,13 @@ public class HelpView {
     helpMainBox.setAlignment(javafx.geometry.Pos.CENTER);
     helpMainBox.getChildren().addAll(helpText, helpButtonBox, mainMenuButton);
 
-
+    //Adding elements to helpRoot
     helpRoot.setTop(helpTitleBox);
     helpRoot.setCenter(helpMainBox);
   }
 
   private void createAndConfigureGameHelpPane() {
-    //Top part of game-help
+    //Top part of game-help pane
     VBox gameHelpTopBox = new VBox();
     gameHelpTopBox.setAlignment(javafx.geometry.Pos.CENTER);
     Text gameHelpTitle = new Text("Game Help");
@@ -99,8 +105,6 @@ public class HelpView {
     gameHelpText.setId("DefaultText");
     gameHelpText.wrappingWidthProperty().bind(gameRoot.widthProperty().subtract(200));
     gameHelpText.setTextAlignment(TextAlignment.JUSTIFY);
-
-
 
     gameToHelp = new Button("Back");
 
@@ -145,7 +149,11 @@ public class HelpView {
     setupRoot.setCenter(setupMainBox);
   }
 
+  /**
+   * Create and layout controls for the different help panes.
+   */
   private void createAndLayoutControls() {
+    //Adding event handlers and setting ID for CSS styling
     setupHelp.addEventHandler(javafx.scene.input.MouseEvent.MOUSE_CLICKED, event -> showSetupHelp());
     gameHelp.addEventHandler(javafx.scene.input.MouseEvent.MOUSE_CLICKED, event -> showGameHelp());
     setupHelp.setId("helpButton");
@@ -156,23 +164,29 @@ public class HelpView {
     setupToHelp.setOnAction(event -> showHelp());
   }
 
-  private void updateControllerFromListeners() {
-  }
-
-  private void observeModelAndUpdateControls() {
-  }
-
+  /**
+   * Display the first help page.
+   */
   public void showHelp(){
+    //Swapping root to general help pane
     Main.changeScene(helpRoot);
     Main.updateStage();
   }
 
+  /**
+   * Display the setup help page.
+   */
   public void showSetupHelp(){
+    //Swapping root to set up help pane
     Main.changeScene(setupRoot);
     Main.updateStage();
   }
 
+  /**
+   * Display the game help page.
+   */
   public void showGameHelp(){
+    //Swapping root to game help pane
     Main.changeScene(gameRoot);
     Main.updateStage();
   }

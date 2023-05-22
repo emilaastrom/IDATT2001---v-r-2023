@@ -45,21 +45,18 @@ public class MainMenuView {
     this.controller = controller;
     this.mainWindowDimmer = mainWindowDimmer;
 
+    //Playing soundtrack
     MusicController.playMusic();
 
     createAndConfigurePane();
 
-    createAndLayoutControls();
-
-    updateControllerFromListeners();
-
-    observeModelAndUpdateControls();
+    configureAndIdControls();
   }
 
   /**
-   * Returns the root of main menu.
+   * Returns the root of the main menu.
    *
-   * @return the root
+   * @return the root StackPane
    */
   public StackPane getRoot() {
     return mainMenuRoot;
@@ -69,7 +66,7 @@ public class MainMenuView {
    * Create and configure the root of MainMenuView.
    */
   public void createAndConfigurePane() {
-
+    //Creating and configuring the main menu StackPane
     entryWindowBox.setMinHeight(0);
     entryWindowBox.setMinWidth(0);
     entryWindowBox.setAlignment(javafx.geometry.Pos.CENTER);
@@ -95,7 +92,7 @@ public class MainMenuView {
   /**
    * Setting ID for different buttons and creating event handlers  .
    */
-  public void createAndLayoutControls() {
+  public void configureAndIdControls() {
     entryWindowChooseAdventureButton.setId("mainMenuButton");
     entryWindowChooseAdventureButton.addEventHandler(MouseEvent.MOUSE_CLICKED,
             mouseEvent -> Main.changeScene(gameSelectionRoot));
@@ -108,21 +105,6 @@ public class MainMenuView {
     exitGameButton.setId("mainMenuButton");
     exitGameButton.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent ->
             controller.showExitConfirmation(mainWindowDimmer));
-  }
-
-  /**
-   * Update controller from listeners.
-   */
-  public void updateControllerFromListeners(){
-    //exitGameButton.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent ->
-    // showExitConfirmation());
-  }
-
-  /**
-   * Observe model and update controls.
-   */
-  public void observeModelAndUpdateControls(){
-
   }
 
   /**

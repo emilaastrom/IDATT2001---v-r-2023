@@ -29,7 +29,7 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 
 /**
- * The view for the paths window.
+ * Constructor for paths window view.
  */
 public class PathsView {
   private Passage currentPassage;
@@ -369,6 +369,7 @@ public class PathsView {
     Button linkButton = new Button();
     linkButton.setText(link.getText());
     linkButton.setPrefWidth(Region.USE_COMPUTED_SIZE);
+    //Checking if the link is broken, if so it will be red.
     if (Game.getInstance().getStory().getBrokenLinks().contains(link)) {
       linkButton.setId("brokenLinkButton");
     } else {
@@ -397,6 +398,7 @@ public class PathsView {
    */
   public void undoMove() {
     try {
+      //goSilent() not record the move, and goBack() to return to the previous passage
       currentPassage = game.goSilent(game.goBack());
       currentPassageVbox = showPassages(currentPassage);
       pathsWindowCenterBox.setCenter(currentPassageVbox);
@@ -408,7 +410,7 @@ public class PathsView {
   }
 
   /**
-   * Method for setting the current passage.
+   * Method for setting the current passage in the view.
    */
   public void setCurrentPassageVbox(VBox currentPassageVbox) {
     this.currentPassageVbox = currentPassageVbox;
