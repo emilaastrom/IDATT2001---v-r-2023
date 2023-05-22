@@ -14,8 +14,17 @@ public class BackgroundController {
           "file:src/main/resources/backgrounds/backgroundforest.png");
   private static String backgroundString = "";
 
+  /**
+   * sets the background from a given path.
+
+   * @param path the path to the background image file
+   * @return the new background
+   */
   private static Background setBackground(String path) {
+    //Setting the background string
     setBackgroundString(path);
+
+    //Setting the background image
     BackgroundRepeat backgroundRepeat = BackgroundRepeat.NO_REPEAT;
     BackgroundPosition backgroundPosition = BackgroundPosition.CENTER;
     BackgroundSize backgroundSize = new BackgroundSize(
@@ -98,6 +107,7 @@ public class BackgroundController {
    * @return the new background
    */
   public static Background rotateBackground() {
+    //Switching between different backgrounds based on the background string
     switch (backgroundString) {
       case "Space" -> setBackgroundForest();
       case "Pirate" -> setBackgroundSpace();
