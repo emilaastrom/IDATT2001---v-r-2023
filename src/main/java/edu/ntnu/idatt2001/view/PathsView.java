@@ -39,9 +39,6 @@ public class PathsView {
   private final BorderPane pathsWindowBottomBox = new BorderPane();
   private final HBox pathsWindowBottomBoxHbox = new HBox();
   private final HBox pathsWindowBottomBoxHbox2 = new HBox();
-  private Text pathsWindowBottomBoxHboxTextScore = new Text();
-  private Text pathsWindowBottomBoxHboxTextHeart = new Text();
-  private Text pathsWindowBottomBoxHboxTextCoin = new Text();
   private final ImageView pathsWindowBottomBoxHboxImageViewScore = new ImageView(
       "file:src/main/resources/score.png");
   private final ImageView pathsWindowBottomBoxHboxImageViewHeart = new ImageView(
@@ -159,12 +156,12 @@ public class PathsView {
     pathsWindowBottomBoxHbox.setAlignment(Pos.CENTER_LEFT);
     pathsWindowBottomBoxHbox.setPadding(new Insets(0, 0, 0, 20));
 
-    pathsWindowBottomBoxHboxTextScore = new Text(
-        Integer.toString(Game.getInstance().getPlayer().getScore()));
-    pathsWindowBottomBoxHboxTextHeart = new Text(
-        Integer.toString(Game.getInstance().getPlayer().getHealth()));
-    pathsWindowBottomBoxHboxTextCoin = new Text(
-        Integer.toString(Game.getInstance().getPlayer().getGold()));
+    Text pathsWindowBottomBoxHboxTextScore = new Text(
+            Integer.toString(Game.getInstance().getPlayer().getScore()));
+    Text pathsWindowBottomBoxHboxTextHeart = new Text(
+            Integer.toString(Game.getInstance().getPlayer().getHealth()));
+    Text pathsWindowBottomBoxHboxTextCoin = new Text(
+            Integer.toString(Game.getInstance().getPlayer().getGold()));
 
     pathsWindowBottomBoxHboxTextScore.setId("scoreText");
     pathsWindowBottomBoxHboxTextHeart.setId("heartText");

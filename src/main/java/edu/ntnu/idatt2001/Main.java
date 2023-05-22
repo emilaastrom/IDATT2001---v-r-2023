@@ -22,7 +22,6 @@ public class Main extends Application {
   public static String currentStylesheet;
   private static Scene scene;
   private static Stage stage;
-  private static InventoryView inventoryView;
   private static SettingsView settingsView;
   private static HelpView helpView;
   private static ExitConfirmationView exitConfirmationView;
@@ -42,7 +41,7 @@ public class Main extends Application {
     exitConfirmationView = new ExitConfirmationView(dimmer);
 
     InventoryController inventoryController = new InventoryController();
-    inventoryView = new InventoryView(inventoryController);
+    InventoryView inventoryView = new InventoryView(inventoryController);
 
     PathsController pathsController = new PathsController(inventoryView);
     PathsView pathsView = new PathsView(pathsController);
