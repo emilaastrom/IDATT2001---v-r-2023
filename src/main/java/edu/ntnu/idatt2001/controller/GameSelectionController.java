@@ -1,7 +1,8 @@
 package edu.ntnu.idatt2001.controller;
 
 import edu.ntnu.idatt2001.Main;
-import edu.ntnu.idatt2001.model.FileHandler;
+import edu.ntnu.idatt2001.handlers.FileHandler;
+import edu.ntnu.idatt2001.handlers.UserInformerHandler;
 import edu.ntnu.idatt2001.model.Game;
 import edu.ntnu.idatt2001.model.goal.Goal;
 import edu.ntnu.idatt2001.view.PathsView;
@@ -22,14 +23,14 @@ public class GameSelectionController {
   /**
    * Choose users own game file and show main menu.
    */
-  public boolean chooseGameFile(Stage stage, String path, String playerName, List<Goal> playerGoals) {
+  public boolean chooseGameFile(String path, String playerName, List<Goal> playerGoals) {
     try {
       // If opening passage is empty, the file is not valid
-      if (FileHandler.openGame(stage, path, playerName, playerGoals)) {
+      if (FileHandler.openGame(path, playerName, playerGoals)) {
         if(Game.getInstance().getStory().getOpeningPassage().getLinks().isEmpty() ||
             Game.getInstance().getStory().getOpeningPassage().getContent().equals("")||
             Game.getInstance().getStory().getOpeningPassage().getTitle().equals("")) {
-          UserInformer.errorWarning("Error", "The game file is not valid");
+          UserInformerHandler.errorWarning("Error", "The game file is not valid");
           return false;
         }
         // If the file is valid, show game screen
@@ -40,7 +41,7 @@ public class GameSelectionController {
       }
     } catch (Exception e) {
       // If the file is not valid, show error message
-      UserInformer.errorWarning("Error", "Could not open file");
+      UserInformerHandler.errorWarning("Error", "Could not open file");
       return false;
     }
     // If the file is valid, return true
@@ -50,9 +51,9 @@ public class GameSelectionController {
   /**
    * Load example game file and show main menu.
    */
-  public void loadExampleFile(Stage stage, String path, String playerName, List<Goal> playerGoals) {
+  public void loadExampleFile(String path, String playerName, List<Goal> playerGoals) {
     //opens the example game file
-    FileHandler.openStaticGame(stage, path, playerName, playerGoals);
+    FileHandler.openStaticGame(path, playerName, playerGoals);
     //shows the game screen
     Main.changeScene(this.pathsView.getRoot());
     this.pathsView.setCurrentPassageVbox(

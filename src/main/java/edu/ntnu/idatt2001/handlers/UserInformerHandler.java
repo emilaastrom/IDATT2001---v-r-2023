@@ -1,4 +1,4 @@
-package edu.ntnu.idatt2001.controller;
+package edu.ntnu.idatt2001.handlers;
 
 import static edu.ntnu.idatt2001.Main.currentStylesheet;
 
@@ -10,7 +10,7 @@ import javafx.stage.Modality;
 /**
  * Is responsible for informing the user of various important things.
  */
-public class UserInformer {
+public class UserInformerHandler {
 
   /**
    * Informs the user that an error has occurred.

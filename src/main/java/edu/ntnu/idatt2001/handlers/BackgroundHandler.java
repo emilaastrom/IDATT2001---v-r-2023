@@ -1,4 +1,4 @@
-package edu.ntnu.idatt2001.controller;
+package edu.ntnu.idatt2001.handlers;
 
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
@@ -9,7 +9,7 @@ import javafx.scene.layout.BackgroundSize;
 /**
  * Controller for BackgroundView.
  */
-public class BackgroundController {
+public class BackgroundHandler {
   private static Background currentBackground = setBackground(
           "file:src/main/resources/backgrounds/backgroundforest.png");
   private static String backgroundString = "";

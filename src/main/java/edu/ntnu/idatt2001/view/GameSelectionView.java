@@ -232,11 +232,9 @@ public class GameSelectionView {
       }
       //Loading either SELECTED GAME FILE or EXAMPLE GAME FILE
       if (exampleGameChosen.get().equals(false)) {
-        controller.chooseGameFile(
-            stage, String.valueOf(pathToGameFile), nameField.getText(), goalList);
+        controller.chooseGameFile(String.valueOf(pathToGameFile), nameField.getText(), goalList);
       } else {
         controller.loadExampleFile(
-                stage,
                 String.valueOf(pathToGameFile),
                 nameField.getText(),
                 goalList);

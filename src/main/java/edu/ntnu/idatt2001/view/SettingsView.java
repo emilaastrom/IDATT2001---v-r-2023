@@ -1,8 +1,8 @@
 package edu.ntnu.idatt2001.view;
 
 import edu.ntnu.idatt2001.Main;
-import edu.ntnu.idatt2001.controller.BackgroundController;
-import edu.ntnu.idatt2001.controller.MusicController;
+import edu.ntnu.idatt2001.handlers.BackgroundHandler;
+import edu.ntnu.idatt2001.handlers.MusicHandler;
 import edu.ntnu.idatt2001.controller.SettingsController;
 import edu.ntnu.idatt2001.model.Game;
 import javafx.geometry.Insets;
@@ -88,30 +88,30 @@ public class SettingsView {
     currentThemeBox.setMinWidth(135);
     currentThemeBox.setMaxWidth(135);
     currentThemeBox.setAlignment(Pos.CENTER);
-    Text currentThemeText = new Text(BackgroundController.getBackgroundString());
+    Text currentThemeText = new Text(BackgroundHandler.getBackgroundString());
     currentThemeText.setId("DefaultText");
     currentThemeBox.getChildren().add(currentThemeText);
     Button themeButtonRight = new Button(">");
     themeButtonRight.setMaxSize(50, 50);
     changeThemeBox.getChildren().addAll(themeButtonLeft, currentThemeBox, themeButtonRight);
     themeButtonLeft.setOnAction(event -> {
-      Background background = BackgroundController.rotateBackground();
+      Background background = BackgroundHandler.rotateBackground();
       controller.getMainMenuRoot().setBackground(background);
       controller.getPathsRoot().setBackground(background);
-      currentThemeText.setText(BackgroundController.getBackgroundString());
+      currentThemeText.setText(BackgroundHandler.getBackgroundString());
     });
     themeButtonRight.setOnAction(event -> {
-      Background background = BackgroundController.rotateBackground();
+      Background background = BackgroundHandler.rotateBackground();
       controller.getMainMenuRoot().setBackground(background);
       controller.getPathsRoot().setBackground(background);
-      currentThemeText.setText(BackgroundController.getBackgroundString());
+      currentThemeText.setText(BackgroundHandler.getBackgroundString());
     });
 
     settingsSoundBox.setAlignment(Pos.CENTER);
     Button muteButton = new Button("Stop music");
     muteButton.setMaxWidth(284);
     settingsSoundBox.getChildren().addAll(muteButton);
-    Slider settingsSoundSlider = MusicController.getVolumeSlider();
+    Slider settingsSoundSlider = MusicHandler.getVolumeSlider();
     settingsSoundSlider.setMaxWidth(284);
 
     settingsSoundBox.getChildren().addAll(settingsSoundSlider);
@@ -119,10 +119,10 @@ public class SettingsView {
     muteButton.setOnAction(event -> {
       if (muteButton.getText().equals("Stop music")) {
         muteButton.setText("Play music");
-        MusicController.pauseMusic();
+        MusicHandler.pauseMusic();
       } else {
         muteButton.setText("Stop music");
-        MusicController.playMusic();
+        MusicHandler.playMusic();
       }
     });
 

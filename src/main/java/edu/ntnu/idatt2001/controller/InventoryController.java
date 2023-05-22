@@ -18,7 +18,7 @@ public class InventoryController {
     //Inventory title
     StringBuilder inventoryString = new StringBuilder("Inventory:\r\n\n");
     Game game = Game.getInstance();
-    //Add every item to inventory string
+    //Adds every item to inventory string
     game.getPlayer().getInventory().stream()
             .map(item -> "- " + item.substring(0, 1).toUpperCase() + item.substring(1).toLowerCase() + "\r\n")
             .forEach(inventoryString::append);

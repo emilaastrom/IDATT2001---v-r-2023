@@ -1,9 +1,9 @@
 package edu.ntnu.idatt2001.view;
 
 import edu.ntnu.idatt2001.Main;
-import edu.ntnu.idatt2001.controller.BackgroundController;
+import edu.ntnu.idatt2001.handlers.BackgroundHandler;
 import edu.ntnu.idatt2001.controller.MainMenuController;
-import edu.ntnu.idatt2001.controller.MusicController;
+import edu.ntnu.idatt2001.handlers.MusicHandler;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
@@ -46,7 +46,7 @@ public class MainMenuView {
     this.mainWindowDimmer = mainWindowDimmer;
 
     //Playing soundtrack
-    MusicController.playMusic();
+    MusicHandler.playMusic();
 
     createAndConfigurePane();
 
@@ -86,7 +86,7 @@ public class MainMenuView {
     entryWindow.setStyle("-fx-background-color: rgb(0,0,0,0)");
 
     mainMenuRoot.getChildren().addAll(entryWindow, mainWindowDimmer);
-    mainMenuRoot.setBackground(BackgroundController.setBackgroundForest());
+    mainMenuRoot.setBackground(BackgroundHandler.setBackgroundForest());
   }
 
   /**

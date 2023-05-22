@@ -1,6 +1,6 @@
 package edu.ntnu.idatt2001.model;
 
-import edu.ntnu.idatt2001.controller.UserInformer;
+import edu.ntnu.idatt2001.handlers.UserInformerHandler;
 import edu.ntnu.idatt2001.model.action.Action;
 import edu.ntnu.idatt2001.model.goal.Goal;
 import java.util.ArrayList;
@@ -136,7 +136,7 @@ public class Game {
         return null;
       }
     } catch (Exception e) {
-      UserInformer.errorWarning("Error trying to undo", "Try again!");
+      UserInformerHandler.errorWarning("Error trying to undo", "Try again!");
       return null;
     }
   }

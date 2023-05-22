@@ -1,6 +1,6 @@
-package edu.ntnu.idatt2001.model;
+package edu.ntnu.idatt2001.handlers;
 
-import edu.ntnu.idatt2001.controller.UserInformer;
+import edu.ntnu.idatt2001.model.*;
 import edu.ntnu.idatt2001.model.action.GoldAction;
 import edu.ntnu.idatt2001.model.action.HealthAction;
 import edu.ntnu.idatt2001.model.action.InventoryAction;
@@ -18,7 +18,6 @@ import java.util.Objects;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import javafx.stage.Stage;
 
 /**
  * The FileHandler class.
@@ -198,13 +197,11 @@ public class FileHandler {
   /**
    * Open static game.
    *
-   * @param stage       the stage
    * @param path        the path
    * @param playerName  the player name
    * @param playerGoals the player goals
    */
   public static void openStaticGame(
-          Stage stage,
           String path,
           String playerName,
           List<Goal> playerGoals) {
@@ -229,19 +226,17 @@ public class FileHandler {
   /**
    * Open game boolean.
    *
-   * @param stage       the stage
    * @param playerName  the player name
    * @param playerGoals the player goals
    * @return the boolean
    */
-  public static boolean openGame(
-      Stage stage, String path, String playerName, List<Goal> playerGoals) {
+  public static boolean openGame(String path, String playerName, List<Goal> playerGoals) {
     try {
       Story story = FileHandler.readFile(path);
 
       //Notifies the user if there are broken links in the story.
       if (story.getBrokenLinks().size() > 0) {
-        UserInformer.errorWarning(
+        UserInformerHandler.errorWarning(
             "The story you are trying to open has broken links.",
             "The broken links will be marked red in the game.");
       }
