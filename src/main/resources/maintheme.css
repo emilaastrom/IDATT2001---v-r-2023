@@ -199,7 +199,7 @@ titleText{
 #SettingsRoot, #inventoryRoot, #SettingsRoot, #ExitConfirmationRoot, #GameSelectionRoot, #DialogPane, #HelpRoot{
     -fx-border-color: #FFFFFF;
     -fx-border-width: 4px;
-    -fx-background-image: url("file:src/main/resources/backgroundsettings.png");
+    -fx-background-image: url("../resources/backgroundsettings.png");
     -fx-background-repeat: no-repeat no-repeat;
     -fx-background-size: cover, auto;
 }
@@ -212,7 +212,7 @@ titleText{
     -fx-padding: 50, 0, 50, 0;
 }
 
-.dialog-pane:header *.header-panel *.label{
+.dialog-pane *.header-panel *.label{
     -fx-text-fill: #ffffff;
     -fx-font-size: 20;
     -fx-font-family: 'Retro Gaming';
@@ -224,8 +224,8 @@ titleText{
     -fx-pref-width: 500;
 }
 
-.dialog-pane:header *.header-panel{
-    -fx-background-image: url("file:src/main/resources/backgroundsettings.png");
+.dialog-pane *.header-panel{
+    -fx-background-image: url("../resources/backgroundsettings.png");
     -fx-background-repeat: no-repeat no-repeat;
     -fx-background-size: cover, auto;
 }
