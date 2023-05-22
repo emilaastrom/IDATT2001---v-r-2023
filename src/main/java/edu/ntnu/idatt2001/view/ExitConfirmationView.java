@@ -4,6 +4,7 @@ import edu.ntnu.idatt2001.Main;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -26,6 +27,7 @@ public class ExitConfirmationView {
    * @param dimmer the dimmer
    */
   public ExitConfirmationView(BorderPane dimmer) {
+    exitConfirmationStage.getIcons().add(new Image("file:src/main/resources/icons/settings.png"));
     this.dimmer = dimmer;
     BorderPane exitConfirmationRoot = new BorderPane();
     exitConfirmationStage.setTitle("Exit confirmation");
@@ -52,6 +54,7 @@ public class ExitConfirmationView {
    * Display exit confirmation.
    */
   public void exitConfirmation() {
+    dimmer.setVisible(true);
     exitConfirmationButton.setOnAction(event -> System.exit(0));
     exitConfirmationCancelButton.setOnAction(event -> {
       exitConfirmationStage.close();
@@ -66,7 +69,9 @@ public class ExitConfirmationView {
   /**
    * Main menu confirmation.
    */
-  public void mainMenuConfirmation(Pane root) {
+  public void mainMenuConfirmation(Pane root, BorderPane dimmer) {
+    exitConfirmationStage.addEventHandler(WindowEvent.WINDOW_SHOWING, windowEvent ->
+            dimmer.setVisible(true));
     exitConfirmationButton.setOnAction(event -> {
       Main.changeScene(root);
       exitConfirmationStage.close();
@@ -79,8 +84,6 @@ public class ExitConfirmationView {
     });
     exitConfirmationStage.addEventHandler(WindowEvent.WINDOW_HIDDEN, windowEvent ->
             dimmer.setVisible(false));
-    System.out.println("showing");
-    dimmer.setVisible(true);
     exitConfirmationStage.show();
   }
 }

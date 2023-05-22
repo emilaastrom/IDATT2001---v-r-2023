@@ -99,17 +99,20 @@ public class Game {
    * Goes back to the previous passage.
    */
   public Link goBack() {
-    if (linkHistory.size() > 1) {
-      List<Action> actionsToUndo = linkHistory.get(linkHistory.size() - 1).getActions();
-      for (Action action : actionsToUndo) {
-        action.undo(player);
+    try {
+      if (linkHistory.size() > 1) {
+
+        List<Action> actionsToUndo = linkHistory.get(linkHistory.size() - 1).getActions();
+        //Executing undo action for each action in the list
+        actionsToUndo.forEach(action -> action.undo(player));
+        Link link = linkHistory.get(linkHistory.size() - 2);
+        linkHistory.remove(linkHistory.size() - 1);
+        return link;
+      } else {
+        return null;
       }
-      Link link = linkHistory.get(linkHistory.size() - 2);
-      Passage passage = passageHistory.get(passageHistory.size() - 1);
-      linkHistory.remove(linkHistory.size() - 1);
-      return link;
-    } else {
-      UserInformer.errorWarning("Error", "No passages to go back to");
+    } catch (Exception e) {
+      UserInformer.errorWarning("Error trying to undo", "Try again!");
       return null;
     }
   }
@@ -118,7 +121,6 @@ public class Game {
    * Restarts the game.
    */
   public void restartGame() {
-    //TODO restartGame() function
     Game.getInstance().setPlayer(
         new Player.PlayerBuilder(Game.getInstance().getPlayer().getName()).build());
     passageHistory.clear();

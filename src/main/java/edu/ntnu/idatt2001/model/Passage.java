@@ -1,6 +1,5 @@
 package edu.ntnu.idatt2001.model;
 
-import edu.ntnu.idatt2001.model.action.Action;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -59,31 +58,23 @@ public class Passage {
    */
   public String getLinksFormatted() {
     StringBuilder outputString = new StringBuilder();
-    for (Link link : links) {
-      outputString
-              .append("[")
+    links.stream().forEach(link -> {
+      outputString.append("[")
               .append(link.getText())
-              .append("]").append("(")
+              .append("](")
               .append(link.getReference())
               .append(")");
+
       if (!link.getActions().isEmpty()) {
-        outputString
-                .append("{");
+        outputString.append("{");
+        link.getActions().stream()
+                .map(action -> action.getType() + " " + action.getAmount() + ";")
+                .forEach(outputString::append);
+        outputString.append("}");
       }
-      for (Action action : link.getActions()) {
-        outputString
-                .append(action.getType())
-                .append(" ")
-                .append(action.getAmount())
-                .append(";");
-      }
-      if (!link.getActions().isEmpty()) {
-        outputString
-                .append("}");
-      }
-      outputString
-              .append("\n");
-    }
+
+      outputString.append("\n");
+    });
 
     return String.valueOf(outputString);
   }

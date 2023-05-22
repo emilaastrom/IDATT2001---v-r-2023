@@ -11,7 +11,7 @@ import javafx.scene.layout.BackgroundSize;
  */
 public class BackgroundController {
   private static Background currentBackground = setBackground(
-          "file:src/main/resources/backgroundforest.png");
+          "file:src/main/resources/backgrounds/backgroundforest.png");
   private static String backgroundString = "";
 
   private static Background setBackground(String path) {
@@ -50,7 +50,7 @@ public class BackgroundController {
    * @return the new background
    */
   public static Background setBackgroundForest() {
-    currentBackground = setBackground("file:src/main/resources/backgroundforest.png");
+    currentBackground = setBackground("file:src/main/resources/backgrounds/backgroundforest.png");
     return currentBackground;
   }
 
@@ -60,7 +60,7 @@ public class BackgroundController {
    * @return the new background
    */
   public static Background setBackgroundSpace() {
-    currentBackground = setBackground("file:src/main/resources/backgroundspace.png");
+    currentBackground = setBackground("file:src/main/resources/backgrounds/backgroundspace.png");
     return currentBackground;
   }
 
@@ -70,7 +70,7 @@ public class BackgroundController {
    * @return the new background
    */
   public static Background setBackgroundPirate() {
-    currentBackground = setBackground("file:src/main/resources/backgroundpirate.png");
+    currentBackground = setBackground("file:src/main/resources/backgrounds/backgroundpirate.png");
     return currentBackground;
   }
 

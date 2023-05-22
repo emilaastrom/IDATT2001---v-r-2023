@@ -7,14 +7,9 @@ import edu.ntnu.idatt2001.controller.UserInformer;
 import edu.ntnu.idatt2001.model.Game;
 import edu.ntnu.idatt2001.model.Link;
 import edu.ntnu.idatt2001.model.Passage;
-import edu.ntnu.idatt2001.model.Player;
-import edu.ntnu.idatt2001.model.Story;
-import edu.ntnu.idatt2001.model.action.Action;
-import edu.ntnu.idatt2001.model.goal.Goal;
 import edu.ntnu.idatt2001.model.goal.GoldGoal;
 import edu.ntnu.idatt2001.model.goal.HealthGoal;
 import edu.ntnu.idatt2001.model.goal.ScoreGoal;
-import java.util.List;
 import java.util.Objects;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
@@ -32,42 +27,33 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
-import javafx.stage.Stage;
 
 /**
  * The view for the paths window.
  */
 public class PathsView {
-  private String currentStylesheet;
   private Passage currentPassage;
   private VBox currentPassageVbox = new VBox();
-  static Player player;
-  static List<Goal> goals;
   static Game game = Game.getInstance();
-  static Story story;
-  private Stage inventoryStage;
-  private BorderPane pathsWindowCenterBox = new BorderPane();
-  private BorderPane pathsWindowBottomBox = new BorderPane();
-  private HBox pathsWindowBottomBoxHbox = new HBox();
-  private HBox pathsWindowBottomBoxHbox2 = new HBox();
-  private Text pathsWindowBottomBoxHboxTextScore = new Text();
-  private Text pathsWindowBottomBoxHboxTextHeart = new Text();
-  private Text pathsWindowBottomBoxHboxTextCoin = new Text();
-  private ImageView pathsWindowBottomBoxHboxImageViewScore = new ImageView(
-      "file:src/main/resources/score.png");
-  private ImageView pathsWindowBottomBoxHboxImageViewHeart = new ImageView(
-      "file:src/main/resources/heart.png");
-  private ImageView pathsWindowBottomBoxHboxImageViewCoin = new ImageView(
-      "file:src/main/resources/coin.png");
-  private ImageView pathsWindowBottomBoxHboxImageViewChest = new ImageView(
-      "file:src/main/resources/chest.png");
-  private ImageView pathsWindowBottomBoxHbox2ImageViewUndo = new ImageView(
-      "file:src/main/resources/undo.png");
-  private ImageView pathsWindowBottomBoxHbox2ImageViewSettings = new ImageView(
-      "file:src/main/resources/settings.png");
-  private BorderPane pathsWindow = new BorderPane();
-  private VBox pathsWindowVbox = new VBox();
-  private PathsController controller;
+  private final BorderPane pathsWindowCenterBox = new BorderPane();
+  private final BorderPane pathsWindowBottomBox = new BorderPane();
+  private final HBox pathsWindowBottomBoxHbox = new HBox();
+  private final HBox pathsWindowBottomBoxHbox2 = new HBox();
+  private final ImageView pathsWindowBottomBoxHboxImageViewScore = new ImageView(
+      "file:src/main/resources/icons/score.png");
+  private final ImageView pathsWindowBottomBoxHboxImageViewHeart = new ImageView(
+      "file:src/main/resources/icons/heart.png");
+  private final ImageView pathsWindowBottomBoxHboxImageViewCoin = new ImageView(
+      "file:src/main/resources/icons/coin.png");
+  private final ImageView pathsWindowBottomBoxHboxImageViewChest = new ImageView(
+      "file:src/main/resources/icons/chest.png");
+  private final ImageView pathsWindowBottomBoxHbox2ImageViewUndo = new ImageView(
+      "file:src/main/resources/icons/undo.png");
+  private final ImageView pathsWindowBottomBoxHbox2ImageViewSettings = new ImageView(
+      "file:src/main/resources/icons/settings.png");
+  private final BorderPane pathsWindow = new BorderPane();
+  private final VBox pathsWindowVbox = new VBox();
+  private final PathsController controller;
   private BorderPane pathsDimmer;
   StackPane pathsRoot = new StackPane();
   VBox pathsWindowCenterBoxVbox = new VBox();
@@ -170,12 +156,12 @@ public class PathsView {
     pathsWindowBottomBoxHbox.setAlignment(Pos.CENTER_LEFT);
     pathsWindowBottomBoxHbox.setPadding(new Insets(0, 0, 0, 20));
 
-    pathsWindowBottomBoxHboxTextScore = new Text(
-        Integer.toString(Game.getInstance().getPlayer().getScore()));
-    pathsWindowBottomBoxHboxTextHeart = new Text(
-        Integer.toString(Game.getInstance().getPlayer().getHealth()));
-    pathsWindowBottomBoxHboxTextCoin = new Text(
-        Integer.toString(Game.getInstance().getPlayer().getGold()));
+    Text pathsWindowBottomBoxHboxTextScore = new Text(
+            Integer.toString(Game.getInstance().getPlayer().getScore()));
+    Text pathsWindowBottomBoxHboxTextHeart = new Text(
+            Integer.toString(Game.getInstance().getPlayer().getHealth()));
+    Text pathsWindowBottomBoxHboxTextCoin = new Text(
+            Integer.toString(Game.getInstance().getPlayer().getGold()));
 
     pathsWindowBottomBoxHboxTextScore.setId("scoreText");
     pathsWindowBottomBoxHboxTextHeart.setId("heartText");
@@ -261,11 +247,12 @@ public class PathsView {
       controller.hideInventory(pathsDimmer);
     });
 
-    undoPane.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-      undoMove();
-    });
+    undoPane.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> undoMove());
 
-    settingsPane.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> controller.showSettings());
+    settingsPane.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+      controller.showSettings();
+      pathsDimmer.setVisible(true);
+    });
   }
 
   /**
@@ -318,52 +305,33 @@ public class PathsView {
     titleText.setText("Game Over\n");
     if (Game.getInstance().getGoals().isEmpty()) {
       contentText.setText(
-          Game.getInstance().getPlayer().getName() + " have reached the end of the game!");
+          Game.getInstance().getPlayer().getName() + " reached the end of the game!");
       contentVboxText.getChildren().add(contentText);
     } else {
       contentText.setText(Game.getInstance().getPlayer().getName() + "'s stats/goals:");
       contentVboxText.getChildren().add(contentText);
-      for (Goal goal : Game.getInstance().getGoals()) {
-        if (goal instanceof ScoreGoal) {
-          Text scoreGoalText = new Text(
-              "Score: " + Game.getInstance().getPlayer().getScore() + "/"
-                  + ((ScoreGoal) goal).getScoreGoal());
-          if (goal.isFulfilled(Game.getInstance().getPlayer())) {
-            scoreGoalText.setFill(Color.GREEN);
-          } else {
-            scoreGoalText.setFill(Color.RED);
-          }
-          scoreGoalText.setId("goalText");
-          scoreGoalText.setTextAlignment(TextAlignment.CENTER);
-          contentVboxText.getChildren().add(scoreGoalText);
-        }
-        if (goal instanceof GoldGoal) {
-          Text goldGoalText = new Text(
-              "Gold: " + Game.getInstance().getPlayer().getGold() + "/"
-                  + ((GoldGoal) goal).getGoldGoal());
-          if (goal.isFulfilled(Game.getInstance().getPlayer())) {
-            goldGoalText.setFill(Color.GREEN);
-          } else {
-            goldGoalText.setFill(Color.RED);
-          }
-          goldGoalText.setId("goalText");
-          goldGoalText.setTextAlignment(TextAlignment.CENTER);
-          contentVboxText.getChildren().add(goldGoalText);
-        }
-        if (goal instanceof HealthGoal) {
-          Text healthGoalText = new Text(
-              "Health: " + Game.getInstance().getPlayer().getHealth() + "/"
-                  + ((HealthGoal) goal).getHealthGoal());
-          if (goal.isFulfilled(Game.getInstance().getPlayer())) {
-            healthGoalText.setFill(Color.GREEN);
-          } else {
-            healthGoalText.setFill(Color.RED);
-          }
-          healthGoalText.setId("goalText");
-          healthGoalText.setTextAlignment(TextAlignment.CENTER);
-          contentVboxText.getChildren().add(healthGoalText);
-        }
-      }
+      Game.getInstance().getGoals().stream()
+              .filter(goal -> goal instanceof ScoreGoal || goal instanceof GoldGoal || goal instanceof HealthGoal)
+              .forEach(goal -> {
+                Text goalText;
+                if (goal instanceof ScoreGoal) {
+                  goalText = new Text("Score: " + Game.getInstance().getPlayer().getScore() + "/" + ((ScoreGoal) goal).getScoreGoal());
+                } else if (goal instanceof GoldGoal) {
+                  goalText = new Text("Gold: " + Game.getInstance().getPlayer().getGold() + "/" + ((GoldGoal) goal).getGoldGoal());
+                } else {
+                  goalText = new Text("Health: " + Game.getInstance().getPlayer().getHealth() + "/" + ((HealthGoal) goal).getHealthGoal());
+                }
+
+                if (goal.isFulfilled(Game.getInstance().getPlayer())) {
+                  goalText.setFill(Color.GREEN);
+                } else {
+                  goalText.setFill(Color.RED);
+                }
+
+                goalText.setId("goalText");
+                goalText.setTextAlignment(TextAlignment.CENTER);
+                contentVboxText.getChildren().add(goalText);
+              });
     }
 
     Button restartButton = new Button("Restart");
@@ -383,7 +351,7 @@ public class PathsView {
     exitButton.setId("endButton");
     exitButton.setOnAction(event -> {
       try {
-        Main.showExitConfirmation();
+        Main.showExitConfirmation(this);
       } catch (Exception e) {
         e.printStackTrace();
       }
@@ -406,13 +374,13 @@ public class PathsView {
     } else {
       linkButton.setId("linkButton");
       linkButton.setOnAction(event -> {
-        for (Action action : link.getActions()) {
+        link.getActions().forEach(action -> {
           try {
             action.execute(Game.getInstance().getPlayer());
           } catch (Exception e) {
             UserInformer.errorWarning("You can't do that action", e.getMessage());
           }
-        }
+        });
         updateBottomBox();
         currentPassage = game.go(link);
         currentPassageVbox = showPassages(currentPassage);
@@ -428,11 +396,15 @@ public class PathsView {
    * Method undoing the last move.
    */
   public void undoMove() {
-    currentPassage = game.goSilent(game.goBack());
-    currentPassageVbox = showPassages(currentPassage);
-    pathsWindowCenterBox.setCenter(currentPassageVbox);
-    updateBottomBox();
-    Main.updateStage();
+    try {
+      currentPassage = game.goSilent(game.goBack());
+      currentPassageVbox = showPassages(currentPassage);
+      pathsWindowCenterBox.setCenter(currentPassageVbox);
+      updateBottomBox();
+      Main.updateStage();
+    } catch (Exception e) {
+      UserInformer.errorWarning("Error", "Make a move first!");
+    }
   }
 
   /**
@@ -442,4 +414,12 @@ public class PathsView {
     this.currentPassageVbox = currentPassageVbox;
     pathsWindowCenterBox.setCenter(currentPassageVbox);
   }
+
+  /**
+   * Getter for the pathsView dimmer to be enabled/disabled by different stages.
+   */
+  public BorderPane getPathsDimmer() {
+    return pathsDimmer;
+  }
+
 }

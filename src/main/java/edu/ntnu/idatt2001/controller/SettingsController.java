@@ -2,6 +2,7 @@ package edu.ntnu.idatt2001.controller;
 
 import edu.ntnu.idatt2001.Main;
 import edu.ntnu.idatt2001.model.Game;
+import edu.ntnu.idatt2001.view.PathsView;
 import javafx.scene.layout.Pane;
 
 /**
@@ -24,8 +25,8 @@ public class SettingsController {
   /**
    * Shows the main menu.
    */
-  public void showMainMenu() {
-    Main.showExitConfirmation();
+  public void showMainMenu(PathsView pathsView) {
+    Main.showExitConfirmation(pathsView);
   }
 
   /**

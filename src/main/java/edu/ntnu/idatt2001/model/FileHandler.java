@@ -18,17 +18,15 @@ import java.util.Objects;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import javax.swing.JOptionPane;
 
 /**
- * The type File handler.
+ * The FileHandler class.
  */
 public class FileHandler {
 
   /**
-   * Write file.
+   * Write to file.
    *
    * @param story the story
    */
@@ -48,7 +46,7 @@ public class FileHandler {
       for (Map.Entry<Link, Passage> entry : story.getPassages().entrySet()) {
         Passage currentPassage = entry.getValue();
 
-        //skriv ting her
+        //Writing passage to file
         fileWriter.write("\n::"
                 + currentPassage.getTitle() + "\n"
                 + currentPassage.getContent() + "\n"
@@ -67,7 +65,7 @@ public class FileHandler {
   /**
    * Reading the given file.
    *
-   * @param fileReference the file reference
+   * @param fileReference the given file reference
    * @return the story
    */
   public static Story readFile(String fileReference) {
@@ -138,7 +136,7 @@ public class FileHandler {
             String actionListString = matcherAction.group(1);
             String[] actions = actionListString.split(";");
             //Looping through actions and tracking which types are being added.
-            for (String action : actions) {
+            Arrays.stream(actions).toList().forEach(action -> {
               //Splitting the action type/value into: type (INDEX 0) and value (INDEX 1).
               String[] currentTypeAndValue = action.split(" ");
 
@@ -156,29 +154,21 @@ public class FileHandler {
                 inventoryActionList.add(new InventoryAction(currentTypeAndValue[1]));
                 activeActionList.set(3, true);
               }
-            }
+            });
           }
           Link link = new Link(linkTitle, linkContent);
           //Checking to see which types of actions have been activated and adding them to the link.
           if (Objects.equals(activeActionList.get(0), true)) {
-            for (GoldAction goldAction : goldActionList) {
-              link.addAction(goldAction);
-            }
+            goldActionList.forEach(link::addAction);
           }
           if (Objects.equals(activeActionList.get(1), true)) {
-            for (HealthAction healthAction : healthActionList) {
-              link.addAction(healthAction);
-            }
+            healthActionList.forEach(link::addAction);
           }
           if (Objects.equals(activeActionList.get(2), true)) {
-            for (ScoreAction scoreAction : scoreActionList) {
-              link.addAction(scoreAction);
-            }
+            scoreActionList.forEach(link::addAction);
           }
           if (Objects.equals(activeActionList.get(3), true)) {
-            for (InventoryAction inventoryAction : inventoryActionList) {
-              link.addAction(inventoryAction);
-            }
+            inventoryActionList.forEach(link::addAction);
           }
           passage.addLink(link);
 

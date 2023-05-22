@@ -53,6 +53,12 @@ public class Player {
    * @return the name
    */
   public String getName() {
+    if (name == null) {
+      return "You";
+    }
+    if (name.equals("")) {
+      return "You";
+    }
     return name;
   }
 

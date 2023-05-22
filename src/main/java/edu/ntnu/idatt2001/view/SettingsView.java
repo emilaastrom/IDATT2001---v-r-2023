@@ -12,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Separator;
 import javafx.scene.control.Slider;
+import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
@@ -68,6 +69,7 @@ public class SettingsView {
     Scene scene = new Scene(settingsRoot, 500, 600);
     scene.getStylesheets().add("file:src/main/resources/maintheme.css");
     this.stage = new Stage();
+    stage.getIcons().add(new Image("file:src/main/resources/icons/settings.png"));
     stage.initModality(Modality.APPLICATION_MODAL);
     stage.setScene(scene);
   }
@@ -144,10 +146,8 @@ public class SettingsView {
       });
       mainMenuButton.setMaxWidth(200);
       mainMenuButton.setOnAction(event -> {
-        //TODO MAIN MENU
-
-        controller.showMainMenu();
         closeStage();
+        controller.showMainMenu(pathsView);
       });
       separator.setMaxWidth(350);
       settingsListBox.getChildren().addAll(restartButton, mainMenuButton, separator);
@@ -182,6 +182,7 @@ public class SettingsView {
     if (isGameSettings) {
       settingsListBox.getChildren().clear();
       settingsListBox.getChildren().addAll(restartButton, mainMenuButton, separator, changeThemeBox, settingsSoundBox);
+      stage.addEventHandler(WindowEvent.WINDOW_HIDDEN, event -> pathsView.getPathsDimmer().setVisible(false));
     } else {
       settingsListBox.getChildren().clear();
       settingsListBox.getChildren().addAll(changeThemeBox, settingsSoundBox);
@@ -190,10 +191,6 @@ public class SettingsView {
 
   private void closeStage() {
     stage.close();
-  }
-
-  public Pane getRoot() {
-    return settingsRoot;
   }
 
 }

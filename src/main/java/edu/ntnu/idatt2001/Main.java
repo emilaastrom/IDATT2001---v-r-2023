@@ -10,6 +10,7 @@ import edu.ntnu.idatt2001.view.PathsView;
 import edu.ntnu.idatt2001.view.SettingsView;
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -21,10 +22,7 @@ import javafx.stage.Stage;
 public class Main extends Application {
   public static String currentStylesheet;
   private static Scene scene;
-  private static Scene mainMenuScene;
   private static Stage stage;
-  private static InventoryView inventoryView;
-  private static SettingsView mainMenuSettingsView;
   private static SettingsView settingsView;
   private static HelpView helpView;
   private static ExitConfirmationView exitConfirmationView;
@@ -33,6 +31,7 @@ public class Main extends Application {
   @Override
   public void start(Stage primaryStage) {
     stage = primaryStage;
+    primaryStage.getIcons().add(new Image("file:src/main/resources/chest.png"));
 
     BorderPane dimmer = new BorderPane();
     dimmer.setVisible(false);
@@ -41,11 +40,10 @@ public class Main extends Application {
     dimmer.setId("mainWindowDimmer");
 
 
-    ExitConfirmationController exitConfirmationController = new ExitConfirmationController();
     exitConfirmationView = new ExitConfirmationView(dimmer);
 
     InventoryController inventoryController = new InventoryController();
-    inventoryView = new InventoryView(inventoryController);
+    InventoryView inventoryView = new InventoryView(inventoryController);
 
     PathsController pathsController = new PathsController(inventoryView);
     PathsView pathsView = new PathsView(pathsController);
@@ -58,20 +56,15 @@ public class Main extends Application {
             exitConfirmationView);
     mainMenuView = new MainMenuView(mainMenuController, gameSelectionView.getRoot(), dimmer);
 
-    HelpController helpController = new HelpController();
-    helpView = new HelpView(helpController, mainMenuView.getRoot());
+    helpView = new HelpView(mainMenuView.getRoot());
 
     SettingsController settingsController = new SettingsController(mainMenuView.getRoot(),pathsView.getRoot());
     settingsView = new SettingsView(
         settingsController,
         pathsView,
         dimmer);
-
-
-
-
+    
     scene = new Scene(mainMenuView.getRoot(), 1250, 700);
-    mainMenuScene = scene;
     currentStylesheet = "file:src/main/resources/maintheme.css";
 
     scene.getStylesheets().add(currentStylesheet);
@@ -89,16 +82,8 @@ public class Main extends Application {
     stage.setScene(scene);
   }
 
-  public static void mainMenu() {
-    stage.setScene(mainMenuScene);
-  }
-
   public static void updateStage() {
     stage.show();
-  }
-
-  public static void showInventory(double width, double height, BorderPane dimmer) {
-    inventoryView.showInventory(width, height, dimmer);
   }
 
   public static void showMainMenuSettings() {
@@ -109,8 +94,9 @@ public class Main extends Application {
     settingsView.showStage(true);
   }
 
-  public static void showExitConfirmation() {
-    exitConfirmationView.mainMenuConfirmation(mainMenuView.getRoot());
+  public static void showExitConfirmation(PathsView pathsView) {
+    pathsView.getPathsDimmer().setVisible(true);
+    exitConfirmationView.mainMenuConfirmation(mainMenuView.getRoot(), pathsView.getPathsDimmer());
   }
 
   public static void showHelp() {helpView.showHelp();}
