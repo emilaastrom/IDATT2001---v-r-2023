@@ -1,20 +1,32 @@
-C:\Users\Eier\Documents\GitHub\mappevurdering2023\src\main\java\edu\ntnu\idatt2001\Model\Game.java
-C:\Users\Eier\Documents\GitHub\mappevurdering2023\src\main\java\edu\ntnu\idatt2001\Model\Goal\ScoreGoal.java
-C:\Users\Eier\Documents\GitHub\mappevurdering2023\src\main\java\edu\ntnu\idatt2001\View\Settings.java
-C:\Users\Eier\Documents\GitHub\mappevurdering2023\src\main\java\edu\ntnu\idatt2001\Model\Action\Action.java
-C:\Users\Eier\Documents\GitHub\mappevurdering2023\src\main\java\edu\ntnu\idatt2001\Model\Goal\Goal.java
-C:\Users\Eier\Documents\GitHub\mappevurdering2023\src\main\java\edu\ntnu\idatt2001\Controller\MusicController.java
-C:\Users\Eier\Documents\GitHub\mappevurdering2023\src\main\java\edu\ntnu\idatt2001\Model\Player.java
-C:\Users\Eier\Documents\GitHub\mappevurdering2023\src\main\java\edu\ntnu\idatt2001\Model\Goal\InventoryGoal.java
-C:\Users\Eier\Documents\GitHub\mappevurdering2023\src\main\java\edu\ntnu\idatt2001\Model\Passage.java
-C:\Users\Eier\Documents\GitHub\mappevurdering2023\src\main\java\edu\ntnu\idatt2001\Model\Action\ScoreAction.java
-C:\Users\Eier\Documents\GitHub\mappevurdering2023\src\main\java\edu\ntnu\idatt2001\View\PathsApplication.java
-C:\Users\Eier\Documents\GitHub\mappevurdering2023\src\main\java\edu\ntnu\idatt2001\Model\Goal\GoldGoal.java
-C:\Users\Eier\Documents\GitHub\mappevurdering2023\src\main\java\edu\ntnu\idatt2001\Controller\BackgroundController.java
-C:\Users\Eier\Documents\GitHub\mappevurdering2023\src\main\java\edu\ntnu\idatt2001\Model\Action\GoldAction.java
-C:\Users\Eier\Documents\GitHub\mappevurdering2023\src\main\java\edu\ntnu\idatt2001\Model\FileHandler.java
-C:\Users\Eier\Documents\GitHub\mappevurdering2023\src\main\java\edu\ntnu\idatt2001\Model\Action\HealthAction.java
-C:\Users\Eier\Documents\GitHub\mappevurdering2023\src\main\java\edu\ntnu\idatt2001\Model\Link.java
-C:\Users\Eier\Documents\GitHub\mappevurdering2023\src\main\java\edu\ntnu\idatt2001\Model\Action\InventoryAction.java
-C:\Users\Eier\Documents\GitHub\mappevurdering2023\src\main\java\edu\ntnu\idatt2001\Model\Goal\HealthGoal.java
-C:\Users\Eier\Documents\GitHub\mappevurdering2023\src\main\java\edu\ntnu\idatt2001\Model\Story.java
+/Users/emilleonardaastrom/Documents/Dataingeniør/Programmering 2/mappevurdering2023/src/main/java/edu/ntnu/idatt2001/view/SettingsView.java
+/Users/emilleonardaastrom/Documents/Dataingeniør/Programmering 2/mappevurdering2023/src/main/java/edu/ntnu/idatt2001/controller/GameSelectionController.java
+/Users/emilleonardaastrom/Documents/Dataingeniør/Programmering 2/mappevurdering2023/src/main/java/edu/ntnu/idatt2001/model/goal/HealthGoal.java
+/Users/emilleonardaastrom/Documents/Dataingeniør/Programmering 2/mappevurdering2023/src/main/java/edu/ntnu/idatt2001/controller/PathsController.java
+/Users/emilleonardaastrom/Documents/Dataingeniør/Programmering 2/mappevurdering2023/src/main/java/edu/ntnu/idatt2001/controller/BackgroundController.java
+/Users/emilleonardaastrom/Documents/Dataingeniør/Programmering 2/mappevurdering2023/src/main/java/edu/ntnu/idatt2001/model/goal/GoldGoal.java
+/Users/emilleonardaastrom/Documents/Dataingeniør/Programmering 2/mappevurdering2023/src/main/java/edu/ntnu/idatt2001/view/MainMenuView.java
+/Users/emilleonardaastrom/Documents/Dataingeniør/Programmering 2/mappevurdering2023/src/main/java/edu/ntnu/idatt2001/controller/InventoryController.java
+/Users/emilleonardaastrom/Documents/Dataingeniør/Programmering 2/mappevurdering2023/src/main/java/edu/ntnu/idatt2001/controller/SettingsController.java
+/Users/emilleonardaastrom/Documents/Dataingeniør/Programmering 2/mappevurdering2023/src/main/java/edu/ntnu/idatt2001/view/InventoryView.java
+/Users/emilleonardaastrom/Documents/Dataingeniør/Programmering 2/mappevurdering2023/src/main/java/edu/ntnu/idatt2001/model/Story.java
+/Users/emilleonardaastrom/Documents/Dataingeniør/Programmering 2/mappevurdering2023/src/main/java/edu/ntnu/idatt2001/model/Player.java
+/Users/emilleonardaastrom/Documents/Dataingeniør/Programmering 2/mappevurdering2023/src/main/java/edu/ntnu/idatt2001/model/goal/ScoreGoal.java
+/Users/emilleonardaastrom/Documents/Dataingeniør/Programmering 2/mappevurdering2023/src/main/java/edu/ntnu/idatt2001/view/ExitConfirmationView.java
+/Users/emilleonardaastrom/Documents/Dataingeniør/Programmering 2/mappevurdering2023/src/main/java/edu/ntnu/idatt2001/model/action/Action.java
+/Users/emilleonardaastrom/Documents/Dataingeniør/Programmering 2/mappevurdering2023/src/main/java/edu/ntnu/idatt2001/model/Passage.java
+/Users/emilleonardaastrom/Documents/Dataingeniør/Programmering 2/mappevurdering2023/src/main/java/edu/ntnu/idatt2001/controller/MainMenuController.java
+/Users/emilleonardaastrom/Documents/Dataingeniør/Programmering 2/mappevurdering2023/src/main/java/edu/ntnu/idatt2001/model/action/ScoreAction.java
+/Users/emilleonardaastrom/Documents/Dataingeniør/Programmering 2/mappevurdering2023/src/main/java/edu/ntnu/idatt2001/controller/UserInformer.java
+/Users/emilleonardaastrom/Documents/Dataingeniør/Programmering 2/mappevurdering2023/src/main/java/edu/ntnu/idatt2001/model/goal/InventoryGoal.java
+/Users/emilleonardaastrom/Documents/Dataingeniør/Programmering 2/mappevurdering2023/src/main/java/edu/ntnu/idatt2001/model/action/InventoryAction.java
+/Users/emilleonardaastrom/Documents/Dataingeniør/Programmering 2/mappevurdering2023/src/main/java/edu/ntnu/idatt2001/view/PathsView.java
+/Users/emilleonardaastrom/Documents/Dataingeniør/Programmering 2/mappevurdering2023/src/main/java/edu/ntnu/idatt2001/model/Link.java
+/Users/emilleonardaastrom/Documents/Dataingeniør/Programmering 2/mappevurdering2023/src/main/java/edu/ntnu/idatt2001/view/HelpView.java
+/Users/emilleonardaastrom/Documents/Dataingeniør/Programmering 2/mappevurdering2023/src/main/java/edu/ntnu/idatt2001/model/Game.java
+/Users/emilleonardaastrom/Documents/Dataingeniør/Programmering 2/mappevurdering2023/src/main/java/edu/ntnu/idatt2001/view/GameSelectionView.java
+/Users/emilleonardaastrom/Documents/Dataingeniør/Programmering 2/mappevurdering2023/src/main/java/edu/ntnu/idatt2001/controller/MusicController.java
+/Users/emilleonardaastrom/Documents/Dataingeniør/Programmering 2/mappevurdering2023/src/main/java/edu/ntnu/idatt2001/model/FileHandler.java
+/Users/emilleonardaastrom/Documents/Dataingeniør/Programmering 2/mappevurdering2023/src/main/java/edu/ntnu/idatt2001/model/action/HealthAction.java
+/Users/emilleonardaastrom/Documents/Dataingeniør/Programmering 2/mappevurdering2023/src/main/java/edu/ntnu/idatt2001/Main.java
+/Users/emilleonardaastrom/Documents/Dataingeniør/Programmering 2/mappevurdering2023/src/main/java/edu/ntnu/idatt2001/model/action/GoldAction.java
+/Users/emilleonardaastrom/Documents/Dataingeniør/Programmering 2/mappevurdering2023/src/main/java/edu/ntnu/idatt2001/model/goal/Goal.java

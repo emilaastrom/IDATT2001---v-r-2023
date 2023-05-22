@@ -40,17 +40,17 @@ public class PathsView {
   private final HBox pathsWindowBottomBoxHbox = new HBox();
   private final HBox pathsWindowBottomBoxHbox2 = new HBox();
   private final ImageView pathsWindowBottomBoxHboxImageViewScore = new ImageView(
-      "file:src/main/resources/score.png");
+      "file:src/main/resources/icons/score.png");
   private final ImageView pathsWindowBottomBoxHboxImageViewHeart = new ImageView(
-      "file:src/main/resources/heart.png");
+      "file:src/main/resources/icons/heart.png");
   private final ImageView pathsWindowBottomBoxHboxImageViewCoin = new ImageView(
-      "file:src/main/resources/coin.png");
+      "file:src/main/resources/icons/coin.png");
   private final ImageView pathsWindowBottomBoxHboxImageViewChest = new ImageView(
-      "file:src/main/resources/chest.png");
+      "file:src/main/resources/icons/chest.png");
   private final ImageView pathsWindowBottomBoxHbox2ImageViewUndo = new ImageView(
-      "file:src/main/resources/undo.png");
+      "file:src/main/resources/icons/undo.png");
   private final ImageView pathsWindowBottomBoxHbox2ImageViewSettings = new ImageView(
-      "file:src/main/resources/settings.png");
+      "file:src/main/resources/icons/settings.png");
   private final BorderPane pathsWindow = new BorderPane();
   private final VBox pathsWindowVbox = new VBox();
   private final PathsController controller;

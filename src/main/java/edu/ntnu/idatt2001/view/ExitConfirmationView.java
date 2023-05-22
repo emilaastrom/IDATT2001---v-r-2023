@@ -27,7 +27,7 @@ public class ExitConfirmationView {
    * @param dimmer the dimmer
    */
   public ExitConfirmationView(BorderPane dimmer) {
-    exitConfirmationStage.getIcons().add(new Image("file:src/main/resources/settings.png"));
+    exitConfirmationStage.getIcons().add(new Image("file:src/main/resources/icons/settings.png"));
     this.dimmer = dimmer;
     BorderPane exitConfirmationRoot = new BorderPane();
     exitConfirmationStage.setTitle("Exit confirmation");

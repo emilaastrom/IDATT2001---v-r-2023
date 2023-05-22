@@ -17,7 +17,7 @@ public class MusicController {
    * Play music.
    */
   public static void playMusic() {
-    String musicFile = "src/main/resources/music.mp3";
+    String musicFile = "src/main/resources/soundtrack.mp3";
     Media sound = new Media(new File(musicFile).toURI().toString());
     mediaPlayer = new MediaPlayer(sound);
     mediaPlayer.setOnEndOfMedia(() -> mediaPlayer.seek(Duration.ZERO));

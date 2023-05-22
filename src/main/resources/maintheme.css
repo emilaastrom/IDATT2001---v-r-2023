@@ -78,7 +78,7 @@
 }
 #endButton{
     -fx-padding: 5px 0px 5px 0px;
-    -fx-background-image: url("../resources/goldButton.png");
+    -fx-background-image: url("icons/goldButton.png");
     -fx-background-repeat: no-repeat no-repeat;;
     -fx-background-size: cover, auto;
     -fx-border-width: 0px;
@@ -137,13 +137,13 @@
     -fx-border-width:2.0px;
 }
 .background_forest{
-    -fx-background-image: url("../resources/backgroundforest.png");
+    -fx-background-image: url("backgrounds/backgroundforest.png");
 }
 .background_space{
-    -fx-background-image: url("../resources/backgroundspace.png");
+    -fx-background-image: url("backgrounds/backgroundspace.png");
 }
 .background_pirate{
-    -fx-background-image: url("../resources/backgroundpirate.png");
+    -fx-background-image: url("backgrounds/backgroundpirate.png");
 }
 
 #mainMenuButton{
@@ -199,7 +199,7 @@ titleText{
 #SettingsRoot, #inventoryRoot, #SettingsRoot, #ExitConfirmationRoot, #GameSelectionRoot, #DialogPane, #HelpRoot{
     -fx-border-color: #FFFFFF;
     -fx-border-width: 4px;
-    -fx-background-image: url("../resources/backgroundsettings.png");
+    -fx-background-image: url("backgrounds/backgroundsettings.png");
     -fx-background-repeat: no-repeat no-repeat;
     -fx-background-size: cover, auto;
 }
@@ -225,7 +225,7 @@ titleText{
 }
 
 .dialog-pane *.header-panel{
-    -fx-background-image: url("../resources/backgroundsettings.png");
+    -fx-background-image: url("backgrounds/backgroundsettings.png");
     -fx-background-repeat: no-repeat no-repeat;
     -fx-background-size: cover, auto;
 }

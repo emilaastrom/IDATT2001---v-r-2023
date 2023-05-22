@@ -69,7 +69,7 @@ public class SettingsView {
     Scene scene = new Scene(settingsRoot, 500, 600);
     scene.getStylesheets().add("file:src/main/resources/maintheme.css");
     this.stage = new Stage();
-    stage.getIcons().add(new Image("file:src/main/resources/settings.png"));
+    stage.getIcons().add(new Image("file:src/main/resources/icons/settings.png"));
     stage.initModality(Modality.APPLICATION_MODAL);
     stage.setScene(scene);
   }
