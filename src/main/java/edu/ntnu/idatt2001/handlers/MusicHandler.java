@@ -1,4 +1,4 @@
-package edu.ntnu.idatt2001.controller;
+package edu.ntnu.idatt2001.handlers;
 
 import java.io.File;
 import javafx.scene.control.Slider;
@@ -9,7 +9,7 @@ import javafx.util.Duration;
 /**
  * Music controller class for playing soundtrack.
  */
-public class MusicController {
+public class MusicHandler {
   private static MediaPlayer mediaPlayer;
   private static final Slider volumeSlider = new Slider(0, 100, 50);
 
