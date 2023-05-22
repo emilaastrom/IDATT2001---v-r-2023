@@ -50,8 +50,6 @@ public class FileHandlerTest {
   @DisplayName("Testing writeFile() method")
   public void writeFile(){
 
-    //TODO Update these unit tests to be more comprehensive
-
     //Testing that the method writeFile() writes the correct story to the file
     Story story = FileHandler.readFile("exampleStory.paths");
     FileHandler.writeFile(exampleStory, "exampleStory");
@@ -63,16 +61,11 @@ public class FileHandlerTest {
   @DisplayName("Testing readFile() method")
   public void readFile(){
 
-    //TODO Update these unit tests to be more comprehensive
-
     Story story = FileHandler.readFile("exampleStory.paths");
     FileHandler.writeFile(story, "exampleStory");
 
     assertEquals(story.getOpeningPassage(), exampleStory.getOpeningPassage());
     assertEquals(story.getTitle(), exampleStory.getTitle());
     assertEquals(story.getPassages().size(), exampleStory.getPassages().size());
-//    assertEquals(story.getPassages(), exampleStory.getPassages());
   }
-
-
 }
