@@ -109,7 +109,6 @@ public class Game {
         linkHistory.remove(linkHistory.size() - 1);
         return link;
       } else {
-        UserInformer.errorWarning("Error", "Did not find move to undo!");
         return null;
       }
     } catch (Exception e) {
@@ -122,7 +121,6 @@ public class Game {
    * Restarts the game.
    */
   public void restartGame() {
-    //TODO restartGame() function
     Game.getInstance().setPlayer(
         new Player.PlayerBuilder(Game.getInstance().getPlayer().getName()).build());
     passageHistory.clear();

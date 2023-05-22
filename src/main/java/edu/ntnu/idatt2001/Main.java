@@ -21,10 +21,8 @@ import javafx.stage.Stage;
 public class Main extends Application {
   public static String currentStylesheet;
   private static Scene scene;
-  private static Scene mainMenuScene;
   private static Stage stage;
   private static InventoryView inventoryView;
-  private static SettingsView mainMenuSettingsView;
   private static SettingsView settingsView;
   private static HelpView helpView;
   private static ExitConfirmationView exitConfirmationView;
@@ -66,12 +64,8 @@ public class Main extends Application {
         settingsController,
         pathsView,
         dimmer);
-
-
-
-
+    
     scene = new Scene(mainMenuView.getRoot(), 1250, 700);
-    mainMenuScene = scene;
     currentStylesheet = "file:src/main/resources/maintheme.css";
 
     scene.getStylesheets().add(currentStylesheet);
@@ -89,16 +83,8 @@ public class Main extends Application {
     stage.setScene(scene);
   }
 
-  public static void mainMenu() {
-    stage.setScene(mainMenuScene);
-  }
-
   public static void updateStage() {
     stage.show();
-  }
-
-  public static void showInventory(double width, double height, BorderPane dimmer) {
-    inventoryView.showInventory(width, height, dimmer);
   }
 
   public static void showMainMenuSettings() {
