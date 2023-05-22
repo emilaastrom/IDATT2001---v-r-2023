@@ -1,9 +1,9 @@
 package edu.ntnu.idatt2001.view;
 
 import edu.ntnu.idatt2001.Main;
-import edu.ntnu.idatt2001.controller.BackgroundController;
+import edu.ntnu.idatt2001.handlers.BackgroundHandler;
 import edu.ntnu.idatt2001.controller.PathsController;
-import edu.ntnu.idatt2001.controller.UserInformer;
+import edu.ntnu.idatt2001.handlers.UserInformerHandler;
 import edu.ntnu.idatt2001.model.Game;
 import edu.ntnu.idatt2001.model.Link;
 import edu.ntnu.idatt2001.model.Passage;
@@ -81,7 +81,7 @@ public class PathsView {
   }
 
   private void createAndConfigurePane() {
-    pathsRoot.setBackground(BackgroundController.getCurrentBackground());
+    pathsRoot.setBackground(BackgroundHandler.getCurrentBackground());
     currentPassage = controller.getStory().getOpeningPassage();
 
 
@@ -379,7 +379,7 @@ public class PathsView {
           try {
             action.execute(Game.getInstance().getPlayer());
           } catch (Exception e) {
-            UserInformer.errorWarning("You can't do that action", e.getMessage());
+            UserInformerHandler.errorWarning("You can't do that action", e.getMessage());
           }
         });
         updateBottomBox();
@@ -405,7 +405,7 @@ public class PathsView {
       updateBottomBox();
       Main.updateStage();
     } catch (Exception e) {
-      UserInformer.errorWarning("Error", "Make a move first!");
+      UserInformerHandler.errorWarning("Error", "Make a move first!");
     }
   }
 

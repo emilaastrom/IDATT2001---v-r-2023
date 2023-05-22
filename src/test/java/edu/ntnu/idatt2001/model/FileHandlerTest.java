@@ -2,6 +2,7 @@ package edu.ntnu.idatt2001.model;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import edu.ntnu.idatt2001.handlers.FileHandler;
 import edu.ntnu.idatt2001.model.action.GoldAction;
 import edu.ntnu.idatt2001.model.action.HealthAction;
 import edu.ntnu.idatt2001.model.action.ScoreAction;
