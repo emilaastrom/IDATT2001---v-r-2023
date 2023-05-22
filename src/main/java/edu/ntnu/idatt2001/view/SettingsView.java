@@ -12,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Separator;
 import javafx.scene.control.Slider;
+import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
@@ -68,6 +69,7 @@ public class SettingsView {
     Scene scene = new Scene(settingsRoot, 500, 600);
     scene.getStylesheets().add("file:src/main/resources/maintheme.css");
     this.stage = new Stage();
+    stage.getIcons().add(new Image("file:src/main/resources/settings.png"));
     stage.initModality(Modality.APPLICATION_MODAL);
     stage.setScene(scene);
   }

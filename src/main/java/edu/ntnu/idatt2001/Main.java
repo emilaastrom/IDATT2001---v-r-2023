@@ -10,6 +10,7 @@ import edu.ntnu.idatt2001.view.PathsView;
 import edu.ntnu.idatt2001.view.SettingsView;
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -30,6 +31,7 @@ public class Main extends Application {
   @Override
   public void start(Stage primaryStage) {
     stage = primaryStage;
+    primaryStage.getIcons().add(new Image("file:src/main/resources/chest.png"));
 
     BorderPane dimmer = new BorderPane();
     dimmer.setVisible(false);

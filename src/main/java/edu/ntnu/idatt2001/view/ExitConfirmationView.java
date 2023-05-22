@@ -4,6 +4,7 @@ import edu.ntnu.idatt2001.Main;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -26,6 +27,7 @@ public class ExitConfirmationView {
    * @param dimmer the dimmer
    */
   public ExitConfirmationView(BorderPane dimmer) {
+    exitConfirmationStage.getIcons().add(new Image("file:src/main/resources/settings.png"));
     this.dimmer = dimmer;
     BorderPane exitConfirmationRoot = new BorderPane();
     exitConfirmationStage.setTitle("Exit confirmation");
