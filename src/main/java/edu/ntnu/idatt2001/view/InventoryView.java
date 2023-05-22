@@ -14,14 +14,11 @@ import javafx.stage.StageStyle;
  */
 public class InventoryView {
 
-  /**
-   * The Inventory stage.
-   */
-  Stage inventoryStage = new Stage(StageStyle.UNDECORATED);
+  private final Stage inventoryStage = new Stage(StageStyle.UNDECORATED);
   private final InventoryController controller;
 
   /**
-   * Instantiates a new Inventory view.
+   * Instantiates a new Inventory view and setting its controller.
    *
    * @param controller the controller
    */
@@ -32,9 +29,9 @@ public class InventoryView {
   /**
    * Display the inventory stage.
    *
-   * @param width  the width
-   * @param height the height
-   * @param dimmer the dimmer
+   * @param width  the width of the background stage
+   * @param height the height of the background stage
+   * @param dimmer the dimmer for the background stage
    */
   public void showInventory(double width, double height, BorderPane dimmer) {
     BorderPane inventoryRoot = new BorderPane();
@@ -53,9 +50,9 @@ public class InventoryView {
   }
 
   /**
-   * Hide the inventory stage.
+   * Hide the inventory stage and disable background dimmer.
    *
-   * @param dimmer the dimmer
+   * @param dimmer the dimmer for the background stage
    */
   public void hideInventory(BorderPane dimmer) {
     inventoryStage.close();

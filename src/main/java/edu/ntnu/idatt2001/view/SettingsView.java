@@ -40,7 +40,7 @@ public class SettingsView {
 
 
   /**
-   * Instantiates a new Settings view.
+   * Constructor for the Settings.
    *
    * @param controller     the settings controller
    * @param pathsView      the paths view
@@ -57,24 +57,19 @@ public class SettingsView {
     this.dimmer = dimmer;
 
     createAndConfigureStage();
-
-    createAndLayoutControls();
-
-    updateControllerFromListeners();
-
-    observeModelAndUpdateControls();
   }
-  
+
+  /**
+   * Configuring the settings stage.
+   */
   private void createAndConfigureStage() {
     Scene scene = new Scene(settingsRoot, 500, 600);
     scene.getStylesheets().add("file:src/main/resources/maintheme.css");
     this.stage = new Stage();
+    stage.addEventHandler(WindowEvent.WINDOW_HIDDEN, event -> dimmer.setVisible(false));
     stage.getIcons().add(new Image("file:src/main/resources/icons/settings.png"));
     stage.initModality(Modality.APPLICATION_MODAL);
     stage.setScene(scene);
-  }
-
-  private void createAndLayoutControls() {
 
     VBox settingsTitleBox = new VBox();
     settingsTitleBox.setPadding(new Insets(20));
@@ -135,22 +130,21 @@ public class SettingsView {
     settingsListBox.setAlignment(Pos.CENTER);
     settingsListBox.setSpacing(30);
 
-      restartButton.setMaxWidth(200);
-      restartButton.setOnAction(event -> {
-        //TODO RESTART GAME
-        controller.restartGame();
-        pathsView.setCurrentPassageVbox(pathsView.showPassages(Game.getInstance().begin()));
-        pathsView.updateBottomBox();
-        Main.updateStage();
-        closeStage();
-      });
-      mainMenuButton.setMaxWidth(200);
-      mainMenuButton.setOnAction(event -> {
-        closeStage();
-        controller.showMainMenu(pathsView);
-      });
-      separator.setMaxWidth(350);
-      settingsListBox.getChildren().addAll(restartButton, mainMenuButton, separator);
+    restartButton.setMaxWidth(200);
+    restartButton.setOnAction(event -> {
+      controller.restartGame();
+      pathsView.setCurrentPassageVbox(pathsView.showPassages(Game.getInstance().begin()));
+      pathsView.updateBottomBox();
+      Main.updateStage();
+      closeStage();
+    });
+    mainMenuButton.setMaxWidth(200);
+    mainMenuButton.setOnAction(event -> {
+      closeStage();
+      controller.showMainMenu(pathsView);
+    });
+    separator.setMaxWidth(350);
+    settingsListBox.getChildren().addAll(restartButton, mainMenuButton, separator);
 
     //Adding general settings to list of buttons in settings
     settingsListBox.getChildren().addAll(changeThemeBox, settingsSoundBox);
@@ -170,16 +164,16 @@ public class SettingsView {
     settingsRoot.setBottom(settingsExitBox);
   }
 
-  private void updateControllerFromListeners() {
-  }
-
-  private void observeModelAndUpdateControls() {
-    stage.addEventHandler(WindowEvent.WINDOW_HIDDEN, event -> dimmer.setVisible(false));
-  }
-
+  /**
+   * Show settings stage.
+   *
+   * @param isGameSettings check to see if the settings are opened from main menu or in game
+   */
   public void showStage(boolean isGameSettings) {
+    //Showing settings, two different versions depending on if it is game settings or not
     stage.show();
     if (isGameSettings) {
+      //Game settings includes buttons for restart and main menu
       settingsListBox.getChildren().clear();
       settingsListBox.getChildren().addAll(restartButton, mainMenuButton, separator, changeThemeBox, settingsSoundBox);
       stage.addEventHandler(WindowEvent.WINDOW_HIDDEN, event -> pathsView.getPathsDimmer().setVisible(false));
@@ -189,6 +183,9 @@ public class SettingsView {
     }
   }
 
+  /**
+   * Close the settings stage.
+   */
   private void closeStage() {
     stage.close();
   }

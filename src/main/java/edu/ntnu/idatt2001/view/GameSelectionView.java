@@ -46,13 +46,11 @@ public class GameSelectionView {
    */
   public GameSelectionView(GameSelectionController controller) {
     this.controller = controller;
+    //Creating a new root that will replace the main menu
     root = new BorderPane();
     root.setId("GameSelectionRoot");
     game = Game.getInstance();
     createAndConfigurePane();
-    createAndLayoutControls();
-    updateControllerFromListeners();
-    observeModelAndUpdateControls();
   }
 
   /**
@@ -65,7 +63,7 @@ public class GameSelectionView {
   }
 
   private void createAndConfigurePane() {
-
+    //Configuring the GameSelectionView elements of the root
     VBox gameSelectionTitleBox = new VBox();
     Text gameSelectionTitle = new Text("Choose a .paths game!");
     gameSelectionTitle.setId("DefaultText");
@@ -103,8 +101,8 @@ public class GameSelectionView {
     gameSelectionButtonsBox.setSpacing(10);
     gameSelectionButtonsBox.getChildren().addAll(customGameButton, exampleGameButton);
 
+    //Creating a field to input player name and adding custom tooltip
     TextField nameField = new TextField();
-    //Tooltip that shows when hovering over the nameField, explaining field use and max length
     Tooltip nameFieldToolTip = new Tooltip("Main character name - max 20 characters");
     nameFieldToolTip.setShowDelay(Duration.millis(50));
     nameField.setTooltip(nameFieldToolTip);
@@ -112,13 +110,14 @@ public class GameSelectionView {
     nameField.setPromptText("CHARACTER NAME");
     nameField.setMaxWidth(250);
     nameField.setAlignment(Pos.CENTER);
-    //Limiting the input field to 20 characters
+    //Limiting the input field for player name to be 20 characters
     nameField.addEventHandler(KeyEvent.KEY_TYPED, event -> {
       if (nameField.getText().length() >= 20) {
         event.consume();
       }
     });
 
+    //Creating boxes for enabling score goals, health goals and gold goals
     HBox scoreGoalBox = new HBox();
     scoreGoalBox.setAlignment(Pos.CENTER);
     scoreGoalBox.setSpacing(10);
@@ -135,12 +134,14 @@ public class GameSelectionView {
     scoreGoalField.setMaxWidth(250);
     scoreGoalField.setAlignment(Pos.CENTER);
     scoreGoalField.setDisable(true);
+    //Ensuring that only numbers can be inputted in the score goal field
     scoreGoalField.addEventHandler(KeyEvent.KEY_TYPED, event -> {
       if (!event.getCharacter().matches("[0-9]")) {
         event.consume();
       }
     });
 
+    //Enabling and disabling the score goal field based on the checkbox
     enableScoreGoal.addEventHandler(MouseEvent.MOUSE_CLICKED, event ->
             scoreGoalField.setDisable(!enableScoreGoal.isSelected()));
 
@@ -162,12 +163,14 @@ public class GameSelectionView {
     healthGoalField.setMaxWidth(250);
     healthGoalField.setAlignment(Pos.CENTER);
     healthGoalField.setDisable(true);
+    //Ensuring that only numbers can be inputted in the score goal field
     healthGoalField.addEventHandler(KeyEvent.KEY_TYPED, event -> {
       if (!event.getCharacter().matches("[0-9]")) {
         event.consume();
       }
     });
 
+    //Enabling and disabling the health goal field based on the checkbox
     enableHealthGoal.addEventHandler(MouseEvent.MOUSE_CLICKED, event ->
             healthGoalField.setDisable(!enableHealthGoal.isSelected()));
     healthGoalBox.getChildren().addAll(enableHealthGoal, healthGoalField);
@@ -188,6 +191,7 @@ public class GameSelectionView {
     goldGoalField.setMaxWidth(250);
     goldGoalField.setAlignment(Pos.CENTER);
     goldGoalField.setDisable(true);
+    //Ensuring that only numbers can be inputted in the score goal field
     goldGoalField.addEventHandler(KeyEvent.KEY_TYPED, event -> {
       if (!event.getCharacter().matches("[0-9]")) {
         event.consume();
@@ -197,6 +201,7 @@ public class GameSelectionView {
     goldGoalBox.getChildren().addAll(enableGoldGoal, goldGoalField);
 
 
+    //Enabling and disabling the gold goal field based on the checkbox
     enableGoldGoal.addEventHandler(MouseEvent.MOUSE_CLICKED, event ->
             goldGoalField.setDisable(!enableGoldGoal.isSelected()));
 
@@ -215,6 +220,7 @@ public class GameSelectionView {
     loadGameButton.setId("LoadGameButton");
     loadGameButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
       List<Goal> goalList = new ArrayList<>();
+      //Checking if the goals are both enabled and not empty before adding them
       if (enableGoldGoal.isSelected() && goldGoalField.getText().length() > 0) {
         goalList.add(new GoldGoal(Integer.parseInt(goldGoalField.getText())));
       }
@@ -224,7 +230,7 @@ public class GameSelectionView {
       if (enableScoreGoal.isSelected() && scoreGoalField.getText().length() > 0) {
         goalList.add(new ScoreGoal(Integer.parseInt(scoreGoalField.getText())));
       }
-      //Loading either SELECTED GAME or EXAMPLE GAME
+      //Loading either SELECTED GAME FILE or EXAMPLE GAME FILE
       if (exampleGameChosen.get().equals(false)) {
         controller.chooseGameFile(
             stage, String.valueOf(pathToGameFile), nameField.getText(), goalList);
@@ -236,11 +242,13 @@ public class GameSelectionView {
                 goalList);
       }
     });
+
     VBox loadGameBox = new VBox();
     loadGameBox.setAlignment(Pos.CENTER);
     loadGameBox.setPadding(new Insets(10, 10, 30, 10));
     loadGameBox.getChildren().add(loadGameButton);
 
+    gameSelectionBox.setSpacing(50);
     gameSelectionBox.getChildren().addAll(
             currentPathsFile,
             gameSelectionButtonsBox,
@@ -248,10 +256,11 @@ public class GameSelectionView {
             nameField,
             goalBox
     );
+
     root.setBottom(loadGameBox);
-    gameSelectionBox.setSpacing(50);
     root.setCenter(gameSelectionBox);
 
+    //Using FileChooser to add a custom game file
     FileChooser fileChooser = new FileChooser();
     fileChooser.setTitle("Choose a .paths file");
     fileChooser.getExtensionFilters().addAll(
@@ -268,20 +277,11 @@ public class GameSelectionView {
       }
     });
 
+    //Loading pre-made example game
     exampleGameButton.setOnAction(event -> {
       currentPathsFile.setText("Current file: " + "\nsrc/main/resources/exampleStory.paths");
       pathToGameFile.set("src/main/resources/exampleStory.paths");
       exampleGameChosen.set(true);
     });
   }
-
-  private void updateControllerFromListeners() {
-  }
-
-  private void observeModelAndUpdateControls() {
-  }
-
-  private void createAndLayoutControls() {
-  }
-
 }

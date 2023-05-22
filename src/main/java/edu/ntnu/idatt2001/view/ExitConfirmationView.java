@@ -27,8 +27,10 @@ public class ExitConfirmationView {
    * @param dimmer the dimmer
    */
   public ExitConfirmationView(BorderPane dimmer) {
-    exitConfirmationStage.getIcons().add(new Image("file:src/main/resources/icons/settings.png"));
     this.dimmer = dimmer;
+
+    //Creating and configuring exit confirmation stage and scene
+    exitConfirmationStage.getIcons().add(new Image("file:src/main/resources/icons/settings.png"));
     BorderPane exitConfirmationRoot = new BorderPane();
     exitConfirmationStage.setTitle("Exit confirmation");
     exitConfirmationStage.initModality(Modality.APPLICATION_MODAL);
@@ -40,6 +42,8 @@ public class ExitConfirmationView {
     exitConfirmationButton.setId("ExitConfirmationButton");
     exitConfirmationButton.setMaxWidth(150);
     exitConfirmationCancelButton.setMaxWidth(150);
+
+    //Creating and configuring a HBox for containing the two buttons
     HBox exitConfirmationButtonBox = new HBox();
     exitConfirmationButtonBox.getChildren().addAll(
             exitConfirmationButton,
@@ -48,30 +52,34 @@ public class ExitConfirmationView {
     exitConfirmationButtonBox.setSpacing(20);
     exitConfirmationRoot.setCenter(exitConfirmationButtonBox);
     exitConfirmationScene.getStylesheets().add("file:src/main/resources/maintheme.css");
+
+    //Ensuring the dimmer for the background stage enabled only when confirmation stage is showing
+    exitConfirmationStage.addEventHandler(WindowEvent.WINDOW_HIDDEN, windowEvent ->
+            dimmer.setVisible(false));
+    exitConfirmationStage.addEventHandler(WindowEvent.WINDOW_SHOWING, windowEvent ->
+            dimmer.setVisible(true));
   }
 
   /**
    * Display exit confirmation.
    */
   public void exitConfirmation() {
-    dimmer.setVisible(true);
+    //Setting buttons to either exit or cancel - and showing stage
     exitConfirmationButton.setOnAction(event -> System.exit(0));
     exitConfirmationCancelButton.setOnAction(event -> {
       exitConfirmationStage.close();
       dimmer.setVisible(false);
     });
-    exitConfirmationStage.addEventHandler(WindowEvent.WINDOW_HIDDEN, windowEvent ->
-            dimmer.setVisible(false));
     exitConfirmationStage.show();
-    dimmer.setVisible(true);
   }
 
   /**
    * Main menu confirmation.
+   * @param root the root of the main menu
+   * @param dimmer the dimmer
    */
   public void mainMenuConfirmation(Pane root, BorderPane dimmer) {
-    exitConfirmationStage.addEventHandler(WindowEvent.WINDOW_SHOWING, windowEvent ->
-            dimmer.setVisible(true));
+    //Setting buttons to either go to main menu or cancel - and showing stage
     exitConfirmationButton.setOnAction(event -> {
       Main.changeScene(root);
       exitConfirmationStage.close();
@@ -82,8 +90,6 @@ public class ExitConfirmationView {
       dimmer.setVisible(false);
       exitConfirmationStage.close();
     });
-    exitConfirmationStage.addEventHandler(WindowEvent.WINDOW_HIDDEN, windowEvent ->
-            dimmer.setVisible(false));
     exitConfirmationStage.show();
   }
 }
