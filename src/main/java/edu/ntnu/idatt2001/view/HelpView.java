@@ -1,7 +1,6 @@
 package edu.ntnu.idatt2001.view;
 
 import edu.ntnu.idatt2001.Main;
-import edu.ntnu.idatt2001.controller.HelpController;
 import javafx.scene.control.Button;
 import javafx.scene.layout.*;
 import javafx.scene.text.Text;
@@ -16,14 +15,11 @@ public class HelpView {
   private Button gameToHelp;
   private Button setupToHelp;
   private final StackPane superRoot;
-  private final HelpController controller;
 
-
-  public HelpView(HelpController controller, StackPane superRoot) {
+  public HelpView(StackPane superRoot) {
     this.helpRoot = new BorderPane();
     this.setupRoot = new BorderPane();
     this.gameRoot = new BorderPane();
-    this.controller = controller;
     this.superRoot = superRoot;
     helpRoot.setId("HelpRoot");
     setupRoot.setId("HelpRoot");

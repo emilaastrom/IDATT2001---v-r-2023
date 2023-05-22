@@ -56,8 +56,7 @@ public class Main extends Application {
             exitConfirmationView);
     mainMenuView = new MainMenuView(mainMenuController, gameSelectionView.getRoot(), dimmer);
 
-    HelpController helpController = new HelpController();
-    helpView = new HelpView(helpController, mainMenuView.getRoot());
+    helpView = new HelpView(mainMenuView.getRoot());
 
     SettingsController settingsController = new SettingsController(mainMenuView.getRoot(),pathsView.getRoot());
     settingsView = new SettingsView(
