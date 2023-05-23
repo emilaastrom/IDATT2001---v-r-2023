@@ -64,10 +64,10 @@ public class SettingsView {
    */
   private void createAndConfigureStage() {
     Scene scene = new Scene(settingsRoot, 500, 600);
-    scene.getStylesheets().add("file:src/main/resources/maintheme.css");
+    scene.getStylesheets().add(Main.class.getResource("/maintheme.css").toString());
     this.stage = new Stage();
     stage.addEventHandler(WindowEvent.WINDOW_HIDDEN, event -> dimmer.setVisible(false));
-    stage.getIcons().add(new Image("file:src/main/resources/icons/settings.png"));
+    stage.getIcons().add(new Image(Main.class.getResource("/icons/settings.png").toString()));
     stage.initModality(Modality.APPLICATION_MODAL);
     stage.setScene(scene);
 

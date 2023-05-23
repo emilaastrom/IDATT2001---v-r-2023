@@ -1,5 +1,6 @@
 package edu.ntnu.idatt2001.handlers;
 
+import edu.ntnu.idatt2001.Main;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
@@ -11,7 +12,7 @@ import javafx.scene.layout.BackgroundSize;
  */
 public class BackgroundHandler {
   private static Background currentBackground = setBackground(
-          "file:src/main/resources/backgrounds/backgroundforest.png");
+      Main.class.getResource("/backgrounds/backgroundforest.png").toString());
   private static String backgroundString = "";
 
   /**
@@ -59,7 +60,7 @@ public class BackgroundHandler {
    * @return the new background
    */
   public static Background setBackgroundForest() {
-    currentBackground = setBackground("file:src/main/resources/backgrounds/backgroundforest.png");
+    currentBackground = setBackground(Main.class.getResource("/backgrounds/backgroundforest.png").toString());
     return currentBackground;
   }
 
@@ -69,7 +70,7 @@ public class BackgroundHandler {
    * @return the new background
    */
   public static Background setBackgroundSpace() {
-    currentBackground = setBackground("file:src/main/resources/backgrounds/backgroundspace.png");
+    currentBackground = setBackground(Main.class.getResource("/backgrounds/backgroundspace.png").toString());
     return currentBackground;
   }
 
@@ -79,7 +80,7 @@ public class BackgroundHandler {
    * @return the new background
    */
   public static Background setBackgroundPirate() {
-    currentBackground = setBackground("file:src/main/resources/backgrounds/backgroundpirate.png");
+    currentBackground = setBackground(Main.class.getResource("/backgrounds/backgroundpirate.png").toString());
     return currentBackground;
   }
 
