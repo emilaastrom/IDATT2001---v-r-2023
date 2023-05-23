@@ -27,7 +27,10 @@ public class GameSelectionController {
     try {
       // If opening passage is empty, the file is not valid
       if (FileHandler.openGame(path, playerName, playerGoals)) {
-        if(Game.getInstance().getStory().getOpeningPassage().getLinks().isEmpty() ||
+        if(Game.getInstance().getStory().getTitle() == null ||
+            Game.getInstance().getStory().getTitle().equals("") ||
+            Game.getInstance().getStory().getOpeningPassage() == null ||
+            Game.getInstance().getStory().getOpeningPassage().getLinks().isEmpty() ||
             Game.getInstance().getStory().getOpeningPassage().getContent().equals("")||
             Game.getInstance().getStory().getOpeningPassage().getTitle().equals("")) {
           UserInformerHandler.errorWarning("Error", "The game file is not valid");

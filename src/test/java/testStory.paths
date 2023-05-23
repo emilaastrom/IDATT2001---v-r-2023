@@ -1,0 +1,18 @@
+Test
+
+::Title of opening test passage
+Content of opening test passage
+[Link1](A link in opening passage, no actions)
+[Link2](Another link in opening passage, no actions)
+
+::Title of test passage 2
+Content of test passage 2
+[Test link](Test reference){Gold 10;Health 20;Score 30;}
+[Test link 2](Test reference 2)
+[Test link 3](Test reference 3)
+
+::Title of test passage 3
+Content of test passage 3
+
+::Title of test passage 4
+Content of test passage 4

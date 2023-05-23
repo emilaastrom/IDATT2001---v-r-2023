@@ -40,17 +40,17 @@ public class PathsView {
   private final HBox pathsWindowBottomBoxHbox = new HBox();
   private final HBox pathsWindowBottomBoxHbox2 = new HBox();
   private final ImageView pathsWindowBottomBoxHboxImageViewScore = new ImageView(
-      "file:src/main/resources/icons/score.png");
+      Main.class.getResource("/icons/score.png").toString());
   private final ImageView pathsWindowBottomBoxHboxImageViewHeart = new ImageView(
-      "file:src/main/resources/icons/heart.png");
+      Main.class.getResource("/icons/heart.png").toString());
   private final ImageView pathsWindowBottomBoxHboxImageViewCoin = new ImageView(
-      "file:src/main/resources/icons/coin.png");
+      Main.class.getResource("/icons/coin.png").toString());
   private final ImageView pathsWindowBottomBoxHboxImageViewChest = new ImageView(
-      "file:src/main/resources/icons/chest.png");
+      Main.class.getResource("/icons/chest.png").toString());
   private final ImageView pathsWindowBottomBoxHbox2ImageViewUndo = new ImageView(
-      "file:src/main/resources/icons/undo.png");
+      Main.class.getResource("/icons/undo.png").toString());
   private final ImageView pathsWindowBottomBoxHbox2ImageViewSettings = new ImageView(
-      "file:src/main/resources/icons/settings.png");
+      Main.class.getResource("/icons/settings.png").toString());
   private final BorderPane pathsWindow = new BorderPane();
   private final VBox pathsWindowVbox = new VBox();
   private final PathsController controller;
@@ -69,12 +69,6 @@ public class PathsView {
     this.controller = controller;
 
     createAndConfigurePane();
-
-    createAndLayoutControls();
-
-    updateControllerFromListeners();
-
-    observeModelAndUpdateControls();
 
     pathsWindowCenterBox.setCenter(currentPassageVbox);
 
@@ -124,18 +118,6 @@ public class PathsView {
 
 
     pathsRoot.getChildren().addAll(pathsWindow, pathsDimmer);
-
-  }
-
-  private void createAndLayoutControls() {
-
-  }
-
-  private void updateControllerFromListeners() {
-
-  }
-
-  private void observeModelAndUpdateControls() {
 
   }
 

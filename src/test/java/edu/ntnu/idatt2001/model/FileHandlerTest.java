@@ -36,23 +36,12 @@ public class FileHandlerTest {
   }
 
   @Test
-  @DisplayName("Testing openGame() method")
-  public void openGame(){
-  }
-
-  @Test
-  @DisplayName("Testing openStaticGame() method")
-  public void openStaticGame(){
-
-  }
-
-  @Test
   @DisplayName("Testing writeFile() method")
   public void writeFile(){
 
     //Testing that the method writeFile() writes the correct story to the file
-    Story story = FileHandler.readFile("exampleStory.paths");
-    FileHandler.writeFile(exampleStory, "exampleStory");
+    Story story = FileHandler.readFile("src/test/java/testStory.paths");
+    FileHandler.writeFile(exampleStory, "testStory");
 
     assertEquals(story.getOpeningPassage(), exampleStory.getOpeningPassage());
   }
@@ -61,8 +50,8 @@ public class FileHandlerTest {
   @DisplayName("Testing readFile() method")
   public void readFile(){
 
-    Story story = FileHandler.readFile("exampleStory.paths");
-    FileHandler.writeFile(story, "exampleStory");
+    Story story = FileHandler.readFile("src/test/java/testStory.paths");
+    FileHandler.writeFile(story, "src/test/java/testStory");
 
     assertEquals(story.getOpeningPassage(), exampleStory.getOpeningPassage());
     assertEquals(story.getTitle(), exampleStory.getTitle());

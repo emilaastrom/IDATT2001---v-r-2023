@@ -35,7 +35,6 @@ import javafx.util.Duration;
  */
 public class GameSelectionView {
   private final BorderPane root;
-  private final Game game;
   private final GameSelectionController controller;
   private Stage stage;
 
@@ -49,7 +48,6 @@ public class GameSelectionView {
     //Creating a new root that will replace the main menu
     root = new BorderPane();
     root.setId("GameSelectionRoot");
-    game = Game.getInstance();
     createAndConfigurePane();
   }
 
@@ -89,9 +87,10 @@ public class GameSelectionView {
 
     Button exampleGameButton = new Button("Example");
     exampleGameButton.setMaxWidth(150);
-    Tooltip gameSelectionButton2ToolTip = new Tooltip("Choose the provided example game "
-            + "\n(workaround for macOS v13+ issue with file chooser)");
-    gameSelectionButton2ToolTip.setShowDelay(Duration.millis(50));
+    Tooltip gameSelectionButton2ToolTip = new Tooltip(
+        "WARNING! does not work in .jar application"
+        + "\n(workaround for macOS v13+ issue with file chooser)");
+    gameSelectionButton2ToolTip.setShowDelay(Duration.millis(0));
     gameSelectionButton2ToolTip.setWrapText(true);
     exampleGameButton.setTooltip(gameSelectionButton2ToolTip);
 
@@ -264,7 +263,6 @@ public class GameSelectionView {
     fileChooser.getExtensionFilters().addAll(
             new FileChooser.ExtensionFilter("Paths file", "*.paths")
     );
-    fileChooser.setInitialDirectory(new File("src/main/resources"));
 
     customGameButton.setOnAction(event -> {
       exampleGameChosen.set(false);

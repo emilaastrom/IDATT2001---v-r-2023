@@ -30,7 +30,7 @@ public class ExitConfirmationView {
     this.dimmer = dimmer;
 
     //Creating and configuring exit confirmation stage and scene
-    exitConfirmationStage.getIcons().add(new Image("file:src/main/resources/icons/settings.png"));
+    exitConfirmationStage.getIcons().add(new Image(Main.class.getResource("/icons/settings.png").toString()));
     BorderPane exitConfirmationRoot = new BorderPane();
     exitConfirmationStage.setTitle("Exit confirmation");
     exitConfirmationStage.initModality(Modality.APPLICATION_MODAL);
@@ -51,7 +51,7 @@ public class ExitConfirmationView {
     exitConfirmationButtonBox.setAlignment(Pos.CENTER);
     exitConfirmationButtonBox.setSpacing(20);
     exitConfirmationRoot.setCenter(exitConfirmationButtonBox);
-    exitConfirmationScene.getStylesheets().add("file:src/main/resources/maintheme.css");
+    exitConfirmationScene.getStylesheets().add(Main.class.getResource("/maintheme.css").toString());
 
     //Ensuring the dimmer for the background stage enabled only when confirmation stage is showing
     exitConfirmationStage.addEventHandler(WindowEvent.WINDOW_HIDDEN, windowEvent ->

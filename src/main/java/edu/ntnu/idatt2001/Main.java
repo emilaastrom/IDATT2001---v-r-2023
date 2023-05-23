@@ -35,7 +35,7 @@ public class Main extends Application {
   @Override
   public void start(Stage primaryStage) {
     stage = primaryStage;
-    primaryStage.getIcons().add(new Image("file:src/main/resources/chest.png"));
+    primaryStage.getIcons().add(new Image(Main.class.getResource("/icons/chest.png").toString()));
 
     //Create a dimmer to dim the background when a new stage is shown
     BorderPane dimmer = new BorderPane();
@@ -72,7 +72,7 @@ public class Main extends Application {
 
     //Set the scene and stylesheet
     scene = new Scene(mainMenuView.getRoot(), 1250, 700);
-    currentStylesheet = "file:src/main/resources/maintheme.css";
+    currentStylesheet = Main.class.getResource("/maintheme.css").toString();
     scene.getStylesheets().add(currentStylesheet);
 
     //Set the stage

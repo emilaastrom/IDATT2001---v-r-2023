@@ -1,5 +1,6 @@
 package edu.ntnu.idatt2001.view;
 
+import edu.ntnu.idatt2001.Main;
 import edu.ntnu.idatt2001.controller.InventoryController;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -43,7 +44,7 @@ public class InventoryView {
     tooltip.setText(inventoryString);
     inventoryRoot.setTop(tooltip);
     Scene tooltipScene = new Scene(inventoryRoot, width, height);
-    tooltipScene.getStylesheets().add("file:src/main/resources/maintheme.css");
+    tooltipScene.getStylesheets().add(Main.class.getResource("/maintheme.css").toString());
     inventoryStage.setScene(tooltipScene);
     dimmer.setVisible(true);
     inventoryStage.show();

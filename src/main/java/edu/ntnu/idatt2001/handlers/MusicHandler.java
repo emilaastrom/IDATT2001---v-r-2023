@@ -1,6 +1,8 @@
 package edu.ntnu.idatt2001.handlers;
 
 import java.io.File;
+
+import edu.ntnu.idatt2001.Main;
 import javafx.scene.control.Slider;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -18,8 +20,7 @@ public class MusicHandler {
    */
   public static void playMusic() {
     //gets the music file
-    String musicFile = "src/main/resources/soundtrack.mp3";
-    Media sound = new Media(new File(musicFile).toURI().toString());
+    Media sound = new Media(Main.class.getResource("/soundtrack.mp3").toString());
     mediaPlayer = new MediaPlayer(sound);
     //loops the music
     mediaPlayer.setOnEndOfMedia(() -> mediaPlayer.seek(Duration.ZERO));

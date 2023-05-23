@@ -21,7 +21,7 @@ public class MainMenuView {
   private final MainMenuController controller;
   private final Pane gameSelectionRoot;
   private final StackPane entryWindowLogoStackPane = new StackPane();
-  private final Image entryWindowLogo = new Image("file:src/main/resources/icons/logo.png");
+  private final Image entryWindowLogo = new Image(Main.class.getResource("/icons/logo.png").toString());
   private final VBox entryWindowBox = new VBox();
   private final Button entryWindowChooseAdventureButton = new Button("CHOOSE YOUR ADVENTURE");
   private final Button settingsButton = new Button("SETTINGS");
